@@ -1499,3 +1499,44 @@ html {
 .text-primary {
   color: var(--primary-color) !important;
 }
+/* ============================================================
+   SIDEBAR DIVIDER - CSS
+   Componente de divisor com ícone musical para a sidebar
+   ============================================================ */
+
+.sidebar-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 0 1rem;
+  opacity: 0.6;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.5), transparent);
+}
+
+.divider-icon {
+  color: rgba(168, 85, 247, 0.7);
+  flex-shrink: 0;
+}
+
+/* Efeito ao passar o mouse na sidebar */
+.sidebar:hover .sidebar-divider {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .divider-icon {
+  color: rgba(168, 85, 247, 1);
+  transition: color 0.3s ease;
+}
+
+.sidebar:hover .divider-line {
+  background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.8), transparent);
+  transition: background 0.3s ease;
+}
