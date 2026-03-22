@@ -13,6 +13,17 @@ const supabase = createClient(
 const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID
 const REDIRECT_URI = window.location.origin + '/login'
 
+// ============================================================
+// COMPONENTE: SidebarDivider (Divisor com ícone musical)
+// ============================================================
+const SidebarDivider = () => (
+  <div className="sidebar-divider">
+    <div className="divider-line"></div>
+    <Music size={16} className="divider-icon" />
+    <div className="divider-line"></div>
+  </div>
+)
+
 const PageTransition = ({ children }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -167,7 +178,6 @@ const CriarFicha = ({ user }) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState(location.state?.loreData || { nick: '', nome: '', idade: '', raca: '', historia: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
-
   if (!user) return (
     <div className="main-content">
       <div className="error-card">
@@ -177,7 +187,6 @@ const CriarFicha = ({ user }) => {
       </div>
     </div>
   )
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -195,7 +204,6 @@ const CriarFicha = ({ user }) => {
       navigate('/perfil')
     }
   }
-
   return (
     <PageTransition>
       <div className="main-content">
@@ -206,49 +214,26 @@ const CriarFicha = ({ user }) => {
           </div>
           <form className="compor-form" onSubmit={handleSubmit}>
             <div className="form-section-card">
-              <h3 className="form-section-title">👤 Informações do Viajante</h3>
+              <h3 className="form-section-title">Informações do Personagem</h3>
               <div className="form-grid">
-                <div className="form-group">
-                  <label>Nick do Minecraft</label>
-                  <div className="input-wrapper">
-                    <span className="input-icon">🎮</span>
-                    <input type="text" required placeholder="Ex: Steve_Musae" value={formData.nick} onChange={(e) => setFormData({...formData, nick: e.target.value})} />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label>Nome do Personagem</label>
-                  <div className="input-wrapper">
-                    <span className="input-icon">🎭</span>
-                    <input type="text" required placeholder="Nome completo no RP" value={formData.nome} onChange={(e) => setFormData({...formData, nome: e.target.value})} />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label>Idade</label>
-                  <div className="input-wrapper">
-                    <span className="input-icon">⏳</span>
-                    <input type="number" placeholder="Ex: 25" value={formData.idade} onChange={(e) => setFormData({...formData, idade: e.target.value})} />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label>Raça</label>
-                  <div className="input-wrapper">
-                    <span className="input-icon">🧬</span>
-                    <input type="text" placeholder="Ex: Humano, Elfo..." value={formData.raca} onChange={(e) => setFormData({...formData, raca: e.target.value})} />
-                  </div>
-                </div>
+                <input type="text" placeholder="Nick do Minecraft" value={formData.nick} onChange={(e) => setFormData({ ...formData, nick: e.target.value })} required />
+                <input type="text" placeholder="Nome do Personagem" value={formData.nome} onChange={(e) => setFormData({ ...formData, nome: e.target.value })} required />
+                <input type="number" placeholder="Idade" value={formData.idade} onChange={(e) => setFormData({ ...formData, idade: e.target.value })} required />
+                <select value={formData.raca} onChange={(e) => setFormData({ ...formData, raca: e.target.value })} required>
+                  <option value="">Selecione uma Raça</option>
+                  <option value="Humano">Humano</option>
+                  <option value="Anjo">Anjo</option>
+                  <option value="Demônio">Demônio</option>
+                  <option value="Quimera">Quimera</option>
+                  <option value="Aquariano">Aquariano</option>
+                </select>
               </div>
             </div>
             <div className="form-section-card">
-              <h3 className="form-section-title">📖 A Grande História (Lore)</h3>
-              <div className="form-group">
-                <label>Sua História</label>
-                <div className="input-wrapper">
-                  <span className="input-icon"><BookOpen size={20} /></span>
-                  <textarea required placeholder="Escreva aqui a história do seu personagem..." value={formData.historia} onChange={(e) => setFormData({...formData, historia: e.target.value})} />
-                </div>
-              </div>
+              <h3 className="form-section-title">Sua História</h3>
+              <textarea placeholder="Conte a história do seu personagem..." value={formData.historia} onChange={(e) => setFormData({ ...formData, historia: e.target.value })} required rows="8"></textarea>
             </div>
-            <button type="submit" disabled={isSubmitting} className="submit-btn w-full">{isSubmitting ? 'Enviando...' : 'Enviar Partitura'}</button>
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>{isSubmitting ? 'Enviando...' : 'Enviar Partitura'}</button>
           </form>
         </div>
       </div>
@@ -256,107 +241,18 @@ const CriarFicha = ({ user }) => {
   )
 }
 
-const LoreModal = ({ lore, isOpen, onClose, atualizarStatus, isAdminView }) => {
-  const [motivo, setMotivo] = useState('')
-  const [showRejectInput, setShowRejectInput] = useState(false)
-  if (!isOpen || !lore) return null
-  const getStatusColor = (status) => {
-    switch(status) {
-      case 'Aprovada': return '#10b981';
-      case 'Recusada': return '#ef4444';
-      default: return '#f59e0b';
-    }
-  }
-  const handleReject = () => {
-    if (!motivo.trim()) return alert('Por favor, insira um motivo para a recusa.')
-    atualizarStatus(lore.id, 'Recusada', motivo)
-    onClose()
-  }
-  return (
-    <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
-      <motion.div className="modal-content" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <div>
-            <h2 className="modal-title">{lore.nome}</h2>
-            <p className="modal-subtitle">Nick: {lore.nick}</p>
-          </div>
-          <button className="modal-close" onClick={onClose}>✕</button>
-        </div>
-        <div className="modal-info-grid">
-          <div className="modal-info-item"><span className="modal-info-label">Discord</span><span className="modal-info-value">{lore.discord_tag}</span></div>
-          <div className="modal-info-item"><span className="modal-info-label">Idade</span><span className="modal-info-value">{lore.idade || 'Não informada'}</span></div>
-          <div className="modal-info-item"><span className="modal-info-label">Raça</span><span className="modal-info-value">{lore.raca || 'Não informada'}</span></div>
-          <div className="modal-info-item"><span className="modal-info-label">Status</span><span className="modal-info-value" style={{ color: getStatusColor(lore.status) }}>{lore.status}</span></div>
-        </div>
-        {lore.status === 'Recusada' && lore.motivo_recusa && (
-          <div className="modal-lore-section" style={{ background: 'rgba(242, 63, 67, 0.05)', borderLeft: '4px solid #ef4444' }}>
-            <h3 className="modal-lore-title" style={{ color: '#ef4444' }}>⚠️ Motivo da Recusa Anterior</h3>
-            <p style={{ color: '#8b949e', fontSize: '0.9rem' }}>{lore.motivo_recusa}</p>
-          </div>
-        )}
-        <div className="modal-divider"></div>
-        <div className="modal-lore-section">
-          <h3 className="modal-lore-title">📖 História Completa</h3>
-          <div className="modal-lore-text">{lore.historia}</div>
-        </div>
-        {showRejectInput && (
-          <div className="modal-lore-section" style={{ background: 'rgba(242, 63, 67, 0.1)', borderRadius: '8px', margin: '0 1.5rem 1.5rem 1.5rem' }}>
-            <h3 className="modal-lore-title">Motivo da Recusa</h3>
-            <textarea className="admin-input" placeholder="Explique por que a ficha foi recusada..." value={motivo} onChange={(e) => setMotivo(e.target.value)} style={{ minHeight: '100px', marginBottom: '1rem' }} />
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button className="modal-btn modal-btn--reject" onClick={handleReject}>Confirmar Recusa</button>
-              <button className="modal-btn modal-btn--close" onClick={() => setShowRejectInput(false)}>Cancelar</button>
-            </div>
-          </div>
-        )}
-        <div className="modal-divider"></div>
-        <div className="modal-actions">
-          {isAdminView && !showRejectInput && (
-            <>
-              {lore.status !== 'Aprovada' && <button className="modal-btn modal-btn--approve" onClick={() => { atualizarStatus(lore.id, 'Aprovada'); onClose(); }}>✓ Aprovar</button>}
-              {lore.status !== 'Recusada' && <button className="modal-btn modal-btn--reject" onClick={() => setShowRejectInput(true)}>✗ Recusar</button>}
-              {lore.status !== 'Em Análise' && <button className="modal-btn modal-btn--review" onClick={() => { atualizarStatus(lore.id, 'Em Análise'); onClose(); }}>⟳ Reanalisar</button>}
-            </>
-          )}
-          <button className="modal-btn modal-btn--close" onClick={onClose}>Fechar</button>
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
-
-const LoreCard = ({ f, onExpand }) => (
-  <div className="lore-card" onClick={() => onExpand(f)} style={{ cursor: 'pointer' }}>
-    <div className="lore-card-header">
-      <div>
-        <p className="lore-card-nick"><strong>{f.nick}</strong></p>
-        <p className="lore-card-discord">{f.discord_tag}</p>
-      </div>
-      <span className="lore-card-expand">→</span>
-    </div>
-    <div className="lore-card-preview">
-      <p><strong>Nome:</strong> {f.nome}</p>
-      <p><strong>Idade:</strong> {f.idade || 'N/A'} | <strong>Raça:</strong> {f.raca || 'N/A'}</p>
-      <p className="lore-card-preview-text">"{f.historia.substring(0, 100)}..."</p>
-    </div>
-  </div>
-)
-
 const Profile = ({ user }) => {
-  const [myLores, setMyLores] = useState([])
-  const [selectedLore, setSelectedLore] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const [lores, setLores] = useState([])
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    if (!user) return
-    const fetchMyLores = async () => {
-      const { data } = await supabase.from('lores').select('*').eq('discord_tag', user.username + '#' + user.discriminator).order('created_at', { ascending: false })
-      setMyLores(data || [])
-      setLoading(false)
-    }
-    fetchMyLores()
+    if (user) fetchUserLores()
   }, [user])
+  const fetchUserLores = async () => {
+    const { data } = await supabase.from('lores').select('*').eq('discord_tag', user.username + '#' + user.discriminator)
+    setLores(data || [])
+    setLoading(false)
+  }
   if (!user) return (
     <div className="main-content">
       <div className="error-card">
@@ -369,51 +265,156 @@ const Profile = ({ user }) => {
   return (
     <PageTransition>
       <div className="main-content">
-        <div className="profile-header">
-          <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="Avatar" className="profile-avatar" />
-          <div className="profile-info">
-            <h1>{user.username}</h1>
-            <p className="profile-discord-id">ID: {user.id}</p>
+        <div className="profile-container">
+          <div className="profile-header">
+            <div className="profile-user-info">
+              <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="Avatar" className="profile-avatar" />
+              <div className="profile-user-details">
+                <h1>{user.username}</h1>
+                <p className="profile-discord-tag">#{user.discriminator}</p>
+              </div>
+            </div>
+          </div>
+          <div className="profile-lores-section">
+            <h2>Suas Partituras</h2>
+            {loading ? (
+              <p>Carregando...</p>
+            ) : lores.length === 0 ? (
+              <div className="profile-empty-state">
+                <p>Você ainda não tem nenhuma partitura.</p>
+                <Link to="/compor" className="sidebar-login-btn" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '1rem' }}>Compor Primeira Obra</Link>
+              </div>
+            ) : (
+              <div className="profile-lores-grid">
+                {lores.map(lore => (
+                  <div key={lore.id} className="profile-lore-card">
+                    <div className="lore-card-header">
+                      <h3>{lore.nome}</h3>
+                      <span className={`lore-status lore-status-${lore.status.toLowerCase().replace(' ', '-')}`}>{lore.status}</span>
+                    </div>
+                    <div className="lore-card-details">
+                      <p><strong>Nick:</strong> {lore.nick}</p>
+                      <p><strong>Raça:</strong> {lore.raca}</p>
+                      <p><strong>Idade:</strong> {lore.idade}</p>
+                    </div>
+                    {lore.status === 'Recusada' && lore.motivo_recusa && (
+                      <div className="lore-card-motivo">
+                        <p><strong>Motivo:</strong> {lore.motivo_recusa}</p>
+                        <button onClick={() => navigate('/compor', { state: { loreData: lore } })} className="result-action-btn">Corrigir e Reenviar</button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-        <div className="profile-content">
-          <h2 className="profile-section-title">📚 Minhas Obras</h2>
-          {loading ? (
-            <p>Carregando...</p>
-          ) : myLores.length === 0 ? (
-            <div className="profile-empty-state">
-              <p>Você ainda não compôs nenhuma obra. Comece sua jornada!</p>
-              <Link to="/compor" className="primary-btn" style={{ textDecoration: 'none', marginTop: '1rem', display: 'inline-block' }}>Compor Obra</Link>
-            </div>
-          ) : (
-            <div className="profile-lores-grid">
-              {myLores.map(lore => (
-                <div key={lore.id} style={{ position: 'relative' }}>
-                  <LoreCard f={lore} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />
-                  {lore.status === 'Recusada' && (
-                    <button className="profile-fix-btn" onClick={() => navigate('/compor', { state: { loreData: lore } })}>Corrigir</button>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <AnimatePresence>{modalOpen && <LoreModal lore={selectedLore} isOpen={modalOpen} onClose={() => setModalOpen(false)} atualizarStatus={() => {}} isAdminView={false} />}</AnimatePresence>
       </div>
     </PageTransition>
   )
 }
 
-const AdminCard = ({ admin, removerAdmin }) => (
-  <div className="admin-user-card">
-    <div className="admin-user-info">
-      <div className="admin-user-avatar">{admin.discord_username.charAt(0).toUpperCase()}</div>
-      <div>
-        <p style={{ margin: 0, fontWeight: 600 }}>{admin.discord_username}</p>
-        <p style={{ margin: 0, fontSize: '0.85rem', color: '#8b949e' }}>ID: {admin.discord_id}</p>
+const WhiteList = () => {
+  const [searchNick, setSearchNick] = useState('')
+  const [result, setResult] = useState(null)
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    if (!searchNick.trim()) return
+    try {
+      const { data } = await supabase.from('lores').select('*').eq('nick', searchNick).eq('status', 'Aprovada').single()
+      setResult(data || 'not_found')
+    } catch (err) {
+      setResult('error')
+    }
+  }
+  return (
+    <PageTransition>
+      <div className="main-content">
+        <div className="whitelist-container">
+          <div className="whitelist-header">
+            <h1>🛡️ WhiteList</h1>
+            <p>Verifique se seu personagem foi aprovado para jogar em Musae Eras.</p>
+          </div>
+          <form className="whitelist-form" onSubmit={handleSearch}>
+            <div className="whitelist-input-group">
+              <input type="text" placeholder="Digite seu nick do Minecraft..." value={searchNick} onChange={(e) => setSearchNick(e.target.value)} className="whitelist-input" />
+              <button type="submit" className="whitelist-btn">Verificar</button>
+            </div>
+          </form>
+          <AnimatePresence>
+            {result === 'not_found' && (
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card not-found">
+                <div className="result-icon">❌</div>
+                <div className="result-info">
+                  <h3>Não Encontrado</h3>
+                  <p className="result-description">Este nick não foi aprovado ou não existe na whitelist.</p>
+                </div>
+              </motion.div>
+            )}
+            {result && result !== 'not_found' && result !== 'error' && (
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card approved">
+                <div className="result-icon">✅</div>
+                <div className="result-info">
+                  <h3>Aprovado!</h3>
+                  <p className="result-description">Seu personagem foi aprovado e está pronto para jogar!</p>
+                </div>
+                <div className="result-details">
+                  <p><strong>Nick:</strong> {result.nick}</p>
+                  <p><strong>Personagem:</strong> {result.nome}</p>
+                  <p><strong>Raça:</strong> {result.raca}</p>
+                </div>
+                {result.status === 'Recusada' && result.motivo_recusa && (
+                  <div className="motivo-recusa-box">
+                    <h4>⚠️ Motivo da Recusa:</h4>
+                    <p>{result.motivo_recusa}</p>
+                  </div>
+                )}
+                {result.status === 'Recusada' && (
+                  <button onClick={() => navigate('/compor', { state: { loreData: result } })} className="result-action-btn">
+                    Corrigir e Reenviar
+                  </button>
+                )}
+              </motion.div>
+            )}
+            {result === 'error' && (
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card error">
+                <div className="result-icon">⚠️</div>
+                <div className="result-info">
+                  <h3>Erro ao Consultar</h3>
+                  <p className="result-description">Ocorreu um erro ao consultar a whitelist. Tente novamente mais tarde.</p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div className="whitelist-footer-info">
+            <p>💡 Dica: Digite exatamente o nick do Minecraft que você usou ao compor sua obra.</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <button className="admin-remove-btn" onClick={() => removerAdmin(admin.id)}>Remover</button>
+    </PageTransition>
+  )
+}
+
+const LoginPage = () => {
+  useEffect(() => {
+    const fragment = new URLSearchParams(window.location.hash.slice(1))
+    const accessToken = fragment.get('access_token')
+    if (accessToken) {
+      fetch('https://discord.com/api/users/@me', { headers: { authorization: `Bearer ${accessToken}` } })
+        .then(res => res.json())
+        .then(user => { localStorage.setItem('discord_user', JSON.stringify(user)); window.location.href = '/'; })
+    } else {
+      window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
+    }
+  }, [])
+  return <div className="main-content"><h1>Conectando ao Discord...</h1></div>
+}
+
+const LoreCard = ({ f, onExpand }) => (
+  <div className="lore-card" onClick={() => onExpand(f)}>
+    <h4>{f.nome}</h4>
+    <p className="lore-card-nick">{f.nick}</p>
+    <p className="lore-card-discord">{f.discord_tag}</p>
   </div>
 )
 
@@ -510,195 +511,60 @@ const AdminPanel = ({ user }) => {
                 <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
               </div>
             </div>
+            {modalOpen && selectedLore && (
+              <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                  <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
+                  <h2>{selectedLore.nome}</h2>
+                  <div className="modal-details">
+                    <p><strong>Nick:</strong> {selectedLore.nick}</p>
+                    <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
+                    <p><strong>Raça:</strong> {selectedLore.raca}</p>
+                    <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                    <p><strong>Status:</strong> {selectedLore.status}</p>
+                  </div>
+                  <div className="modal-historia">
+                    <h3>História:</h3>
+                    <p>{selectedLore.historia}</p>
+                  </div>
+                  <div className="modal-actions">
+                    <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
+                    <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="admin-tab-content">
-            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-              <div className="admin-add-form">
-                <h2>Adicionar Novo Administrador</h2>
-                <div className="form-group">
-                  <label>ID do Discord</label>
-                  <div className="input-wrapper">
-                    <User className="input-icon" size={20} />
-                    <input type="text" placeholder="ID do Discord" value={novoAdminId} onChange={(e) => setNovoAdminId(e.target.value)} />
-                  </div>
-                </div>
-                <div className="form-group" style={{ marginTop: '1rem' }}>
-                  <label>Username</label>
-                  <div className="input-wrapper">
-                    <ClipboardList className="input-icon" size={20} />
-                    <input type="text" placeholder="Username" value={novoAdminUsername} onChange={(e) => setNovoAdminUsername(e.target.value)} />
-                  </div>
-                </div>
-                <button onClick={adicionarNovoAdmin} disabled={adicionandoAdmin} className="submit-btn" style={{ width: '100%', marginTop: '1.5rem' }}>{adicionandoAdmin ? 'Adicionando...' : 'Adicionar Admin'}</button>
-              </div>
-              <div className="admin-list">
-                <h2>Administradores Atuais ({admins.length})</h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1rem' }}>{admins.map(admin => <AdminCard key={admin.id} admin={admin} removerAdmin={removerAdmin} />)}</div>
-              </div>
+            <div className="admin-add-form">
+              <h3>Adicionar Novo Admin</h3>
+              <input type="text" placeholder="Discord ID" value={novoAdminId} onChange={(e) => setNovoAdminId(e.target.value)} />
+              <input type="text" placeholder="Discord Username" value={novoAdminUsername} onChange={(e) => setNovoAdminUsername(e.target.value)} />
+              <button onClick={adicionarNovoAdmin} disabled={adicionandoAdmin}>{adicionandoAdmin ? 'Adicionando...' : 'Adicionar Admin'}</button>
+            </div>
+            <div className="admin-list">
+              <h3>Admins Atuais</h3>
+              {admins.map(admin => (
+                <AdminCard key={admin.id} admin={admin} removerAdmin={removerAdmin} />
+              ))}
             </div>
           </div>
         )}
-        <AnimatePresence>{modalOpen && <LoreModal lore={selectedLore} isOpen={modalOpen} onClose={() => setModalOpen(false)} atualizarStatus={atualizarStatus} isAdminView={true} />}</AnimatePresence>
       </div>
     </PageTransition>
   )
 }
 
-const WhiteList = () => {
-  const [search, setSearch] = useState('')
-  const [result, setResult] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-  
-  const handleSearch = async (e) => {
-    e.preventDefault()
-    if (!search.trim()) return
-    setLoading(true)
-    try {
-      const { data } = await supabase.from('lores').select('*').eq('nick', search.trim()).order('created_at', { ascending: false }).limit(1)
-      setResult(data && data.length > 0 ? data[0] : 'not_found')
-    } catch (err) {
-      console.error('Erro ao buscar:', err)
-      setResult('error')
-    }
-    setLoading(false)
-  }
-
-  return (
-    <PageTransition>
-      <div className="main-content">
-        <div className="whitelist-container">
-          <div className="whitelist-header">
-            <h1>🔍 Consulta de WhiteList</h1>
-            <p>Verifique o status da sua partitura em Musae Eras.</p>
-          </div>
-          
-          <form className="whitelist-search-card" onSubmit={handleSearch}>
-            <div className="search-box-modern">
-              <div className="input-with-icon">
-                <Search className="search-icon-inner" size={20} />
-                <input 
-                  type="text" 
-                  placeholder="Seu nick do Minecraft..." 
-                  value={search} 
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="whitelist-search-input"
-                />
-              </div>
-              <button 
-                type="submit" 
-                disabled={loading} 
-                className="search-btn-modern"
-              >
-                {loading ? 'Consultando...' : 'Consultar'}
-              </button>
-            </div>
-          </form>
-
-          <AnimatePresence>
-            {result === 'not_found' && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="result-card error"
-              >
-                <div className="result-icon">❌</div>
-                <div className="result-info">
-                  <h3>Nick não encontrado</h3>
-                  <p className="result-description">Não encontramos nenhuma ficha para o nick "{search}". Verifique se digitou corretamente ou componha uma nova obra.</p>
-                  <Link to="/compor" className="result-action-btn">Compor Obra</Link>
-                </div>
-              </motion.div>
-            )}
-            
-            {result && result !== 'not_found' && result !== 'error' && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className={`result-card ${result.status.toLowerCase().replace(' ', '-')}`}
-              >
-                <div className="result-icon">
-                  {result.status === 'Aprovada' ? '✅' : result.status === 'Recusada' ? '❌' : '⏳'}
-                </div>
-                <div className="result-info">
-                  <div className="result-badge">
-                    {result.status === 'Aprovada' ? '✅ APROVADA' : result.status === 'Recusada' ? '❌ RECUSADA' : '⏳ EM ANÁLISE'}
-                  </div>
-                  <h3>{result.nome}</h3>
-                  <div className="result-meta">
-                    <span><strong>Nick:</strong> {result.nick}</span>
-                    <span className="meta-divider">•</span>
-                    <span><strong>Raça:</strong> {result.raca}</span>
-                  </div>
-                  <p className="result-description">
-                    {result.status === 'Aprovada' 
-                      ? 'Parabéns! Sua partitura foi aprovada. Bem-vindo a Musae Eras!'
-                      : result.status === 'Em Análise'
-                      ? 'Sua partitura está sendo analisada pelos Maestros. Aguarde a resposta em breve.'
-                      : 'Sua partitura foi recusada. Veja o motivo abaixo e considere reenviar uma versão corrigida.'}
-                  </p>
-                  
-                  {result.status === 'Recusada' && result.motivo_recusa && (
-                    <div className="motivo-recusa-box">
-                      <h4>⚠️ Motivo da Recusa:</h4>
-                      <p>{result.motivo_recusa}</p>
-                    </div>
-                  )}
-                  
-                  {result.status === 'Recusada' && (
-                    <button 
-                      onClick={() => navigate('/compor', { state: { loreData: result } })} 
-                      className="result-action-btn"
-                    >
-                      Corrigir e Reenviar
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {result === 'error' && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="result-card error"
-              >
-                <div className="result-icon">⚠️</div>
-                <div className="result-info">
-                  <h3>Erro ao Consultar</h3>
-                  <p className="result-description">Ocorreu um erro ao consultar a whitelist. Tente novamente mais tarde.</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="whitelist-footer-info">
-            <p>💡 Dica: Digite exatamente o nick do Minecraft que você usou ao compor sua obra.</p>
-          </div>
-        </div>
-      </div>
-    </PageTransition>
-  )
-}
-
-const LoginPage = () => {
-  useEffect(() => {
-    const fragment = new URLSearchParams(window.location.hash.slice(1))
-    const accessToken = fragment.get('access_token')
-    if (accessToken) {
-      fetch('https://discord.com/api/users/@me', { headers: { authorization: `Bearer ${accessToken}` } })
-        .then(res => res.json())
-        .then(user => { localStorage.setItem('discord_user', JSON.stringify(user)); window.location.href = '/'; })
-    } else {
-      window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
-    }
-  }, [])
-  return <div className="main-content"><h1>Conectando ao Discord...</h1></div>
-}
+const AdminCard = ({ admin, removerAdmin }) => (
+  <div className="admin-card">
+    <div className="admin-info">
+      <h4>{admin.discord_username}</h4>
+      <p>ID: {admin.discord_id}</p>
+    </div>
+    <button className="admin-remove-btn" onClick={() => removerAdmin(admin.id)}>Remover</button>
+  </div>
+)
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('discord_user')))
@@ -720,6 +586,10 @@ function App() {
             <img src="/rat1.png" alt="Logo" className="sidebar-logo" />
             <span className="sidebar-title">Musae Eras</span>
           </Link>
+
+          {/* PRIMEIRO DIVISOR: Entre o nome e as abas */}
+          <SidebarDivider />
+
           <nav className="sidebar-nav">
             {user && <Link to="/perfil" className="nav-item" style={{ color: '#d565e5' }}><span>Perfil</span></Link>}
             <Link to="/forum" className="nav-item" style={{ color: '#f0b232' }}><span>Fórum</span></Link>
@@ -729,6 +599,10 @@ function App() {
               <span>WhiteList</span>
             </Link>
             {!loadingAdmin && isAdmin && <Link to="/admin" className="nav-item" style={{ color: '#f0a500' }}><span>👑 Admin</span></Link>}
+
+            {/* SEGUNDO DIVISOR: Entre as abas e o botão Sair */}
+            <SidebarDivider />
+
             {user ? (
               <button className="sidebar-login-btn" onClick={() => { localStorage.removeItem('discord_user'); window.location.href = '/'; }}>Sair</button>
             ) : (
