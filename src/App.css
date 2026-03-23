@@ -1115,3 +1115,35 @@ body {
     font-size: 2.2rem;
   }
 }
+
+/* BOTÃO DE DELETAR NO ADMIN */
+.btn-delete-lore {
+  background: rgba(242, 63, 67, 0.1) !important;
+  color: #f23f43 !important;
+  border: 1px solid rgba(242, 63, 67, 0.3) !important;
+  padding: 0.8rem 1.5rem !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.btn-delete-lore:hover {
+  background: #f23f43 !important;
+  color: white !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 15px rgba(242, 63, 67, 0.4) !important;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
