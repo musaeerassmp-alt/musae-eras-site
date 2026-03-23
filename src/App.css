@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + BUSCA ADMIN)
+   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + FIX COMPOSIÇÃO)
    ============================================================ */
 
 :root {
@@ -253,203 +253,133 @@ body {
 }
 
 /* ============================================================
-   WHITELIST (CONSULTA) - MELHORADO
+   COMPOR OBRA (FORMULÁRIO) - CORREÇÃO DE LAYOUT
    ============================================================ */
 
-.whitelist-container {
+.compor-container {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 3rem;
+  padding-bottom: 4rem;
 }
 
-.whitelist-header {
+.compor-header {
   text-align: center;
-}
-
-.whitelist-search-card {
-  background: rgba(22, 27, 34, 0.8);
-  border: 1px solid #30363d;
-  border-radius: 20px;
-  padding: 2.5rem;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-}
-
-.search-box-modern {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-}
-
-.input-with-icon {
-  position: relative;
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.search-icon-inner {
-  position: absolute;
-  left: 1.25rem;
-  font-size: 1.2rem;
-  opacity: 0.8;
-  color: var(--text-secondary);
-}
-
-.input-with-icon input {
-  width: 100%;
-  background: rgba(11, 14, 20, 0.6);
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  color: white;
-  padding: 1rem 1rem 1rem 3.2rem;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.input-with-icon input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.input-with-icon input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 20px rgba(213, 101, 229, 0.2);
-  background: rgba(11, 14, 20, 0.8);
-}
-
-.search-btn-modern {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0 2rem;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(213, 101, 229, 0.3);
-}
-
-.search-btn-modern:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(213, 101, 229, 0.5);
-  filter: brightness(1.1);
-}
-
-.search-btn-modern:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.result-card {
-  display: flex;
-  gap: 2rem;
-  background: rgba(22, 27, 34, 0.9);
-  border: 1px solid #30363d;
-  border-radius: 20px;
-  padding: 2.5rem;
-  text-align: left;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  position: relative;
-  overflow: hidden;
-}
-
-.result-card.aprovada { border-left: 6px solid var(--success-color); }
-.result-card.recusada { border-left: 6px solid var(--danger-color); }
-.result-card.error { border-left: 6px solid #8b949e; }
-
-.result-icon {
-  font-size: 4rem;
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.result-badge {
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
-.aprovada .result-badge { background: rgba(35, 165, 89, 0.2); color: var(--success-color); }
-
-.result-meta {
-  display: flex;
-  gap: 1rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+.compor-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
 }
 
-/* ============================================================
-   COMPOR OBRA (FORMULÁRIO)
-   ============================================================ */
-
-.compor-container {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+.compor-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
 }
 
 .compor-form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
+  width: 100%;
 }
 
 .form-section-card {
-  background: rgba(22, 27, 34, 0.8);
-  border: 1px solid #30363d;
-  border-radius: 16px;
-  padding: 2rem;
+  background: rgba(22, 27, 34, 0.7);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
   text-align: left;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-section-title {
   color: var(--primary-color);
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid rgba(213, 101, 229, 0.2);
   padding-bottom: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+  width: 100%;
 }
 
-.form-group input, .form-group textarea, .form-group select {
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
   width: 100%;
-  background: rgba(11, 14, 20, 0.6);
+  background: rgba(11, 14, 20, 0.8);
   border: 1px solid #30363d;
-  border-radius: 10px;
+  border-radius: 12px;
   color: white;
-  padding: 0.85rem 1rem;
+  padding: 1rem 1.25rem;
   font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus, 
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(213, 101, 229, 0.2);
+  background: rgba(11, 14, 20, 0.95);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 200px;
+  line-height: 1.6;
 }
 
 .submit-btn {
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 10px;
-  font-weight: 700;
+  padding: 1.25rem 3rem;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(213, 101, 229, 0.2);
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.4);
+  filter: brightness(1.1);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* ============================================================
@@ -765,4 +695,17 @@ body {
   background: white;
   flex: 1;
   margin: 0 10px;
+}
+
+/* RESPONSIVIDADE PARA COMPOSIÇÃO */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-section-card {
+    padding: 1.5rem;
+  }
+  .compor-header h1 {
+    font-size: 2rem;
+  }
 }
