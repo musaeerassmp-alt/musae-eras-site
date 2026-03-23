@@ -334,6 +334,45 @@ const Profile = ({ user }) => {
             )}
           </div>
         </div>
+
+        {/* MODAL DE VISUALIZAÇÃO NO PERFIL */}
+        <AnimatePresence>
+          {modalOpen && selectedLore && (
+            <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="modal-content" 
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
+                <h2>{selectedLore.nome}</h2>
+                <div className="modal-details">
+                  <p><strong>Nick:</strong> {selectedLore.nick}</p>
+                  <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
+                  <p><strong>Raça:</strong> {selectedLore.raca}</p>
+                  <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                  <p><strong>Status:</strong> {selectedLore.status}</p>
+                </div>
+                <div className="modal-historia">
+                  <h3>História:</h3>
+                  <p>{selectedLore.historia}</p>
+                </div>
+                {selectedLore.status === 'Recusada' && (
+                  <div className="modal-actions">
+                    <button 
+                      onClick={() => { setModalOpen(false); navigate('/compor', { state: { loreData: selectedLore } }); }} 
+                      className="btn-approve"
+                    >
+                      ✍️ Corrigir Agora
+                    </button>
+                  </div>
+                )}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </PageTransition>
   )
@@ -456,10 +495,15 @@ const LoginPage = () => {
 
 const LoreCard = ({ f, onExpand }) => (
   <div className="lore-card" onClick={() => onExpand(f)}>
-    <h4>{f.nome}</h4>
+    <div className="lore-card-header">
+      <h4>{f.nome}</h4>
+      <span className="lore-card-expand">👁️</span>
+    </div>
     <p className="lore-card-nick">{f.nick}</p>
     <p className="lore-card-discord">{f.discord_tag}</p>
-    <p className="lore-card-preview-text">{f.historia.substring(0, 80)}...</p>
+    <div className="lore-card-preview">
+      <p className="lore-card-preview-text">{f.historia.substring(0, 80)}...</p>
+    </div>
   </div>
 )
 
@@ -560,29 +604,37 @@ const AdminPanel = ({ user }) => {
                   <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
                 </div>
               </div>
-              {modalOpen && selectedLore && (
-                <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-                  <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                    <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
-                    <h2>{selectedLore.nome}</h2>
-                    <div className="modal-details">
-                      <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                      <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
-                      <p><strong>Raça:</strong> {selectedLore.raca}</p>
-                      <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                      <p><strong>Status:</strong> {selectedLore.status}</p>
-                    </div>
-                    <div className="modal-historia">
-                      <h3>História:</h3>
-                      <p>{selectedLore.historia}</p>
-                    </div>
-                    <div className="modal-actions">
-                      <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
-                      <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
-                    </div>
+              <AnimatePresence>
+                {modalOpen && selectedLore && (
+                  <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      className="modal-content" 
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
+                      <h2>{selectedLore.nome}</h2>
+                      <div className="modal-details">
+                        <p><strong>Nick:</strong> {selectedLore.nick}</p>
+                        <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
+                        <p><strong>Raça:</strong> {selectedLore.raca}</p>
+                        <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                        <p><strong>Status:</strong> {selectedLore.status}</p>
+                      </div>
+                      <div className="modal-historia">
+                        <h3>História:</h3>
+                        <p>{selectedLore.historia}</p>
+                      </div>
+                      <div className="modal-actions">
+                        <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
+                        <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              )}
+                )}
+              </AnimatePresence>
             </div>
           ) : (
             <div className="admin-tab-content">
