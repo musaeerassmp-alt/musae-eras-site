@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + FIX COMPOSIÇÃO)
+   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + GRID PERFIL)
    ============================================================ */
 
 :root {
@@ -253,7 +253,181 @@ body {
 }
 
 /* ============================================================
-   COMPOR OBRA (FORMULÁRIO) - CORREÇÃO DE LAYOUT
+   PERFIL - GRADE DE LORES (FIX)
+   ============================================================ */
+
+.profile-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+.profile-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.profile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  text-align: left;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(213, 101, 229, 0.4);
+}
+
+.profile-user-details h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: white;
+}
+
+.profile-discord-tag {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.profile-lores-section {
+  width: 100%;
+  text-align: left;
+}
+
+.profile-lores-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: white;
+  border-left: 4px solid var(--primary-color);
+  padding-left: 1.5rem;
+}
+
+.profile-lores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-lore-card-container {
+  width: 100%;
+}
+
+.profile-lore-card {
+  background: rgba(22, 27, 34, 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(213, 101, 229, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-lore-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(213, 101, 229, 0.6) !important;
+  background: rgba(22, 27, 34, 0.6) !important;
+  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.2);
+}
+
+.profile-lore-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+}
+
+.profile-lore-nick {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.aprovada { background: rgba(35, 165, 89, 0.2); color: #23a559; border: 1px solid rgba(35, 165, 89, 0.3); }
+.status-badge.recusada { background: rgba(242, 63, 67, 0.2); color: #f23f43; border: 1px solid rgba(242, 63, 67, 0.3); }
+.status-badge.em-análise { background: rgba(240, 178, 50, 0.2); color: #f0b232; border: 1px solid rgba(240, 178, 50, 0.3); }
+
+.profile-lore-body {
+  flex-grow: 1;
+}
+
+.profile-lore-body p {
+  margin: 0.6rem 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.profile-lore-body strong {
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.profile-motivo-box {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background: rgba(242, 63, 67, 0.1);
+  border-radius: 12px;
+  border-left: 4px solid #f23f43;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.profile-fix-btn {
+  background: var(--danger-color) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.85rem !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+  margin-top: 1.5rem !important;
+  width: 100% !important;
+  transition: all 0.2s ease !important;
+}
+
+.profile-fix-btn:hover {
+  filter: brightness(1.2) !important;
+  transform: scale(1.02) !important;
+}
+
+/* ============================================================
+   COMPOR OBRA (FORMULÁRIO)
    ============================================================ */
 
 .compor-container {
@@ -269,17 +443,6 @@ body {
 .compor-header {
   text-align: center;
   margin-bottom: 1rem;
-}
-
-.compor-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.compor-header p {
-  color: var(--text-secondary);
-  font-size: 1.1rem;
 }
 
 .compor-form {
@@ -369,17 +532,6 @@ body {
   box-shadow: 0 10px 20px rgba(213, 101, 229, 0.2);
   align-self: center;
   margin-top: 1rem;
-}
-
-.submit-btn:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.4);
-  filter: brightness(1.1);
-}
-
-.submit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 /* ============================================================
@@ -616,72 +768,6 @@ body {
   overflow-y: auto;
 }
 
-/* ============================================================
-   EFEITO VIDRO PARA OS CARDS DO PERFIL (RESTAURADO)
-   ============================================================ */
-.profile-lores-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-  width: 100%;
-}
-.profile-lore-card {
-  background: rgba(22, 27, 34, 0.4) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(213, 101, 229, 0.2) !important;
-  border-radius: 20px !important;
-  padding: 1.5rem !important;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: left;
-}
-.profile-lore-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(213, 101, 229, 0.5) !important;
-}
-.profile-lore-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.5rem;
-}
-.profile-lore-nick {
-  font-weight: bold;
-  color: var(--primary-color);
-}
-.status-badge {
-  font-size: 0.7rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 20px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-.status-badge.aprovada { background: rgba(35, 165, 89, 0.2); color: #23a559; }
-.status-badge.recusada { background: rgba(242, 63, 67, 0.2); color: #f23f43; }
-.status-badge.em-análise { background: rgba(240, 178, 50, 0.2); color: #f0b232; }
-
-.profile-motivo-box {
-  margin-top: 1rem;
-  padding: 0.8rem;
-  background: rgba(242, 63, 67, 0.1);
-  border-radius: 8px;
-  border-left: 3px solid #f23f43;
-}
-
-.profile-fix-btn {
-  background: var(--danger-color) !important;
-  color: white !important;
-  border: none !important;
-  padding: 0.75rem !important;
-  border-radius: 8px !important;
-  cursor: pointer !important;
-  font-weight: bold !important;
-  margin-top: 0.5rem !important;
-  width: 100% !important;
-}
-
 /* SIDEBAR DIVIDER */
 .sidebar-divider {
   display: flex;
@@ -697,7 +783,13 @@ body {
   margin: 0 10px;
 }
 
-/* RESPONSIVIDADE PARA COMPOSIÇÃO */
+/* RESPONSIVIDADE */
+@media (max-width: 992px) {
+  .profile-lores-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;
@@ -707,5 +799,17 @@ body {
   }
   .compor-header h1 {
     font-size: 2rem;
+  }
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+  .profile-user-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  .profile-lores-grid {
+    grid-template-columns: 1fr;
   }
 }
