@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSAE ERAS - CSS FINAL INTEGRADO (CORRIGIDO)
+   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO)
    ============================================================ */
 
 :root {
@@ -345,10 +345,6 @@ body {
   cursor: not-allowed;
 }
 
-.whitelist-result-container {
-  width: 100%;
-}
-
 .result-card {
   display: flex;
   gap: 2rem;
@@ -363,32 +359,19 @@ body {
   overflow: hidden;
 }
 
-.result-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, var(--status-color-light) 0%, transparent 70%);
-  opacity: 0.1;
-  pointer-events: none;
-}
+.result-card.aprovada { border-left: 6px solid var(--success-color); }
+.result-card.recusada { border-left: 6px solid var(--danger-color); }
+.result-card.error { border-left: 6px solid #8b949e; }
 
 .result-icon {
   font-size: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100px;
   height: 100px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 24px;
-  flex-shrink: 0;
-}
-
-.result-info {
-  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .result-badge {
@@ -398,121 +381,241 @@ body {
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1px;
   margin-bottom: 1rem;
 }
 
-.result-info h3 {
-  font-size: 2rem;
-  margin: 0 0 0.75rem 0;
-  color: white;
-}
+.aprovada .result-badge { background: rgba(35, 165, 89, 0.2); color: var(--success-color); }
 
 .result-meta {
   display: flex;
-  align-items: center;
   gap: 1rem;
   color: var(--text-secondary);
-  font-size: 0.95rem;
   margin-bottom: 1.5rem;
 }
 
-.meta-divider {
-  opacity: 0.3;
+/* ============================================================
+   COMPOR OBRA (FORMULÁRIO)
+   ============================================================ */
+
+.compor-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.result-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 0.5rem 0;
+.compor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.motivo-recusa-box {
-  margin-top: 1.5rem;
-  padding: 1.25rem;
-  background: rgba(242, 63, 67, 0.1);
-  border-radius: 12px;
-  border-left: 4px solid var(--danger-color);
-}
-
-.motivo-recusa-box h4 {
-  margin: 0 0 0.5rem 0;
-  color: var(--danger-color);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.motivo-recusa-box p {
-  margin: 0;
-  color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* Cores por Status */
-.result-card.aprovada { --status-color: var(--success-color); --status-color-light: #23a559; border-left: 6px solid var(--success-color); }
-.result-card.aprovada .result-badge { background: rgba(35, 165, 89, 0.2); color: var(--success-color); }
-
-.result-card.em-análise { --status-color: var(--warning-color); --status-color-light: #f0b232; border-left: 6px solid var(--warning-color); }
-.result-card.em-análise .result-badge { background: rgba(240, 178, 50, 0.2); color: var(--warning-color); }
-
-.result-card.recusada { --status-color: var(--danger-color); --status-color-light: #f23f43; border-left: 6px solid var(--danger-color); }
-.result-card.recusada .result-badge { background: rgba(242, 63, 67, 0.2); color: var(--danger-color); }
-
-.result-card.error { border-left: 6px solid #8b949e; }
-.result-card.error .result-icon { opacity: 0.5; }
-
-.result-action-btn {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+.form-section-card {
+  background: rgba(22, 27, 34, 0.8);
   border: 1px solid #30363d;
-  border-radius: 8px;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: left;
+  backdrop-filter: blur(10px);
+}
+
+.form-section-title {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(213, 101, 229, 0.2);
+  padding-bottom: 0.75rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  background: rgba(11, 14, 20, 0.6);
+  border: 1px solid #30363d;
+  border-radius: 10px;
   color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
 }
 
-.result-action-btn:hover {
+.submit-btn {
   background: var(--primary-color);
-  border-color: var(--primary-color);
-  transform: translateX(5px);
-}
-
-.whitelist-footer-info {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  opacity: 0.7;
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* ============================================================
-   SIDEBAR DIVIDER
+   FÓRUM E HISTÓRIA DO MUNDO
    ============================================================ */
-.sidebar-divider {
+
+.forum-container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.forum-intro-text {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 1.5rem 0 !important;
+}
+
+.forum-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.forum-nav-btn {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid #30363d;
+  color: var(--text-secondary);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.forum-nav-btn.active {
+  background: var(--warning-color);
+  color: #000;
+  border-color: var(--warning-color);
+}
+
+.lore-intro-card {
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid #30363d;
+  border-radius: 24px;
+  padding: 3rem;
+  text-align: left;
+}
+
+.lore-title {
+  font-size: 2rem;
+  color: #f59e0b;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.lore-highlight {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--primary-color);
+  text-align: center;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.lore-text-content {
+  line-height: 1.8;
+  font-size: 1.15rem;
+}
+
+.lore-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0;
-  width: 100%;
-  opacity: 0.3;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  color: var(--primary-color);
 }
-.divider-line {
-  height: 1px;
-  background: white;
-  flex: 1;
-  margin: 0 10px;
+
+.lore-footer {
+  background: rgba(147, 51, 234, 0.05);
+  padding: 1.5rem;
+  border-left: 3px solid var(--primary-color);
+  border-radius: 12px;
 }
-.divider-icon {
-  color: white;
+
+.lore-final-call {
+  color: #f59e0b;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: 2.5rem;
 }
 
 /* ============================================================
-   EFEITO VIDRO PARA OS CARDS DO PERFIL
+   ADMIN E MODAL
+   ============================================================ */
+
+.admin-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.admin-column {
+  background: rgba(22, 27, 34, 0.8);
+  border-radius: 12px;
+  border: 1px solid #30363d;
+}
+
+.lore-card {
+  background: rgba(22, 27, 34, 0.7);
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  max-width: 650px;
+  width: 90%;
+  padding: 2rem;
+  position: relative;
+  text-align: left;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-historia {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #30363d;
+}
+
+.modal-historia p {
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   EFEITO VIDRO PARA OS CARDS DO PERFIL (RESTAURADO)
    ============================================================ */
 .profile-lores-grid {
   display: grid;
@@ -520,36 +623,30 @@ body {
   gap: 2rem;
   padding: 2rem;
   width: 100%;
-  max-width: 1200px;
 }
 .profile-lore-card {
   background: rgba(22, 27, 34, 0.4) !important;
   backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(213, 101, 229, 0.2) !important;
   border-radius: 20px !important;
   padding: 1.5rem !important;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: left;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 .profile-lore-card:hover {
   transform: translateY(-5px);
   border-color: rgba(213, 101, 229, 0.5) !important;
-  background: rgba(22, 27, 34, 0.6) !important;
 }
 .profile-lore-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.5rem;
 }
 .profile-lore-nick {
   font-weight: bold;
-  font-size: 1.2rem;
   color: var(--primary-color);
 }
 .status-badge {
@@ -562,12 +659,12 @@ body {
 .status-badge.aprovada { background: rgba(35, 165, 89, 0.2); color: #23a559; }
 .status-badge.recusada { background: rgba(242, 63, 67, 0.2); color: #f23f43; }
 .status-badge.em-análise { background: rgba(240, 178, 50, 0.2); color: #f0b232; }
+
 .profile-motivo-box {
   margin-top: 1rem;
   padding: 0.8rem;
   background: rgba(242, 63, 67, 0.1);
   border-radius: 8px;
-  font-size: 0.85rem;
   border-left: 3px solid #f23f43;
 }
 
@@ -581,10 +678,19 @@ body {
   font-weight: bold !important;
   margin-top: 0.5rem !important;
   width: 100% !important;
-  transition: all 0.2s ease !important;
 }
 
-.profile-fix-btn:hover {
-  filter: brightness(1.2) !important;
-  transform: scale(1.02) !important;
+/* SIDEBAR DIVIDER */
+.sidebar-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  opacity: 0.3;
+}
+.divider-line {
+  height: 1px;
+  background: white;
+  flex: 1;
+  margin: 0 10px;
 }
