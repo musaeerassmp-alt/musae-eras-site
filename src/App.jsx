@@ -216,22 +216,32 @@ const CriarFicha = ({ user }) => {
             <div className="form-section-card">
               <h3 className="form-section-title">Informações do Personagem</h3>
               <div className="form-grid">
-                <input type="text" placeholder="Nick do Minecraft" value={formData.nick} onChange={(e) => setFormData({ ...formData, nick: e.target.value })} required />
-                <input type="text" placeholder="Nome do Personagem" value={formData.nome} onChange={(e) => setFormData({ ...formData, nome: e.target.value })} required />
-                <input type="number" placeholder="Idade" value={formData.idade} onChange={(e) => setFormData({ ...formData, idade: e.target.value })} required />
-                <select value={formData.raca} onChange={(e) => setFormData({ ...formData, raca: e.target.value })} required>
-                  <option value="">Selecione uma Raça</option>
-                  <option value="Humano">Humano</option>
-                  <option value="Anjo">Anjo</option>
-                  <option value="Demônio">Demônio</option>
-                  <option value="Quimera">Quimera</option>
-                  <option value="Aquariano">Aquariano</option>
-                </select>
+                <div className="form-group">
+                  <input type="text" placeholder="Nick do Minecraft" value={formData.nick} onChange={(e) => setFormData({ ...formData, nick: e.target.value })} required />
+                </div>
+                <div className="form-group">
+                  <input type="text" placeholder="Nome do Personagem" value={formData.nome} onChange={(e) => setFormData({ ...formData, nome: e.target.value })} required />
+                </div>
+                <div className="form-group">
+                  <input type="number" placeholder="Idade" value={formData.idade} onChange={(e) => setFormData({ ...formData, idade: e.target.value })} required />
+                </div>
+                <div className="form-group">
+                  <select value={formData.raca} onChange={(e) => setFormData({ ...formData, raca: e.target.value })} required>
+                    <option value="">Selecione uma Raça</option>
+                    <option value="Humano">Humano</option>
+                    <option value="Anjo">Anjo</option>
+                    <option value="Demônio">Demônio</option>
+                    <option value="Quimera">Quimera</option>
+                    <option value="Aquariano">Aquariano</option>
+                  </select>
+                </div>
               </div>
             </div>
             <div className="form-section-card">
               <h3 className="form-section-title">Sua História</h3>
-              <textarea placeholder="Conte a história do seu personagem..." value={formData.historia} onChange={(e) => setFormData({ ...formData, historia: e.target.value })} required rows="8"></textarea>
+              <div className="form-group">
+                <textarea placeholder="Conte a história do seu personagem..." value={formData.historia} onChange={(e) => setFormData({ ...formData, historia: e.target.value })} required rows="8"></textarea>
+              </div>
             </div>
             <button type="submit" className="submit-btn" disabled={isSubmitting}>{isSubmitting ? 'Enviando...' : 'Enviar Partitura'}</button>
           </form>
@@ -315,18 +325,36 @@ const Profile = ({ user }) => {
 }
 
 const WhiteList = () => {
+  const navigate = useNavigate()
   const [searchNick, setSearchNick] = useState('')
   const [result, setResult] = useState(null)
+  const [isSearching, setIsSearching] = useState(false)
+  
   const handleSearch = async (e) => {
     e.preventDefault()
     if (!searchNick.trim()) return
+    
+    setIsSearching(true)
     try {
-      const { data } = await supabase.from('lores').select('*').eq('nick', searchNick).eq('status', 'Aprovada').single()
-      setResult(data || 'not_found')
+      const { data, error } = await supabase
+        .from('lores')
+        .select('*')
+        .ilike('nick', `%${searchNick}%`)
+        .eq('status', 'Aprovada')
+        .single()
+      
+      if (error || !data) {
+        setResult('not_found')
+      } else {
+        setResult(data)
+      }
     } catch (err) {
       setResult('error')
+    } finally {
+      setIsSearching(false)
     }
   }
+  
   return (
     <PageTransition>
       <div className="main-content">
@@ -335,15 +363,25 @@ const WhiteList = () => {
             <h1>🛡️ WhiteList</h1>
             <p>Verifique se seu personagem foi aprovado para jogar em Musae Eras.</p>
           </div>
-          <form className="whitelist-form" onSubmit={handleSearch}>
-            <div className="whitelist-input-group">
-              <input type="text" placeholder="Digite seu nick do Minecraft..." value={searchNick} onChange={(e) => setSearchNick(e.target.value)} className="whitelist-input" />
-              <button type="submit" className="whitelist-btn">Verificar</button>
-            </div>
-          </form>
+          <div className="whitelist-search-card">
+            <form className="search-box-modern" onSubmit={handleSearch}>
+              <div className="input-with-icon">
+                <Search className="search-icon-inner" size={20} />
+                <input 
+                  type="text" 
+                  placeholder="Digite seu nick do Minecraft..." 
+                  value={searchNick} 
+                  onChange={(e) => setSearchNick(e.target.value)} 
+                />
+              </div>
+              <button type="submit" className="search-btn-modern" disabled={isSearching}>
+                {isSearching ? 'Buscando...' : 'Verificar'}
+              </button>
+            </form>
+          </div>
           <AnimatePresence>
             {result === 'not_found' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card not-found">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card error">
                 <div className="result-icon">❌</div>
                 <div className="result-info">
                   <h3>Não Encontrado</h3>
@@ -352,28 +390,19 @@ const WhiteList = () => {
               </motion.div>
             )}
             {result && result !== 'not_found' && result !== 'error' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card approved">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card aprovada">
                 <div className="result-icon">✅</div>
                 <div className="result-info">
                   <h3>Aprovado!</h3>
-                  <p className="result-description">Seu personagem foi aprovado e está pronto para jogar!</p>
-                </div>
-                <div className="result-details">
-                  <p><strong>Nick:</strong> {result.nick}</p>
-                  <p><strong>Personagem:</strong> {result.nome}</p>
-                  <p><strong>Raça:</strong> {result.raca}</p>
-                </div>
-                {result.status === 'Recusada' && result.motivo_recusa && (
-                  <div className="motivo-recusa-box">
-                    <h4>⚠️ Motivo da Recusa:</h4>
-                    <p>{result.motivo_recusa}</p>
+                  <span className="result-badge">Aprovada</span>
+                  <div className="result-meta">
+                    <span>{result.nick}</span>
+                    <span className="meta-divider">•</span>
+                    <span>{result.raca}</span>
                   </div>
-                )}
-                {result.status === 'Recusada' && (
-                  <button onClick={() => navigate('/compor', { state: { loreData: result } })} className="result-action-btn">
-                    Corrigir e Reenviar
-                  </button>
-                )}
+                  <p className="result-description"><strong>Personagem:</strong> {result.nome}</p>
+                  <p className="result-description"><strong>Idade:</strong> {result.idade}</p>
+                </div>
               </motion.div>
             )}
             {result === 'error' && (
@@ -415,6 +444,7 @@ const LoreCard = ({ f, onExpand }) => (
     <h4>{f.nome}</h4>
     <p className="lore-card-nick">{f.nick}</p>
     <p className="lore-card-discord">{f.discord_tag}</p>
+    <p className="lore-card-preview-text">{f.historia.substring(0, 80)}...</p>
   </div>
 )
 
@@ -430,9 +460,11 @@ const AdminPanel = ({ user }) => {
   const [novoAdminId, setNovoAdminId] = useState('')
   const [novoAdminUsername, setNovoAdminUsername] = useState('')
   const [adicionandoAdmin, setAdicionandoAdmin] = useState(false)
+  
   useEffect(() => {
     verificarAdmin()
   }, [user])
+  
   const verificarAdmin = async () => {
     if (!user) { setIsAdmin(false); setLoading(false); return; }
     try {
@@ -442,14 +474,17 @@ const AdminPanel = ({ user }) => {
     } catch (err) { setIsAdmin(false); }
     finally { setLoading(false); }
   }
+  
   const fetchLores = async () => {
     const { data } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
     setLores(data || [])
   }
+  
   const fetchAdmins = async () => {
     const { data } = await supabase.from('admins').select('*').order('created_at', { ascending: false })
     setAdmins(data || [])
   }
+  
   const atualizarStatus = async (id, status, motivo = null) => {
     const updateData = { status }
     if (status === 'Recusada' && motivo) updateData.motivo_recusa = motivo
@@ -457,100 +492,104 @@ const AdminPanel = ({ user }) => {
     await supabase.from('lores').update(updateData).eq('id', id)
     fetchLores()
   }
+  
   const adicionarNovoAdmin = async () => {
     if (!novoAdminId.trim() || !novoAdminUsername.trim()) return alert('Preencha todos os campos!')
     setAdicionandoAdmin(true)
     const { error } = await supabase.from('admins').insert([{ discord_id: novoAdminId, discord_username: novoAdminUsername }])
-    if (error) alert('Erro: ' + error.message)
-    else { alert('Admin adicionado!'); setNovoAdminId(''); setNovoAdminUsername(''); fetchAdmins(); }
+    if (error) alert('Erro ao adicionar admin: ' + error.message)
+    else { setNovoAdminId(''); setNovoAdminUsername(''); fetchAdmins(); }
     setAdicionandoAdmin(false)
   }
-  const removerAdmin = async (adminId) => {
-    if (confirm('Remover este admin?')) {
-      const { error } = await supabase.from('admins').delete().eq('id', adminId)
-      if (error) alert('Erro: ' + error.message)
-      else { alert('Removido!'); fetchAdmins(); }
-    }
+  
+  const removerAdmin = async (id) => {
+    if (!confirm('Tem certeza?')) return
+    await supabase.from('admins').delete().eq('id', id)
+    fetchAdmins()
   }
+  
   if (loading) return <div className="main-content"><h1>Carregando...</h1></div>
-  if (!isAdmin) return <div className="main-content"><h1>Acesso Negado</h1></div>
-  const loresFiltradas = lores.filter(lore => lore.discord_tag.toLowerCase().includes(searchDiscord.toLowerCase()))
-  const emAnalise = loresFiltradas.filter(f => f.status === 'Em Análise')
-  const aprovadas = loresFiltradas.filter(f => f.status === 'Aprovada')
-  const recusadas = loresFiltradas.filter(f => f.status === 'Recusada')
+  if (!isAdmin) return (
+    <div className="main-content">
+      <div className="error-card">
+        <h1>⚠️ Acesso Restrito</h1>
+        <p>Você não tem permissão para acessar a área administrativa.</p>
+      </div>
+    </div>
+  )
+  
+  const emAnalise = lores.filter(l => l.status === 'Em Análise')
+  const aprovadas = lores.filter(l => l.status === 'Aprovada')
+  const recusadas = lores.filter(l => l.status === 'Recusada')
+  
   return (
     <PageTransition>
       <div className="main-content">
-        <div className="admin-header"><h1>Painel do Maestro</h1></div>
-        <div className="admin-tabs-container">
-          <div className="admin-tabs">
-            <button className={`admin-tab-btn ${activeTab === 'lores' ? 'admin-tab-btn--active' : ''}`} onClick={() => setActiveTab('lores')}>📜 Lores</button>
-            <button className={`admin-tab-btn ${activeTab === 'admins' ? 'admin-tab-btn--active' : ''}`} onClick={() => setActiveTab('admins')}>👑 Gerenciar Admins</button>
+        <div className="admin-panel">
+          <div className="admin-header">
+            <h1>👑 Painel Administrativo</h1>
+            <div className="admin-tabs">
+              <button className={`admin-tab-btn ${activeTab === 'lores' ? 'active' : ''}`} onClick={() => setActiveTab('lores')}>Partituras</button>
+              <button className={`admin-tab-btn ${activeTab === 'admins' ? 'active' : ''}`} onClick={() => setActiveTab('admins')}>Gerenciar Admins</button>
+            </div>
           </div>
-        </div>
-        {activeTab === 'lores' ? (
-          <div className="admin-tab-content" style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <div className="admin-search-container">
-              <div className="admin-search-box">
-                <span className="search-icon">🔍</span>
-                <input type="text" placeholder="Pesquisar por Discord (ex: user#0000)..." value={searchDiscord} onChange={(e) => setSearchDiscord(e.target.value)} className="admin-search-input" />
-                {searchDiscord && <button className="clear-search" onClick={() => setSearchDiscord('')}>✕</button>}
-              </div>
-            </div>
-            <div className="admin-columns">
-              <div className="admin-column admin-column--analise">
-                <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f0a500' }}></span><h2>Em Análise</h2><span className="admin-column-count">{emAnalise.length}</span></div>
-                <div className="admin-column-body">{emAnalise.length === 0 ? <p className="admin-column-empty">Vazio.</p> : emAnalise.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-              </div>
-              <div className="admin-column admin-column--aprovada">
-                <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#23a559' }}></span><h2>Aprovadas</h2><span className="admin-column-count">{aprovadas.length}</span></div>
-                <div className="admin-column-body">{aprovadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : aprovadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-              </div>
-              <div className="admin-column admin-column--recusada">
-                <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f23f43' }}></span><h2>Recusadas</h2><span className="admin-column-count">{recusadas.length}</span></div>
-                <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-              </div>
-            </div>
-            {modalOpen && selectedLore && (
-              <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                  <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
-                  <h2>{selectedLore.nome}</h2>
-                  <div className="modal-details">
-                    <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                    <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
-                    <p><strong>Raça:</strong> {selectedLore.raca}</p>
-                    <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                    <p><strong>Status:</strong> {selectedLore.status}</p>
-                  </div>
-                  <div className="modal-historia">
-                    <h3>História:</h3>
-                    <p>{selectedLore.historia}</p>
-                  </div>
-                  <div className="modal-actions">
-                    <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
-                    <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
-                  </div>
+          {activeTab === 'lores' ? (
+            <div className="admin-tab-content">
+              <div className="admin-columns">
+                <div className="admin-column admin-column--analise">
+                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f0a500' }}></span><h2>Em Análise</h2><span className="admin-column-count">{emAnalise.length}</span></div>
+                  <div className="admin-column-body">{emAnalise.length === 0 ? <p className="admin-column-empty">Vazio.</p> : emAnalise.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
+                </div>
+                <div className="admin-column admin-column--aprovada">
+                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#23a559' }}></span><h2>Aprovadas</h2><span className="admin-column-count">{aprovadas.length}</span></div>
+                  <div className="admin-column-body">{aprovadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : aprovadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
+                </div>
+                <div className="admin-column admin-column--recusada">
+                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f23f43' }}></span><h2>Recusadas</h2><span className="admin-column-count">{recusadas.length}</span></div>
+                  <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
                 </div>
               </div>
-            )}
-          </div>
-        ) : (
-          <div className="admin-tab-content">
-            <div className="admin-add-form">
-              <h3>Adicionar Novo Admin</h3>
-              <input type="text" placeholder="Discord ID" value={novoAdminId} onChange={(e) => setNovoAdminId(e.target.value)} />
-              <input type="text" placeholder="Discord Username" value={novoAdminUsername} onChange={(e) => setNovoAdminUsername(e.target.value)} />
-              <button onClick={adicionarNovoAdmin} disabled={adicionandoAdmin}>{adicionandoAdmin ? 'Adicionando...' : 'Adicionar Admin'}</button>
+              {modalOpen && selectedLore && (
+                <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+                  <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
+                    <h2>{selectedLore.nome}</h2>
+                    <div className="modal-details">
+                      <p><strong>Nick:</strong> {selectedLore.nick}</p>
+                      <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
+                      <p><strong>Raça:</strong> {selectedLore.raca}</p>
+                      <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                      <p><strong>Status:</strong> {selectedLore.status}</p>
+                    </div>
+                    <div className="modal-historia">
+                      <h3>História:</h3>
+                      <p>{selectedLore.historia}</p>
+                    </div>
+                    <div className="modal-actions">
+                      <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
+                      <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="admin-list">
-              <h3>Admins Atuais</h3>
-              {admins.map(admin => (
-                <AdminCard key={admin.id} admin={admin} removerAdmin={removerAdmin} />
-              ))}
+          ) : (
+            <div className="admin-tab-content">
+              <div className="admin-add-form">
+                <h3>Adicionar Novo Admin</h3>
+                <input type="text" placeholder="Discord ID" value={novoAdminId} onChange={(e) => setNovoAdminId(e.target.value)} />
+                <input type="text" placeholder="Discord Username" value={novoAdminUsername} onChange={(e) => setNovoAdminUsername(e.target.value)} />
+                <button onClick={adicionarNovoAdmin} disabled={adicionandoAdmin}>{adicionandoAdmin ? 'Adicionando...' : 'Adicionar Admin'}</button>
+              </div>
+              <div className="admin-list">
+                <h3>Admins Atuais</h3>
+                {admins.map(admin => (
+                  <AdminCard key={admin.id} admin={admin} removerAdmin={removerAdmin} />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </PageTransition>
   )
