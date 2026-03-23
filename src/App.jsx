@@ -255,17 +255,35 @@ const CriarFicha = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    const { error } = await supabase.from('lores').insert([{
+    
+    const loreData = {
       ...formData,
       discord_tag: user.username + '#' + user.discriminator,
       status: 'Em Análise',
       motivo_recusa: null
-    }])
+    }
+
+    let error;
+    if (formData.id) {
+      // Se já tem ID, estamos editando (UPSERT/UPDATE)
+      const { error: updateError } = await supabase
+        .from('lores')
+        .update(loreData)
+        .eq('id', formData.id)
+      error = updateError
+    } else {
+      // Se não tem ID, é uma nova lore (INSERT)
+      const { error: insertError } = await supabase
+        .from('lores')
+        .insert([loreData])
+      error = insertError
+    }
+
     if (error) {
       alert('Erro ao enviar: ' + error.message)
       setIsSubmitting(false)
     } else {
-      alert('Sua partitura foi reenviada aos maestros!')
+      alert(formData.id ? 'Sua partitura foi corrigida e reenviada aos maestros!' : 'Sua partitura foi enviada aos maestros!')
       navigate('/perfil')
     }
   }
