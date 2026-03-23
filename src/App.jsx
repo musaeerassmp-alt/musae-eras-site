@@ -532,6 +532,16 @@ const AdminPanel = ({ user }) => {
     fetchLores()
   }
 
+  const deletarLore = async (id) => {
+    if (!confirm('⚠️ ATENÇÃO: Tem certeza que deseja DELETAR esta partitura permanentemente? Ela sumirá do perfil do usuário.')) return
+    const { error } = await supabase.from('lores').delete().eq('id', id)
+    if (error) alert('Erro ao deletar: ' + error.message)
+    else {
+      setModalOpen(false)
+      fetchLores()
+    }
+  }
+
   const adicionarNovoAdmin = async () => {
     if (!novoAdminId || !novoAdminUsername) return
     setAdicionandoAdmin(true)
@@ -644,6 +654,7 @@ const AdminPanel = ({ user }) => {
                       <div className="modal-actions">
                         <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
                         <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
+                        <button className="btn-delete-lore" onClick={() => deletarLore(selectedLore.id)}>🗑️ Deletar</button>
                       </div>
                     </motion.div>
                   </div>
