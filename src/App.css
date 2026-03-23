@@ -892,3 +892,226 @@ body {
     padding: 1.5rem;
   }
 }
+
+/* ============================================================
+   RAÇAS DISPONÍVEIS - NOVO DESIGN
+   ============================================================ */
+
+.race-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.race-card-modern {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.race-card-modern:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary-color);
+  background: rgba(213, 101, 229, 0.1);
+  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.2);
+}
+
+.race-card-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(213, 101, 229, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--primary-color);
+  border: 1px solid rgba(213, 101, 229, 0.3);
+}
+
+.race-card-modern h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.race-card-modern p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* DETALHES DA RAÇA */
+.race-detail-container {
+  text-align: left;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.race-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.race-detail-icon-large {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(213, 101, 229, 0.2), rgba(147, 51, 234, 0.2));
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  border: 1px solid rgba(213, 101, 229, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.race-detail-title-group h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: white;
+  letter-spacing: -1px;
+}
+
+.race-lifespan {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(240, 178, 50, 0.1);
+  color: #f0b232;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 1px solid rgba(240, 178, 50, 0.2);
+}
+
+.race-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.race-info-block {
+  background: rgba(22, 27, 34, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.race-info-block h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--primary-color);
+  margin-bottom: 1.25rem;
+  font-size: 1.2rem;
+}
+
+.race-info-block p {
+  line-height: 1.7;
+  color: #e6edf3;
+  font-size: 1.05rem;
+  text-align: justify;
+}
+
+.main-desc {
+  grid-column: span 2;
+  background: rgba(213, 101, 229, 0.05);
+  border-color: rgba(213, 101, 229, 0.2);
+}
+
+.skill-block {
+  grid-column: span 2;
+  border: 1px solid rgba(240, 178, 50, 0.3);
+  background: linear-gradient(135deg, rgba(22, 27, 34, 0.8), rgba(240, 178, 50, 0.05));
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.skill-header h3 {
+  margin: 0;
+  color: #f0b232;
+}
+
+.skill-type {
+  padding: 0.2rem 0.8rem;
+  background: rgba(240, 178, 50, 0.2);
+  color: #f0b232;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.skill-desc {
+  color: var(--text-secondary) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.skill-effect-box {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid #f0b232;
+}
+
+.skill-effect-box p {
+  margin: 0.5rem 0;
+}
+
+.skill-cooldown {
+  font-size: 0.9rem !important;
+  color: var(--text-secondary) !important;
+  margin-top: 1rem !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .race-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-desc, .skill-block {
+    grid-column: span 1;
+  }
+  .race-detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .race-detail-title-group h1 {
+    font-size: 2.2rem;
+  }
+}
