@@ -255,14 +255,19 @@ const Profile = ({ user }) => {
   const navigate = useNavigate()
   const [lores, setLores] = useState([])
   const [loading, setLoading] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedLore, setSelectedLore] = useState(null)
+
   useEffect(() => {
     if (user) fetchUserLores()
   }, [user])
+
   const fetchUserLores = async () => {
     const { data } = await supabase.from('lores').select('*').eq('discord_tag', user.username + '#' + user.discriminator)
     setLores(data || [])
     setLoading(false)
   }
+
   if (!user) return (
     <div className="main-content">
       <div className="error-card">
@@ -272,6 +277,7 @@ const Profile = ({ user }) => {
       </div>
     </div>
   )
+
   return (
     <PageTransition>
       <div className="main-content">
@@ -297,22 +303,31 @@ const Profile = ({ user }) => {
             ) : (
               <div className="profile-lores-grid">
                 {lores.map(lore => (
-                  <div key={lore.id} className="profile-lore-card">
-                    <div className="lore-card-header">
-                      <h3>{lore.nome}</h3>
-                      <span className={`lore-status lore-status-${lore.status.toLowerCase().replace(' ', '-')}`}>{lore.status}</span>
-                    </div>
-                    <div className="lore-card-details">
-                      <p><strong>Nick:</strong> {lore.nick}</p>
-                      <p><strong>Raça:</strong> {lore.raca}</p>
-                      <p><strong>Idade:</strong> {lore.idade}</p>
-                    </div>
-                    {lore.status === 'Recusada' && lore.motivo_recusa && (
-                      <div className="lore-card-motivo">
-                        <p><strong>Motivo:</strong> {lore.motivo_recusa}</p>
-                        <button onClick={() => navigate('/compor', { state: { loreData: lore } })} className="result-action-btn">Corrigir e Reenviar</button>
+                  <div key={lore.id} className="profile-lore-card-container">
+                    <div className="profile-lore-card" onClick={() => { setSelectedLore(lore); setModalOpen(true); }}>
+                      <div className="profile-lore-header">
+                        <span className="profile-lore-nick">{lore.nick}</span>
+                        <span className={`status-badge ${lore.status.toLowerCase().replace(' ', '-')}`}>{lore.status}</span>
                       </div>
-                    )}
+                      <div className="profile-lore-body">
+                        <p><strong>Nome:</strong> {lore.nome}</p>
+                        <p><strong>Raça:</strong> {lore.raca}</p>
+                        <p><strong>Idade:</strong> {lore.idade}</p>
+                        {lore.status === 'Recusada' && lore.motivo_recusa && (
+                          <div className="profile-motivo-box">
+                            <strong>Motivo:</strong> {lore.motivo_recusa}
+                          </div>
+                        )}
+                      </div>
+                      {lore.status === 'Recusada' && (
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); navigate('/compor', { state: { loreData: lore } }); }} 
+                          className="profile-fix-btn"
+                        >
+                          Corrigir e Reenviar
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -447,220 +462,3 @@ const LoreCard = ({ f, onExpand }) => (
     <p className="lore-card-preview-text">{f.historia.substring(0, 80)}...</p>
   </div>
 )
-
-const AdminPanel = ({ user }) => {
-  const [activeTab, setActiveTab] = useState('lores')
-  const [lores, setLores] = useState([])
-  const [selectedLore, setSelectedLore] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [searchDiscord, setSearchDiscord] = useState('')
-  const [admins, setAdmins] = useState([])
-  const [novoAdminId, setNovoAdminId] = useState('')
-  const [novoAdminUsername, setNovoAdminUsername] = useState('')
-  const [adicionandoAdmin, setAdicionandoAdmin] = useState(false)
-  
-  useEffect(() => {
-    verificarAdmin()
-  }, [user])
-  
-  const verificarAdmin = async () => {
-    if (!user) { setIsAdmin(false); setLoading(false); return; }
-    try {
-      const { data } = await supabase.from('admins').select('*').eq('discord_id', user.id).single()
-      if (data) { setIsAdmin(true); fetchLores(); fetchAdmins(); }
-      else setIsAdmin(false)
-    } catch (err) { setIsAdmin(false); }
-    finally { setLoading(false); }
-  }
-  
-  const fetchLores = async () => {
-    const { data } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
-    setLores(data || [])
-  }
-  
-  const fetchAdmins = async () => {
-    const { data } = await supabase.from('admins').select('*').order('created_at', { ascending: false })
-    setAdmins(data || [])
-  }
-  
-  const atualizarStatus = async (id, status, motivo = null) => {
-    const updateData = { status }
-    if (status === 'Recusada' && motivo) updateData.motivo_recusa = motivo
-    else if (status === 'Aprovada' || status === 'Em Análise') updateData.motivo_recusa = null
-    await supabase.from('lores').update(updateData).eq('id', id)
-    fetchLores()
-  }
-  
-  const adicionarNovoAdmin = async () => {
-    if (!novoAdminId.trim() || !novoAdminUsername.trim()) return alert('Preencha todos os campos!')
-    setAdicionandoAdmin(true)
-    const { error } = await supabase.from('admins').insert([{ discord_id: novoAdminId, discord_username: novoAdminUsername }])
-    if (error) alert('Erro ao adicionar admin: ' + error.message)
-    else { setNovoAdminId(''); setNovoAdminUsername(''); fetchAdmins(); }
-    setAdicionandoAdmin(false)
-  }
-  
-  const removerAdmin = async (id) => {
-    if (!confirm('Tem certeza?')) return
-    await supabase.from('admins').delete().eq('id', id)
-    fetchAdmins()
-  }
-  
-  if (loading) return <div className="main-content"><h1>Carregando...</h1></div>
-  if (!isAdmin) return (
-    <div className="main-content">
-      <div className="error-card">
-        <h1>⚠️ Acesso Restrito</h1>
-        <p>Você não tem permissão para acessar a área administrativa.</p>
-      </div>
-    </div>
-  )
-  
-  const emAnalise = lores.filter(l => l.status === 'Em Análise')
-  const aprovadas = lores.filter(l => l.status === 'Aprovada')
-  const recusadas = lores.filter(l => l.status === 'Recusada')
-  
-  return (
-    <PageTransition>
-      <div className="main-content">
-        <div className="admin-panel">
-          <div className="admin-header">
-            <h1>👑 Painel Administrativo</h1>
-            <div className="admin-tabs">
-              <button className={`admin-tab-btn ${activeTab === 'lores' ? 'active' : ''}`} onClick={() => setActiveTab('lores')}>Partituras</button>
-              <button className={`admin-tab-btn ${activeTab === 'admins' ? 'active' : ''}`} onClick={() => setActiveTab('admins')}>Gerenciar Admins</button>
-            </div>
-          </div>
-          {activeTab === 'lores' ? (
-            <div className="admin-tab-content">
-              <div className="admin-columns">
-                <div className="admin-column admin-column--analise">
-                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f0a500' }}></span><h2>Em Análise</h2><span className="admin-column-count">{emAnalise.length}</span></div>
-                  <div className="admin-column-body">{emAnalise.length === 0 ? <p className="admin-column-empty">Vazio.</p> : emAnalise.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-                </div>
-                <div className="admin-column admin-column--aprovada">
-                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#23a559' }}></span><h2>Aprovadas</h2><span className="admin-column-count">{aprovadas.length}</span></div>
-                  <div className="admin-column-body">{aprovadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : aprovadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-                </div>
-                <div className="admin-column admin-column--recusada">
-                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f23f43' }}></span><h2>Recusadas</h2><span className="admin-column-count">{recusadas.length}</span></div>
-                  <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-                </div>
-              </div>
-              {modalOpen && selectedLore && (
-                <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-                  <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                    <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
-                    <h2>{selectedLore.nome}</h2>
-                    <div className="modal-details">
-                      <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                      <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
-                      <p><strong>Raça:</strong> {selectedLore.raca}</p>
-                      <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                      <p><strong>Status:</strong> {selectedLore.status}</p>
-                    </div>
-                    <div className="modal-historia">
-                      <h3>História:</h3>
-                      <p>{selectedLore.historia}</p>
-                    </div>
-                    <div className="modal-actions">
-                      <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
-                      <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="admin-tab-content">
-              <div className="admin-add-form">
-                <h3>Adicionar Novo Admin</h3>
-                <input type="text" placeholder="Discord ID" value={novoAdminId} onChange={(e) => setNovoAdminId(e.target.value)} />
-                <input type="text" placeholder="Discord Username" value={novoAdminUsername} onChange={(e) => setNovoAdminUsername(e.target.value)} />
-                <button onClick={adicionarNovoAdmin} disabled={adicionandoAdmin}>{adicionandoAdmin ? 'Adicionando...' : 'Adicionar Admin'}</button>
-              </div>
-              <div className="admin-list">
-                <h3>Admins Atuais</h3>
-                {admins.map(admin => (
-                  <AdminCard key={admin.id} admin={admin} removerAdmin={removerAdmin} />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </PageTransition>
-  )
-}
-
-const AdminCard = ({ admin, removerAdmin }) => (
-  <div className="admin-card">
-    <div className="admin-info">
-      <h4>{admin.discord_username}</h4>
-      <p>ID: {admin.discord_id}</p>
-    </div>
-    <button className="admin-remove-btn" onClick={() => removerAdmin(admin.id)}>Remover</button>
-  </div>
-)
-
-function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('discord_user')))
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [loadingAdmin, setLoadingAdmin] = useState(true)
-  useEffect(() => { if (user) verificarAdminStatus() }, [user])
-  const verificarAdminStatus = async () => {
-    try {
-      const { data } = await supabase.from('admins').select('*').eq('discord_id', user.id).single()
-      setIsAdmin(!!data)
-    } catch (err) { setIsAdmin(false); }
-    finally { setLoadingAdmin(false); }
-  }
-  return (
-    <Router>
-      <div className="container">
-        <aside className="sidebar">
-          <Link to="/" className="logo-section">
-            <img src="/rat1.png" alt="Logo" className="sidebar-logo" />
-            <span className="sidebar-title">Musae Eras</span>
-          </Link>
-
-          {/* PRIMEIRO DIVISOR: Entre o nome e as abas */}
-          <SidebarDivider />
-
-          <nav className="sidebar-nav">
-            {user && <Link to="/perfil" className="nav-item" style={{ color: '#d565e5' }}><span>Perfil</span></Link>}
-            <Link to="/forum" className="nav-item" style={{ color: '#f0b232' }}><span>Fórum</span></Link>
-            <Link to="/compor" className="nav-item"><span>Componha sua Obra</span></Link>
-            <Link to="/whitelist" className="nav-item">
-              <ShieldCheck size={20} />
-              <span>WhiteList</span>
-            </Link>
-            {!loadingAdmin && isAdmin && <Link to="/admin" className="nav-item" style={{ color: '#f0a500' }}><span>👑 Admin</span></Link>}
-
-            {/* SEGUNDO DIVISOR: Entre as abas e o botão Sair */}
-            <SidebarDivider />
-
-            {user ? (
-              <button className="sidebar-login-btn" onClick={() => { localStorage.removeItem('discord_user'); window.location.href = '/'; }}>Sair</button>
-            ) : (
-              <Link to="/login" className="sidebar-login-btn" style={{ textDecoration: 'none', textAlign: 'center', background: '#5865F2' }}>Login com Discord</Link>
-            )}
-          </nav>
-        </aside>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/perfil" element={<Profile user={user} />} />
-          <Route path="/forum" element={<Forum />} />
-          <Route path="/compor" element={<CriarFicha user={user} />} />
-          <Route path="/whitelist" element={<WhiteList />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin" element={<AdminPanel user={user} />} />
-        </Routes>
-      </div>
-    </Router>
-  )
-}
-
-export default App
