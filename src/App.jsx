@@ -140,7 +140,7 @@ const Forum = () => {
                       <div className="lore-divider"><Music size={16} /></div>
                       <p>As antigas cidades, construídas sobre camadas de tempo e esquecimento, continuam vivas. Humanos dominam grande parte delas, mas não estão sozinhos: entre becos e mercados, seres de outras naturezas coexistem, observam… e conspiram. Neste mosaico de raças e histórias, forças ocultas começam a se mover com mais intensidade. Segredos enterrados no passado ecoam novamente, como notas esquecidas que insistem em retornar à melodia.</p>
                       <div className="lore-divider"><Music size={16} /></div>
-                      <p className="lore-footer">Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado? De que lado ficará quando a harmonia começar a ruir? E quais objetivos irão guiar seus passos através do desconhecido?</p>
+                      <p>Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado? De que lado ficará quando a harmonia começar a ruir? E quais objetivos irão guiar seus passos através do desconhecido?</p>
                       <p className="lore-final-call">Cada escolha é um acorde, cada ação, uma mudança no destino. Prepare sua alma, viajante, pois o continente está esperando — e a sinfonia está prestes a alcançar seu clímax.</p>
                     </div>
                   </div>
@@ -373,106 +373,6 @@ const Profile = ({ user }) => {
             </div>
           )}
         </AnimatePresence>
-      </div>
-    </PageTransition>
-  )
-}
-
-const WhiteList = () => {
-  const navigate = useNavigate()
-  const [searchNick, setSearchNick] = useState('')
-  const [result, setResult] = useState(null)
-  const [isSearching, setIsSearching] = useState(false)
-  
-  const handleSearch = async (e) => {
-    e.preventDefault()
-    if (!searchNick.trim()) return
-    
-    setIsSearching(true)
-    try {
-      const { data, error } = await supabase
-        .from('lores')
-        .select('*')
-        .ilike('nick', `%${searchNick}%`)
-        .eq('status', 'Aprovada')
-        .single()
-      
-      if (error || !data) {
-        setResult('not_found')
-      } else {
-        setResult(data)
-      }
-    } catch (err) {
-      setResult('error')
-    } finally {
-      setIsSearching(false)
-    }
-  }
-  
-  return (
-    <PageTransition>
-      <div className="main-content">
-        <div className="whitelist-container">
-          <div className="whitelist-header">
-            <h1>🛡️ WhiteList</h1>
-            <p>Verifique se seu personagem foi aprovado para jogar em Musae Eras.</p>
-          </div>
-          <div className="whitelist-search-card">
-            <form className="search-box-modern" onSubmit={handleSearch}>
-              <div className="input-with-icon">
-                <Search className="search-icon-inner" size={20} />
-                <input 
-                  type="text" 
-                  placeholder="Digite seu nick do Minecraft..." 
-                  value={searchNick} 
-                  onChange={(e) => setSearchNick(e.target.value)} 
-                />
-              </div>
-              <button type="submit" className="search-btn-modern" disabled={isSearching}>
-                {isSearching ? 'Buscando...' : 'Verificar'}
-              </button>
-            </form>
-          </div>
-          <AnimatePresence>
-            {result === 'not_found' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card error">
-                <div className="result-icon">❌</div>
-                <div className="result-info">
-                  <h3>Não Encontrado</h3>
-                  <p className="result-description">Este nick não foi aprovado ou não existe na whitelist.</p>
-                </div>
-              </motion.div>
-            )}
-            {result && result !== 'not_found' && result !== 'error' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card aprovada">
-                <div className="result-icon">✅</div>
-                <div className="result-info">
-                  <h3>Aprovado!</h3>
-                  <span className="result-badge">Aprovada</span>
-                  <div className="result-meta">
-                    <span>{result.nick}</span>
-                    <span className="meta-divider">•</span>
-                    <span>{result.raca}</span>
-                  </div>
-                  <p className="result-description"><strong>Personagem:</strong> {result.nome}</p>
-                  <p className="result-description"><strong>Idade:</strong> {result.idade}</p>
-                </div>
-              </motion.div>
-            )}
-            {result === 'error' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card error">
-                <div className="result-icon">⚠️</div>
-                <div className="result-info">
-                  <h3>Erro ao Consultar</h3>
-                  <p className="result-description">Ocorreu um erro ao consultar a whitelist. Tente novamente mais tarde.</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          <div className="whitelist-footer-info">
-            <p>💡 Dica: Digite exatamente o nick do Minecraft que você usou ao compor sua obra.</p>
-          </div>
-        </div>
       </div>
     </PageTransition>
   )
@@ -726,10 +626,6 @@ function App() {
             {user && <Link to="/perfil" className="nav-item" style={{ color: '#d565e5' }}><span>Perfil</span></Link>}
             <Link to="/forum" className="nav-item" style={{ color: '#f0b232' }}><span>Fórum</span></Link>
             <Link to="/compor" className="nav-item"><span>Componha sua Obra</span></Link>
-            <Link to="/whitelist" className="nav-item">
-              <ShieldCheck size={20} />
-              <span>WhiteList</span>
-            </Link>
             {!loadingAdmin && isAdmin && <Link to="/admin" className="nav-item" style={{ color: '#f0a500' }}><span>👑 Admin</span></Link>}
 
             <SidebarDivider />
@@ -746,7 +642,6 @@ function App() {
           <Route path="/perfil" element={<Profile user={user} />} />
           <Route path="/forum" element={<Forum />} />
           <Route path="/compor" element={<CriarFicha user={user} />} />
-          <Route path="/whitelist" element={<WhiteList />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPanel user={user} />} />
         </Routes>
