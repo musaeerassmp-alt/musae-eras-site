@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@supabase/supabase-js'
-import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X } from 'lucide-react'
+import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck } from 'lucide-react'
 import './App.css'
 
 const supabase = createClient(
@@ -79,6 +79,35 @@ const Home = () => {
 
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
+  const [selectedRace, setSelectedRace] = useState(null)
+
+  const races = [
+    { 
+      id: 'humanos', 
+      name: 'Humanos', 
+      icon: <Users size={24} />,
+      content: {
+        expectativa: '83 anos (média)',
+        descricao: 'Os humanos são os mestres da adaptação, capazes de moldar o mundo ao seu redor por pura necessidade ou ambição. Sem as dádivas inatas de outras raças, eles compensam com uma resiliência inabalável e uma velocidade de aprendizado inigualável.',
+        culturaFora: 'Aqueles que vêm de fora do continente vivem sob o fio da navalha. Em um estado constante de "luta ou fuga", a sobrevivência humana é um ato de amor e necessidade mútua. Mestres em moldar o ambiente hostil para seu próprio bem, valorizam a força bruta, a proatividade e, acima de tudo, a união inquebrável.',
+        percepcaoDentro: 'Os rumores sobre os humanos que já habitam o continente pintam um quadro oposto. São vistos como seres tranquilos, beirando a preguiça e a fragilidade física e mental. No entanto, esbanjam uma arrogância intelectual, agindo como sabichões e filósofos que dominam a etiqueta e a retórica.',
+        fisico: 'Simples e versáteis. Não possuem orelhas pontuadas, escamas, caldas ou qualquer traço animal. Sua força reside naquilo que não se vê à primeira vista.',
+        magia: 'Páginas em branco esperando para serem preenchidas. Embora não possuam afinidade mágica nata com nenhum elemento, são capazes de aprender qualquer arte arcana. Podem não ser os melhores em uma única escola de magia, mas são os que evoluem com a maior velocidade entre todas as raças existentes.',
+        habilidade: {
+          nome: 'Indomável Espírito Humano',
+          tipo: 'Passiva',
+          descricao: 'Ao se aproximar do fim, uma força ancestral percorre o âmago do seu ser. Seu corpo se recusa a cair enquanto sua mente desejar viver.',
+          efeito: 'Ao chegar a 3 corações de vida, você recebe Regeneração II, Resistência I e Força I por 30 segundos.',
+          recarga: '15 minutos'
+        }
+      }
+    },
+    { id: 'anjos', name: 'Anjos', icon: <Sparkles size={24} /> },
+    { id: 'demonios', name: 'Demônios', icon: <Zap size={24} /> },
+    { id: 'quimeras', name: 'Quimeras', icon: <UserCheck size={24} /> },
+    { id: 'aquarianos', name: 'Aquarianos', icon: <Map size={24} /> }
+  ]
+
   return (
     <PageTransition>
       <div className="main-content">
@@ -86,15 +115,13 @@ const Forum = () => {
           <div className="forum-header">
             <h1>📜 Fórum Musae Eras</h1>
             <p className="forum-intro-text">
-              Bem-vindo ao centro de conhecimento do nosso mundo. Aqui você encontrará os registros das eras passadas,
-              os segredos das raças que habitam estas terras e as leis que regem a nossa sinfonia.
-              Explore com sabedoria, pois cada nota escrita aqui molda o destino de Musae Eras.
+              Explore os registros das eras passadas e os segredos das raças que habitam estas terras.
             </p>
           </div>
           <div className="forum-nav">
             <button
               className={`forum-nav-btn ${activeSection === 'historia' ? 'active' : ''}`}
-              onClick={() => setActiveSection('historia')}
+              onClick={() => { setActiveSection('historia'); setSelectedRace(null); }}
             >
               📖 História do Mundo
             </button>
@@ -105,30 +132,20 @@ const Forum = () => {
               👥 Raças Disponíveis
             </button>
           </div>
+          
           <div className="forum-content">
             <AnimatePresence mode="wait">
               {activeSection === 'intro' && (
-                <motion.div
-                  key="intro"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  className="forum-section-placeholder"
-                >
+                <motion.div key="intro" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="forum-section-placeholder">
                   <div className="placeholder-card">
                     <h3>Selecione uma categoria acima</h3>
                     <p>Escolha entre a História do Mundo ou as Raças Disponíveis para começar sua leitura.</p>
                   </div>
                 </motion.div>
               )}
+
               {activeSection === 'historia' && (
-                <motion.div
-                  key="historia"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  className="lore-section"
-                >
+                <motion.div key="historia" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="lore-section">
                   <div className="lore-intro-card">
                     <h3 className="lore-title">Abertura: O Despertar da Sinfonia</h3>
                     <div className="lore-text-content">
@@ -136,32 +153,80 @@ const Forum = () => {
                       <p>Dessa primeira nota, o silêncio foi quebrado e o mundo começou a se moldar. Onde antes havia apenas o vazio, surgiram montanhas que parecem tocar o céu, florestas que sussurram segredos ao vento e oceanos que guardam o peso de eras esquecidas.</p>
                       <div className="lore-divider"><Music size={16} /></div>
                       <p>Muito antes de sua chegada, no ano 999, as terras deste continente já carregavam cicatrizes de histórias antigas — impérios erguidos, alianças seladas e guerras que quase apagaram civilizações inteiras. Foi nesse passado distante que nasceu o primeiro grande reino humano, marcando o início de uma nova era.</p>
-                      <p>Agora, no ano 1000, um marco histórico se aproxima: o milésimo aniversário do primeiro reino humano, da grandiosa <strong className="text-primary">União entre as Raças</strong> e da fundação da capital <strong className="text-primary">Chrona</strong>. Este antigo tratado, forjado em tempos imemoriais, assegura a paz e a coexistência entre todas as raças. É neste cenário de celebração e expectativa que você, um desses viajantes, deixa para trás as pequenas ilhas onde cresceu e cruza as águas incertas em busca de algo maior. Seja por ambição, necessidade ou por um chamado que nem mesmo você compreende, seu barco corta as ondas em direção ao grande continente. No horizonte, ergue-se <strong className="text-primary">Chrona</strong>, a capital — uma cidade monumental, coração político e simbólico de toda a região, fundada no mesmo ano do Tratado. Sua chegada não poderia acontecer em momento mais decisivo.</p>
+                      <p>Agora, no ano 1000, um marco histórico se aproxima: o milésimo aniversário do primeiro reino humano, da grandiosa <strong className="text-primary">União entre as Raças</strong> e da fundação da capital <strong className="text-primary">Chrona</strong>.</p>
                       <div className="lore-divider"><Music size={16} /></div>
-                      <p>As antigas cidades, construídas sobre camadas de tempo e esquecimento, continuam vivas. Humanos dominam grande parte delas, mas não estão sozinhos: entre becos e mercados, seres de outras naturezas coexistem, observam… e conspiram. Neste mosaico de raças e histórias, forças ocultas começam a se mover com mais intensidade. Segredos enterrados no passado ecoam novamente, como notas esquecidas que insistem em retornar à melodia.</p>
-                      <div className="lore-divider"><Music size={16} /></div>
-                      <p>Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado? De que lado ficará quando a harmonia começar a ruir? E quais objetivos irão guiar seus passos através do desconhecido?</p>
-                      <p className="lore-final-call">Cada escolha é um acorde, cada ação, uma mudança no destino. Prepare sua alma, viajante, pois o continente está esperando — e a sinfonia está prestes a alcançar seu clímax.</p>
+                      <p className="lore-footer">Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado?</p>
+                      <p className="lore-final-call">Cada escolha é um acorde, cada ação, uma mudança no destino.</p>
                     </div>
                   </div>
                 </motion.div>
               )}
-              {activeSection === 'racas' && (
-                <motion.div
-                  key="racas"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  className="forum-section"
-                >
+
+              {activeSection === 'racas' && !selectedRace && (
+                <motion.div key="racas-grid" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="forum-section">
                   <h2 className="section-title">👥 Raças Disponíveis</h2>
                   <div className="race-grid">
-                    {['Humanos', 'Anjos', 'Demônios', 'Quimeras', 'Aquarianos'].map(raca => (
-                      <div key={raca} className="race-card placeholder">
-                        <h4>{raca}</h4>
-                        <p>Informações sobre as características e habilidades desta raça serão reveladas em breve pelos Maestros.</p>
+                    {races.map(raca => (
+                      <div key={raca.id} className="race-card-modern" onClick={() => raca.content && setSelectedRace(raca)}>
+                        <div className="race-card-icon">{raca.icon}</div>
+                        <h4>{raca.name}</h4>
+                        <p>{raca.content ? 'Clique para ver detalhes' : 'Informações em breve...'}</p>
                       </div>
                     ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {activeSection === 'racas' && selectedRace && (
+                <motion.div key={selectedRace.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="race-detail-container">
+                  <button className="back-btn" onClick={() => setSelectedRace(null)}>← Voltar para Raças</button>
+                  
+                  <div className="race-detail-header">
+                    <div className="race-detail-icon-large">{selectedRace.icon}</div>
+                    <div className="race-detail-title-group">
+                      <h1>{selectedRace.name}</h1>
+                      <span className="race-lifespan">⏳ Expectativa de Vida: {selectedRace.content.expectativa}</span>
+                    </div>
+                  </div>
+
+                  <div className="race-detail-grid">
+                    <div className="race-info-block main-desc">
+                      <h3><BookOpen size={20} /> A Essência Humana</h3>
+                      <p>{selectedRace.content.descricao}</p>
+                    </div>
+
+                    <div className="race-info-block">
+                      <h3><Users size={20} /> Cultura (Além-Mar)</h3>
+                      <p>{selectedRace.content.culturaFora}</p>
+                    </div>
+
+                    <div className="race-info-block">
+                      <h3><Search size={20} /> Percepção do Continente</h3>
+                      <p>{selectedRace.content.percepcaoDentro}</p>
+                    </div>
+
+                    <div className="race-info-block">
+                      <h3><User size={20} /> Características Físicas</h3>
+                      <p>{selectedRace.content.fisico}</p>
+                    </div>
+
+                    <div className="race-info-block">
+                      <h3><Sparkles size={20} /> Afinidades Mágicas</h3>
+                      <p>{selectedRace.content.magia}</p>
+                    </div>
+
+                    <div className="race-info-block skill-block">
+                      <div className="skill-header">
+                        <Zap size={20} />
+                        <h3>Habilidade Única: {selectedRace.content.habilidade.nome}</h3>
+                        <span className="skill-type">{selectedRace.content.habilidade.tipo}</span>
+                      </div>
+                      <p className="skill-desc"><em>{selectedRace.content.habilidade.descricao}</em></p>
+                      <div className="skill-effect-box">
+                        <p><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</p>
+                        <p className="skill-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</p>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               )}
