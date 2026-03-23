@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO)
+   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + BUSCA ADMIN)
    ============================================================ */
 
 :root {
@@ -558,6 +558,72 @@ body {
   background: rgba(22, 27, 34, 0.8);
   border-radius: 12px;
   border: 1px solid #30363d;
+  min-height: 400px;
+}
+
+.admin-column-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid #30363d;
+}
+
+.admin-column-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.admin-column-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.admin-column-count {
+  background: rgba(255,255,255,0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.admin-column-body {
+  padding: 1rem;
+}
+
+.admin-search-wrapper {
+  margin-bottom: 2rem;
+  max-width: 500px;
+  text-align: left;
+}
+
+.admin-search-input {
+  width: 100% !important;
+  background: rgba(22, 27, 34, 0.8) !important;
+  border-radius: 12px !important;
+  padding: 1rem 1rem 1rem 3.2rem !important;
+  border: 1px solid #30363d !important;
+}
+
+.clear-search {
+  position: absolute;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.search-results-info {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.75rem;
+}
+
+.search-results-info strong {
+  color: var(--primary-color);
 }
 
 .lore-card {
@@ -568,6 +634,12 @@ body {
   margin-bottom: 0.75rem;
   cursor: pointer;
   text-align: left;
+  transition: all 0.2s ease;
+}
+
+.lore-card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .modal-overlay {
