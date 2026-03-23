@@ -1,6 +1,5 @@
 /* ============================================================
-   MUSAE ERAS - CSS FINAL INTEGRADO (V13 - CORRIGIDO)
-   Melhorias: Formulário, Admin Cards, Whitelist Search
+   MUSAE ERAS - CSS FINAL INTEGRADO (CORRIGIDO)
    ============================================================ */
 
 :root {
@@ -491,7 +490,26 @@ body {
   opacity: 0.7;
 }
 
-/* ... [Restante do arquivo omitido para brevidade, mas mantendo a estrutura até o final] ... */
+/* ============================================================
+   SIDEBAR DIVIDER
+   ============================================================ */
+.sidebar-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  width: 100%;
+  opacity: 0.3;
+}
+.divider-line {
+  height: 1px;
+  background: white;
+  flex: 1;
+  margin: 0 10px;
+}
+.divider-icon {
+  color: white;
+}
 
 /* ============================================================
    EFEITO VIDRO PARA OS CARDS DO PERFIL
