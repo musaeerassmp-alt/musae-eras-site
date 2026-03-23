@@ -1557,3 +1557,96 @@ html {
   background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.8), transparent);
   transition: background 0.3s ease;
 }
+/* ============================================================
+   FIX: CARDS DO PERFIL (ADICIONAR AO FINAL DO APP.CSS)
+   ============================================================ */
+
+.profile-lores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.profile-lore-item {
+  background: rgba(22, 27, 34, 0.8) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(213, 101, 229, 0.3) !important;
+  padding: 1.5rem !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  text-align: left !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+.profile-lore-item:hover {
+  transform: translateY(-5px) !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 15px 40px rgba(213, 101, 229, 0.2) !important;
+}
+
+.profile-lore-item .lore-card {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.profile-lore-item .lore-card-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.profile-lore-item .lore-card-nick {
+  font-size: 1.2rem !important;
+  color: var(--primary-color) !important;
+  font-weight: bold !important;
+  margin: 0 !important;
+}
+
+.profile-lore-item .lore-card-discord {
+  font-size: 0.85rem !important;
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+.profile-lore-item .lore-card-preview p {
+  margin: 0.4rem 0 !important;
+  color: var(--text-color) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+}
+
+.profile-lore-item .lore-card-preview strong {
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+}
+
+.profile-fix-btn {
+  background: var(--danger-color) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.75rem !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  font-weight: bold !important;
+  margin-top: 0.5rem !important;
+  width: 100% !important;
+  transition: all 0.2s ease !important;
+}
+
+.profile-fix-btn:hover {
+  filter: brightness(1.2) !important;
+  transform: scale(1.02) !important;
+}
