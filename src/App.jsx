@@ -192,7 +192,7 @@ const CriarFicha = ({ user }) => {
     setIsSubmitting(true)
     const { error } = await supabase.from('lores').insert([{
       ...formData,
-      discord_tag: user.username + '#' + (user.discriminator || '0'),
+      discord_tag: user.username + '#' + user.discriminator,
       status: 'Em Análise',
       motivo_recusa: null
     }])
@@ -259,7 +259,7 @@ const Profile = ({ user }) => {
     if (user) fetchUserLores()
   }, [user])
   const fetchUserLores = async () => {
-    const { data } = await supabase.from('lores').select('*').eq('discord_tag', user.username + '#' + (user.discriminator || '0'))
+    const { data } = await supabase.from('lores').select('*').eq('discord_tag', user.username + '#' + user.discriminator)
     setLores(data || [])
     setLoading(false)
   }
@@ -281,7 +281,7 @@ const Profile = ({ user }) => {
               <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="Avatar" className="profile-avatar" />
               <div className="profile-user-details">
                 <h1>{user.username}</h1>
-                <p className="profile-discord-tag">#{user.discriminator || '0'}</p>
+                <p className="profile-discord-tag">#{user.discriminator}</p>
               </div>
             </div>
           </div>
@@ -325,36 +325,30 @@ const Profile = ({ user }) => {
 }
 
 const WhiteList = () => {
+  const navigate = useNavigate()
   const [searchNick, setSearchNick] = useState('')
   const [result, setResult] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
   
   const handleSearch = async (e) => {
     e.preventDefault()
-    const nick = searchNick.trim()
-    if (!nick) return
+    if (!searchNick.trim()) return
     
     setIsSearching(true)
-    setResult(null)
-    
     try {
-      // Busca flexível: Case-insensitive e sem espaços nas pontas
       const { data, error } = await supabase
         .from('lores')
         .select('*')
-        .ilike('nick', nick) // ilike já é case-insensitive
+        .ilike('nick', `%${searchNick}%`)
         .eq('status', 'Aprovada')
-        .maybeSingle() // maybeSingle evita erro se não encontrar nada
+        .single()
       
-      if (error) throw error
-      
-      if (data) {
-        setResult(data)
-      } else {
+      if (error || !data) {
         setResult('not_found')
+      } else {
+        setResult(data)
       }
     } catch (err) {
-      console.error('Erro na busca:', err)
       setResult('error')
     } finally {
       setIsSearching(false)
@@ -387,7 +381,7 @@ const WhiteList = () => {
           </div>
           <AnimatePresence>
             {result === 'not_found' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card recusada">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card error">
                 <div className="result-icon">❌</div>
                 <div className="result-info">
                   <h3>Não Encontrado</h3>
@@ -395,7 +389,7 @@ const WhiteList = () => {
                 </div>
               </motion.div>
             )}
-            {result && typeof result === 'object' && (
+            {result && result !== 'not_found' && result !== 'error' && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="result-card aprovada">
                 <div className="result-icon">✅</div>
                 <div className="result-info">
@@ -461,6 +455,7 @@ const AdminPanel = ({ user }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [searchDiscord, setSearchDiscord] = useState('')
   const [admins, setAdmins] = useState([])
   const [novoAdminId, setNovoAdminId] = useState('')
   const [novoAdminUsername, setNovoAdminUsername] = useState('')
