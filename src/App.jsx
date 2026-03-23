@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@supabase/supabase-js'
-import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList } from 'lucide-react'
+import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X } from 'lucide-react'
 import './App.css'
 
 const supabase = createClient(
@@ -510,6 +510,7 @@ const LoreCard = ({ f, onExpand }) => (
 const AdminPanel = ({ user }) => {
   const [activeTab, setActiveTab] = useState('lores')
   const [lores, setLores] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
   const [selectedLore, setSelectedLore] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [admins, setAdmins] = useState([])
@@ -573,9 +574,15 @@ const AdminPanel = ({ user }) => {
     </div>
   )
   
-  const emAnalise = lores.filter(l => l.status === 'Em Análise')
-  const aprovadas = lores.filter(l => l.status === 'Aprovada')
-  const recusadas = lores.filter(l => l.status === 'Recusada')
+  // Lógica de filtragem por Nick ou Nome
+  const filteredLores = lores.filter(lore => 
+    lore.nick.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    lore.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const emAnalise = filteredLores.filter(l => l.status === 'Em Análise')
+  const aprovadas = filteredLores.filter(l => l.status === 'Aprovada')
+  const recusadas = filteredLores.filter(l => l.status === 'Recusada')
   
   return (
     <PageTransition>
@@ -588,22 +595,46 @@ const AdminPanel = ({ user }) => {
               <button className={`admin-tab-btn ${activeTab === 'admins' ? 'active' : ''}`} onClick={() => setActiveTab('admins')}>Gerenciar Admins</button>
             </div>
           </div>
+          
           {activeTab === 'lores' ? (
             <div className="admin-tab-content">
+              {/* CAMPO DE BUSCA */}
+              <div className="admin-search-wrapper">
+                <div className="input-with-icon">
+                  <Search className="search-icon-inner" size={18} />
+                  <input 
+                    type="text" 
+                    placeholder="Pesquisar por Nick ou Nome..." 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="admin-search-input"
+                  />
+                  {searchTerm && (
+                    <button className="clear-search" onClick={() => setSearchTerm('')}>
+                      <X size={16} />
+                    </button>
+                  )}
+                </div>
+                <p className="search-results-info">
+                  Mostrando <strong>{filteredLores.length}</strong> de {lores.length} partituras.
+                </p>
+              </div>
+
               <div className="admin-columns">
                 <div className="admin-column admin-column--analise">
                   <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f0a500' }}></span><h2>Em Análise</h2><span className="admin-column-count">{emAnalise.length}</span></div>
-                  <div className="admin-column-body">{emAnalise.length === 0 ? <p className="admin-column-empty">Vazio.</p> : emAnalise.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
+                  <div className="admin-column-body">{emAnalise.length === 0 ? <p className="admin-column-empty">Nenhum resultado.</p> : emAnalise.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
                 </div>
                 <div className="admin-column admin-column--aprovada">
                   <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#23a559' }}></span><h2>Aprovadas</h2><span className="admin-column-count">{aprovadas.length}</span></div>
-                  <div className="admin-column-body">{aprovadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : aprovadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
+                  <div className="admin-column-body">{aprovadas.length === 0 ? <p className="admin-column-empty">Nenhum resultado.</p> : aprovadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
                 </div>
                 <div className="admin-column admin-column--recusada">
                   <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f23f43' }}></span><h2>Recusadas</h2><span className="admin-column-count">{recusadas.length}</span></div>
-                  <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Vazio.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
+                  <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Nenhum resultado.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
                 </div>
               </div>
+              
               <AnimatePresence>
                 {modalOpen && selectedLore && (
                   <div className="modal-overlay" onClick={() => setModalOpen(false)}>
