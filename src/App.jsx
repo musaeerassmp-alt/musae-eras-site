@@ -87,18 +87,18 @@ const Forum = () => {
       name: 'Humanos', 
       icon: <Users size={24} />,
       content: {
-        expectativa: '83 anos (média)',
-        descricao: 'Os humanos são os mestres da adaptação, capazes de moldar o mundo ao seu redor por pura necessidade ou ambição. Sem as dádivas inatas de outras raças, eles compensam com uma resiliência inabalável e uma velocidade de aprendizado inigualável.',
-        culturaFora: 'Aqueles que vêm de fora do continente vivem sob o fio da navalha. Em um estado constante de "luta ou fuga", a sobrevivência humana é um ato de amor e necessidade mútua. Mestres em moldar o ambiente hostil para seu próprio bem, valorizam a força bruta, a proatividade e, acima de tudo, a união inquebrável.',
-        percepcaoDentro: 'Os rumores sobre os humanos que já habitam o continente pintam um quadro oposto. São vistos como seres tranquilos, beirando a preguiça e a fragilidade física e mental. No entanto, esbanjam uma arrogância intelectual, agindo como sabichões e filósofos que dominam a etiqueta e a retórica.',
-        fisico: 'Simples e versáteis. Não possuem orelhas pontuadas, escamas, caldas ou qualquer traço animal. Sua força reside naquilo que não se vê à primeira vista.',
-        magia: 'Páginas em branco esperando para serem preenchidas. Embora não possuam afinidade mágica nata com nenhum elemento, são capazes de aprender qualquer arte arcana. Podem não ser os melhores em uma única escola de magia, mas são os que evoluem com a maior velocidade entre todas as raças existentes.',
+        expectativa: '83 anos de persistência',
+        descricao: 'Onde outras raças nascem com o poder de mover montanhas ou dobrar a realidade, o humano nasce apenas com o desejo de fazê-lo. Somos a raça da adaptação, os arquitetos do improvável. Nossa força não vem de linhagens divinas ou ancestrais mágicos, mas do suor, da proatividade e da teimosia em não aceitar o destino imposto.',
+        culturaFora: 'Para aqueles que cruzaram as águas em busca do continente, a vida foi uma sinfonia de luta. Sobrevivemos sob o fio da navalha, onde cada dia era uma batalha entre o "lutar" e o "fugir". Fora daqui, aprendemos que a união não é apenas uma escolha, mas uma necessidade vital. Valorizamos a força de quem age, a coragem de quem protege e o amor que nos mantém juntos quando tudo o mais desmorona.',
+        percepcaoDentro: 'Os que já habitam o continente, protegidos por muralhas e tratados, parecem ter esquecido o peso do aço. São vistos por nós como intelectuais de mãos limpas, talvez um pouco lentos e arrogantes em sua sabedoria de livros. Dizem que são frágeis, que a paz os tornou preguiçosos... mas talvez tenham apenas encontrado uma harmonia que nós, os de fora, ainda estamos lutando para compreender.',
+        fisico: 'Nossa aparência é o reflexo da nossa simplicidade: não temos orelhas pontiagudas para ouvir o além, nem escamas para nos proteger do fogo. Somos carne, osso e vontade. Um espelho limpo da natureza, sem adornos, onde a verdadeira beleza reside na diversidade de nossas faces e na força de nossos passos.',
+        magia: 'Dizem que somos páginas em branco. Enquanto um anjo nasce com a luz e um demônio com o fogo, o humano nasce com o vazio — e é nesse vazio que reside nossa maior vantagem. Podemos aprender qualquer segredo arcano, trilhar qualquer caminho místico. Não somos os mestres naturais de nenhum elemento, mas somos os que evoluem com a velocidade de um vendaval, preenchendo nossas páginas com a magia que escolhermos conquistar.',
         habilidade: {
           nome: 'Indomável Espírito Humano',
-          tipo: 'Passiva',
-          descricao: 'Ao se aproximar do fim, uma força ancestral percorre o âmago do seu ser. Seu corpo se recusa a cair enquanto sua mente desejar viver.',
-          efeito: 'Ao chegar a 3 corações de vida, você recebe Regeneração II, Resistência I e Força I por 30 segundos.',
-          recarga: '15 minutos'
+          tipo: 'Despertar Ancestral',
+          descricao: 'Quando o corpo clama pela queda e o fôlego se esvai, algo profundo e indomável desperta em suas veias. É o grito de mil gerações que se recusaram a morrer.',
+          efeito: 'Ao atingir o limiar de 3 corações, sua vontade se torna aço: você recebe Regeneração II, Resistência I e Força I por 30 segundos, negando o abraço da morte.',
+          recarga: '15 minutos de descanso da alma'
         }
       }
     },
