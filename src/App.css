@@ -1,3 +1,4 @@
+
 /* ============================================================
    MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + FIX MODAL TEXT)
    ============================================================ */
@@ -1146,4 +1147,66 @@ body {
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* MELHORIA DOS BOTÕES DE APROVAR E RECUSAR NO ADMIN */
+.btn-approve {
+  background: rgba(35, 165, 89, 0.1) !important;
+  color: #23a559 !important;
+  border: 1px solid rgba(35, 165, 89, 0.3) !important;
+  padding: 0.8rem 1.5rem !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-size: 0.85rem !important;
+}
+
+.btn-approve:hover {
+  background: #23a559 !important;
+  color: white !important;
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 10px 20px rgba(35, 165, 89, 0.3) !important;
+  border-color: #23a559 !important;
+}
+
+.btn-refuse {
+  background: rgba(240, 178, 50, 0.1) !important;
+  color: #f0b232 !important;
+  border: 1px solid rgba(240, 178, 50, 0.3) !important;
+  padding: 0.8rem 1.5rem !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-size: 0.85rem !important;
+}
+
+.btn-refuse:hover {
+  background: #f0b232 !important;
+  color: #000 !important;
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 10px 20px rgba(240, 178, 50, 0.3) !important;
+  border-color: #f0b232 !important;
+}
+
+/* AJUSTE FINAL NO CONTAINER DE AÇÕES DO MODAL */
+.modal-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.25rem !important;
+  justify-content: center !important; /* Centralizado para ficar mais harmônico */
+  margin-top: 2.5rem !important;
+  padding-top: 2rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
