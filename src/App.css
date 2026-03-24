@@ -1,4 +1,3 @@
-
 /* ============================================================
    MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + FIX MODAL TEXT)
    ============================================================ */
@@ -1209,4 +1208,41 @@ body {
   margin-top: 2.5rem !important;
   padding-top: 2rem !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ESTILIZAÇÃO ADICIONAL PARA A HISTÓRIA DO MUNDO */
+.lore-quote-box {
+  background: rgba(213, 101, 229, 0.05);
+  border-left: 4px solid var(--primary-color);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  border-radius: 0 16px 16px 0;
+  font-style: italic;
+  position: relative;
+}
+
+.lore-quote-box p {
+  margin: 0;
+  color: #e6edf3;
+  line-height: 1.6;
+}
+
+.text-primary {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.lore-text-content p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.lore-final-call {
+  background: linear-gradient(to right, transparent, rgba(240, 178, 50, 0.1), transparent);
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #f0b232 !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(240, 178, 50, 0.3);
 }
