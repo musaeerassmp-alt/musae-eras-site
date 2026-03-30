@@ -104,7 +104,7 @@ const Forum = () => {
           },
           {
             nome: "Kaelthar, a Luz do Céu",
-            relato: "Há um século, em meio a conflitos humanos, uma luz intensa teria descido do céu. Dela, um ser alado com voz de trovão surgiu dizendo: 'Não temam, eis que está sobre vós a justiça dos céus'. O ser exterminou o grupo maligno 'Sangue e Aço' de maneira limpa e rápida. Desde esse dia, canções são feitas em homenagem a 'Kaelthar das Himmelslicht'."
+            relato: "Há um século, em meio a conflitos humanos, uma luz intensa teria descido do céu. Dela, um ser alado com voz de trovão surgiu dizendo: 'Não temam, eis que está sobre vós a justiça dos céus'. O ser exterminou o grupo maligno 'Sangue e Aço' de maneira limpa e rápida. Desde esse dia, diversas canções foram feitas em homenagem a este ser misterioso que recebeu o nome de: 'Kaelthar das Himmelslicht'."
           },
           {
             nome: "Vaelion, a Sorte",
@@ -470,7 +470,7 @@ const LoginPage = () => {
   }
 
   const handleLogin = () => {
-    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_id}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
+    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
     window.location.href = url
   }
 
