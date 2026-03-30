@@ -93,6 +93,24 @@ const Forum = () => {
         percepcaoDentro: 'Os que já habitam o continente, protegidos por muralhas e tratados, parecem ter esquecido o peso do aço. São vistos por nós como intelectuais de mãos limpas, talvez um pouco lentos e arrogantes em sua sabedoria de livros. Dizem que são frágeis, que a paz os tornou preguiçosos... mas talvez tenham apenas encontrado uma harmonia que nós, os de fora, ainda estamos lutando para compreender.',
         fisico: 'Nossa aparência é o reflexo da nossa simplicidade: não temos orelhas pontiagudas para ouvir o além, nem escamas para nos proteger do fogo. Somos carne, osso e vontade. Um espelho limpo da natureza, sem adornos, onde a verdadeira beleza reside na diversidade de nossas faces e na força de nossos passos.',
         magia: 'Dizem que somos páginas em branco. Enquanto um anjo nasce com a luz e um demônio com o fogo, o humano nasce com o vazio — e é nesse vazio que reside nossa maior vantagem. Podemos aprender qualquer segredo arcano, trilhar qualquer caminho místico. Não somos os mestres naturais de nenhum elemento, mas somos os que evoluem com a velocidade de um vendaval, preenchendo nossas páginas com a magia que escolhermos conquistar.',
+        lendas: [
+          {
+            nome: "Krampus",
+            relato: "Krampus é uma criatura abominável, com patas de bode, chifres de cabra, cauda com ponta como de tridente, garras afiadas como as de um leão e língua de serpente. Muitos pais advertem seus filhos para se comportarem e serem obedientes, caso contrário Krampus as buscará e as castigará. Existem diversos relatos de crianças travessas que somem no primeiro solstício de inverno e aparecem somente a noite, com marcas de chicote nas costas e com os olhos cheios de temor, mas com uma lição aprendida: respeite seus pais."
+          },
+          {
+            nome: "Althira",
+            relato: "Dizem que o espírito de Althira vaga pelos mares cheia de raiva e sede de vingança. Ela atrai qualquer homem que veja com suas canções e aparência exuberante, o espírito então os afoga e naufraga suas embarcações. Relatos dizem que Althira ignora embarcações cujo o capitão seja uma mulher."
+          },
+          {
+            nome: "Kaelthar, a Luz do Céu",
+            relato: "Há um século, em meio a conflitos humanos, uma luz intensa teria descido do céu. Dela, um ser alado com voz de trovão surgiu dizendo: 'Não temam, eis que está sobre vós a justiça dos céus'. O ser exterminou o grupo maligno 'Sangue e Aço' de maneira limpa e rápida. Desde esse dia, canções são feitas em homenagem a 'Kaelthar das Himmelslicht'."
+          },
+          {
+            nome: "Vaelion, a Sorte",
+            relato: "Séculos atrás, um surto de doença quase dizimou os humanos. Tomados pelo desespero, o povo cantava: 'Alguém por favor atenda ao nosso clamor, mude a nossa sorte e acabe com nossa dor'. Misteriosamente, a doença acabou conforme pediram. Hoje, as pessoas continuam proferindo este canto e dão o nome de 'Vaelion, a sortuda' para a entidade que os atendeu."
+          }
+        ],
         habilidade: {
           nome: 'Indomável Espírito Humano',
           tipo: 'Despertar Ancestral',
@@ -168,80 +186,118 @@ const Forum = () => {
                       
                       <div className="lore-divider"><Music size={16} /></div>
                       
-                      <p className="lore-footer">Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado? De que lado ficará quando a harmonia começar a ruir? E quais objetivos irão guiar seus passos através do desconhecido?</p>
-                      
-                      <p className="lore-final-call">Cada escolha é um acorde, cada ação, uma mudança no destino. Prepare sua alma, viajante, pois o continente está esperando — e a sinfonia está prestes a alcançar seu clímax.</p>
+                      <p className="lore-footer">Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado? De que lado ficará quando a harmonia começar a ruir? E quais objetivos irá perseguir?</p>
                     </div>
                   </div>
                 </motion.div>
               )}
 
-              {activeSection === 'racas' && !selectedRace && (
-                <motion.div key="racas-grid" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="forum-section">
-                  <h2 className="section-title">👥 Raças Disponíveis</h2>
-                  <div className="race-grid">
-                    {races.map(raca => (
-                      <div key={raca.id} className="race-card-modern" onClick={() => raca.content && setSelectedRace(raca)}>
-                        <div className="race-card-icon">{raca.icon}</div>
-                        <h4>{raca.name}</h4>
-                        <p>{raca.content ? 'Clique para ver detalhes' : 'Informações em breve...'}</p>
-                      </div>
+              {activeSection === 'racas' && (
+                <motion.div key="racas" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="races-section">
+                  <div className="races-grid">
+                    {races.map(race => (
+                      <button
+                        key={race.id}
+                        className={`race-card ${selectedRace?.id === race.id ? 'active' : ''}`}
+                        onClick={() => setSelectedRace(race)}
+                      >
+                        <div className="race-icon">{race.icon}</div>
+                        <span>{race.name}</span>
+                      </button>
                     ))}
                   </div>
-                </motion.div>
-              )}
 
-              {activeSection === 'racas' && selectedRace && (
-                <motion.div key={selectedRace.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="race-detail-container">
-                  <button className="back-btn" onClick={() => setSelectedRace(null)}>← Voltar para Raças</button>
-                  
-                  <div className="race-detail-header">
-                    <div className="race-detail-icon-large">{selectedRace.icon}</div>
-                    <div className="race-detail-title-group">
-                      <h1>{selectedRace.name}</h1>
-                      <span className="race-lifespan">⏳ Expectativa de Vida: {selectedRace.content.expectativa}</span>
-                    </div>
-                  </div>
+                  <AnimatePresence mode="wait">
+                    {selectedRace ? (
+                      <motion.div
+                        key={selectedRace.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="race-details-card"
+                      >
+                        <div className="race-details-header">
+                          <h2>{selectedRace.name}</h2>
+                          <div className="race-stat-badge">
+                            <Heart size={16} />
+                            <span>Expectativa: {selectedRace.content?.expectativa || '???'}</span>
+                          </div>
+                        </div>
 
-                  <div className="race-detail-grid">
-                    <div className="race-info-block main-desc">
-                      <h3><BookOpen size={20} /> A Essência Humana</h3>
-                      <p>{selectedRace.content.descricao}</p>
-                    </div>
+                        <div className="race-details-content">
+                          {selectedRace.content ? (
+                            <>
+                              <div className="lore-block">
+                                <h3 className="lore-subtitle"><BookOpen size={20} /> A Essência</h3>
+                                <p>{selectedRace.content.descricao}</p>
+                              </div>
 
-                    <div className="race-info-block">
-                      <h3><Users size={20} /> Cultura (Além-Mar)</h3>
-                      <p>{selectedRace.content.culturaFora}</p>
-                    </div>
+                              <div className="lore-two-columns">
+                                <div className="lore-block">
+                                  <h3 className="lore-subtitle"><Map size={20} /> Cultura (Fora)</h3>
+                                  <p>{selectedRace.content.culturaFora}</p>
+                                </div>
+                                <div className="lore-block">
+                                  <h3 className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</h3>
+                                  <p>{selectedRace.content.percepcaoDentro}</p>
+                                </div>
+                              </div>
 
-                    <div className="race-info-block">
-                      <h3><Search size={20} /> Percepção do Continente</h3>
-                      <p>{selectedRace.content.percepcaoDentro}</p>
-                    </div>
+                              <div className="lore-block">
+                                <h3 className="lore-subtitle"><User size={20} /> Aspecto Físico</h3>
+                                <p>{selectedRace.content.fisico}</p>
+                              </div>
 
-                    <div className="race-info-block">
-                      <h3><User size={20} /> Características Físicas</h3>
-                      <p>{selectedRace.content.fisico}</p>
-                    </div>
+                              <div className="lore-block">
+                                <h3 className="lore-subtitle"><Zap size={20} /> Afinidade Mágica</h3>
+                                <p>{selectedRace.content.magia}</p>
+                              </div>
 
-                    <div className="race-info-block">
-                      <h3><Sparkles size={20} /> Afinidades Mágicas</h3>
-                      <p>{selectedRace.content.magia}</p>
-                    </div>
+                              {/* Seção de Lendas */}
+                              {selectedRace.content.lendas && (
+                                <div className="lore-lendas-section">
+                                  <h3 className="lore-subtitle"><BookOpen size={20} /> Lendas e Relatos</h3>
+                                  <div className="lendas-grid">
+                                    {selectedRace.content.lendas.map((lenda, index) => (
+                                      <div key={index} className="lenda-card">
+                                        <h4>{lenda.nome}</h4>
+                                        <p>"{lenda.relato}"</p>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
 
-                    <div className="race-info-block skill-block">
-                      <div className="skill-header">
-                        <Zap size={20} />
-                        <h3>Habilidade Única: {selectedRace.content.habilidade.nome}</h3>
-                        <span className="skill-type">{selectedRace.content.habilidade.tipo}</span>
+                              <div className="ability-card">
+                                <div className="ability-header">
+                                  <div className="ability-title">
+                                    <Sparkles size={20} />
+                                    <span>{selectedRace.content.habilidade.nome}</span>
+                                  </div>
+                                  <span className="ability-type">{selectedRace.content.habilidade.tipo}</span>
+                                </div>
+                                <p className="ability-desc">{selectedRace.content.habilidade.descricao}</p>
+                                <div className="ability-effect">
+                                  <strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}
+                                </div>
+                                <div className="ability-cooldown">
+                                  <strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="placeholder-card">
+                              <p>Os registros sobre esta raça ainda estão sendo traduzidos pelos escribas de Chrona...</p>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <div className="race-placeholder">
+                        <p>Selecione uma raça para ver seus detalhes</p>
                       </div>
-                      <p className="skill-desc"><em>{selectedRace.content.habilidade.descricao}</em></p>
-                      <div className="skill-effect-box">
-                        <p><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</p>
-                        <p className="skill-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</p>
-                      </div>
-                    </div>
-                  </div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -252,128 +308,21 @@ const Forum = () => {
   )
 }
 
-const CriarFicha = ({ user }) => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [formData, setFormData] = useState(location.state?.loreData || { nick: '', nome: '', idade: '', raca: '', historia: '' })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  if (!user) return (
-    <div className="main-content">
-      <div className="error-card">
-        <h1>⚠️ Acesso Restrito</h1>
-        <p>Você precisa estar conectado ao Discord para compor sua obra.</p>
-        <Link to="/login" className="sidebar-login-btn" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '1rem' }}>Fazer Login</Link>
-      </div>
-    </div>
-  )
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    const loreData = {
-      ...formData,
-      discord_tag: user.username + '#' + user.discriminator,
-      status: 'Em Análise',
-      motivo_recusa: null
-    }
-
-    let error;
-    if (formData.id) {
-      // Se já tem ID, estamos editando (UPSERT/UPDATE)
-      const { error: updateError } = await supabase
-        .from('lores')
-        .update(loreData)
-        .eq('id', formData.id)
-      error = updateError
-    } else {
-      // Se não tem ID, é uma nova lore (INSERT)
-      const { error: insertError } = await supabase
-        .from('lores')
-        .insert([loreData])
-      error = insertError
-    }
-
-    if (error) {
-      alert('Erro ao enviar: ' + error.message)
-      setIsSubmitting(false)
-    } else {
-      alert(formData.id ? 'Sua partitura foi corrigida e reenviada aos maestros!' : 'Sua partitura foi enviada aos maestros!')
-      navigate('/perfil')
-    }
-  }
-  return (
-    <PageTransition>
-      <div className="main-content">
-        <div className="compor-container">
-          <div className="compor-header">
-            <h1>✍️ {location.state?.loreData ? 'Corrigir sua Obra' : 'Componha sua Obra'}</h1>
-            <p>{location.state?.loreData ? 'Ajuste os detalhes da sua partitura e envie novamente.' : 'Dê vida ao seu personagem e escreva sua história em Musae Eras.'}</p>
-          </div>
-          <form className="compor-form" onSubmit={handleSubmit}>
-            <div className="form-section-card">
-              <h3 className="form-section-title">Informações do Personagem</h3>
-              <div className="form-grid">
-                <div className="form-group">
-                  <input type="text" placeholder="Nick do Minecraft" value={formData.nick} onChange={(e) => setFormData({ ...formData, nick: e.target.value })} required />
-                </div>
-                <div className="form-group">
-                  <input type="text" placeholder="Nome do Personagem" value={formData.nome} onChange={(e) => setFormData({ ...formData, nome: e.target.value })} required />
-                </div>
-                <div className="form-group">
-                  <input type="number" placeholder="Idade" value={formData.idade} onChange={(e) => setFormData({ ...formData, idade: e.target.value })} required />
-                </div>
-                <div className="form-group">
-                  <select value={formData.raca} onChange={(e) => setFormData({ ...formData, raca: e.target.value })} required>
-                    <option value="">Selecione uma Raça</option>
-                    <option value="Humano">Humano</option>
-                    <option value="Anjo">Anjo</option>
-                    <option value="Demônio">Demônio</option>
-                    <option value="Quimera">Quimera</option>
-                    <option value="Aquariano">Aquariano</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="form-section-card">
-              <h3 className="form-section-title">Sua História</h3>
-              <div className="form-group">
-                <textarea placeholder="Conte a história do seu personagem..." value={formData.historia} onChange={(e) => setFormData({ ...formData, historia: e.target.value })} required rows="8"></textarea>
-              </div>
-            </div>
-            <button type="submit" className="submit-btn" disabled={isSubmitting}>{isSubmitting ? 'Enviando...' : 'Enviar Partitura'}</button>
-          </form>
-        </div>
-      </div>
-    </PageTransition>
-  )
-}
-
 const Profile = ({ user }) => {
-  const navigate = useNavigate()
   const [lores, setLores] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [modalOpen, setModalOpen] = useState(false)
   const [selectedLore, setSelectedLore] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
     if (user) fetchUserLores()
   }, [user])
 
   const fetchUserLores = async () => {
-    const { data } = await supabase.from('lores').select('*').eq('discord_tag', user.username + '#' + user.discriminator)
+    const { data } = await supabase.from('lores').select('*').eq('discord_id', user.id).order('created_at', { ascending: false })
     setLores(data || [])
-    setLoading(false)
   }
 
-  if (!user) return (
-    <div className="main-content">
-      <div className="error-card">
-        <h1>⚠️ Acesso Restrito</h1>
-        <p>Você precisa estar conectado ao Discord para acessar seu perfil.</p>
-        <Link to="/login" className="sidebar-login-btn" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '1rem' }}>Fazer Login</Link>
-      </div>
-    </div>
-  )
+  if (!user) return <div className="main-content"><h1>Por favor, faça login.</h1></div>
 
   return (
     <PageTransition>
@@ -381,58 +330,30 @@ const Profile = ({ user }) => {
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-user-info">
-              <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="Avatar" className="profile-avatar" />
+              <img src={user.avatar_url} alt="Avatar" className="profile-avatar" />
               <div className="profile-user-details">
                 <h1>{user.username}</h1>
-                <p className="profile-discord-tag">#{user.discriminator}</p>
+                <p className="profile-discord-tag">@{user.username}</p>
               </div>
             </div>
           </div>
+
           <div className="profile-lores-section">
-            <h2>Suas Partituras</h2>
-            {loading ? (
-              <p>Carregando...</p>
-            ) : lores.length === 0 ? (
-              <div className="profile-empty-state">
-                <p>Você ainda não tem nenhuma partitura.</p>
-                <Link to="/compor" className="sidebar-login-btn" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '1rem' }}>Compor Primeira Obra</Link>
+            <h2>Minhas Partituras</h2>
+            {lores.length === 0 ? (
+              <div className="placeholder-card">
+                <p>Você ainda não compôs nenhuma obra. Vá até "Componha sua Obra" para começar!</p>
               </div>
             ) : (
               <div className="profile-lores-grid">
-                {lores.map(lore => (
-                  <div key={lore.id} className="profile-lore-card-container">
-                    <div className="profile-lore-card" onClick={() => { setSelectedLore(lore); setModalOpen(true); }}>
-                      <div className="profile-lore-header">
-                        <span className="profile-lore-nick">{lore.nick}</span>
-                        <span className={`status-badge ${lore.status.toLowerCase().replace(' ', '-')}`}>{lore.status}</span>
-                      </div>
-                      <div className="profile-lore-body">
-                        <p><strong>Nome:</strong> {lore.nome}</p>
-                        <p><strong>Raça:</strong> {lore.raca}</p>
-                        <p><strong>Idade:</strong> {lore.idade}</p>
-                        {lore.status === 'Recusada' && lore.motivo_recusa && (
-                          <div className="profile-motivo-box">
-                            <strong>Motivo:</strong> {lore.motivo_recusa}
-                          </div>
-                        )}
-                      </div>
-                      {lore.status === 'Recusada' && (
-                        <button 
-                          onClick={(e) => { e.stopPropagation(); navigate('/compor', { state: { loreData: lore } }); }} 
-                          className="profile-fix-btn"
-                        >
-                          Corrigir e Reenviar
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                {lores.map(f => (
+                  <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />
                 ))}
               </div>
             )}
           </div>
         </div>
 
-        {/* MODAL DE VISUALIZAÇÃO NO PERFIL */}
         <AnimatePresence>
           {modalOpen && selectedLore && (
             <div className="modal-overlay" onClick={() => setModalOpen(false)}>
@@ -447,23 +368,18 @@ const Profile = ({ user }) => {
                 <h2>{selectedLore.nome}</h2>
                 <div className="modal-details">
                   <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                  <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                  <p><strong>Status:</strong> {selectedLore.status}</p>
+                  <p><strong>Status:</strong> <span className={`status-badge ${selectedLore.status.toLowerCase().replace(' ', '-')}`}>{selectedLore.status}</span></p>
                 </div>
                 <div className="modal-historia">
                   <h3>História:</h3>
                   <p>{selectedLore.historia}</p>
                 </div>
-                {selectedLore.status === 'Recusada' && (
-                  <div className="modal-actions">
-                    <button 
-                      onClick={() => { setModalOpen(false); navigate('/compor', { state: { loreData: selectedLore } }); }} 
-                      className="btn-approve"
-                    >
-                      ✍️ Corrigir Agora
-                    </button>
+                {selectedLore.status === 'Recusada' && selectedLore.motivo_recusa && (
+                  <div className="profile-motivo-box">
+                    <strong>Motivo da Recusa:</strong>
+                    <p>{selectedLore.motivo_recusa}</p>
                   </div>
                 )}
               </motion.div>
@@ -475,30 +391,110 @@ const Profile = ({ user }) => {
   )
 }
 
+const CriarFicha = ({ user }) => {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({ nome: '', nick: '', raca: 'Humanos', idade: '', historia: '' })
+  const [enviando, setEnviando] = useState(false)
+
+  if (!user) return <div className="main-content"><h1>Por favor, faça login para compor.</h1></div>
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setEnviando(true)
+    const { error } = await supabase.from('lores').insert([{
+      ...formData,
+      discord_id: user.id,
+      discord_tag: user.username,
+      status: 'Em Análise'
+    }])
+    if (error) alert('Erro ao enviar: ' + error.message)
+    else { alert('Sua partitura foi enviada para análise!'); navigate('/perfil') }
+    setEnviando(false)
+  }
+
+  return (
+    <PageTransition>
+      <div className="main-content">
+        <div className="form-container">
+          <h1>🎼 Componha sua Obra</h1>
+          <p>Dê vida ao seu personagem e envie sua história para os mestres de Chrona.</p>
+          <form onSubmit={handleSubmit} className="lore-form">
+            <div className="form-group">
+              <label>Nome do Personagem</label>
+              <input type="text" required value={formData.nome} onChange={e => setFormData({...formData, nome: e.target.value})} />
+            </div>
+            <div className="form-group">
+              <label>Nick no Minecraft</label>
+              <input type="text" required value={formData.nick} onChange={e => setFormData({...formData, nick: e.target.value})} />
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Raça</label>
+                <select value={formData.raca} onChange={e => setFormData({...formData, raca: e.target.value})}>
+                  <option>Humanos</option><option>Anjos</option><option>Demônios</option><option>Quimeras</option><option>Aquarianos</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Idade</label>
+                <input type="number" required value={formData.idade} onChange={e => setFormData({...formData, idade: e.target.value})} />
+              </div>
+            </div>
+            <div className="form-group">
+              <label>História (Mínimo 15 linhas)</label>
+              <textarea required rows="15" value={formData.historia} onChange={e => setFormData({...formData, historia: e.target.value})} placeholder="Conte a trajetória do seu personagem..."></textarea>
+            </div>
+            <button type="submit" className="submit-btn" disabled={enviando}>{enviando ? 'Enviando...' : 'Enviar Partitura'}</button>
+          </form>
+        </div>
+      </div>
+    </PageTransition>
+  )
+}
+
 const LoginPage = () => {
   useEffect(() => {
-    const fragment = new URLSearchParams(window.location.hash.slice(1))
-    const accessToken = fragment.get('access_token')
-    if (accessToken) {
-      fetch('https://discord.com/api/users/@me', { headers: { authorization: `Bearer ${accessToken}` } })
-        .then(res => res.json())
-        .then(user => { localStorage.setItem('discord_user', JSON.stringify(user)); window.location.href = '/'; })
-    } else {
-      window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
+    const hash = window.location.hash
+    if (hash) {
+      const params = new URLSearchParams(hash.substring(1))
+      const accessToken = params.get('access_token')
+      if (accessToken) fetchDiscordUser(accessToken)
     }
   }, [])
-  return <div className="main-content"><h1>Conectando ao Discord...</h1></div>
+
+  const fetchDiscordUser = async (token) => {
+    const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
+    const data = await res.json()
+    const user = { id: data.id, username: data.username, avatar_url: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` }
+    localStorage.setItem('discord_user', JSON.stringify(user))
+    window.location.href = '/perfil'
+  }
+
+  const handleLogin = () => {
+    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_id}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
+    window.location.href = url
+  }
+
+  return (
+    <div className="main-content">
+      <div className="login-card">
+        <h1>Bem-vindo a Musae Eras</h1>
+        <button onClick={handleLogin} className="discord-btn">Entrar com Discord</button>
+      </div>
+    </div>
+  )
 }
 
 const LoreCard = ({ f, onExpand }) => (
-  <div className="lore-card" onClick={() => onExpand(f)}>
-    <div className="lore-card-header">
-      <h4>{f.nome}</h4>
-      <span className="lore-card-expand">👁️</span>
-    </div>
-    <p className="lore-card-nick">{f.nick}</p>
-    <p className="lore-card-discord">{f.discord_tag}</p>
-    <div className="lore-card-preview">
+  <div className="profile-lore-card-container" onClick={() => onExpand(f)}>
+    <div className="profile-lore-card">
+      <div className="profile-lore-header">
+        <span className="profile-lore-nick">{f.nick}</span>
+        <span className={`status-badge ${f.status.toLowerCase().replace(' ', '-')}`}>{f.status}</span>
+      </div>
+      <div className="profile-lore-body">
+        <p><strong>Nome:</strong> {f.nome}</p>
+        <p><strong>Raça:</strong> {f.raca}</p>
+      </div>
       <p className="lore-card-preview-text">{f.historia.substring(0, 80)}...</p>
     </div>
   </div>
@@ -581,7 +577,6 @@ const AdminPanel = ({ user }) => {
     </div>
   )
   
-  // Lógica de filtragem por Nick ou Nome
   const filteredLores = lores.filter(lore => 
     lore.nick.toLowerCase().includes(searchTerm.toLowerCase()) || 
     lore.nome.toLowerCase().includes(searchTerm.toLowerCase())
@@ -605,7 +600,6 @@ const AdminPanel = ({ user }) => {
           
           {activeTab === 'lores' ? (
             <div className="admin-tab-content">
-              {/* CAMPO DE BUSCA */}
               <div className="admin-search-wrapper">
                 <div className="input-with-icon">
                   <Search className="search-icon-inner" size={18} />
@@ -724,7 +718,7 @@ function App() {
       <div className="container">
         <aside className="sidebar">
           <Link to="/" className="logo-section">
-            <img src="/rat1.png" alt="Logo" className="sidebar-logo" />
+            <img src="/logo.png" alt="Logo" className="sidebar-logo" />
             <span className="sidebar-title">Musae Eras</span>
           </Link>
 
