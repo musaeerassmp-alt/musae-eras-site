@@ -318,7 +318,12 @@ const Profile = ({ user }) => {
   }, [user])
 
   const fetchUserLores = async () => {
-    const { data } = await supabase.from('lores').select('*').eq('discord_id', user.id).order('created_at', { ascending: false })
+    // CORREÇÃO: Usando discord_tag para buscar as fichas, conforme a estrutura do Supabase
+    const { data } = await supabase
+      .from('lores')
+      .select('*')
+      .eq('discord_tag', user.username)
+      .order('created_at', { ascending: false })
     setLores(data || [])
   }
 
@@ -370,7 +375,7 @@ const Profile = ({ user }) => {
                   <p><strong>Nick:</strong> {selectedLore.nick}</p>
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                  <p><strong>Status:</strong> <span className={`status-badge ${selectedLore.status.toLowerCase().replace(' ', '-')}`}>{selectedLore.status}</span></p>
+                  <p><strong>Status:</strong> <span className={`status-badge ${selectedLore.status?.toLowerCase().replace(' ', '-') || 'em-análise'}`}>{selectedLore.status || 'Em Análise'}</span></p>
                 </div>
                 <div className="modal-historia">
                   <h3>História:</h3>
@@ -401,9 +406,13 @@ const CriarFicha = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setEnviando(true)
+    // CORREÇÃO: Removido discord_id que não existe na tabela, mantendo apenas discord_tag
     const { error } = await supabase.from('lores').insert([{
-      ...formData,
-      discord_id: user.id,
+      nome: formData.nome,
+      nick: formData.nick,
+      raca: formData.raca,
+      idade: formData.idade,
+      historia: formData.historia,
       discord_tag: user.username,
       status: 'Em Análise'
     }])
@@ -462,19 +471,19 @@ const LoginPage = () => {
   }, [])
 
   const fetchDiscordUser = async (token) => {
-    const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } } )
+    const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
     const data = await res.json()
     const avatarUrl = data.avatar 
       ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
       : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`;
       
     const user = { id: data.id, username: data.username, avatar_url: avatarUrl }
-    localStorage.setItem('discord_user', JSON.stringify(user ))
+    localStorage.setItem('discord_user', JSON.stringify(user))
     window.location.href = '/perfil'
   }
 
   const handleLogin = () => {
-    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI )}&response_type=token&scope=identify`
+    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
     window.location.href = url
   }
 
@@ -493,13 +502,13 @@ const LoreCard = ({ f, onExpand }) => (
     <div className="profile-lore-card">
       <div className="profile-lore-header">
         <span className="profile-lore-nick">{f.nick}</span>
-        <span className={`status-badge ${f.status.toLowerCase().replace(' ', '-')}`}>{f.status}</span>
+        <span className={`status-badge ${(f.status || 'Em Análise').toLowerCase().replace(' ', '-')}`}>{f.status || 'Em Análise'}</span>
       </div>
       <div className="profile-lore-body">
         <p><strong>Nome:</strong> {f.nome}</p>
         <p><strong>Raça:</strong> {f.raca}</p>
       </div>
-      <p className="lore-card-preview-text">{f.historia.substring(0, 80)}...</p>
+      <p className="lore-card-preview-text">{f.historia?.substring(0, 80)}...</p>
     </div>
   </div>
 )
@@ -582,11 +591,11 @@ const AdminPanel = ({ user }) => {
   )
   
   const filteredLores = lores.filter(lore => 
-    lore.nick.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    lore.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    lore.nick?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    lore.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const emAnalise = filteredLores.filter(l => l.status === 'Em Análise')
+  const emAnalise = filteredLores.filter(l => (l.status || 'Em Análise') === 'Em Análise')
   const aprovadas = filteredLores.filter(l => l.status === 'Aprovada')
   const recusadas = filteredLores.filter(l => l.status === 'Recusada')
   
@@ -657,7 +666,7 @@ const AdminPanel = ({ user }) => {
                         <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
                         <p><strong>Raça:</strong> {selectedLore.raca}</p>
                         <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                        <p><strong>Status:</strong> {selectedLore.status}</p>
+                        <p><strong>Status:</strong> {selectedLore.status || 'Em Análise'}</p>
                       </div>
                       <div className="modal-historia">
                         <h3>História:</h3>
