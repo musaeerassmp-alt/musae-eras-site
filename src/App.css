@@ -984,3 +984,70 @@ body {
     font-size: 1.3rem;
   }
 }
+/* ============================================================
+   SCROLLBAR PERSONALIZADA E ROLAGEM INTERNA DO MODAL
+   ============================================================ */
+
+/* Garante que o conteúdo do modal seja rolável */
+.modal-content {
+  overflow-y: auto; /* Permite rolagem vertical */
+  max-height: 90vh; /* Limita a altura máxima do modal para caber na tela */
+}
+
+/* Estilo da barra de rolagem para navegadores WebKit (Chrome, Safari) */
+.modal-content::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(213, 101, 229, 0.1); /* Fundo da trilha da barra de rolagem */
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color); /* Cor do "polegar" da barra de rolagem */
+  border-radius: 10px;
+  border: 2px solid rgba(213, 101, 229, 0.2); /* Borda do polegar */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #c052d0; /* Cor do polegar ao passar o mouse */
+}
+
+/* Estilo da barra de rolagem para Firefox */
+.modal-content {
+  scrollbar-width: thin; /* Largura da barra de rolagem (auto, thin, none) */
+  scrollbar-color: var(--primary-color) rgba(213, 101, 229, 0.1); /* Cor do polegar e da trilha */
+}
+
+/* Garante que a história tenha sua própria rolagem se for muito longa */
+.modal-historia p {
+  max-height: 300px; /* Altura máxima para o parágrafo da história */
+  overflow-y: auto; /* Adiciona rolagem apenas para a história se necessário */
+  padding-right: 10px; /* Espaçamento para a scrollbar interna */
+}
+
+/* Estilo da barra de rolagem para a história (WebKit) */
+.modal-historia p::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-historia p::-webkit-scrollbar-track {
+  background: rgba(213, 101, 229, 0.05);
+  border-radius: 10px;
+}
+
+.modal-historia p::-webkit-scrollbar-thumb {
+  background-color: rgba(213, 101, 229, 0.6);
+  border-radius: 10px;
+}
+
+.modal-historia p::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+
+/* Estilo da barra de rolagem para a história (Firefox) */
+.modal-historia p {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(213, 101, 229, 0.6) rgba(213, 101, 229, 0.05);
+}
