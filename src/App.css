@@ -819,3 +819,168 @@ body {
   border-color: var(--primary-color) !important;
   background: rgba(22, 27, 34, 0.6) !important;
 }
+/* ============================================================
+   MODAL DE DETALHES DA FICHA - VISUAL RPG IMERSIVO
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: linear-gradient(145deg, rgba(15, 18, 25, 0.95), rgba(10, 12, 18, 0.98));
+  border: 1px solid rgba(213, 101, 229, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 700px;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(213, 101, 229, 0.1);
+  color: #e0e0e0;
+  overflow-y: auto; /* Para permitir scroll se a história for muito longa */
+  max-height: 90vh;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--primary-color);
+}
+
+.modal-content h2 {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(213, 101, 229, 0.4);
+}
+
+.modal-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(213, 101, 229, 0.1);
+}
+
+.modal-details p {
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-details strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.modal-historia {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(213, 101, 229, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.modal-historia h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(213, 101, 229, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.modal-historia p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #c0c0c0;
+  white-space: pre-wrap; /* Preserva quebras de linha do texto */
+}
+
+/* Estilos para o badge de status dentro do modal */
+.modal-details .status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.modal-details .status-badge.em-analise {
+  background-color: #f0a500;
+  color: #333;
+}
+
+.modal-details .status-badge.aprovada {
+  background-color: #23a559;
+  color: #fff;
+}
+
+.modal-details .status-badge.recusada {
+  background-color: #f23f43;
+  color: #fff;
+}
+
+/* Estilo para o motivo da recusa */
+.profile-motivo-box {
+  background: rgba(242, 63, 67, 0.1);
+  border-left: 4px solid #f23f43;
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+  border-radius: 0 10px 10px 0;
+}
+
+.profile-motivo-box strong {
+  color: #f23f43;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.profile-motivo-box p {
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Responsividade para o modal */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 1.5rem;
+  }
+  .modal-details {
+    grid-template-columns: 1fr;
+  }
+  .modal-content h2 {
+    font-size: 1.8rem;
+  }
+  .modal-historia h3 {
+    font-size: 1.3rem;
+  }
+}
