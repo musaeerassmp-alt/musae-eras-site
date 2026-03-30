@@ -659,3 +659,86 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* ============================================================
+   FIX: RESTAURANDO A FORMATAÇÃO DA HISTÓRIA DO MUNDO
+   ============================================================ */
+
+.lore-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.lore-intro-card {
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 24px;
+  padding: 3.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.lore-title {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 2rem;
+  font-weight: 800;
+}
+
+.lore-text-content {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.lore-highlight {
+  color: white;
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.lore-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  color: var(--primary-color);
+  opacity: 0.5;
+}
+
+.lore-divider::before, .lore-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+}
+
+.lore-quote-box {
+  background: rgba(213, 101, 229, 0.05);
+  border-left: 4px solid var(--primary-color);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border-radius: 0 16px 16px 0;
+  text-align: left;
+}
+
+.lore-quote-box p {
+  color: white;
+  font-style: italic;
+  margin: 0;
+}
+
+.text-primary {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.lore-footer {
+  margin-top: 3rem;
+  font-weight: 600;
+  color: white;
+}
