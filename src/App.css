@@ -1425,3 +1425,81 @@ body {
   line-height: 1.5;
   color: var(--text-secondary);
 }
+/* ============================================================
+   SUPER FIX - RESTAURANDO O VISUAL DO FÓRUM E RAÇAS
+   ============================================================ */
+
+/* Corrige o container dos botões das raças */
+.races-grid {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+  margin: 2rem 0 !important;
+  flex-wrap: wrap !important;
+}
+
+/* Restaura o visual dos cards de raça (os botões com ícones) */
+.race-card {
+  background: rgba(22, 27, 34, 0.6) !important;
+  border: 1px solid rgba(213, 101, 229, 0.3) !important;
+  padding: 1rem 1.5rem !important;
+  border-radius: 12px !important;
+  color: white !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  min-width: 100px !important;
+}
+
+.race-card:hover {
+  background: rgba(213, 101, 229, 0.1) !important;
+  transform: translateY(-3px) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.race-card.active {
+  background: var(--primary-color) !important;
+  border-color: white !important;
+  box-shadow: 0 0 15px rgba(213, 101, 229, 0.4) !important;
+}
+
+.race-icon {
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ajuste para o texto "Selecione uma raça" */
+.race-placeholder {
+  margin-top: 2rem !important;
+  color: var(--text-secondary) !important;
+  font-style: italic !important;
+}
+
+/* Garante que os botões de navegação do fórum (História/Raças) fiquem bonitos */
+.forum-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.forum-nav-btn {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.forum-nav-btn.active {
+  background: #f0b232; /* Cor amarela que aparece na sua imagem */
+  color: #000;
+  font-weight: bold;
+}
