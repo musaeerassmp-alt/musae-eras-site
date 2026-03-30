@@ -1051,3 +1051,58 @@ body {
   scrollbar-width: thin;
   scrollbar-color: rgba(213, 101, 229, 0.6) rgba(213, 101, 229, 0.05);
 }
+/* ============================================================
+   REPOSICIONAMENTO DO STATUS NOS CARDS DE PARTITURA
+   ============================================================ */
+
+/* Garante que o card seja o ponto de referência para o status */
+.profile-lore-card {
+  position: relative; /* Adicione ou certifique-se que esta linha existe */
+  /* Mantenha os outros estilos do card aqui */
+  background: rgba(22, 27, 34, 0.4);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex; /* Adicionado para melhor controle do layout interno */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Estilo para o badge de status */
+.status-badge {
+  position: absolute; /* Posiciona o badge de forma absoluta */
+  top: 15px; /* Distância do topo */
+  right: 15px; /* Distância da direita */
+  padding: 0.4rem 0.8rem; /* Ajuste de padding para melhor visual */
+  border-radius: 8px; /* Borda mais arredondada */
+  font-size: 0.8rem; /* Tamanho da fonte */
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 10; /* Garante que fique acima de outros elementos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+/* Ajuste para o cabeçalho do card para não sobrepor o status */
+.profile-lore-header {
+  display: flex;
+  justify-content: space-between; /* Para empurrar o nick para a esquerda */
+  align-items: flex-start; /* Alinha o nick ao topo */
+  margin-bottom: 0.5rem;
+  padding-right: 70px; /* Espaço para o badge de status */
+}
+
+.profile-lore-nick {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Remova o margin-left do status-badge se ele estiver dentro de .modal-details */
+.modal-details .status-badge {
+  margin-left: 0; /* Remove o margin-left que estava empurrando */
+  position: static; /* Volta a ser estático dentro do modal */
+  top: auto;
+  right: auto;
+  box-shadow: none;
+}
