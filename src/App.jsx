@@ -318,11 +318,11 @@ const Profile = ({ user }) => {
   }, [user])
 
   const fetchUserLores = async () => {
-    // CORREÇÃO: Usando discord_tag para buscar as fichas, conforme a estrutura do Supabase
+    // BUSCA INTELIGENTE: Procura pelo nome puro e pelo nome com #0 para garantir que apareça
     const { data } = await supabase
       .from('lores')
       .select('*')
-      .eq('discord_tag', user.username)
+      .or(`discord_tag.eq.${user.username},discord_tag.eq.${user.username}#0`)
       .order('created_at', { ascending: false })
     setLores(data || [])
   }
@@ -335,7 +335,15 @@ const Profile = ({ user }) => {
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-user-info">
-              <img src={user.avatar_url} alt="Avatar" className="profile-avatar" />
+              <img 
+                src={user.avatar_url} 
+                alt="Avatar" 
+                className="profile-avatar" 
+                onError={(e) => {
+                  // Se o avatar do Discord falhar, usa um placeholder bonito
+                  e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff`;
+                }}
+              />
               <div className="profile-user-details">
                 <h1>{user.username}</h1>
                 <p className="profile-discord-tag">@{user.username}</p>
@@ -375,7 +383,7 @@ const Profile = ({ user }) => {
                   <p><strong>Nick:</strong> {selectedLore.nick}</p>
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                  <p><strong>Status:</strong> <span className={`status-badge ${selectedLore.status?.toLowerCase().replace(' ', '-') || 'em-análise'}`}>{selectedLore.status || 'Em Análise'}</span></p>
+                  <p><strong>Status:</strong> <span className={`status-badge ${(selectedLore.status || 'Em Análise').toLowerCase().replace(' ', '-')}`}>{selectedLore.status || 'Em Análise'}</span></p>
                 </div>
                 <div className="modal-historia">
                   <h3>História:</h3>
@@ -406,7 +414,6 @@ const CriarFicha = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setEnviando(true)
-    // CORREÇÃO: Removido discord_id que não existe na tabela, mantendo apenas discord_tag
     const { error } = await supabase.from('lores').insert([{
       nome: formData.nome,
       nick: formData.nick,
