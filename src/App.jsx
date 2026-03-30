@@ -462,17 +462,17 @@ const LoginPage = () => {
   }, [])
 
   const fetchDiscordUser = async (token) => {
-    const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
-    const data = await res.json()
-    const user = { id: data.id, username: data.username, avatar_url: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` }
-    localStorage.setItem('discord_user', JSON.stringify(user))
-    window.location.href = '/perfil'
-  }
-
-  const handleLogin = () => {
-    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
-    window.location.href = url
-  }
+  const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } } )
+  const data = await res.json()
+  // Ajuste na URL do avatar para garantir que funcione
+  const avatarUrl = data.avatar 
+    ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
+    : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`;
+    
+  const user = { id: data.id, username: data.username, avatar_url: avatarUrl }
+  localStorage.setItem('discord_user', JSON.stringify(user ))
+  window.location.href = '/perfil'
+}
 
   return (
     <div className="main-content">
