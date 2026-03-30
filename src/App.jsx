@@ -167,7 +167,7 @@ const Forum = () => {
                   <div className="lore-intro-card">
                     <h3 className="lore-title">Abertura: O Despertar da Sinfonia</h3>
                     <div className="lore-text-content">
-                      <p className="lore-highlight">Na vasta e silenciosa escuridão do universo, algo cantou.</p>
+                      <p className="lore-highlight">Na vasta e silenciosa escuridão do universe, algo cantou.</p>
                       <p>Dessa primeira nota, o silêncio foi quebrado e o mundo começou a se moldar. Onde antes havia apenas o vazio, surgiram montanhas que parecem tocar o céu, florestas que sussurram segredos ao vento e oceanos que guardam o peso de eras esquecidas.</p>
                       
                       <div className="lore-divider"><Music size={16} /></div>
@@ -335,13 +335,15 @@ const Profile = ({ user }) => {
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-user-info">
+              {/* FIX DEFINITIVO DO AVATAR COM FALLBACK AUTOMÁTICO */}
               <img 
                 src={user.avatar_url} 
-                alt="Avatar" 
+                alt="" 
                 className="profile-avatar" 
                 onError={(e) => {
-                  // Se o avatar do Discord falhar, usa um placeholder bonito
-                  e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff`;
+                  // Se o avatar do Discord falhar, usa um placeholder bonito com a inicial
+                  e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff&size=128`;
+                  e.target.onerror = null; // Evita loop infinito
                 }}
               />
               <div className="profile-user-details">
@@ -456,7 +458,7 @@ const CriarFicha = ({ user }) => {
               </div>
             </div>
             <div className="form-group">
-              <label>História (Mínimo 15 linhas)</label>
+              <label>História (Mínimo 15 lines)</label>
               <textarea required rows="15" value={formData.historia} onChange={e => setFormData({...formData, historia: e.target.value})} placeholder="Conte a trajetória do seu personagem..."></textarea>
             </div>
             <button type="submit" className="submit-btn" disabled={enviando}>{enviando ? 'Enviando...' : 'Enviar Partitura'}</button>
