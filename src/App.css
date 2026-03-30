@@ -1310,3 +1310,82 @@ body {
   color: var(--text-secondary) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
+.lore-text-content p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.lore-final-call {
+  background: linear-gradient(to right, transparent, rgba(240, 178, 50, 0.1), transparent);
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #f0b232 !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(240, 178, 50, 0.3);
+}
+
+/* MELHORIA VISUAL "HUMANA" PARA DETALHES DA RAÇA */
+.race-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.race-info-block {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(22, 27, 34, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.race-info-block:hover {
+  transform: translateY(-5px);
+  border-color: rgba(213, 101, 229, 0.2);
+}
+
+.main-desc {
+  background: linear-gradient(135deg, rgba(213, 101, 229, 0.08), rgba(22, 27, 34, 0.6));
+  padding: 3rem !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-desc::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+.main-desc p {
+  font-size: 1.2rem !important;
+  line-height: 1.8 !important;
+  font-style: italic;
+  color: #fff !important;
+}
+
+.skill-block {
+  border: 2px solid rgba(240, 178, 50, 0.2) !important;
+  background: rgba(240, 178, 50, 0.03) !important;
+}
+
+.skill-header h3 {
+  font-size: 1.5rem !important;
+  letter-spacing: 1px;
+}
+
+.skill-effect-box {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(240, 178, 50, 0.2) !important;
+}
+
+.race-lifespan {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
