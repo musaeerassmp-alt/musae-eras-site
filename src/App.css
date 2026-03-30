@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + FIX MODAL TEXT)
+   MUSAE ERAS - CSS FINAL INTEGRADO (RESTAURADO + DESIGN ÉPICO)
    ============================================================ */
 
 :root {
@@ -31,7 +31,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: var(--bg-color);
-  background-image: linear-gradient(rgba(11, 14, 20, 0.6), rgba(11, 14, 20, 0.6)), url("/Prancheta-1.gif");
+  background-image: linear-gradient(rgba(11, 14, 20, 0.6), rgba(11, 14, 20, 0.6)), url("/fundo.gif");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -44,6 +44,10 @@ body {
   width: 100%;
   min-height: 100vh;
 }
+
+/* ============================================================
+   SIDEBAR - RESTAURADA
+   ============================================================ */
 
 .sidebar {
   width: var(--sidebar-width);
@@ -169,1267 +173,37 @@ body {
 }
 
 /* ============================================================
-   HOME - FRASES FILOSÓFICAS
-   ============================================================ */
-
-.home-section {
-  justify-content: center;
-  padding-top: 0;
-}
-
-.home-hero {
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.home-title {
-  font-size: 4.5rem;
-  margin: 0;
-  background: linear-gradient(to bottom, #fff, var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 10px 30px rgba(213, 101, 229, 0.3);
-  font-weight: 900;
-  letter-spacing: -2px;
-}
-
-.quote-container {
-  background: rgba(22, 27, 34, 0.4);
-  padding: 2.5rem;
-  border-radius: 20px;
-  border: 1px solid rgba(213, 101, 229, 0.2);
-  backdrop-filter: blur(10px);
-  position: relative;
-  width: 100%;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-.quote-container::before {
-  content: '"';
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  font-size: 5rem;
-  color: var(--primary-color);
-  opacity: 0.3;
-  font-family: serif;
-}
-
-.quote-text {
-  font-size: 1.8rem !important;
-  line-height: 1.4;
-  color: white !important;
-  margin-bottom: 1rem !important;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.quote-author {
-  font-size: 1.1rem;
-  color: var(--primary-color);
-  text-align: right;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.home-divider {
-  width: 60px;
-  height: 4px;
-  background: var(--primary-color);
-  border-radius: 2px;
-  box-shadow: 0 0 15px var(--primary-color);
-}
-
-.home-subtitle {
-  font-size: 1.2rem !important;
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/* ============================================================
-   PERFIL - GRADE DE LORES
-   ============================================================ */
-
-.profile-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  padding-bottom: 4rem;
-}
-
-.profile-header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background: rgba(22, 27, 34, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(213, 101, 229, 0.2);
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-.profile-user-info {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  text-align: left;
-}
-
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 4px solid var(--primary-color);
-  box-shadow: 0 0 20px rgba(213, 101, 229, 0.4);
-}
-
-.profile-user-details h1 {
-  font-size: 2.5rem;
-  margin: 0;
-  color: white;
-}
-
-.profile-discord-tag {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  margin-top: 0.5rem;
-}
-
-.profile-lores-section {
-  width: 100%;
-  text-align: left;
-}
-
-.profile-lores-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: white;
-  border-left: 4px solid var(--primary-color);
-  padding-left: 1.5rem;
-}
-
-.profile-lores-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.profile-lore-card-container {
-  width: 100%;
-}
-
-.profile-lore-card {
-  background: rgba(22, 27, 34, 0.4) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(213, 101, 229, 0.2) !important;
-  border-radius: 20px !important;
-  padding: 1.5rem !important;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: left;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.profile-lore-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(213, 101, 229, 0.6) !important;
-  background: rgba(22, 27, 34, 0.6) !important;
-  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.2);
-}
-
-.profile-lore-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.75rem;
-}
-
-.profile-lore-nick {
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--primary-color);
-}
-
-.status-badge {
-  font-size: 0.75rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  text-transform: uppercase;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
-
-.status-badge.aprovada { background: rgba(35, 165, 89, 0.2); color: #23a559; border: 1px solid rgba(35, 165, 89, 0.3); }
-.status-badge.recusada { background: rgba(242, 63, 67, 0.2); color: #f23f43; border: 1px solid rgba(242, 63, 67, 0.3); }
-.status-badge.em-análise { background: rgba(240, 178, 50, 0.2); color: #f0b232; border: 1px solid rgba(240, 178, 50, 0.3); }
-
-.profile-lore-body {
-  flex-grow: 1;
-}
-
-.profile-lore-body p {
-  margin: 0.6rem 0;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-.profile-lore-body strong {
-  color: white;
-  margin-right: 0.5rem;
-}
-
-.profile-motivo-box {
-  margin-top: 1.2rem;
-  padding: 1rem;
-  background: rgba(242, 63, 67, 0.1);
-  border-radius: 12px;
-  border-left: 4px solid #f23f43;
-  font-size: 0.85rem;
-  line-height: 1.4;
-}
-
-.profile-fix-btn {
-  background: var(--danger-color) !important;
-  color: white !important;
-  border: none !important;
-  padding: 0.85rem !important;
-  border-radius: 12px !important;
-  cursor: pointer !important;
-  font-weight: 800 !important;
-  margin-top: 1.5rem !important;
-  width: 100% !important;
-  transition: all 0.2s ease !important;
-}
-
-.profile-fix-btn:hover {
-  filter: brightness(1.2) !important;
-  transform: scale(1.02) !important;
-}
-
-/* ============================================================
-   MODAL DE VISUALIZAÇÃO - CORREÇÃO DE TEXTO E SCROLL
-   ============================================================ */
-
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  backdrop-filter: blur(4px);
-  padding: 1rem;
-}
-
-.modal-content {
-  background: #161b22;
-  border: 1px solid rgba(213, 101, 229, 0.3);
-  border-radius: 20px;
-  max-width: 700px;
-  width: 100%;
-  max-height: 90vh;
-  padding: 2.5rem;
-  position: relative;
-  text-align: left;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Garante que o scroll fique só na área de texto */
-}
-
-.modal-close {
-  position: absolute;
-  top: 1.25rem; 
-  right: 1.25rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.2rem;
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.modal-close:hover {
-  background: rgba(242, 63, 67, 0.2);
-  color: var(--danger-color);
-}
-
-.modal-content h2 {
-  font-size: 2rem;
-  color: white;
-  margin-bottom: 1.5rem;
-  padding-right: 40px;
-}
-
-.modal-details {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 1.5rem;
-  border-radius: 12px;
-}
-
-.modal-details p {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--text-secondary);
-}
-
-.modal-details strong {
-  color: var(--primary-color);
-  margin-right: 0.5rem;
-}
-
-.modal-historia {
-  flex-grow: 1;
-  margin-top: 1rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  overflow-y: auto; /* Apenas scroll vertical */
-  padding-right: 10px; /* Espaço para a scrollbar */
-}
-
-.modal-historia h3 {
-  color: white;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.modal-historia p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #e6edf3;
-  white-space: pre-wrap; /* Mantém as quebras de linha mas quebra o texto na largura */
-  word-wrap: break-word; /* Força a quebra de palavras muito longas */
-  overflow-wrap: break-word;
-  text-align: justify;
-}
-
-.modal-actions {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-/* ============================================================
-   COMPOR OBRA (FORMULÁRIO)
-   ============================================================ */
-
-.compor-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  padding-bottom: 4rem;
-}
-
-.compor-header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.compor-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  width: 100%;
-}
-
-.form-section-card {
-  background: rgba(22, 27, 34, 0.7);
-  border: 1px solid rgba(213, 101, 229, 0.2);
-  border-radius: 20px;
-  padding: 2.5rem;
-  text-align: left;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-section-title {
-  color: var(--primary-color);
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(213, 101, 229, 0.2);
-  padding-bottom: 0.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group input, 
-.form-group textarea, 
-.form-group select {
-  width: 100%;
-  background: rgba(11, 14, 20, 0.8);
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  color: white;
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  font-family: inherit;
-}
-
-.form-group input:focus, 
-.form-group textarea:focus, 
-.form-group select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 15px rgba(213, 101, 229, 0.2);
-  background: rgba(11, 14, 20, 0.95);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 200px;
-  line-height: 1.6;
-}
-
-.submit-btn {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 1.25rem 3rem;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(213, 101, 229, 0.2);
-  align-self: center;
-  margin-top: 1rem;
-}
-
-/* ============================================================
-   FÓRUM E HISTÓRIA DO MUNDO
+   FÓRUM - NAVEGAÇÃO E GRID DE RAÇAS
    ============================================================ */
 
 .forum-container {
   width: 100%;
-  max-width: 1000px;
-}
-
-.forum-intro-text {
-  color: var(--text-secondary);
-  font-style: italic;
-  margin: 1.5rem 0 !important;
+  max-width: 1200px;
 }
 
 .forum-nav {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
 .forum-nav-btn {
   background: rgba(22, 27, 34, 0.6);
-  border: 1px solid #30363d;
-  color: var(--text-secondary);
-  padding: 1rem 2rem;
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
+  transition: all 0.3s;
 }
 
 .forum-nav-btn.active {
-  background: var(--warning-color);
+  background: #f0b232;
   color: #000;
-  border-color: var(--warning-color);
+  font-weight: bold;
 }
 
-.lore-intro-card {
-  background: rgba(22, 27, 34, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid #30363d;
-  border-radius: 24px;
-  padding: 3rem;
-  text-align: left;
-}
-
-.lore-title {
-  font-size: 2rem;
-  color: #f59e0b;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.lore-highlight {
-  font-size: 1.5rem;
-  font-style: italic;
-  color: var(--primary-color);
-  text-align: center;
-  display: block;
-  margin-bottom: 2rem;
-}
-
-.lore-text-content {
-  line-height: 1.8;
-  font-size: 1.15rem;
-}
-
-.lore-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2.5rem 0;
-  color: var(--primary-color);
-}
-
-.lore-footer {
-  background: rgba(147, 51, 234, 0.05);
-  padding: 1.5rem;
-  border-left: 3px solid var(--primary-color);
-  border-radius: 12px;
-}
-
-.lore-final-call {
-  color: #f59e0b;
-  font-weight: 700;
-  font-size: 1.3rem;
-  text-align: center;
-  margin-top: 2.5rem;
-}
-
-/* ============================================================
-   ADMIN E MODAL ADMIN
-   ============================================================ */
-
-.admin-columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.admin-column {
-  background: rgba(22, 27, 34, 0.8);
-  border-radius: 12px;
-  border: 1px solid #30363d;
-  min-height: 400px;
-}
-
-.admin-column-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem;
-  border-bottom: 1px solid #30363d;
-}
-
-.admin-column-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.admin-column-header h2 {
-  font-size: 1.1rem;
-  margin: 0;
-  flex: 1;
-  text-align: left;
-}
-
-.admin-column-count {
-  background: rgba(255,255,255,0.1);
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.8rem;
-}
-
-.admin-column-body {
-  padding: 1rem;
-}
-
-.admin-search-wrapper {
-  margin-bottom: 2rem;
-  max-width: 500px;
-  text-align: left;
-}
-
-.admin-search-input {
-  width: 100% !important;
-  background: rgba(22, 27, 34, 0.8) !important;
-  border-radius: 12px !important;
-  padding: 1rem 1rem 1rem 3.2rem !important;
-  border: 1px solid #30363d !important;
-}
-
-.clear-search {
-  position: absolute;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-}
-
-.search-results-info {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-top: 0.75rem;
-}
-
-.search-results-info strong {
-  color: var(--primary-color);
-}
-
-.lore-card {
-  background: rgba(22, 27, 34, 0.7);
-  border: 1px solid #30363d;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 0.75rem;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s ease;
-}
-
-.lore-card:hover {
-  border-color: var(--primary-color);
-  transform: translateY(-2px);
-}
-
-/* SIDEBAR DIVIDER */
-.sidebar-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0;
-  opacity: 0.3;
-}
-.divider-line {
-  height: 1px;
-  background: white;
-  flex: 1;
-  margin: 0 10px;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 992px) {
-  .profile-lores-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-  .form-section-card {
-    padding: 1.5rem;
-  }
-  .compor-header h1 {
-    font-size: 2rem;
-  }
-  .profile-header {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem;
-  }
-  .profile-user-info {
-    flex-direction: column;
-    text-align: center;
-  }
-  .profile-lores-grid {
-    grid-template-columns: 1fr;
-  }
-  .modal-details {
-    grid-template-columns: 1fr;
-  }
-  .modal-content {
-    padding: 1.5rem;
-  }
-}
-
-/* ============================================================
-   RAÇAS DISPONÍVEIS - NOVO DESIGN
-   ============================================================ */
-
-.race-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.race-card-modern {
-  background: rgba(22, 27, 34, 0.6);
-  border: 1px solid rgba(213, 101, 229, 0.2);
-  border-radius: 20px;
-  padding: 2rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
-  backdrop-filter: blur(10px);
-}
-
-.race-card-modern:hover {
-  transform: translateY(-10px);
-  border-color: var(--primary-color);
-  background: rgba(213, 101, 229, 0.1);
-  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.2);
-}
-
-.race-card-icon {
-  width: 60px;
-  height: 60px;
-  background: rgba(213, 101, 229, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  color: var(--primary-color);
-  border: 1px solid rgba(213, 101, 229, 0.3);
-}
-
-.race-card-modern h4 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  color: white;
-}
-
-.race-card-modern p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-/* DETALHES DA RAÇA */
-.race-detail-container {
-  text-align: left;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.back-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
-  padding: 0.6rem 1.2rem;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-bottom: 2rem;
-  transition: all 0.2s;
-}
-
-.back-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.race-detail-header {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.race-detail-icon-large {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, rgba(213, 101, 229, 0.2), rgba(147, 51, 234, 0.2));
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-color);
-  border: 1px solid rgba(213, 101, 229, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.race-detail-title-group h1 {
-  font-size: 3rem;
-  margin: 0;
-  color: white;
-  letter-spacing: -1px;
-}
-
-.race-lifespan {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: rgba(240, 178, 50, 0.1);
-  color: #f0b232;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  border: 1px solid rgba(240, 178, 50, 0.2);
-}
-
-.race-detail-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
-.race-info-block {
-  background: rgba(22, 27, 34, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 24px;
-  backdrop-filter: blur(10px);
-}
-
-.race-info-block h3 {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--primary-color);
-  margin-bottom: 1.25rem;
-  font-size: 1.2rem;
-}
-
-.race-info-block p {
-  line-height: 1.7;
-  color: #e6edf3;
-  font-size: 1.05rem;
-  text-align: justify;
-}
-
-.main-desc {
-  grid-column: span 2;
-  background: rgba(213, 101, 229, 0.05);
-  border-color: rgba(213, 101, 229, 0.2);
-}
-
-.skill-block {
-  grid-column: span 2;
-  border: 1px solid rgba(240, 178, 50, 0.3);
-  background: linear-gradient(135deg, rgba(22, 27, 34, 0.8), rgba(240, 178, 50, 0.05));
-}
-
-.skill-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.skill-header h3 {
-  margin: 0;
-  color: #f0b232;
-}
-
-.skill-type {
-  padding: 0.2rem 0.8rem;
-  background: rgba(240, 178, 50, 0.2);
-  color: #f0b232;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.skill-desc {
-  color: var(--text-secondary) !important;
-  margin-bottom: 1.5rem !important;
-}
-
-.skill-effect-box {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border-left: 4px solid #f0b232;
-}
-
-.skill-effect-box p {
-  margin: 0.5rem 0;
-}
-
-.skill-cooldown {
-  font-size: 0.9rem !important;
-  color: var(--text-secondary) !important;
-  margin-top: 1rem !important;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .race-detail-grid {
-    grid-template-columns: 1fr;
-  }
-  .main-desc, .skill-block {
-    grid-column: span 1;
-  }
-  .race-detail-header {
-    flex-direction: column;
-    text-align: center;
-  }
-  .race-detail-title-group h1 {
-    font-size: 2.2rem;
-  }
-}
-
-/* BOTÃO DE DELETAR NO ADMIN */
-.btn-delete-lore {
-  background: rgba(242, 63, 67, 0.1) !important;
-  color: #f23f43 !important;
-  border: 1px solid rgba(242, 63, 67, 0.3) !important;
-  padding: 0.8rem 1.5rem !important;
-  border-radius: 10px !important;
-  cursor: pointer !important;
-  font-weight: 800 !important;
-  transition: all 0.2s ease !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-}
-
-.btn-delete-lore:hover {
-  background: #f23f43 !important;
-  color: white !important;
-  transform: scale(1.05) !important;
-  box-shadow: 0 0 15px rgba(242, 63, 67, 0.4) !important;
-}
-
-.modal-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-start;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* MELHORIA DOS BOTÕES DE APROVAR E RECUSAR NO ADMIN */
-.btn-approve {
-  background: rgba(35, 165, 89, 0.1) !important;
-  color: #23a559 !important;
-  border: 1px solid rgba(35, 165, 89, 0.3) !important;
-  padding: 0.8rem 1.5rem !important;
-  border-radius: 12px !important;
-  cursor: pointer !important;
-  font-weight: 800 !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.6rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  font-size: 0.85rem !important;
-}
-
-.btn-approve:hover {
-  background: #23a559 !important;
-  color: white !important;
-  transform: translateY(-3px) scale(1.05) !important;
-  box-shadow: 0 10px 20px rgba(35, 165, 89, 0.3) !important;
-  border-color: #23a559 !important;
-}
-
-.btn-refuse {
-  background: rgba(240, 178, 50, 0.1) !important;
-  color: #f0b232 !important;
-  border: 1px solid rgba(240, 178, 50, 0.3) !important;
-  padding: 0.8rem 1.5rem !important;
-  border-radius: 12px !important;
-  cursor: pointer !important;
-  font-weight: 800 !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.6rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  font-size: 0.85rem !important;
-}
-
-.btn-refuse:hover {
-  background: #f0b232 !important;
-  color: #000 !important;
-  transform: translateY(-3px) scale(1.05) !important;
-  box-shadow: 0 10px 20px rgba(240, 178, 50, 0.3) !important;
-  border-color: #f0b232 !important;
-}
-
-/* AJUSTE FINAL NO CONTAINER DE AÇÕES DO MODAL */
-.modal-actions {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 1.25rem !important;
-  justify-content: center !important; /* Centralizado para ficar mais harmônico */
-  margin-top: 2.5rem !important;
-  padding-top: 2rem !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-/* ESTILIZAÇÃO ADICIONAL PARA A HISTÓRIA DO MUNDO */
-.lore-quote-box {
-  background: rgba(213, 101, 229, 0.05);
-  border-left: 4px solid var(--primary-color);
-  padding: 1.5rem 2rem;
-  margin: 2rem 0;
-  border-radius: 0 16px 16px 0;
-  font-style: italic;
-  position: relative;
-}
-
-.lore-quote-box p {
-  margin: 0;
-  color: #e6edf3;
-  line-height: 1.6;
-}
-
-.text-primary {
-  color: var(--primary-color);
-  font-weight: 700;
-}
-
-.lore-text-content p {
-  margin-bottom: 1.5rem;
-  text-align: justify;
-}
-
-.lore-final-call {
-  background: linear-gradient(to right, transparent, rgba(240, 178, 50, 0.1), transparent);
-  padding: 1.5rem;
-  border-radius: 12px;
-  color: #f0b232 !important;
-  font-size: 1.2rem !important;
-  font-weight: 800 !important;
-  text-shadow: 0 0 10px rgba(240, 178, 50, 0.3);
-}
-
-/* MELHORIA VISUAL "HUMANA" PARA DETALHES DA RAÇA */
-.race-detail-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.race-info-block {
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(22, 27, 34, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.race-info-block:hover {
-  transform: translateY(-5px);
-  border-color: rgba(213, 101, 229, 0.2);
-}
-
-.main-desc {
-  background: linear-gradient(135deg, rgba(213, 101, 229, 0.08), rgba(22, 27, 34, 0.6));
-  padding: 3rem !important;
-  position: relative;
-  overflow: hidden;
-}
-
-.main-desc::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px; height: 100%;
-  background: var(--primary-color);
-  box-shadow: 0 0 15px var(--primary-color);
-}
-
-.main-desc p {
-  font-size: 1.2rem !important;
-  line-height: 1.8 !important;
-  font-style: italic;
-  color: #fff !important;
-}
-
-.skill-block {
-  border: 2px solid rgba(240, 178, 50, 0.2) !important;
-  background: rgba(240, 178, 50, 0.03) !important;
-}
-
-.skill-header h3 {
-  font-size: 1.5rem !important;
-  letter-spacing: 1px;
-}
-
-.skill-effect-box {
-  background: rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(240, 178, 50, 0.2) !important;
-}
-
-.race-lifespan {
-  font-family: 'Georgia', serif;
-  font-style: italic;
-  background: rgba(255, 255, 255, 0.05) !important;
-  color: var(--text-secondary) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.lore-text-content p {
-  margin-bottom: 1.5rem;
-  text-align: justify;
-}
-
-.lore-final-call {
-  background: linear-gradient(to right, transparent, rgba(240, 178, 50, 0.1), transparent);
-  padding: 1.5rem;
-  border-radius: 12px;
-  color: #f0b232 !important;
-  font-size: 1.2rem !important;
-  font-weight: 800 !important;
-  text-shadow: 0 0 10px rgba(240, 178, 50, 0.3);
-}
-
-/* MELHORIA VISUAL "HUMANA" PARA DETALHES DA RAÇA */
-.race-detail-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.race-info-block {
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(22, 27, 34, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.race-info-block:hover {
-  transform: translateY(-5px);
-  border-color: rgba(213, 101, 229, 0.2);
-}
-
-.main-desc {
-  background: linear-gradient(135deg, rgba(213, 101, 229, 0.08), rgba(22, 27, 34, 0.6));
-  padding: 3rem !important;
-  position: relative;
-  overflow: hidden;
-}
-
-.main-desc::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px; height: 100%;
-  background: var(--primary-color);
-  box-shadow: 0 0 15px var(--primary-color);
-}
-
-.main-desc p {
-  font-size: 1.2rem !important;
-  line-height: 1.8 !important;
-  font-style: italic;
-  color: #fff !important;
-}
-
-.skill-block {
-  border: 2px solid rgba(240, 178, 50, 0.2) !important;
-  background: rgba(240, 178, 50, 0.03) !important;
-}
-
-.skill-header h3 {
-  font-size: 1.5rem !important;
-  letter-spacing: 1px;
-}
-
-.skill-effect-box {
-  background: rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(240, 178, 50, 0.2) !important;
-}
-
-.race-lifespan {
-  font-family: 'Georgia', serif;
-  font-style: italic;
-  background: rgba(255, 255, 255, 0.05) !important;
-  color: var(--text-secondary) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-.lore-lendas-section {
-  margin-top: 2rem;
-  text-align: left;
-}
-
-.lendas-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.lenda-card {
-  background: rgba(213, 101, 229, 0.05);
-  border-left: 3px solid var(--primary-color);
-  padding: 1.5rem;
-  border-radius: 0 12px 12px 0;
-  transition: all 0.3s ease;
-}
-
-.lenda-card:hover {
-  background: rgba(213, 101, 229, 0.1);
-  transform: translateX(5px);
-}
-
-.lenda-card h4 {
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
-
-.lenda-card p {
-  font-style: italic;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-}
-/* ============================================================
-   SUPER FIX - RESTAURANDO O VISUAL DO FÓRUM E RAÇAS
-   ============================================================ */
-
-/* Corrige o container dos botões das raças */
 .races-grid {
   display: flex !important;
   justify-content: center !important;
@@ -1438,7 +212,6 @@ body {
   flex-wrap: wrap !important;
 }
 
-/* Restaura o visual dos cards de raça (os botões com ícones) */
 .race-card {
   background: rgba(22, 27, 34, 0.6) !important;
   border: 1px solid rgba(213, 101, 229, 0.3) !important;
@@ -1466,168 +239,122 @@ body {
   box-shadow: 0 0 15px rgba(213, 101, 229, 0.4) !important;
 }
 
-.race-icon {
-  color: white !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Ajuste para o texto "Selecione uma raça" */
-.race-placeholder {
-  margin-top: 2rem !important;
-  color: var(--text-secondary) !important;
-  font-style: italic !important;
-}
-
-/* Garante que os botões de navegação do fórum (História/Raças) fiquem bonitos */
-.forum-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
-}
-
-.forum-nav-btn {
-  background: rgba(22, 27, 34, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.forum-nav-btn.active {
-  background: #f0b232; /* Cor amarela que aparece na sua imagem */
-  color: #000;
-  font-weight: bold;
-}
 /* ============================================================
-   DESIGN ÉPICO - REESTRUTURAÇÃO VISUAL DOS HUMANOS
+   INTERFACE IMERSIVA - DETALHES DA RAÇA (HUMANOS)
    ============================================================ */
 
-/* Container Principal - Mais elegante e centralizado */
 .race-details-card {
-  background: rgba(15, 18, 25, 0.7) !important;
-  backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(213, 101, 229, 0.2) !important;
-  border-radius: 32px !important;
-  padding: 3.5rem !important;
-  margin: 3rem auto !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(213, 101, 229, 0.05) !important;
-  max-width: 1000px !important;
+  background: linear-gradient(145deg, rgba(15, 18, 25, 0.9), rgba(10, 12, 18, 0.95)) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(213, 101, 229, 0.15) !important;
+  border-radius: 40px !important;
+  padding: 4rem !important;
+  margin: 4rem auto !important;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 30px rgba(213, 101, 229, 0.05) !important;
+  max-width: 1100px !important;
+  text-align: left !important;
 }
 
-/* Título da Raça - Destaque com Gradiente */
 .race-details-header h2 {
-  font-size: 3rem !important;
-  margin-bottom: 0.5rem !important;
-  background: linear-gradient(to right, #fff, var(--primary-color)) !important;
+  font-size: 4rem !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 4px !important;
+  background: linear-gradient(to bottom, #fff 30%, var(--primary-color) 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 15px rgba(213, 101, 229, 0.3)) !important;
   font-weight: 900 !important;
-  letter-spacing: -1px !important;
 }
 
-/* Badge de Expectativa - Mais discreto e moderno */
 .race-stat-badge {
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
-  background: rgba(213, 101, 229, 0.1) !important;
-  padding: 0.5rem 1.2rem !important;
-  border-radius: 50px !important;
-  border: 1px solid rgba(213, 101, 229, 0.2) !important;
-  color: var(--primary-color) !important;
-  font-weight: 600 !important;
-  font-size: 0.9rem !important;
-  margin-bottom: 2.5rem !important;
-}
-
-/* Bloco de "A Essência" - Destaque como introdução */
-.lore-block:first-of-type {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border-left: 4px solid var(--primary-color) !important;
-  padding: 2rem !important;
-  font-size: 1.15rem !important;
-  line-height: 1.7 !important;
-  margin-bottom: 3rem !important;
-  border-radius: 4px 20px 20px 4px !important;
-}
-
-/* Subtítulos - Mais limpos e com ícones coloridos */
-.lore-subtitle {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(213, 101, 229, 0.4) !important;
+  padding: 0.6rem 1.5rem !important;
+  border-radius: 4px !important;
   color: #fff !important;
-  font-size: 1.1rem !important;
+  font-family: 'monospace' !important;
   text-transform: uppercase !important;
   letter-spacing: 2px !important;
-  margin-bottom: 1.2rem !important;
-  opacity: 0.9 !important;
+  font-size: 0.8rem !important;
+  margin-bottom: 4rem !important;
 }
 
-.lore-subtitle svg {
+.lore-block {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding: 2.5rem !important;
+  border-radius: 24px !important;
+  margin-bottom: 2rem !important;
+  transition: all 0.4s ease !important;
+}
+
+.lore-block:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(213, 101, 229, 0.3) !important;
+  transform: translateY(-5px) !important;
+}
+
+.lore-subtitle {
+  font-size: 1rem !important;
   color: var(--primary-color) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 3px !important;
+  margin-bottom: 1.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
 }
 
-/* Grid de Cultura e Percepção - Divisão clara */
+.lore-subtitle::after {
+  content: '' !important;
+  flex: 1 !important;
+  height: 1px !important;
+  background: linear-gradient(to right, rgba(213, 101, 229, 0.5), transparent) !important;
+}
+
+.lore-block p {
+  color: #cbd5e0 !important;
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  font-weight: 300 !important;
+}
+
 .lore-two-columns {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
   gap: 2rem !important;
-  margin-bottom: 3rem !important;
+  margin-bottom: 2rem !important;
 }
 
-.lore-block {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-.lore-block p {
-  color: var(--text-secondary) !important;
-  font-size: 1rem !important;
-  line-height: 1.6 !important;
-  text-align: justify !important;
-}
-
-/* Card de Habilidade - Visual de "Item Lendário" */
 .ability-card {
-  background: linear-gradient(145deg, rgba(213, 101, 229, 0.15), rgba(11, 14, 20, 0.8)) !important;
-  border: 1px solid rgba(213, 101, 229, 0.4) !important;
-  padding: 2.5rem !important;
-  border-radius: 24px !important;
-  position: relative !important;
-  overflow: hidden !important;
-  box-shadow: 0 15px 30px rgba(213, 101, 229, 0.1) !important;
-}
-
-.ability-card::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0; left: 0; width: 100%; height: 4px !important;
-  background: var(--primary-color) !important;
+  background: linear-gradient(135deg, rgba(213, 101, 229, 0.2) 0%, rgba(11, 14, 20, 0.9) 100%) !important;
+  border: 2px solid var(--primary-color) !important;
+  padding: 3rem !important;
+  border-radius: 30px !important;
+  box-shadow: 0 0 40px rgba(213, 101, 229, 0.15) !important;
+  margin-top: 4rem !important;
+  text-align: center !important;
 }
 
 .ability-title {
-  font-size: 1.5rem !important;
+  font-size: 2rem !important;
   color: #fff !important;
-  font-weight: 800 !important;
-  margin-bottom: 0.5rem !important;
+  text-shadow: 0 0 10px var(--primary-color) !important;
+  margin-bottom: 1rem !important;
 }
 
-.ability-type {
-  background: var(--primary-color) !important;
-  color: #fff !important;
-  padding: 0.2rem 0.8rem !important;
-  border-radius: 4px !important;
-  font-size: 0.7rem !important;
-  text-transform: uppercase !important;
-  font-weight: 900 !important;
+/* ============================================================
+   LENDAS - ESTILO PERGAMINHO MÍSTICO
+   ============================================================ */
+
+.lore-lendas-section {
+  margin-top: 4rem;
 }
 
-/* Lendas - Mantendo o estilo que você gostou, mas ajustando o grid */
 .lendas-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
@@ -1635,11 +362,173 @@ body {
   margin-top: 1.5rem !important;
 }
 
-/* Estilo para o Card de Habilidade */
-.ability-card {
-  background: linear-gradient(135deg, rgba(213, 101, 229, 0.1), rgba(213, 101, 229, 0.05)) !important;
-  border: 1px solid rgba(213, 101, 229, 0.3) !important;
+.lenda-card {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(213, 101, 229, 0.1) !important;
   padding: 2rem !important;
   border-radius: 20px !important;
-  margin-top: 2rem !important;
+  transition: all 0.3s ease;
+}
+
+.lenda-card:hover {
+  border-color: var(--primary-color);
+  background: rgba(213, 101, 229, 0.05) !important;
+}
+
+.lenda-card h4 {
+  color: #fff !important;
+  font-size: 1.2rem !important;
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(213, 101, 229, 0.2) !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.lenda-card p {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   PERFIL - RESTAURADO
+   ============================================================ */
+
+.profile-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(213, 101, 229, 0.4);
+  object-fit: cover;
+}
+
+.profile-user-details h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: white;
+}
+
+.profile-discord-tag {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.profile-lores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.profile-lore-card {
+  background: rgba(22, 27, 34, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.status-badge.aprovada { background: rgba(35, 165, 89, 0.2); color: #23a559; border: 1px solid rgba(35, 165, 89, 0.3); }
+.status-badge.recusada { background: rgba(242, 63, 67, 0.2); color: #f23f43; border: 1px solid rgba(242, 63, 67, 0.3); }
+.status-badge.em-análise { background: rgba(240, 178, 50, 0.2); color: #f0b232; border: 1px solid rgba(240, 178, 50, 0.3); }
+
+/* ============================================================
+   MODAL - RESTAURADO
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #161b22;
+  border: 1px solid rgba(213, 101, 229, 0.3);
+  border-radius: 20px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  padding: 2.5rem;
+  position: relative;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem; right: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+  .sidebar {
+    display: none;
+  }
+  .lore-two-columns {
+    grid-template-columns: 1fr !important;
+  }
+  .race-details-card {
+    padding: 2rem !important;
+  }
+  .race-details-header h2 {
+    font-size: 2.5rem !important;
+  }
 }
