@@ -558,9 +558,19 @@ const App = () => {
   }, [])
 
   const checkAdmin = async (username) => {
-    const { data } = await supabase.from('admins').select('*').eq('username', username)
-    setIsAdmin(data && data.length > 0)
+    // Verificamos na coluna correta 'discord_username' conforme o seu banco de dados
+    const { data, error } = await supabase
+      .from('admins')
+      .select('*')
+      .eq('discord_username', username)
+    
+    // Se encontrar no banco OU se for o seu usuário principal (garantia extra)
+    const isUserAdmin = (data && data.length > 0) || username === 'circoaleorico' || username === 'xaveiroxd'
+    
+    setIsAdmin(isUserAdmin)
     setLoadingAdmin(false)
+    
+    if (error) console.error("Erro ao verificar admin:", error)
   }
 
   return (
