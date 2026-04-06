@@ -419,7 +419,7 @@ const CriarFicha = ({ user }) => {
     const { error } = await supabase.from('lores').insert([{
       ...formData,
       discord_tag: user.username,
-      status: 'EM ANÁLISE'
+      status: 'PENDENTE'
     }])
     setLoading(false)
     if (error) alert('Erro ao enviar: ' + error.message)
@@ -496,7 +496,7 @@ const AdminPanel = ({ user }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const vipTags = ["Nenhum", "VIP", "VIP+", "VIP++", "Beta"];
 
-  const pendingLores = lores.filter(lore => lore.status === "PENDENTE");
+  const pendingLores = lores.filter(lore => lore.status !== "APROVADA" && lore.status !== "RECUSADA");
   const approvedLores = lores.filter(lore => lore.status === "APROVADA");
   const rejectedLores = lores.filter(lore => lore.status === "RECUSADA");
 
@@ -508,8 +508,13 @@ const AdminPanel = ({ user }) => {
   }, [user]);
 
   const fetchAllLores = async () => {
-    const { data } = await supabase.from("lores").select("*").order("created_at", { ascending: false });
-    setLores(data || []);
+    const { data, error } = await supabase.from("lores").select("*").order("created_at", { ascending: false });
+    if (error) {
+      console.error("Erro ao buscar lores:", error);
+      alert("Erro ao carregar lores: " + error.message);
+    } else {
+      setLores(data || []);
+    }
   };
 
   const fetchAllAdmins = async () => {
@@ -697,20 +702,34 @@ const AdminPanel = ({ user }) => {
                 exit={{ opacity: 0, scale: 0.9 }}
               >
                 <button className="modal-close" onClick={() => setModalOpen(false)}><X size={24} /></button>
-                <h2>Análise de Lore: {selectedLore.nome}</h2>
-                <div className="modal-details">
-                  <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                  <p><strong>Raça:</strong> {selectedLore.raca}</p>
-                  <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                <div className="modal-header-lore">
+                  <h2>Análise de Lore: {selectedLore.nome}</h2>
                   <div className={`status-badge status--${selectedLore.status.toLowerCase()}`}>{selectedLore.status}</div>
                 </div>
-                <div className="modal-historia">
-                  <h3>História:</h3>
+                
+                <div className="modal-info-grid">
+                  <div className="info-item">
+                    <User size={18} />
+                    <span><strong>Nick:</strong> {selectedLore.nick}</span>
+                  </div>
+                  <div className="info-item">
+                    <ShieldCheck size={18} />
+                    <span><strong>Raça:</strong> {selectedLore.raca}</span>
+                  </div>
+                  <div className="info-item">
+                    <Star size={18} />
+                    <span><strong>Idade:</strong> {selectedLore.idade}</span>
+                  </div>
+                </div>
+
+                <div className="modal-historia-content">
+                  <h3><BookOpen size={20} /> História:</h3>
                   <p>{selectedLore.historia}</p>
                 </div>
+
                 {selectedLore.status === "RECUSADA" && selectedLore.motivo && (
-                  <div className="profile-motivo-box">
-                    <strong>Motivo da Recusa:</strong>
+                  <div className="modal-motivo-recusa">
+                    <h3><X size={20} /> Motivo da Recusa:</h3>
                     <p>{selectedLore.motivo}</p>
                   </div>
                 )}
