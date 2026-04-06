@@ -488,13 +488,17 @@ const LoginPage = () => {
 }
 
 const AdminPanel = ({ user }) => {
-  const [activeTab, setActiveTab] = useState('lores');
+  const [activeTab, setActiveTab] = useState("lores");
   const [lores, setLores] = useState([]);
   const [admins, setAdmins] = useState([]);
-  const [newAdminName, setNewAdminName] = useState('');
+  const [newAdminName, setNewAdminName] = useState("");
   const [selectedLore, setSelectedLore] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const vipTags = ["Nenhum", "VIP", "VIP+", "VIP++", "Beta"];
+
+  const pendingLores = lores.filter(lore => lore.status === "PENDENTE");
+  const approvedLores = lores.filter(lore => lore.status === "APROVADA");
+  const rejectedLores = lores.filter(lore => lore.status === "RECUSADA");
 
   useEffect(() => {
     if (user) {
@@ -514,7 +518,14 @@ const AdminPanel = ({ user }) => {
   };
 
   const updateStatus = async (id, status) => {
-    const motivo = status === "RECUSADA" ? prompt("Motivo da recusa:") : null;
+    let motivo = null;
+    if (status === "RECUSADA") {
+      motivo = prompt("Por favor, insira o motivo da recusa:");
+      if (!motivo || motivo.trim() === "") {
+        alert("O motivo da recusa é obrigatório.");
+        return;
+      }
+    }
     await supabase.from("lores").update({ status, motivo }).eq("id", id);
     fetchAllLores();
     if (modalOpen) setModalOpen(false);
@@ -530,19 +541,19 @@ const AdminPanel = ({ user }) => {
   };
 
   const addAdmin = async () => {
-    if (!newAdminName.trim()) return alert('Digite um nome de usuário do Discord.');
-    const { data, error } = await supabase.from('admins').insert([{ discord_username: newAdminName.trim() }]);
+    if (!newAdminName.trim()) return alert("Digite um nome de usuário do Discord.");
+    const { data, error } = await supabase.from("admins").insert([{ discord_username: newAdminName.trim() }]);
     if (error) {
-      alert('Erro ao adicionar admin: ' + error.message);
+      alert("Erro ao adicionar admin: " + error.message);
     } else {
-      setNewAdminName('');
+      setNewAdminName("");
       fetchAllAdmins();
     }
   };
 
   const removeAdmin = async (id) => {
-    if (!confirm('Tem certeza que deseja remover este administrador?')) return;
-    await supabase.from('admins').delete().eq('id', id);
+    if (!confirm("Tem certeza que deseja remover este administrador?")) return;
+    await supabase.from("admins").delete().eq("id", id);
     fetchAllAdmins();
   };
 
@@ -556,43 +567,100 @@ const AdminPanel = ({ user }) => {
           
           <div className="admin-nav">
             <button 
-              className={`admin-nav-btn ${activeTab === 'lores' ? 'active' : ''}`}
-              onClick={() => setActiveTab('lores')}
+              className={`admin-nav-btn ${activeTab === "lores" ? "active" : ""}`}
+              onClick={() => setActiveTab("lores")}
             >
-              Lores Pendentes
+              Gerenciar Lores
             </button>
             <button 
-              className={`admin-nav-btn ${activeTab === 'admins' ? 'active' : ''}`}
-              onClick={() => setActiveTab('admins')}
+              className={`admin-nav-btn ${activeTab === "admins" ? "active" : ""}`}
+              onClick={() => setActiveTab("admins")}
             >
               Gerenciar Admins
             </button>
           </div>
 
           <AnimatePresence mode="wait">
-            {activeTab === 'lores' && (
-              <motion.div key="lores-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-                <div className="admin-grid">
-                  {lores.map(l => (
-                    <div key={l.id} className="admin-card">
-                      <div className="admin-card-header">
-                        <h3>{l.nome}</h3>
-                        <span>@{l.discord_tag}</span>
-                      </div>
-                      <p><strong>Raça:</strong> {l.raca}</p>
-                      <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
-                      <div className="admin-actions">
-                        <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Analisar</button>
-                        <button onClick={() => updateStatus(l.id, "APROVADA")} className="btn-approve">Aprovar</button>
-                        <button onClick={() => updateStatus(l.id, "RECUSADA")} className="btn-reject">Recusar</button>
-                      </div>
-                    </div>
-                  ))}
+            {activeTab === "lores" && (
+              <motion.div key="lores-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="lores-management-grid">
+                
+                <div className="lore-column">
+                  <h2>Em Análise</h2>
+                  <div className="admin-grid">
+                    {pendingLores.length === 0 ? (
+                      <p className="no-lores-message">Nenhuma lore pendente.</p>
+                    ) : (
+                      pendingLores.map(l => (
+                        <div key={l.id} className="admin-card">
+                          <div className="admin-card-header">
+                            <h3>{l.nome}</h3>
+                            <span>@{l.discord_tag}</span>
+                          </div>
+                          <p><strong>Raça:</strong> {l.raca}</p>
+                          <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
+                          <div className="admin-actions">
+                            <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Analisar</button>
+                            <button onClick={() => updateStatus(l.id, "APROVADA")} className="btn-approve">Aprovar</button>
+                            <button onClick={() => updateStatus(l.id, "RECUSADA")} className="btn-reject">Recusar</button>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
+
+                <div className="lore-column">
+                  <h2>Aprovadas</h2>
+                  <div className="admin-grid">
+                    {approvedLores.length === 0 ? (
+                      <p className="no-lores-message">Nenhuma lore aprovada.</p>
+                    ) : (
+                      approvedLores.map(l => (
+                        <div key={l.id} className="admin-card">
+                          <div className="admin-card-header">
+                            <h3>{l.nome}</h3>
+                            <span>@{l.discord_tag}</span>
+                          </div>
+                          <p><strong>Raça:</strong> {l.raca}</p>
+                          <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
+                          <div className="admin-actions">
+                            <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Ver Detalhes</button>
+                            <button onClick={() => updateStatus(l.id, "PENDENTE")} className="btn-revert">Reverter</button>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                <div className="lore-column">
+                  <h2>Recusadas</h2>
+                  <div className="admin-grid">
+                    {rejectedLores.length === 0 ? (
+                      <p className="no-lores-message">Nenhuma lore recusada.</p>
+                    ) : (
+                      rejectedLores.map(l => (
+                        <div key={l.id} className="admin-card">
+                          <div className="admin-card-header">
+                            <h3>{l.nome}</h3>
+                            <span>@{l.discord_tag}</span>
+                          </div>
+                          <p><strong>Raça:</strong> {l.raca}</p>
+                          <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
+                          <div className="admin-actions">
+                            <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Ver Detalhes</button>
+                            <button onClick={() => updateStatus(l.id, "PENDENTE")} className="btn-revert">Reverter</button>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+
               </motion.div>
             )}
 
-            {activeTab === 'admins' && (
+            {activeTab === "admins" && (
               <motion.div key="admins-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="admin-manage-section">
                 <div className="add-admin-form">
                   <h3>Adicionar Novo Admin</h3>
@@ -657,8 +725,15 @@ const AdminPanel = ({ user }) => {
                     </select>
                   </div>
                   <div className="admin-decision-buttons">
-                    <button onClick={() => updateStatus(selectedLore.id, "APROVADA")} className="btn-approve">Aprovar Lore</button>
-                    <button onClick={() => updateStatus(selectedLore.id, "RECUSADA")} className="btn-reject">Recusar Lore</button>
+                    {selectedLore.status === "PENDENTE" && (
+                      <>
+                        <button onClick={() => updateStatus(selectedLore.id, "APROVADA")} className="btn-approve">Aprovar Lore</button>
+                        <button onClick={() => updateStatus(selectedLore.id, "RECUSADA")} className="btn-reject">Recusar Lore</button>
+                      </>
+                    )}
+                    {(selectedLore.status === "APROVADA" || selectedLore.status === "RECUSADA") && (
+                      <button onClick={() => updateStatus(selectedLore.id, "PENDENTE")} className="btn-revert">Reverter para Pendente</button>
+                    )}
                   </div>
                 </div>
               </motion.div>
