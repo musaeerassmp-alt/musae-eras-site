@@ -659,450 +659,197 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
 /* ============================================================
-   FIX: RESTAURANDO A FORMATAÇÃO DA HISTÓRIA DO MUNDO
+   PÁGINA DE APOIOS - ESTILOS GERAIS
    ============================================================ */
-
-.lore-section {
-  width: 100%;
-  max-width: 900px;
+.apoios-container {
+  padding: 3rem 2rem;
+  max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 4rem;
-}
-
-.lore-intro-card {
-  background: rgba(22, 27, 34, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(213, 101, 229, 0.2);
-  border-radius: 24px;
-  padding: 3.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 
-.lore-title {
-  font-size: 2.2rem;
-  color: white;
-  margin-bottom: 2rem;
-  font-weight: 800;
-}
-
-.lore-text-content {
-  color: var(--text-secondary);
-  line-height: 1.8;
-  font-size: 1.1rem;
-}
-
-.lore-highlight {
-  color: white;
-  font-size: 1.3rem;
-  font-style: italic;
-  margin-bottom: 2rem;
-}
-
-.lore-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2.5rem 0;
+.apoios-header h1 {
+  font-size: 3rem;
   color: var(--primary-color);
-  opacity: 0.5;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 15px rgba(213, 101, 229, 0.5);
 }
 
-.lore-divider::before, .lore-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+.apoios-intro-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
 }
 
-.lore-quote-box {
-  background: rgba(213, 101, 229, 0.05);
-  border-left: 4px solid var(--primary-color);
-  padding: 2rem;
-  margin: 2.5rem 0;
-  border-radius: 0 16px 16px 0;
+/* Seção de Artefatos */
+.artefatos-info {
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
   text-align: left;
 }
 
-.lore-quote-box p {
-  color: white;
-  font-style: italic;
-  margin: 0;
-}
-
-.text-primary {
-  color: var(--primary-color);
-  font-weight: 700;
-}
-
-.lore-footer {
-  margin-top: 3rem;
-  font-weight: 600;
-  color: white;
-}
-/* ============================================================
-   FIX: RESTAURANDO O PERFIL E PARTITURAS
-   ============================================================ */
-
-.profile-header {
-  display: flex !important;
-  align-items: center !important;
-  gap: 2.5rem !important;
-  background: rgba(22, 27, 34, 0.6) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(213, 101, 229, 0.2) !important;
-  border-radius: 24px !important;
-  padding: 3rem !important;
-  text-align: left !important;
-  width: 100% !important;
-  max-width: 900px !important;
-  margin: 0 auto 3rem auto !important;
-}
-
-.profile-avatar {
-  width: 120px !important;
-  height: 120px !important;
-  border-radius: 50% !important;
-  border: 4px solid var(--primary-color) !important;
-  box-shadow: 0 0 20px rgba(213, 101, 229, 0.4) !important;
-  object-fit: cover !important;
-  background: #161b22 !important; /* Fundo caso a imagem demore a carregar */
-}
-
-.profile-user-details h1 {
-  font-size: 2.8rem !important;
-  margin: 0 !important;
-  color: white !important;
-  font-weight: 800 !important;
-}
-
-.profile-discord-tag {
-  font-size: 1.2rem !important;
-  color: var(--text-secondary) !important;
-  margin-top: 0.5rem !important;
-}
-
-/* Grid de Partituras */
-.profile-lores-section {
-  width: 100% !important;
-  max-width: 1000px !important;
-  margin: 0 auto !important;
-  text-align: left !important;
-}
-
-.profile-lores-section h2 {
-  font-size: 1.8rem !important;
-  margin-bottom: 2rem !important;
-  border-left: 4px solid var(--primary-color) !important;
-  padding-left: 1.5rem !important;
-}
-
-.profile-lores-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 2rem !important;
-}
-
-/* Card de Partitura Individual */
-.profile-lore-card {
-  background: rgba(22, 27, 34, 0.4) !important;
-  border: 1px solid rgba(213, 101, 229, 0.2) !important;
-  border-radius: 20px !important;
-  padding: 1.5rem !important;
-  transition: all 0.3s ease !important;
-}
-
-.profile-lore-card:hover {
-  transform: translateY(-5px) !important;
-  border-color: var(--primary-color) !important;
-  background: rgba(22, 27, 34, 0.6) !important;
-}
-/* ============================================================
-   MODAL DE DETALHES DA FICHA - VISUAL RPG IMERSIVO
-   ============================================================ */
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(8px);
-}
-
-.modal-content {
-  background: linear-gradient(145deg, rgba(15, 18, 25, 0.95), rgba(10, 12, 18, 0.98));
-  border: 1px solid rgba(213, 101, 229, 0.3);
-  border-radius: 20px;
-  padding: 2.5rem;
-  width: 90%;
-  max-width: 700px;
-  position: relative;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(213, 101, 229, 0.1);
-  color: #e0e0e0;
-  overflow-y: auto; /* Para permitir scroll se a história for muito longa */
-  max-height: 90vh;
-}
-
-.modal-close {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.8rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.modal-close:hover {
-  color: var(--primary-color);
-}
-
-.modal-content h2 {
-  font-size: 2.2rem;
-  color: var(--primary-color);
+.artefatos-info h2 {
+  font-size: 2rem;
+  color: #FFD700; /* Cor de ouro para Artefatos */
   margin-bottom: 1.5rem;
-  text-align: center;
-  text-shadow: 0 0 10px rgba(213, 101, 229, 0.4);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
-.modal-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  border: 1px solid rgba(213, 101, 229, 0.1);
-}
-
-.modal-details p {
-  margin: 0;
+.artefatos-info p {
   font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.modal-details strong {
-  color: #fff;
-  font-weight: 600;
-}
-
-.modal-historia {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(213, 101, 229, 0.1);
-  border-radius: 10px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-}
-
-.modal-historia h3 {
-  font-size: 1.5rem;
-  color: #fff;
+  color: var(--text-secondary);
+  line-height: 1.7;
   margin-bottom: 1rem;
-  border-bottom: 1px solid rgba(213, 101, 229, 0.2);
-  padding-bottom: 0.5rem;
 }
 
-.modal-historia p {
-  line-height: 1.8;
-  font-size: 1.05rem;
-  color: #c0c0c0;
-  white-space: pre-wrap; /* Preserva quebras de linha do texto */
-}
-
-/* Estilos para o badge de status dentro do modal */
-.modal-details .status-badge {
-  padding: 0.3rem 0.8rem;
-  border-radius: 5px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  display: inline-block;
-  margin-left: 0.5rem;
-}
-
-.modal-details .status-badge.em-analise {
-  background-color: #f0a500;
-  color: #333;
-}
-
-.modal-details .status-badge.aprovada {
-  background-color: #23a559;
-  color: #fff;
-}
-
-.modal-details .status-badge.recusada {
-  background-color: #f23f43;
-  color: #fff;
-}
-
-/* Estilo para o motivo da recusa */
-.profile-motivo-box {
-  background: rgba(242, 63, 67, 0.1);
-  border-left: 4px solid #f23f43;
-  padding: 1rem 1.5rem;
-  margin-top: 2rem;
-  border-radius: 0 10px 10px 0;
-}
-
-.profile-motivo-box strong {
-  color: #f23f43;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.profile-motivo-box p {
+.artefatos-roll {
+  font-style: italic;
   color: #e0e0e0;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  border-left: 3px solid #FFD700;
+  padding-left: 1rem;
 }
 
-/* Responsividade para o modal */
-@media (max-width: 768px) {
-  .modal-content {
-    padding: 1.5rem;
-  }
-  .modal-details {
-    grid-template-columns: 1fr;
-  }
-  .modal-content h2 {
-    font-size: 1.8rem;
-  }
-  .modal-historia h3 {
-    font-size: 1.3rem;
-  }
-}
-/* ============================================================
-   SCROLLBAR PERSONALIZADA E ROLAGEM INTERNA DO MODAL
-   ============================================================ */
-
-/* Garante que o conteúdo do modal seja rolável */
-.modal-content {
-  overflow-y: auto; /* Permite rolagem vertical */
-  max-height: 90vh; /* Limita a altura máxima do modal para caber na tela */
+/* Grid de Tiers VIP */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
-/* Estilo da barra de rolagem para navegadores WebKit (Chrome, Safari) */
-.modal-content::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem */
-}
-
-.modal-content::-webkit-scrollbar-track {
-  background: rgba(213, 101, 229, 0.1); /* Fundo da trilha da barra de rolagem */
-  border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color); /* Cor do "polegar" da barra de rolagem */
-  border-radius: 10px;
-  border: 2px solid rgba(213, 101, 229, 0.2); /* Borda do polegar */
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background-color: #c052d0; /* Cor do polegar ao passar o mouse */
-}
-
-/* Estilo da barra de rolagem para Firefox */
-.modal-content {
-  scrollbar-width: thin; /* Largura da barra de rolagem (auto, thin, none) */
-  scrollbar-color: var(--primary-color) rgba(213, 101, 229, 0.1); /* Cor do polegar e da trilha */
-}
-
-/* Garante que a história tenha sua própria rolagem se for muito longa */
-.modal-historia p {
-  max-height: 300px; /* Altura máxima para o parágrafo da história */
-  overflow-y: auto; /* Adiciona rolagem apenas para a história se necessário */
-  padding-right: 10px; /* Espaçamento para a scrollbar interna */
-}
-
-/* Estilo da barra de rolagem para a história (WebKit) */
-.modal-historia p::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-historia p::-webkit-scrollbar-track {
-  background: rgba(213, 101, 229, 0.05);
-  border-radius: 10px;
-}
-
-.modal-historia p::-webkit-scrollbar-thumb {
-  background-color: rgba(213, 101, 229, 0.6);
-  border-radius: 10px;
-}
-
-.modal-historia p::-webkit-scrollbar-thumb:hover {
-  background-color: var(--primary-color);
-}
-
-/* Estilo da barra de rolagem para a história (Firefox) */
-.modal-historia p {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(213, 101, 229, 0.6) rgba(213, 101, 229, 0.05);
-}
-/* ============================================================
-   REPOSICIONAMENTO DO STATUS NOS CARDS DE PARTITURA
-   ============================================================ */
-
-/* Garante que o card seja o ponto de referência para o status */
-.profile-lore-card {
-  position: relative; /* Adicione ou certifique-se que esta linha existe */
-  /* Mantenha os outros estilos do card aqui */
-  background: rgba(22, 27, 34, 0.4);
-  border: 1px solid rgba(213, 101, 229, 0.2);
+.tier-card {
+  background: linear-gradient(145deg, rgba(15, 18, 25, 0.9), rgba(10, 12, 18, 0.95));
+  border: 1px solid rgba(213, 101, 229, 0.15);
   border-radius: 20px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  display: flex; /* Adicionado para melhor controle do layout interno */
+  padding: 2rem;
+  text-align: left;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Estilo para o badge de status */
-.status-badge {
-  position: absolute; /* Posiciona o badge de forma absoluta */
-  top: 15px; /* Distância do topo */
-  right: 15px; /* Distância da direita */
-  padding: 0.4rem 0.8rem; /* Ajuste de padding para melhor visual */
-  border-radius: 8px; /* Borda mais arredondada */
-  font-size: 0.8rem; /* Tamanho da fonte */
-  font-weight: bold;
-  text-transform: uppercase;
-  z-index: 10; /* Garante que fique acima de outros elementos */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+.tier-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary-color);
 }
 
-/* Ajuste para o cabeçalho do card para não sobrepor o status */
-.profile-lore-header {
+.tier-header {
+  border-bottom: 2px solid;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
-  justify-content: space-between; /* Para empurrar o nick para a esquerda */
-  align-items: flex-start; /* Alinha o nick ao topo */
-  margin-bottom: 0.5rem;
-  padding-right: 70px; /* Espaço para o badge de status */
+  align-items: center;
+  gap: 1rem;
 }
 
-.profile-lore-nick {
-  font-size: 1.2rem;
+.tier-icon {
+  font-size: 2rem;
+}
+
+.tier-title {
+  font-size: 1.8rem;
   font-weight: bold;
   color: #fff;
+  flex-grow: 1;
 }
 
-/* Remova o margin-left do status-badge se ele estiver dentro de .modal-details */
-.modal-details .status-badge {
-  margin-left: 0; /* Remove o margin-left que estava empurrando */
-  position: static; /* Volta a ser estático dentro do modal */
-  top: auto;
-  right: auto;
-  box-shadow: none;
+.tier-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.tier-details {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.tier-benefits h4, .tier-kit h4 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.tier-benefits ul, .tier-kit ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.tier-benefits li, .tier-kit li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.tier-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
+}
+
+.tier-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Seção de Boosts do Discord */
+.discord-boost-info {
+  background: rgba(88, 101, 242, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: left;
+}
+
+.discord-boost-info h2 {
+  font-size: 2rem;
+  color: #5865F2; /* Cor do Discord */
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
+}
+
+.discord-boost-info p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .apoios-header h1 {
+    font-size: 2.5rem;
+  }
+  .artefatos-info, .discord-boost-info {
+    padding: 1.5rem;
+  }
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
 }

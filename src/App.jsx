@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@supabase/supabase-js'
-import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck } from 'lucide-react'
+import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star } from 'lucide-react'
+import Apoios from './Apoios'
 import './App.css'
 
 const supabase = createClient(
@@ -24,7 +25,7 @@ const SidebarDivider = () => (
   </div>
 )
 
-const PageTransition = ({ children }) => (
+export const PageTransition = ({ children }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -174,15 +175,13 @@ const Forum = () => {
                       
                       <p>Muito antes de sua chegada, no ano 999, as terras deste continente já carregavam cicatrizes de histórias antigas — impérios erguidos, alianças seladas e guerras que quase apagaram civilizações inteiras. Foi nesse passado distante que nasceu o primeiro grande reino humano, marcando o início de uma nova era.</p>
                       
-                      <p>Agora, no ano 1000, um marco histórico se aproxima: o milésimo aniversário do primeiro reino humano, da grandiosa <strong className="text-primary">União entre as Raças</strong> e da fundação da capital <strong className="text-primary">Chrona</strong>. Este antigo tratado, forjado em tempos imemoriais, assegura a paz e a coexistência entre todas as raças.</p>
+                      <p>Agora, no ano 1000, um marco histórico se aproxima: o milésimo aniversário do primeiro reino humano, da grandiosa <span className="text-primary">União entre as Raças</span> e da fundação da capital <span className="text-primary">Chrona</span>. Este antigo tratado, forjado em tempos imemoriais, assegura a paz e a coexistência entre todas as raças.</p>
                       
-                      <div className="lore-quote-box">
-                        <p>É neste cenário de celebração e expectativa que você, um desses viajantes, deixa para trás as pequenas ilhas onde cresceu e cruza as águas incertas em busca de algo maior. Seja por ambição, necessidade ou por um chamado que nem mesmo você compreende, seu barco corta as ondas em direção ao grande continente.</p>
-                      </div>
-
-                      <p>No horizonte, ergue-se <strong className="text-primary">Chrona</strong>, a capital — uma cidade monumental, coração político e simbólico de toda a região, fundada no mesmo ano do Tratado. Sua chegada não poderia acontecer em momento mais decisivo.</p>
+                      <p>É neste cenário de celebração e expectativa que você, um desses viajantes, deixa para trás as pequenas ilhas onde cresceu e cruza as águas incertas em busca de algo maior. Seja por ambição, necessidade ou por um chamado que nem mesmo você compreende, seu barco corta as ondas em direção ao grande continente.</p>
                       
-                      <p>As antigas cidades, construídas sobre camadas de tempo e esquecimento, continuam vivas. Humanos dominam grande parte delas, mas não estão sozinhos: entre becos e mercados, seres de outras naturezas coexistem, observam… e conspiram. Neste mosaico de raças e histórias, forças ocultas começam a se mover com mais intensidade. Segredos enterrados no passado ecoam novamente, como notas esquecidas que insistem em retornar à melodia.</p>
+                      <p>No horizonte, ergue-se <span className="text-primary">Chrona</span>, a capital — uma cidade monumental, coração político e simbólico de toda a região, fundada no mesmo ano do Tratado. Sua chegada não poderia acontecer em momento mais decisivo.</p>
+                      
+                      <p>As antigas cidades, construídas sobre camadas de tempo e esquecimento, continuam vivas. Humanos dominam grande parte delas, mas não estão sozinhos: entre becos e mercados, seres de outras naturezas coexistem, observam... e conspiram. Neste mosaico de raças e histórias, forças ocultas começam a se mover com mais intensidade. Segredos enterrados no passado ecoam novamente, como notas esquecidas que insistem em retornar à melodia.</p>
                       
                       <div className="lore-divider"><Music size={16} /></div>
                       
@@ -193,17 +192,17 @@ const Forum = () => {
               )}
 
               {activeSection === 'racas' && (
-                <motion.div key="racas" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="races-section">
+                <motion.div key="racas" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                   <div className="races-grid">
                     {races.map(race => (
-                      <button
+                      <div
                         key={race.id}
                         className={`race-card ${selectedRace?.id === race.id ? 'active' : ''}`}
                         onClick={() => setSelectedRace(race)}
                       >
                         <div className="race-icon">{race.icon}</div>
                         <span>{race.name}</span>
-                      </button>
+                      </div>
                     ))}
                   </div>
 
@@ -219,83 +218,63 @@ const Forum = () => {
                         <div className="race-details-header">
                           <h2>{selectedRace.name}</h2>
                           <div className="race-stat-badge">
-                            <Heart size={16} />
-                            <span>Expectativa: {selectedRace.content?.expectativa || '???'}</span>
+                            <Heart size={16} /> {selectedRace.content.expectativa}
                           </div>
                         </div>
 
-                        <div className="race-details-content">
-                          {selectedRace.content ? (
-                            <>
-                              <div className="lore-block">
-                                <h3 className="lore-subtitle"><BookOpen size={20} /> A Essência</h3>
-                                <p>{selectedRace.content.descricao}</p>
-                              </div>
+                        <div className="lore-block">
+                          <div className="lore-subtitle"><BookOpen size={20} /> A Essência</div>
+                          <p>{selectedRace.content.descricao}</p>
+                        </div>
 
-                              <div className="lore-two-columns">
-                                <div className="lore-block">
-                                  <h3 className="lore-subtitle"><Map size={20} /> Cultura (Fora)</h3>
-                                  <p>{selectedRace.content.culturaFora}</p>
-                                </div>
-                                <div className="lore-block">
-                                  <h3 className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</h3>
-                                  <p>{selectedRace.content.percepcaoDentro}</p>
-                                </div>
-                              </div>
+                        <div className="lore-two-columns">
+                          <div className="lore-block">
+                            <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
+                            <p>{selectedRace.content.culturaFora}</p>
+                          </div>
+                          <div className="lore-block">
+                            <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
+                            <p>{selectedRace.content.percepcaoDentro}</p>
+                          </div>
+                        </div>
 
-                              <div className="lore-block">
-                                <h3 className="lore-subtitle"><User size={20} /> Aspecto Físico</h3>
-                                <p>{selectedRace.content.fisico}</p>
-                              </div>
+                        <div className="lore-two-columns">
+                          <div className="lore-block">
+                            <div className="lore-subtitle"><User size={20} /> Físico</div>
+                            <p>{selectedRace.content.fisico}</p>
+                          </div>
+                          <div className="lore-block">
+                            <div className="lore-subtitle"><Zap size={20} /> Magia</div>
+                            <p>{selectedRace.content.magia}</p>
+                          </div>
+                        </div>
 
-                              <div className="lore-block">
-                                <h3 className="lore-subtitle"><Zap size={20} /> Afinidade Mágica</h3>
-                                <p>{selectedRace.content.magia}</p>
+                        <div className="lore-lendas-section">
+                          <div className="lore-subtitle"><Sparkles size={20} /> Lendas Conhecidas</div>
+                          <div className="lendas-grid">
+                            {selectedRace.content.lendas.map((lenda, index) => (
+                              <div key={index} className="lenda-card">
+                                <h4>{lenda.nome}</h4>
+                                <p>"{lenda.relato}"</p>
                               </div>
+                            ))}
+                          </div>
+                        </div>
 
-                              {/* Seção de Lendas */}
-                              {selectedRace.content.lendas && (
-                                <div className="lore-lendas-section">
-                                  <h3 className="lore-subtitle"><BookOpen size={20} /> Lendas e Relatos</h3>
-                                  <div className="lendas-grid">
-                                    {selectedRace.content.lendas.map((lenda, index) => (
-                                      <div key={index} className="lenda-card">
-                                        <h4>{lenda.nome}</h4>
-                                        <p>"{lenda.relato}"</p>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-
-                              <div className="ability-card">
-                                <div className="ability-header">
-                                  <div className="ability-title">
-                                    <Sparkles size={20} />
-                                    <span>{selectedRace.content.habilidade.nome}</span>
-                                  </div>
-                                  <span className="ability-type">{selectedRace.content.habilidade.tipo}</span>
-                                </div>
-                                <p className="ability-desc">{selectedRace.content.habilidade.descricao}</p>
-                                <div className="ability-effect">
-                                  <strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}
-                                </div>
-                                <div className="ability-cooldown">
-                                  <strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}
-                                </div>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="placeholder-card">
-                              <p>Os registros sobre esta raça ainda estão sendo traduzidos pelos escribas de Chrona...</p>
-                            </div>
-                          )}
+                        <div className="ability-card">
+                          <div className="ability-title">
+                            <Zap size={24} /> {selectedRace.content.habilidade.nome}
+                            <span className="ability-type">{selectedRace.content.habilidade.tipo}</span>
+                          </div>
+                          <p className="ability-description">{selectedRace.content.habilidade.descricao}</p>
+                          <div className="ability-footer">
+                            <div className="ability-effect"><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</div>
+                            <div className="ability-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</div>
+                          </div>
                         </div>
                       </motion.div>
                     ) : (
-                      <div className="race-placeholder">
-                        <p>Selecione uma raça para ver seus detalhes</p>
-                      </div>
+                      <div className="race-placeholder">Selecione uma raça para ver seus detalhes</div>
                     )}
                   </AnimatePresence>
                 </motion.div>
@@ -318,7 +297,6 @@ const Profile = ({ user }) => {
   }, [user])
 
   const fetchUserLores = async () => {
-    // BUSCA INTELIGENTE: Procura pelo nome puro e pelo nome com #0 para garantir que apareça
     const { data } = await supabase
       .from('lores')
       .select('*')
@@ -335,19 +313,14 @@ const Profile = ({ user }) => {
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-user-info">
-              {/* FIX DEFINITIVO DO AVATAR COM FALLBACK AUTOMÁTICO */}
               <img 
                 src={user.avatar_url} 
                 alt="" 
                 className="profile-avatar" 
-                onError={(e) => {
-                  // Se o avatar do Discord falhar, usa um placeholder bonito com a inicial
-                  e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff&size=128`;
-                  e.target.onerror = null; // Evita loop infinito
-                }}
+                onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff` }}
               />
-              <div className="profile-user-details">
-                <h1>{user.username}</h1>
+              <div>
+                <h1 className="profile-username">{user.username}</h1>
                 <p className="profile-discord-tag">@{user.username}</p>
               </div>
             </div>
@@ -362,7 +335,20 @@ const Profile = ({ user }) => {
             ) : (
               <div className="profile-lores-grid">
                 {lores.map(f => (
-                  <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />
+                  <div key={f.id} className="profile-lore-card" onClick={() => { setSelectedLore(f); setModalOpen(true); }}>
+                    <div className="status-badge" style={{ 
+                      backgroundColor: f.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : f.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
+                      color: f.status === 'APROVADA' ? '#23a559' : f.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
+                    }}>
+                      {f.status}
+                    </div>
+                    <div className="profile-lore-header">
+                      <span className="profile-lore-nick">{f.nick}</span>
+                    </div>
+                    <p><strong>Nome:</strong> {f.nome}</p>
+                    <p><strong>Raça:</strong> {f.raca}</p>
+                    <p className="profile-lore-preview">{f.historia.substring(0, 100)}...</p>
+                  </div>
                 ))}
               </div>
             )}
@@ -373,28 +359,33 @@ const Profile = ({ user }) => {
           {modalOpen && selectedLore && (
             <div className="modal-overlay" onClick={() => setModalOpen(false)}>
               <motion.div 
+                className="modal-content" 
+                onClick={e => e.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="modal-content" 
-                onClick={(e) => e.stopPropagation()}
               >
-                <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
+                <button className="modal-close" onClick={() => setModalOpen(false)}><X size={24} /></button>
                 <h2>{selectedLore.nome}</h2>
                 <div className="modal-details">
                   <p><strong>Nick:</strong> {selectedLore.nick}</p>
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                  <p><strong>Status:</strong> <span className={`status-badge ${(selectedLore.status || 'Em Análise').toLowerCase().replace(' ', '-')}`}>{selectedLore.status || 'Em Análise'}</span></p>
+                  <div className="status-badge" style={{ 
+                    backgroundColor: selectedLore.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : selectedLore.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
+                    color: selectedLore.status === 'APROVADA' ? '#23a559' : selectedLore.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
+                  }}>
+                    {selectedLore.status}
+                  </div>
                 </div>
                 <div className="modal-historia">
                   <h3>História:</h3>
                   <p>{selectedLore.historia}</p>
                 </div>
-                {selectedLore.status === 'Recusada' && selectedLore.motivo_recusa && (
+                {selectedLore.status === 'RECUSADA' && selectedLore.motivo && (
                   <div className="profile-motivo-box">
                     <strong>Motivo da Recusa:</strong>
-                    <p>{selectedLore.motivo_recusa}</p>
+                    <p>{selectedLore.motivo}</p>
                   </div>
                 )}
               </motion.div>
@@ -407,27 +398,22 @@ const Profile = ({ user }) => {
 }
 
 const CriarFicha = ({ user }) => {
-  const navigate = useNavigate()
   const [formData, setFormData] = useState({ nome: '', nick: '', raca: 'Humanos', idade: '', historia: '' })
-  const [enviando, setEnviando] = useState(false)
-
-  if (!user) return <div className="main-content"><h1>Por favor, faça login para compor.</h1></div>
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setEnviando(true)
+    if (!user) return alert('Faça login primeiro!')
+    setLoading(true)
     const { error } = await supabase.from('lores').insert([{
-      nome: formData.nome,
-      nick: formData.nick,
-      raca: formData.raca,
-      idade: formData.idade,
-      historia: formData.historia,
+      ...formData,
       discord_tag: user.username,
-      status: 'Em Análise'
+      status: 'EM ANÁLISE'
     }])
+    setLoading(false)
     if (error) alert('Erro ao enviar: ' + error.message)
-    else { alert('Sua partitura foi enviada para análise!'); navigate('/perfil') }
-    setEnviando(false)
+    else { alert('Ficha enviada com sucesso!'); navigate('/perfil') }
   }
 
   return (
@@ -435,8 +421,7 @@ const CriarFicha = ({ user }) => {
       <div className="main-content">
         <div className="form-container">
           <h1>🎼 Componha sua Obra</h1>
-          <p>Dê vida ao seu personagem e envie sua história para os mestres de Chrona.</p>
-          <form onSubmit={handleSubmit} className="lore-form">
+          <form onSubmit={handleSubmit} className="ficha-form">
             <div className="form-group">
               <label>Nome do Personagem</label>
               <input type="text" required value={formData.nome} onChange={e => setFormData({...formData, nome: e.target.value})} />
@@ -445,23 +430,21 @@ const CriarFicha = ({ user }) => {
               <label>Nick no Minecraft</label>
               <input type="text" required value={formData.nick} onChange={e => setFormData({...formData, nick: e.target.value})} />
             </div>
-            <div className="form-row">
-              <div className="form-group">
-                <label>Raça</label>
-                <select value={formData.raca} onChange={e => setFormData({...formData, raca: e.target.value})}>
-                  <option>Humanos</option><option>Anjos</option><option>Demônios</option><option>Quimeras</option><option>Aquarianos</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Idade</label>
-                <input type="number" required value={formData.idade} onChange={e => setFormData({...formData, idade: e.target.value})} />
-              </div>
+            <div className="form-group">
+              <label>Raça</label>
+              <select value={formData.raca} onChange={e => setFormData({...formData, raca: e.target.value})}>
+                <option>Humanos</option><option>Anjos</option><option>Demônios</option><option>Quimeras</option><option>Aquarianos</option>
+              </select>
             </div>
             <div className="form-group">
-              <label>História (Mínimo 15 lines)</label>
-              <textarea required rows="15" value={formData.historia} onChange={e => setFormData({...formData, historia: e.target.value})} placeholder="Conte a trajetória do seu personagem..."></textarea>
+              <label>Idade</label>
+              <input type="number" required value={formData.idade} onChange={e => setFormData({...formData, idade: e.target.value})} />
             </div>
-            <button type="submit" className="submit-btn" disabled={enviando}>{enviando ? 'Enviando...' : 'Enviar Partitura'}</button>
+            <div className="form-group">
+              <label>História (Mínimo 15 linhas)</label>
+              <textarea required rows="10" value={formData.historia} onChange={e => setFormData({...formData, historia: e.target.value})} />
+            </div>
+            <button type="submit" disabled={loading} className="submit-btn">{loading ? 'Enviando...' : 'Enviar Sinfonia'}</button>
           </form>
         </div>
       </div>
@@ -471,270 +454,83 @@ const CriarFicha = ({ user }) => {
 
 const LoginPage = () => {
   useEffect(() => {
-    const hash = window.location.hash
-    if (hash) {
-      const params = new URLSearchParams(hash.substring(1))
-      const accessToken = params.get('access_token')
-      if (accessToken) fetchDiscordUser(accessToken)
-    }
+    const params = new URLSearchParams(window.location.hash.substring(1))
+    const token = params.get('access_token')
+    if (token) fetchDiscordUser(token)
   }, [])
 
   const fetchDiscordUser = async (token) => {
     const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
     const data = await res.json()
     const avatarUrl = data.avatar 
-      ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
-      : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`;
-      
+      ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`
+      : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`
     const user = { id: data.id, username: data.username, avatar_url: avatarUrl }
     localStorage.setItem('discord_user', JSON.stringify(user))
     window.location.href = '/perfil'
   }
 
-  const handleLogin = () => {
-    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`
-    window.location.href = url
-  }
-
   return (
     <div className="main-content">
-      <div className="login-card">
-        <h1>Bem-vindo a Musae Eras</h1>
-        <button onClick={handleLogin} className="discord-btn">Entrar com Discord</button>
-      </div>
+      <h1>Conectando ao Discord...</h1>
     </div>
   )
 }
 
-const LoreCard = ({ f, onExpand }) => (
-  <div className="profile-lore-card-container" onClick={() => onExpand(f)}>
-    <div className="profile-lore-card">
-      <div className="profile-lore-header">
-        <span className="profile-lore-nick">{f.nick}</span>
-        <span className={`status-badge ${(f.status || 'Em Análise').toLowerCase().replace(' ', '-')}`}>{f.status || 'Em Análise'}</span>
-      </div>
-      <div className="profile-lore-body">
-        <p><strong>Nome:</strong> {f.nome}</p>
-        <p><strong>Raça:</strong> {f.raca}</p>
-      </div>
-      <p className="lore-card-preview-text">{f.historia?.substring(0, 80)}...</p>
-    </div>
-  </div>
-)
-
 const AdminPanel = ({ user }) => {
-  const [activeTab, setActiveTab] = useState('lores')
   const [lores, setLores] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedLore, setSelectedLore] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [admins, setAdmins] = useState([])
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [novoAdminId, setNovoAdminId] = useState('')
-  const [novoAdminUsername, setNovoAdminUsername] = useState('')
-  const [adicionandoAdmin, setAdicionandoAdmin] = useState(false)
-
-  useEffect(() => {
-    if (user) {
-      verificarAdmin()
-      fetchLores()
-      fetchAdmins()
-    }
-  }, [user])
-
-  const verificarAdmin = async () => {
-    const { data } = await supabase.from('admins').select('*').eq('discord_id', user.id).single()
-    setIsAdmin(!!data)
-    setLoading(false)
-  }
-
-  const fetchLores = async () => {
+  useEffect(() => { fetchAllLores() }, [])
+  const fetchAllLores = async () => {
     const { data } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
     setLores(data || [])
   }
-
-  const fetchAdmins = async () => {
-    const { data } = await supabase.from('admins').select('*')
-    setAdmins(data || [])
+  const updateStatus = async (id, status) => {
+    const motivo = status === 'RECUSADA' ? prompt('Motivo da recusa:') : null
+    await supabase.from('lores').update({ status, motivo }).eq('id', id)
+    fetchAllLores()
   }
 
-  const atualizarStatus = async (id, status, motivo = null) => {
-    await supabase.from('lores').update({ status, motivo_recusa: motivo }).eq('id', id)
-    fetchLores()
-  }
-
-  const deletarLore = async (id) => {
-    if (!confirm('⚠️ ATENÇÃO: Tem certeza que deseja DELETAR esta partitura permanentemente? Ela sumirá do perfil do usuário.')) return
-    const { error } = await supabase.from('lores').delete().eq('id', id)
-    if (error) alert('Erro ao deletar: ' + error.message)
-    else {
-      setModalOpen(false)
-      fetchLores()
-    }
-  }
-
-  const adicionarNovoAdmin = async () => {
-    if (!novoAdminId || !novoAdminUsername) return
-    setAdicionandoAdmin(true)
-    const { error } = await supabase.from('admins').insert([{ discord_id: novoAdminId, discord_username: novoAdminUsername }])
-    if (error) alert('Erro: ' + error.message)
-    else { setNovoAdminId(''); setNovoAdminUsername(''); fetchAdmins(); }
-    setAdicionandoAdmin(false)
-  }
-  
-  const removerAdmin = async (id) => {
-    if (!confirm('Tem certeza?')) return
-    await supabase.from('admins').delete().eq('id', id)
-    fetchAdmins()
-  }
-  
-  if (loading) return <div className="main-content"><h1>Carregando...</h1></div>
-  if (!isAdmin) return (
-    <div className="main-content">
-      <div className="error-card">
-        <h1>⚠️ Acesso Restrito</h1>
-        <p>Você não tem permissão para acessar a área administrativa.</p>
-      </div>
-    </div>
-  )
-  
-  const filteredLores = lores.filter(lore => 
-    lore.nick?.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    lore.nome?.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-
-  const emAnalise = filteredLores.filter(l => (l.status || 'Em Análise') === 'Em Análise')
-  const aprovadas = filteredLores.filter(l => l.status === 'Aprovada')
-  const recusadas = filteredLores.filter(l => l.status === 'Recusada')
-  
   return (
-    <PageTransition>
-      <div className="main-content">
-        <div className="admin-panel">
-          <div className="admin-header">
-            <h1>👑 Painel Administrativo</h1>
-            <div className="admin-tabs">
-              <button className={`admin-tab-btn ${activeTab === 'lores' ? 'active' : ''}`} onClick={() => setActiveTab('lores')}>Partituras</button>
-              <button className={`admin-tab-btn ${activeTab === 'admins' ? 'active' : ''}`} onClick={() => setActiveTab('admins')}>Gerenciar Admins</button>
+    <div className="main-content">
+      <h1>👑 Painel Administrativo</h1>
+      <div className="admin-grid">
+        {lores.map(l => (
+          <div key={l.id} className="admin-card">
+            <h3>{l.nome} (@{l.discord_tag})</h3>
+            <p><strong>Raça:</strong> {l.raca} | <strong>Status:</strong> {l.status}</p>
+            <div className="admin-actions">
+              <button onClick={() => updateStatus(l.id, 'APROVADA')} className="btn-approve">Aprovar</button>
+              <button onClick={() => updateStatus(l.id, 'RECUSADA')} className="btn-reject">Recusar</button>
             </div>
           </div>
-          
-          {activeTab === 'lores' ? (
-            <div className="admin-tab-content">
-              <div className="admin-search-wrapper">
-                <div className="input-with-icon">
-                  <Search className="search-icon-inner" size={18} />
-                  <input 
-                    type="text" 
-                    placeholder="Pesquisar por Nick ou Nome..." 
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="admin-search-input"
-                  />
-                  {searchTerm && (
-                    <button className="clear-search" onClick={() => setSearchTerm('')}>
-                      <X size={16} />
-                    </button>
-                  )}
-                </div>
-                <p className="search-results-info">
-                  Mostrando <strong>{filteredLores.length}</strong> de {lores.length} partituras.
-                </p>
-              </div>
-
-              <div className="admin-columns">
-                <div className="admin-column admin-column--analise">
-                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f0a500' }}></span><h2>Em Análise</h2><span className="admin-column-count">{emAnalise.length}</span></div>
-                  <div className="admin-column-body">{emAnalise.length === 0 ? <p className="admin-column-empty">Nenhum resultado.</p> : emAnalise.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-                </div>
-                <div className="admin-column admin-column--aprovada">
-                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#23a559' }}></span><h2>Aprovadas</h2><span className="admin-column-count">{aprovadas.length}</span></div>
-                  <div className="admin-column-body">{aprovadas.length === 0 ? <p className="admin-column-empty">Nenhum resultado.</p> : aprovadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-                </div>
-                <div className="admin-column admin-column--recusada">
-                  <div className="admin-column-header"><span className="admin-column-dot" style={{ background: '#f23f43' }}></span><h2>Recusadas</h2><span className="admin-column-count">{recusadas.length}</span></div>
-                  <div className="admin-column-body">{recusadas.length === 0 ? <p className="admin-column-empty">Nenhum resultado.</p> : recusadas.map(f => <LoreCard key={f.id} f={f} onExpand={(l) => { setSelectedLore(l); setModalOpen(true); }} />)}</div>
-                </div>
-              </div>
-              
-              <AnimatePresence>
-                {modalOpen && selectedLore && (
-                  <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      className="modal-content" 
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <button className="modal-close" onClick={() => setModalOpen(false)}>✕</button>
-                      <h2>{selectedLore.nome}</h2>
-                      <div className="modal-details">
-                        <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                        <p><strong>Discord:</strong> {selectedLore.discord_tag}</p>
-                        <p><strong>Raça:</strong> {selectedLore.raca}</p>
-                        <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                        <p><strong>Status:</strong> {selectedLore.status || 'Em Análise'}</p>
-                      </div>
-                      <div className="modal-historia">
-                        <h3>História:</h3>
-                        <p>{selectedLore.historia}</p>
-                      </div>
-                      <div className="modal-actions">
-                        <button className="btn-approve" onClick={() => { atualizarStatus(selectedLore.id, 'Aprovada'); setModalOpen(false); }}>✅ Aprovar</button>
-                        <button className="btn-refuse" onClick={() => { const motivo = prompt('Motivo da recusa:'); if (motivo) { atualizarStatus(selectedLore.id, 'Recusada', motivo); setModalOpen(false); } }}>❌ Recusar</button>
-                        <button className="btn-delete-lore" onClick={() => deletarLore(selectedLore.id)}>🗑️ Deletar</button>
-                      </div>
-                    </motion.div>
-                  </div>
-                )}
-              </AnimatePresence>
-            </div>
-          ) : (
-            <div className="admin-tab-content">
-              <div className="admin-add-form">
-                <h3>Adicionar Novo Admin</h3>
-                <input type="text" placeholder="Discord ID" value={novoAdminId} onChange={(e) => setNovoAdminId(e.target.value)} />
-                <input type="text" placeholder="Discord Username" value={novoAdminUsername} onChange={(e) => setNovoAdminUsername(e.target.value)} />
-                <button onClick={adicionarNovoAdmin} disabled={adicionandoAdmin}>{adicionandoAdmin ? 'Adicionando...' : 'Adicionar Admin'}</button>
-              </div>
-              <div className="admin-list">
-                <h3>Admins Atuais</h3>
-                {admins.map(admin => (
-                  <AdminCard key={admin.id} admin={admin} removerAdmin={removerAdmin} />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+        ))}
       </div>
-    </PageTransition>
+    </div>
   )
 }
 
-const AdminCard = ({ admin, removerAdmin }) => (
-  <div className="admin-card">
-    <div className="admin-info">
-      <h4>{admin.discord_username}</h4>
-      <p>ID: {admin.discord_id}</p>
-    </div>
-    <button className="admin-remove-btn" onClick={() => removerAdmin(admin.id)}>Remover</button>
-  </div>
-)
-
-function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('discord_user')))
+const App = () => {
+  const [user, setUser] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [loadingAdmin, setLoadingAdmin] = useState(true)
-  useEffect(() => { if (user) verificarAdminStatus() }, [user])
-  const verificarAdminStatus = async () => {
-    try {
-      const { data } = await supabase.from('admins').select('*').eq('discord_id', user.id).single()
-      setIsAdmin(!!data)
-    } catch (err) { setIsAdmin(false); }
-    finally { setLoadingAdmin(false); }
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('discord_user')
+    if (savedUser) {
+      const parsedUser = JSON.parse(savedUser)
+      setUser(parsedUser)
+      checkAdmin(parsedUser.username)
+    } else {
+      setLoadingAdmin(false)
+    }
+  }, [])
+
+  const checkAdmin = async (username) => {
+    const { data } = await supabase.from('admins').select('*').eq('username', username)
+    setIsAdmin(data && data.length > 0)
+    setLoadingAdmin(false)
   }
+
   return (
     <Router>
       <div className="container">
@@ -743,21 +539,18 @@ function App() {
             <img src="/logo.png" alt="Logo" className="sidebar-logo" />
             <span className="sidebar-title">Musae Eras</span>
           </Link>
-
           <SidebarDivider />
-
           <nav className="sidebar-nav">
             {user && <Link to="/perfil" className="nav-item" style={{ color: '#d565e5' }}><span>Perfil</span></Link>}
             <Link to="/forum" className="nav-item" style={{ color: '#f0b232' }}><span>Fórum</span></Link>
             <Link to="/compor" className="nav-item"><span>Componha sua Obra</span></Link>
+            <Link to="/apoios" className="nav-item" style={{ color: '#FFD700' }}><span>✨ Apoios</span></Link>
             {!loadingAdmin && isAdmin && <Link to="/admin" className="nav-item" style={{ color: '#f0a500' }}><span>👑 Admin</span></Link>}
-
             <SidebarDivider />
-
             {user ? (
               <button className="sidebar-login-btn" onClick={() => { localStorage.removeItem('discord_user'); window.location.href = '/'; }}>Sair</button>
             ) : (
-              <Link to="/login" className="sidebar-login-btn" style={{ textDecoration: 'none', textAlign: 'center', background: '#5865F2' }}>Login com Discord</Link>
+              <a href={`https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`} className="sidebar-login-btn" style={{ textDecoration: 'none', textAlign: 'center', background: '#5865F2', display: 'block' }}>Login com Discord</a>
             )}
           </nav>
         </aside>
@@ -768,6 +561,7 @@ function App() {
           <Route path="/compor" element={<CriarFicha user={user} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPanel user={user} />} />
+          <Route path="/apoios" element={<Apoios />} />
         </Routes>
       </div>
     </Router>
