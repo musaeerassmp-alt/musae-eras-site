@@ -931,3 +931,281 @@ body {
   font-family: inherit;
   cursor: pointer;
 }
+
+/* ============================================================
+   ADMIN PANEL
+   ============================================================ */
+.admin-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  text-align: left;
+}
+
+.admin-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.admin-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-nav-btn {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.admin-nav-btn.active {
+  background: var(--primary-color);
+  color: #000;
+  font-weight: bold;
+  border-color: var(--primary-color);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-card {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+}
+
+.admin-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.admin-card-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.admin-card-header span {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.admin-card p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+.status--aprovada {
+  background-color: rgba(35, 165, 89, 0.2);
+  color: #23a559;
+}
+
+.status--recusada {
+  background-color: rgba(242, 63, 71, 0.2);
+  color: #f23f47;
+}
+
+.status--pendente {
+  background-color: rgba(240, 178, 50, 0.2);
+  color: #f0b232;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.admin-actions button {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-analisar {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-analisar:hover {
+  background-color: #b34fe0;
+}
+
+.btn-approve {
+  background-color: #23a559;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #1a7a42;
+}
+
+.btn-reject {
+  background-color: #f23f43;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #b82e32;
+}
+
+/* Admin Manage Section */
+.admin-manage-section {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.add-admin-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.add-admin-form h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.add-admin-form input {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.add-admin-form button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-admin-form button:hover {
+  background-color: #b34fe0;
+}
+
+.admin-list h3 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.admin-list-item span {
+  color: white;
+}
+
+.btn-remove-admin {
+  background-color: #f23f43;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-remove-admin:hover {
+  background-color: #b82e32;
+}
+
+/* Admin Lore Modal */
+.admin-lore-modal {
+  max-width: 800px;
+  width: 90%;
+}
+
+.admin-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-decision-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-decision-buttons button {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.profile-motivo-box {
+  background: rgba(242, 63, 71, 0.1);
+  border: 1px solid rgba(242, 63, 71, 0.3);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.profile-motivo-box strong {
+  color: #f23f43;
+}
+
+.profile-motivo-box p {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}

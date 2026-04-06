@@ -488,56 +488,185 @@ const LoginPage = () => {
 }
 
 const AdminPanel = ({ user }) => {
-  const [lores, setLores] = useState([])
-  const vipTags = ["Nenhum", "VIP", "VIP+", "VIP++", "Beta"]
+  const [activeTab, setActiveTab] = useState('lores');
+  const [lores, setLores] = useState([]);
+  const [admins, setAdmins] = useState([]);
+  const [newAdminName, setNewAdminName] = useState('');
+  const [selectedLore, setSelectedLore] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const vipTags = ["Nenhum", "VIP", "VIP+", "VIP++", "Beta"];
 
-  useEffect(() => { 
-    if (user) fetchAllLores() 
-  }, [user])
+  useEffect(() => {
+    if (user) {
+      fetchAllLores();
+      fetchAllAdmins();
+    }
+  }, [user]);
 
   const fetchAllLores = async () => {
-    const { data } = await supabase.from("lores").select("*").order("created_at", { ascending: false })
-    setLores(data || [])
-  }
+    const { data } = await supabase.from("lores").select("*").order("created_at", { ascending: false });
+    setLores(data || []);
+  };
+
+  const fetchAllAdmins = async () => {
+    const { data } = await supabase.from("admins").select("*");
+    setAdmins(data || []);
+  };
 
   const updateStatus = async (id, status) => {
-    const motivo = status === "RECUSADA" ? prompt("Motivo da recusa:") : null
-    await supabase.from("lores").update({ status, motivo }).eq("id", id)
-    fetchAllLores()
-  }
+    const motivo = status === "RECUSADA" ? prompt("Motivo da recusa:") : null;
+    await supabase.from("lores").update({ status, motivo }).eq("id", id);
+    fetchAllLores();
+    if (modalOpen) setModalOpen(false);
+  };
 
   const updateVipTag = async (id, newTag) => {
-    await supabase.from("lores").update({ vip_tag: newTag === "Nenhum" ? null : newTag }).eq("id", id)
-    fetchAllLores()
-  }
+    await supabase.from("lores").update({ vip_tag: newTag === "Nenhum" ? null : newTag }).eq("id", id);
+    fetchAllLores();
+    // Atualiza a lore selecionada no modal, se estiver aberta
+    if (selectedLore && selectedLore.id === id) {
+      setSelectedLore({ ...selectedLore, vip_tag: newTag === "Nenhum" ? null : newTag });
+    }
+  };
 
-  if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>
+  const addAdmin = async () => {
+    if (!newAdminName.trim()) return alert('Digite um nome de usuário do Discord.');
+    const { data, error } = await supabase.from('admins').insert([{ discord_username: newAdminName.trim() }]);
+    if (error) {
+      alert('Erro ao adicionar admin: ' + error.message);
+    } else {
+      setNewAdminName('');
+      fetchAllAdmins();
+    }
+  };
+
+  const removeAdmin = async (id) => {
+    if (!confirm('Tem certeza que deseja remover este administrador?')) return;
+    await supabase.from('admins').delete().eq('id', id);
+    fetchAllAdmins();
+  };
+
+  if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>;
 
   return (
-    <div className="main-content">
-      <h1>👑 Painel Administrativo</h1>
-      <div className="admin-grid">
-        {lores.map(l => (
-          <div key={l.id} className="admin-card">
-            <h3>{l.nome} (@{l.discord_tag})</h3>
-            <p><strong>Raça:</strong> {l.raca} | <strong>Status:</strong> {l.status}</p>
-            <div className="admin-vip-tag">
-              <label>Tag VIP:</label>
-              <select 
-                value={l.vip_tag || "Nenhum"}
-                onChange={(e) => updateVipTag(l.id, e.target.value)}
-              >
-                {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
-              </select>
-            </div>
-            <div className="admin-actions">
-              <button onClick={() => updateStatus(l.id, "APROVADA")} className="btn-approve">Aprovar</button>
-              <button onClick={() => updateStatus(l.id, "RECUSADA")} className="btn-reject">Recusar</button>
-            </div>
+    <PageTransition>
+      <div className="main-content">
+        <div className="admin-container">
+          <h1 className="admin-title">👑 Painel Administrativo</h1>
+          
+          <div className="admin-nav">
+            <button 
+              className={`admin-nav-btn ${activeTab === 'lores' ? 'active' : ''}`}
+              onClick={() => setActiveTab('lores')}
+            >
+              Lores Pendentes
+            </button>
+            <button 
+              className={`admin-nav-btn ${activeTab === 'admins' ? 'active' : ''}`}
+              onClick={() => setActiveTab('admins')}
+            >
+              Gerenciar Admins
+            </button>
           </div>
-        ))}
+
+          <AnimatePresence mode="wait">
+            {activeTab === 'lores' && (
+              <motion.div key="lores-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+                <div className="admin-grid">
+                  {lores.map(l => (
+                    <div key={l.id} className="admin-card">
+                      <div className="admin-card-header">
+                        <h3>{l.nome}</h3>
+                        <span>@{l.discord_tag}</span>
+                      </div>
+                      <p><strong>Raça:</strong> {l.raca}</p>
+                      <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
+                      <div className="admin-actions">
+                        <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Analisar</button>
+                        <button onClick={() => updateStatus(l.id, "APROVADA")} className="btn-approve">Aprovar</button>
+                        <button onClick={() => updateStatus(l.id, "RECUSADA")} className="btn-reject">Recusar</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === 'admins' && (
+              <motion.div key="admins-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="admin-manage-section">
+                <div className="add-admin-form">
+                  <h3>Adicionar Novo Admin</h3>
+                  <input 
+                    type="text" 
+                    placeholder="Username do Discord (sem #)" 
+                    value={newAdminName}
+                    onChange={e => setNewAdminName(e.target.value)}
+                  />
+                  <button onClick={addAdmin}>Adicionar</button>
+                </div>
+                <div className="admin-list">
+                  <h3>Administradores Atuais</h3>
+                  {admins.map(admin => (
+                    <div key={admin.id} className="admin-list-item">
+                      <span>{admin.discord_username}</span>
+                      <button onClick={() => removeAdmin(admin.id)} className="btn-remove-admin">Remover</button>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <AnimatePresence>
+          {modalOpen && selectedLore && (
+            <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+              <motion.div 
+                className="modal-content admin-lore-modal" 
+                onClick={e => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+              >
+                <button className="modal-close" onClick={() => setModalOpen(false)}><X size={24} /></button>
+                <h2>Análise de Lore: {selectedLore.nome}</h2>
+                <div className="modal-details">
+                  <p><strong>Nick:</strong> {selectedLore.nick}</p>
+                  <p><strong>Raça:</strong> {selectedLore.raca}</p>
+                  <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                  <div className={`status-badge status--${selectedLore.status.toLowerCase()}`}>{selectedLore.status}</div>
+                </div>
+                <div className="modal-historia">
+                  <h3>História:</h3>
+                  <p>{selectedLore.historia}</p>
+                </div>
+                {selectedLore.status === "RECUSADA" && selectedLore.motivo && (
+                  <div className="profile-motivo-box">
+                    <strong>Motivo da Recusa:</strong>
+                    <p>{selectedLore.motivo}</p>
+                  </div>
+                )}
+                <div className="admin-modal-actions">
+                  <div className="admin-vip-tag">
+                    <label>Tag VIP:</label>
+                    <select 
+                      value={selectedLore.vip_tag || "Nenhum"}
+                      onChange={(e) => updateVipTag(selectedLore.id, e.target.value)}
+                    >
+                      {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
+                    </select>
+                  </div>
+                  <div className="admin-decision-buttons">
+                    <button onClick={() => updateStatus(selectedLore.id, "APROVADA")} className="btn-approve">Aprovar Lore</button>
+                    <button onClick={() => updateStatus(selectedLore.id, "RECUSADA")} className="btn-reject">Recusar Lore</button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+    </PageTransition>
   )
 }
 
