@@ -853,3 +853,12 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Ajustes para ícones dentro dos benefícios e kits */
+.tier-benefits li svg,
+.tier-kit li svg {
+  width: 18px; /* Tamanho padrão para os ícones */
+  height: 18px;
+  min-width: 18px; /* Garante que o tamanho não seja menor */
+  flex-shrink: 0;
+}

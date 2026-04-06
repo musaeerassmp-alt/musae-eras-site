@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Heart, Star, Zap, Map, BookOpen, Music, ShieldCheck, DollarSign } from 'lucide-react'
+import { Music, Disc, Volume2, Mic, DollarSign } from 'lucide-react' // Importando ícones musicais
 import { PageTransition } from './App' // Assumindo que PageTransition está exportado em App.jsx
 
 const tiers = [
@@ -29,7 +29,7 @@ const tiers = [
     title: 'O Crescendo',
     price: 'R$ 30,00',
     color: '#d565e5', // Roxo/Prata
-    icon: <Star size={24} />,
+    icon: <Disc size={24} />,
     benefits: [
       'Kit inicial e Mochila de Ouro customizável',
       'Dois Artefatos randomizados (dobro de chance!)',
@@ -51,7 +51,7 @@ const tiers = [
     title: 'Nossa Obra-Prima',
     price: 'R$ 60,00',
     color: '#23a559', // Verde/Diamante
-    icon: <Zap size={24} />,
+    icon: <Mic size={24} />,
     benefits: [
       'Kit inicial e Mochila de Diamante customizável',
       'Uma Pelúcia Colecionável Aleatória',
@@ -74,7 +74,7 @@ const tiers = [
     title: 'Acesso Antecipado (Beta)',
     price: 'R$ 20,00',
     color: '#f23f43', // Vermelho/Beta
-    icon: <ShieldCheck size={24} />,
+    icon: <Volume2 size={24} />,
     benefits: [
       'Kit Mochila de Ouro customizado',
       'Um Artefato randomizado',
@@ -96,14 +96,14 @@ const Apoios = () => {
       <div className="main-content">
         <div className="apoios-container">
           <div className="apoios-header">
-            <h1>💖 Apoie o Musae e Seja Parte Dessa História</h1>
+            <h1>Apoie o Musae e Seja Parte Dessa História</h1>
             <p className="apoios-intro-text">
               Manter um servidor vivo é trabalhoso e exige paixão. Se você acredita no nosso projeto e quer ver ele crescer, seu apoio faz toda a diferença! Preparamos recompensas incríveis para quem decide embarcar nessa jornada conosco.
             </p>
           </div>
 
           <div className="artefatos-info">
-            <h2>Os Artefatos: O Mistério :)</h2>
+            <h2>Os Artefatos: O Mistério</h2>
             <p>
               Eles não são itens normais. Pedimos para um modmaker criar relíquias que não existem em nenhum outro mod por aí. Relíquias antigas, passadas de mão em mão ao longo dos séculos. Ninguém sabe mais para que elas servem, mas o legal é: elas têm poderes!
             </p>
@@ -135,7 +135,7 @@ const Apoios = () => {
                   <h4>Benefícios Exclusivos:</h4>
                   <ul>
                     {tier.benefits.map((benefit, index) => (
-                      <li key={index}><ShieldCheck size={16} style={{ color: tier.color }} /> {benefit}</li>
+                      <li key={index}><Disc size={16} style={{ color: tier.color }} /> {benefit}</li>
                     ))}
                   </ul>
                 </div>
@@ -144,7 +144,7 @@ const Apoios = () => {
                   <h4>Kit Inicial (Base):</h4>
                   <ul>
                     {tier.kit.map((item, index) => (
-                      <li key={index}><Map size={16} style={{ color: tier.color }} /> {item}</li>
+                      <li key={index}><Music size={16} style={{ color: tier.color }} /> {item}</li>
                     ))}
                   </ul>
                 </div>
