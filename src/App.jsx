@@ -298,10 +298,10 @@ const Profile = ({ user }) => {
 
   const fetchUserLores = async () => {
     const { data } = await supabase
-      .from('lores')
-      .select('*')
+      .from("lores")
+      .select("*, vip_tag") // Seleciona também a vip_tag
       .or(`discord_tag.eq.${user.username},discord_tag.eq.${user.username}#0`)
-      .order('created_at', { ascending: false })
+      .order("created_at", { ascending: false })
     setLores(data || [])
   }
 
@@ -322,6 +322,11 @@ const Profile = ({ user }) => {
               <div>
                 <h1 className="profile-username">{user.username}</h1>
                 <p className="profile-discord-tag">@{user.username}</p>
+                {user.vip_tag && (
+                  <span className={`vip-tag vip-tag--${user.vip_tag.toLowerCase().replace("+", "-plus")}`}>
+                    {user.vip_tag}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -337,8 +342,8 @@ const Profile = ({ user }) => {
                 {lores.map(f => (
                   <div key={f.id} className="profile-lore-card" onClick={() => { setSelectedLore(f); setModalOpen(true); }}>
                     <div className="status-badge" style={{ 
-                      backgroundColor: f.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : f.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
-                      color: f.status === 'APROVADA' ? '#23a559' : f.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
+                      backgroundColor: f.status === "APROVADA" ? "rgba(35, 165, 89, 0.2)" : f.status === "RECUSADA" ? "rgba(242, 63, 71, 0.2)" : "rgba(240, 178, 50, 0.2)",
+                      color: f.status === "APROVADA" ? "#23a559" : f.status === "RECUSADA" ? "#f23f47" : "#f0b232"
                     }}>
                       {f.status}
                     </div>
@@ -371,9 +376,14 @@ const Profile = ({ user }) => {
                   <p><strong>Nick:</strong> {selectedLore.nick}</p>
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                  {selectedLore.vip_tag && (
+                    <span className={`vip-tag vip-tag--${selectedLore.vip_tag.toLowerCase().replace("+", "-plus")}`}>
+                      {selectedLore.vip_tag}
+                    </span>
+                  )}
                   <div className="status-badge" style={{ 
-                    backgroundColor: selectedLore.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : selectedLore.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
-                    color: selectedLore.status === 'APROVADA' ? '#23a559' : selectedLore.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
+                    backgroundColor: selectedLore.status === "APROVADA" ? "rgba(35, 165, 89, 0.2)" : selectedLore.status === "RECUSADA" ? "rgba(242, 63, 71, 0.2)" : "rgba(240, 178, 50, 0.2)",
+                    color: selectedLore.status === "APROVADA" ? "#23a559" : selectedLore.status === "RECUSADA" ? "#f23f47" : "#f0b232"
                   }}>
                     {selectedLore.status}
                   </div>
@@ -382,7 +392,7 @@ const Profile = ({ user }) => {
                   <h3>História:</h3>
                   <p>{selectedLore.historia}</p>
                 </div>
-                {selectedLore.status === 'RECUSADA' && selectedLore.motivo && (
+                {selectedLore.status === "RECUSADA" && selectedLore.motivo && (
                   <div className="profile-motivo-box">
                     <strong>Motivo da Recusa:</strong>
                     <p>{selectedLore.motivo}</p>
@@ -479,16 +489,29 @@ const LoginPage = () => {
 
 const AdminPanel = ({ user }) => {
   const [lores, setLores] = useState([])
-  useEffect(() => { fetchAllLores() }, [])
+  const vipTags = ["Nenhum", "VIP", "VIP+", "VIP++", "Beta"]
+
+  useEffect(() => { 
+    if (user) fetchAllLores() 
+  }, [user])
+
   const fetchAllLores = async () => {
-    const { data } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
+    const { data } = await supabase.from("lores").select("*").order("created_at", { ascending: false })
     setLores(data || [])
   }
+
   const updateStatus = async (id, status) => {
-    const motivo = status === 'RECUSADA' ? prompt('Motivo da recusa:') : null
-    await supabase.from('lores').update({ status, motivo }).eq('id', id)
+    const motivo = status === "RECUSADA" ? prompt("Motivo da recusa:") : null
+    await supabase.from("lores").update({ status, motivo }).eq("id", id)
     fetchAllLores()
   }
+
+  const updateVipTag = async (id, newTag) => {
+    await supabase.from("lores").update({ vip_tag: newTag === "Nenhum" ? null : newTag }).eq("id", id)
+    fetchAllLores()
+  }
+
+  if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>
 
   return (
     <div className="main-content">
@@ -498,9 +521,18 @@ const AdminPanel = ({ user }) => {
           <div key={l.id} className="admin-card">
             <h3>{l.nome} (@{l.discord_tag})</h3>
             <p><strong>Raça:</strong> {l.raca} | <strong>Status:</strong> {l.status}</p>
+            <div className="admin-vip-tag">
+              <label>Tag VIP:</label>
+              <select 
+                value={l.vip_tag || "Nenhum"}
+                onChange={(e) => updateVipTag(l.id, e.target.value)}
+              >
+                {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
+              </select>
+            </div>
             <div className="admin-actions">
-              <button onClick={() => updateStatus(l.id, 'APROVADA')} className="btn-approve">Aprovar</button>
-              <button onClick={() => updateStatus(l.id, 'RECUSADA')} className="btn-reject">Recusar</button>
+              <button onClick={() => updateStatus(l.id, "APROVADA")} className="btn-approve">Aprovar</button>
+              <button onClick={() => updateStatus(l.id, "RECUSADA")} className="btn-reject">Recusar</button>
             </div>
           </div>
         ))}

@@ -862,3 +862,72 @@ body {
   min-width: 18px; /* Garante que o tamanho não seja menor */
   flex-shrink: 0;
 }
+
+/* ============================================================
+   VIP TAGS
+   ============================================================ */
+.vip-tag {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  border: 1px solid;
+}
+
+.vip-tag--nenhum {
+  background-color: rgba(139, 148, 158, 0.2);
+  color: var(--text-secondary);
+  border-color: rgba(139, 148, 158, 0.3);
+}
+
+.vip-tag--vip {
+  background-color: rgba(240, 178, 50, 0.2); /* Amarelo/Bronze */
+  color: #f0b232;
+  border-color: rgba(240, 178, 50, 0.3);
+}
+
+.vip-tag--vip-plus {
+  background-color: rgba(213, 101, 229, 0.2); /* Roxo/Prata */
+  color: var(--primary-color);
+  border-color: rgba(213, 101, 229, 0.3);
+}
+
+.vip-tag--vip-plus-plus {
+  background-color: rgba(35, 165, 89, 0.2); /* Verde/Diamante */
+  color: #23a559;
+  border-color: rgba(35, 165, 89, 0.3);
+}
+
+.vip-tag--beta {
+  background-color: rgba(242, 63, 67, 0.2); /* Vermelho/Beta */
+  color: #f23f43;
+  border-color: rgba(242, 63, 67, 0.3);
+}
+
+/* Estilos para o seletor de tag VIP no Admin Panel */
+.admin-vip-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-vip-tag label {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.admin-vip-tag select {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: white;
+  font-family: inherit;
+  cursor: pointer;
+}
