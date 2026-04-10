@@ -6,10 +6,10 @@ import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, Cli
 import Apoios from './Apoios';
 import './App.css';
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+// Configuração do Supabase - Certifique-se de que estas variáveis estão no seu .env
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID;
 const REDIRECT_URI = window.location.origin + '/login';
@@ -76,7 +76,7 @@ const Home = () => {
 };
 
 const Forum = () => {
-    return <PageTransition><div>Fórum</div></PageTransition>;
+    return <PageTransition><div className="main-content"><h2>Fórum</h2><p>Em breve...</p></div></PageTransition>;
 };
 
 const CriarFicha = ({ user }) => {
@@ -157,9 +157,9 @@ const Profile = ({ user }) => {
         .from('lores')
         .select('*')
         .eq('discord_id', user.id)
-        .single();
+        .maybeSingle(); // Usando maybeSingle para evitar erro se não existir
 
-      if (loreError && loreError.code !== 'PGRST116') {
+      if (loreError) {
         console.error('Erro ao buscar lore:', loreError);
       } else {
         setLore(loreData);
@@ -170,9 +170,9 @@ const Profile = ({ user }) => {
         .from('vips')
         .select('tier')
         .eq('discord_username', user.username)
-        .single();
+        .maybeSingle();
 
-      if (vipError && vipError.code !== 'PGRST116') {
+      if (vipError) {
           console.error("Error fetching VIPs:", vipError);
       } else if (vipData) {
           setVipTier(vipData.tier);
@@ -185,11 +185,11 @@ const Profile = ({ user }) => {
   }, [user]);
 
   if (loading) {
-    return <PageTransition><div>Carregando perfil...</div></PageTransition>;
+    return <PageTransition><div className="main-content">Carregando perfil...</div></PageTransition>;
   }
 
   if (!user) {
-    return <PageTransition><div>Por favor, faça login para ver seu perfil.</div></PageTransition>;
+    return <PageTransition><div className="main-content">Por favor, faça login para ver seu perfil.</div></PageTransition>;
   }
 
   return (
@@ -229,9 +229,8 @@ const AdminPanel = ({ user }) => {
     const { data, error } = await supabase.from('lores').select('*');
     if (error) {
       console.error('Error fetching lores:', error);
-      alert('Erro ao carregar as lores.');
     } else {
-      setLores(data);
+      setLores(data || []);
     }
   }, []);
 
@@ -240,7 +239,7 @@ const AdminPanel = ({ user }) => {
     if (error) {
       console.error('Error fetching admins:', error);
     } else {
-      setAdmins(data);
+      setAdmins(data || []);
     }
   }, []);
 
@@ -249,7 +248,7 @@ const AdminPanel = ({ user }) => {
     if (error) {
         console.error('Error fetching VIPs:', error);
     } else {
-        setVips(data);
+        setVips(data || []);
     }
   }, []);
 
@@ -320,7 +319,7 @@ const AdminPanel = ({ user }) => {
   };
 
   const removeVip = async (username) => {
-      if (!confirm(`Tem certeza que deseja remover o VIP de ${username}?`)) return;
+      if (!window.confirm(`Tem certeza que deseja remover o VIP de ${username}?`)) return;
       const { error } = await supabase.from('vips').delete().eq('discord_username', username);
       if (error) {
           console.error('Error removing VIP:', error);
@@ -439,29 +438,82 @@ const Login = ({ setUser }) => {
 
   useEffect(() => {
     const handleLogin = async () => {
+      // O Supabase lida com o fragmento da URL automaticamente se você usar auth.onAuthStateChange
+      // Mas para uma implementação manual simplificada:
       const params = new URLSearchParams(location.hash.substring(1));
       const accessToken = params.get('access_token');
 
       if (accessToken) {
-        const { data: { user } } = await supabase.auth.getUser(accessToken);
-        if (user) {
-          const userData = {
-            id: user.id,
-            email: user.email,
-            username: user.user_metadata.custom_claims.global_name,
-            avatar: user.user_metadata.avatar_url,
-          };
-          setUser(userData);
-          localStorage.setItem('user', JSON.stringify(userData));
-          navigate('/perfil');
+        try {
+          const { data: { user }, error } = await supabase.auth.getUser(accessToken);
+          if (error) throw error;
+          
+          if (user) {
+            const userData = {
+              id: user.id,
+              email: user.email,
+              username: user.user_metadata?.full_name || user.user_metadata?.user_name || user.email,
+              avatar: user.user_metadata?.avatar_url,
+            };
+            setUser(userData);
+            localStorage.setItem('user', JSON.stringify(userData));
+            navigate('/perfil');
+          }
+        } catch (err) {
+          console.error('Erro no login:', err);
+          navigate('/');
         }
       }
     };
     handleLogin();
   }, [location, navigate, setUser]);
 
-  return <div>Logando...</div>;
+  return <div className="main-content">Logando...</div>;
 };
+
+// Componente para gerenciar as rotas internas e ter acesso ao useLocation()
+function AppRoutes({ user, setUser, isAdmin, handleLogin, handleLogout }) {
+  const location = useLocation();
+  
+  return (
+    <div className="App">
+      <aside className="sidebar">
+        <div className="sidebar-header">
+          <img src="/logo.png" alt="Musae Eras Logo" className="logo" />
+          <h2>Musae Eras</h2>
+        </div>
+        <nav className="sidebar-nav">
+          <Link to="/"><User size={18} /> Home</Link>
+          <Link to="/perfil"><User size={18} /> Perfil</Link>
+          <Link to="/forum"><BookOpen size={18} /> Fórum</Link>
+          <Link to="/criar-ficha"><PenTool size={18} /> Componha sua Obra</Link>
+          <Link to="/apoios" className="apoios-link"><Sparkles size={18} /> Apoios</Link>
+          {isAdmin && <Link to="/admin">👑 Admin</Link>}
+        </nav>
+        <div className="sidebar-footer">
+          {user ? (
+            <button onClick={handleLogout} className="sidebar-btn-logout"><LogOut size={18} /> Sair</button>
+          ) : (
+            <button onClick={handleLogin} className="sidebar-btn-login">Conectar com Discord</button>
+          )}
+        </div>
+      </aside>
+      <main className="main-view">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/criar-ficha" element={<CriarFicha user={user} />} />
+            <Route path="/perfil" element={<Profile user={user} />} />
+            <Route path="/apoios" element={<Apoios />} />
+            <Route path="/admin" element={isAdmin ? <AdminPanel user={user} /> : <Home />} />
+            <Route path="/login" element={<Login setUser={setUser} />} />
+          </Routes>
+        </AnimatePresence>
+      </main>
+    </div>
+  );
+}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -470,77 +522,73 @@ function App() {
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
     if (loggedInUser) {
-      setUser(JSON.parse(loggedInUser));
+      try {
+        setUser(JSON.parse(loggedInUser));
+      } catch (e) {
+        localStorage.removeItem('user');
+      }
     }
   }, []);
 
   useEffect(() => {
     const checkAdmin = async () => {
-      if (user && (user.username === 'circoaleorico' || user.username === 'xaveiroxd')) {
+      if (!user) {
+        setIsAdmin(false);
+        return;
+      }
+
+      // Whitelist de admins (opcional)
+      const whitelist = ['circoaleorico', 'xaveiroxd'];
+      if (whitelist.includes(user.username)) {
         setIsAdmin(true);
         return;
       }
-      if (user) {
-        const { data, error } = await supabase
-          .from('admins')
-          .select('discord_username')
-          .eq('discord_username', user.username);
-        if (data && data.length > 0) {
-          setIsAdmin(true);
-        }
+
+      const { data, error } = await supabase
+        .from('admins')
+        .select('discord_username')
+        .eq('discord_username', user.username)
+        .maybeSingle();
+
+      if (data) {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
       }
     };
     checkAdmin();
   }, [user]);
 
   const handleLogin = () => {
-    const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify%20email`;
-    window.location.href = discordAuthUrl;
+    // Usando o Supabase para o login com Discord é mais seguro e fácil
+    supabase.auth.signInWithOAuth({
+      provider: 'discord',
+      options: {
+        redirectTo: REDIRECT_URI
+      }
+    });
+    
+    // Fallback caso não queira usar o método acima:
+    // const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify%20email`;
+    // window.location.href = discordAuthUrl;
   };
 
   const handleLogout = () => {
     setUser(null);
     setIsAdmin(false);
     localStorage.removeItem('user');
+    supabase.auth.signOut();
   };
 
   return (
     <Router>
-      <div className="App">
-        <aside className="sidebar">
-          <div className="sidebar-header">
-            <img src="/logo.png" alt="Musae Eras Logo" className="logo" />
-            <h2>Musae Eras</h2>
-          </div>
-          <nav className="sidebar-nav">
-            <Link to="/perfil"><User size={18} /> Perfil</Link>
-            <Link to="/forum"><BookOpen size={18} /> Fórum</Link>
-            <Link to="/criar-ficha"><PenTool size={18} /> Componha sua Obra</Link>
-            <Link to="/apoios" className="apoios-link"><Sparkles size={18} /> Apoios</Link>
-            {isAdmin && <Link to="/admin">👑 Admin</Link>}
-          </nav>
-          <div className="sidebar-footer">
-            {user ? (
-              <button onClick={handleLogout} className="sidebar-btn-logout"><LogOut size={18} /> Sair</button>
-            ) : (
-              <button onClick={handleLogin} className="sidebar-btn-login">Conectar com Discord</button>
-            )}
-          </div>
-        </aside>
-        <main className="main-view">
-          <AnimatePresence mode="wait">
-            <Routes location={useLocation()} key={useLocation().pathname}>
-              <Route path="/" element={<Home />} />
-              <Route path="/forum" element={<Forum />} />
-              <Route path="/criar-ficha" element={<CriarFicha user={user} />} />
-              <Route path="/perfil" element={<Profile user={user} />} />
-              <Route path="/apoios" element={<Apoios />} />
-              <Route path="/admin" element={isAdmin ? <AdminPanel user={user} /> : <Home />} />
-              <Route path="/login" element={<Login setUser={setUser} />} />
-            </Routes>
-          </AnimatePresence>
-        </main>
-      </div>
+      <AppRoutes 
+        user={user} 
+        setUser={setUser} 
+        isAdmin={isAdmin} 
+        handleLogin={handleLogin} 
+        handleLogout={handleLogout} 
+      />
     </Router>
   );
 }
