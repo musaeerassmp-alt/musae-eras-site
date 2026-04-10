@@ -1447,3 +1447,99 @@ body {
     flex-direction: column;
   }
 }
+
+/* Admin Panel - Gerenciar VIPs */
+.add-vip-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.add-vip-section input[type="text"],
+.add-vip-section select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #2a2a2a;
+    color: #eee;
+    flex-grow: 1;
+}
+
+.add-vip-section button {
+    background-color: #6a0dad; /* Purple */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-vip-section button:hover {
+    background-color: #7b1fa2;
+}
+
+.vip-list {
+    list-style: none;
+    padding: 0;
+}
+
+.vip-list li {
+    background-color: #2a2a2a;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #eee;
+}
+
+.vip-list li button {
+    background-color: #dc3545; /* Red */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vip-list li button:hover {
+    background-color: #c82333;
+}
+
+/* VIP Tags in lists */
+.vip-tag {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.vip--nenhum {
+    background-color: #555;
+    color: #ccc;
+}
+
+.vip--vip {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+
+.vip--vip\+ {
+    background-color: #fd7e14; /* Orange */
+    color: white;
+}
+
+.vip--vip\+\+ {
+    background-color: #e83e8c; /* Pink */
+    color: white;
+}
+
+.vip--beta {
+    background-color: #007bff; /* Blue */
+    color: white;
+}
