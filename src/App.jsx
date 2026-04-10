@@ -64,7 +64,7 @@ const Home = () => {
         >
           <h1 className="home-title">Musae Eras</h1>
           <div className="quote-container">
-            <p className="quote-text">\"{frase.texto}\"</p>
+            <p className="quote-text">"{frase.texto}"</p>
             <p className="quote-author">— {frase.autor}</p>
           </div>
           <div className="home-divider"></div>
