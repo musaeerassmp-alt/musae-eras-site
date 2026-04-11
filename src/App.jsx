@@ -537,36 +537,122 @@ const CriarFicha = ({ user }) => {
   return (
     <PageTransition>
       <div className="main-content">
-        <div className="form-container">
-          <h1>🎼 Componha sua Obra</h1>
-          <form onSubmit={handleSubmit} className="ficha-form">
-            <div className="form-group">
-              <label>Nome do Personagem</label>
-              <input type="text" required value={formData.nome} onChange={e => setFormData({ ...formData, nome: e.target.value })} />
+        <div className="form-container form-container--lore">
+          <div className="form-hero">
+            <span className="form-kicker">Whitelist do personagem</span>
+            <h1>Componha sua Obra</h1>
+            <p className="form-intro">
+              Preencha sua ficha com atenção. Quanto mais clara e bem estruturada estiver sua história, melhor será a análise da sua whitelist.
+            </p>
+          </div>
+
+          <div className="form-highlight-grid">
+            <div className="form-highlight-card">
+              <span className="form-highlight-title">Identidade</span>
+              <p>Defina nome, nick e idade do personagem com clareza.</p>
             </div>
-            <div className="form-group">
-              <label>Nick no Minecraft</label>
-              <input type="text" required value={formData.nick} onChange={e => setFormData({ ...formData, nick: e.target.value })} />
+            <div className="form-highlight-card">
+              <span className="form-highlight-title">Raça</span>
+              <p>Escolha a origem correta para manter coerência com o universo.</p>
             </div>
-            <div className="form-group">
-              <label>Raça</label>
-              <select value={formData.raca} onChange={e => setFormData({ ...formData, raca: e.target.value })}>
-                <option>Humanos</option>
-                <option>Anjos</option>
-                <option>Demônios</option>
-                <option>Quimeras</option>
-                <option>Aquarianos</option>
-              </select>
+            <div className="form-highlight-card">
+              <span className="form-highlight-title">História</span>
+              <p>Descreva passado, motivação e personalidade em no mínimo 15 linhas.</p>
             </div>
-            <div className="form-group">
-              <label>Idade</label>
-              <input type="number" required value={formData.idade} onChange={e => setFormData({ ...formData, idade: e.target.value })} />
+          </div>
+
+          {user?.id && (
+            <div className="form-account-banner">
+              <span className="form-account-label">Conta vinculada</span>
+              <strong className="form-account-value">{user.id}</strong>
             </div>
-            <div className="form-group">
-              <label>História (Mínimo 15 linhas)</label>
-              <textarea required rows="10" value={formData.historia} onChange={e => setFormData({ ...formData, historia: e.target.value })} />
+          )}
+
+          <form onSubmit={handleSubmit} className="ficha-form ficha-form--enhanced">
+            <div className="form-section-card">
+              <div className="form-section-header">
+                <h2>Dados principais</h2>
+                <p>Essas informações identificam sua ficha dentro da whitelist.</p>
+              </div>
+
+              <div className="form-grid form-grid--two">
+                <div className="form-group">
+                  <label>Nome do Personagem</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ex: Aelion Thorne"
+                    value={formData.nome}
+                    onChange={e => setFormData({ ...formData, nome: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Nick no Minecraft</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ex: AelionMC"
+                    value={formData.nick}
+                    onChange={e => setFormData({ ...formData, nick: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Raça</label>
+                  <select value={formData.raca} onChange={e => setFormData({ ...formData, raca: e.target.value })}>
+                    <option>Humanos</option>
+                    <option>Anjos</option>
+                    <option>Demônios</option>
+                    <option>Quimeras</option>
+                    <option>Aquarianos</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Idade</label>
+                  <input
+                    type="number"
+                    required
+                    min="1"
+                    placeholder="Ex: 24"
+                    value={formData.idade}
+                    onChange={e => setFormData({ ...formData, idade: e.target.value })}
+                  />
+                </div>
+              </div>
             </div>
-            <button type="submit" disabled={loading} className="submit-btn">{loading ? 'Enviando...' : 'Enviar Sinfonia'}</button>
+
+            <div className="form-section-card">
+              <div className="form-section-header">
+                <h2>História do personagem</h2>
+                <p>Capriche no contexto. Explique origem, objetivos, traços marcantes e o que torna seu personagem interessante.</p>
+              </div>
+
+              <div className="form-group form-group--story">
+                <label>História completa</label>
+                <textarea
+                  required
+                  rows="12"
+                  placeholder="Conte a trajetória do seu personagem, sua personalidade, conflitos, motivações e como ele chegou até este mundo."
+                  value={formData.historia}
+                  onChange={e => setFormData({ ...formData, historia: e.target.value })}
+                />
+                <div className="form-helper-row">
+                  <span className="form-helper-text">Mínimo recomendado: 15 linhas bem desenvolvidas.</span>
+                  <span className="form-helper-text">Caracteres: {formData.historia.length}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-submit-row">
+              <p className="form-submit-note">
+                Revise sua ficha antes de enviar. Após o envio, ela irá para análise da administração.
+              </p>
+              <button type="submit" disabled={loading} className="submit-btn submit-btn--lore">
+                {loading ? 'Enviando...' : 'Enviar Sinfonia'}
+              </button>
+            </div>
           </form>
         </div>
       </div>
