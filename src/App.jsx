@@ -34,6 +34,66 @@ export const PageTransition = ({ children }) => (
   </motion.div>
 )
 
+const getVipClassName = (vipTag) => {
+  const normalizedTag = (vipTag || 'Nenhum')
+    .toLowerCase()
+    .replace(/\+\+/g, '-plus-plus')
+    .replace(/\+/g, '-plus')
+
+  return `vip-tag vip-tag--${normalizedTag}`
+}
+
+const getVipDisplayValue = (vipTag) => vipTag || 'Nenhum'
+
+const stopEvent = (event) => {
+  event.preventDefault()
+  event.stopPropagation()
+}
+
+const VIP_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++', 'Beta']
+
+const STATUS_LABELS = {
+  PENDENTE: 'PENDENTE',
+  APROVADA: 'APROVADA',
+  RECUSADA: 'RECUSADA'
+}
+
+const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onUpdateVipTag, onDeleteLore }) => (
+  <div className="admin-card">
+    <div className="admin-card-header">
+      <h3>{lore.nome}</h3>
+      <span>@{lore.discord_tag}</span>
+    </div>
+    <p><strong>Raça:</strong> {lore.raca}</p>
+    {lore.discord_id && <p><strong>ID da conta:</strong> {lore.discord_id}</p>}
+    <div className="admin-inline-vip">
+      <label>Tag VIP:</label>
+      <select
+        value={getVipDisplayValue(lore.vip_tag)}
+        onClick={stopEvent}
+        onChange={(e) => onUpdateVipTag(lore.id, e.target.value)}
+      >
+        {VIP_OPTIONS.map(tag => <option key={tag} value={tag}>{tag}</option>)}
+      </select>
+    </div>
+    <div className={getVipClassName(lore.vip_tag)}>{getVipDisplayValue(lore.vip_tag)}</div>
+    <div className={`status-badge status--${lore.status.toLowerCase()}`}>{STATUS_LABELS[lore.status] || lore.status}</div>
+    <div className="admin-actions">
+      <button onClick={() => onOpen(lore)} className="btn-analisar">{lore.status === 'PENDENTE' ? 'Analisar' : 'Ver Detalhes'}</button>
+      {lore.status === 'PENDENTE' && (
+        <>
+          <button onClick={() => onUpdateStatus(lore.id, 'APROVADA')} className="btn-approve">Aprovar</button>
+          <button onClick={() => onUpdateStatus(lore.id, 'RECUSADA')} className="btn-reject">Recusar</button>
+        </>
+      )}
+      {(lore.status === 'APROVADA' || lore.status === 'RECUSADA') && (
+        <button onClick={() => onUpdateStatus(lore.id, 'PENDENTE')} className="btn-revert">Reverter</button>
+      )}
+      <button onClick={() => onDeleteLore(lore.id)} className="btn-delete-lore">Deletar</button>
+    </div>
+  </div>
+)
+
 const FRASES_FILOSOFICAS = [
   { texto: 'A alegria não está nas coisas, está em nós.', autor: 'Richard Wagner' },
   { texto: 'O coração tem razões que a própria razão desconhece.', autor: 'Blaise Pascal' },
@@ -335,11 +395,9 @@ const Profile = ({ user }) => {
                 <h1 className="profile-username">{user.username}</h1>
                 <p className="profile-discord-tag">@{user.username}</p>
                 <p className="profile-discord-tag">ID da conta: {user.id}</p>
-                {user.vip_tag && (
-                  <span className={`vip-tag vip-tag--${user.vip_tag.toLowerCase().replace('+', '-plus')}`}>
-                    {user.vip_tag}
-                  </span>
-                )}
+                <span className={getVipClassName(user.vip_tag)}>
+                  {getVipDisplayValue(user.vip_tag)}
+                </span>
               </div>
             </div>
           </div>
@@ -391,11 +449,10 @@ const Profile = ({ user }) => {
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
                   {selectedLore.discord_id && <p><strong>ID da conta:</strong> {selectedLore.discord_id}</p>}
-                  {selectedLore.vip_tag && (
-                    <span className={`vip-tag vip-tag--${selectedLore.vip_tag.toLowerCase().replace('+', '-plus')}`}>
-                      {selectedLore.vip_tag}
-                    </span>
-                  )}
+                  <span className={getVipClassName(selectedLore.vip_tag)}>
+                    {getVipDisplayValue(selectedLore.vip_tag)}
+                  </span>
+
                   <div className="status-badge" style={{
                     backgroundColor: selectedLore.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : selectedLore.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
                     color: selectedLore.status === 'APROVADA' ? '#23a559' : selectedLore.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
@@ -528,7 +585,7 @@ const AdminPanel = ({ user }) => {
   const [bulkVipTag, setBulkVipTag] = useState('VIP')
   const [bulkUpdatingVip, setBulkUpdatingVip] = useState(false)
 
-  const vipTags = ['Nenhum', 'VIP', 'VIP+', 'VIP++', 'Beta']
+  const vipTags = VIP_OPTIONS
 
   const pendingLores = lores.filter(lore => lore.status !== 'APROVADA' && lore.status !== 'RECUSADA')
   const approvedLores = lores.filter(lore => lore.status === 'APROVADA')
@@ -604,20 +661,60 @@ const AdminPanel = ({ user }) => {
       }
     }
 
-    await supabase.from('lores').update({ status, motivo }).eq('id', id)
-    fetchAllLores()
-    if (modalOpen) setModalOpen(false)
+    if (status === 'APROVADA' || status === 'PENDENTE') {
+      motivo = null
+    }
+
+    const { error } = await supabase.from('lores').update({ status, motivo }).eq('id', id)
+
+    if (error) {
+      alert('Erro ao atualizar status: ' + error.message)
+      return
+    }
+
+    if (selectedLore && selectedLore.id === id) {
+      setSelectedLore(prev => prev ? { ...prev, status, motivo } : prev)
+    }
+
+    await fetchAllLores()
+  }
+
+  const deleteLore = async (id) => {
+    const confirmDelete = confirm('Tem certeza que deseja deletar esta whitelist? Essa ação não poderá ser desfeita.')
+    if (!confirmDelete) return
+
+    const { error } = await supabase.from('lores').delete().eq('id', id)
+
+    if (error) {
+      alert('Erro ao deletar whitelist: ' + error.message)
+      return
+    }
+
+    if (selectedLore && selectedLore.id === id) {
+      setSelectedLore(null)
+      setModalOpen(false)
+    }
+
+    await fetchAllLores()
+    await fetchAccountOptions()
+    alert('Whitelist deletada com sucesso.')
   }
 
   const updateVipTag = async (id, newTag) => {
     const vipValue = newTag === 'Nenhum' ? null : newTag
 
-    await supabase.from('lores').update({ vip_tag: vipValue }).eq('id', id)
+    const { error } = await supabase.from('lores').update({ vip_tag: vipValue }).eq('id', id)
+
+    if (error) {
+      alert('Erro ao atualizar a tag VIP: ' + error.message)
+      return
+    }
+
     await fetchAllLores()
     await fetchAccountOptions()
 
     if (selectedLore && selectedLore.id === id) {
-      setSelectedLore({ ...selectedLore, vip_tag: vipValue })
+      setSelectedLore(prev => prev ? { ...prev, vip_tag: vipValue } : prev)
     }
   }
 
@@ -711,20 +808,14 @@ const AdminPanel = ({ user }) => {
                       <p className="no-lores-message">Nenhuma lore pendente.</p>
                     ) : (
                       pendingLores.map(l => (
-                        <div key={l.id} className="admin-card">
-                          <div className="admin-card-header">
-                            <h3>{l.nome}</h3>
-                            <span>@{l.discord_tag}</span>
-                          </div>
-                          <p><strong>Raça:</strong> {l.raca}</p>
-                          {l.discord_id && <p><strong>ID da conta:</strong> {l.discord_id}</p>}
-                          <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
-                          <div className="admin-actions">
-                            <button onClick={() => { setSelectedLore(l); setModalOpen(true) }} className="btn-analisar">Analisar</button>
-                            <button onClick={() => updateStatus(l.id, 'APROVADA')} className="btn-approve">Aprovar</button>
-                            <button onClick={() => updateStatus(l.id, 'RECUSADA')} className="btn-reject">Recusar</button>
-                          </div>
-                        </div>
+                        <AdminLoreCard
+                          key={l.id}
+                          lore={l}
+                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
+                          onUpdateStatus={updateStatus}
+                          onUpdateVipTag={updateVipTag}
+                          onDeleteLore={deleteLore}
+                        />
                       ))
                     )}
                   </div>
@@ -737,19 +828,14 @@ const AdminPanel = ({ user }) => {
                       <p className="no-lores-message">Nenhuma lore aprovada.</p>
                     ) : (
                       approvedLores.map(l => (
-                        <div key={l.id} className="admin-card">
-                          <div className="admin-card-header">
-                            <h3>{l.nome}</h3>
-                            <span>@{l.discord_tag}</span>
-                          </div>
-                          <p><strong>Raça:</strong> {l.raca}</p>
-                          {l.discord_id && <p><strong>ID da conta:</strong> {l.discord_id}</p>}
-                          <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
-                          <div className="admin-actions">
-                            <button onClick={() => { setSelectedLore(l); setModalOpen(true) }} className="btn-analisar">Ver Detalhes</button>
-                            <button onClick={() => updateStatus(l.id, 'PENDENTE')} className="btn-revert">Reverter</button>
-                          </div>
-                        </div>
+                        <AdminLoreCard
+                          key={l.id}
+                          lore={l}
+                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
+                          onUpdateStatus={updateStatus}
+                          onUpdateVipTag={updateVipTag}
+                          onDeleteLore={deleteLore}
+                        />
                       ))
                     )}
                   </div>
@@ -762,19 +848,14 @@ const AdminPanel = ({ user }) => {
                       <p className="no-lores-message">Nenhuma lore recusada.</p>
                     ) : (
                       rejectedLores.map(l => (
-                        <div key={l.id} className="admin-card">
-                          <div className="admin-card-header">
-                            <h3>{l.nome}</h3>
-                            <span>@{l.discord_tag}</span>
-                          </div>
-                          <p><strong>Raça:</strong> {l.raca}</p>
-                          {l.discord_id && <p><strong>ID da conta:</strong> {l.discord_id}</p>}
-                          <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
-                          <div className="admin-actions">
-                            <button onClick={() => { setSelectedLore(l); setModalOpen(true) }} className="btn-analisar">Ver Detalhes</button>
-                            <button onClick={() => updateStatus(l.id, 'PENDENTE')} className="btn-revert">Reverter</button>
-                          </div>
-                        </div>
+                        <AdminLoreCard
+                          key={l.id}
+                          lore={l}
+                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
+                          onUpdateStatus={updateStatus}
+                          onUpdateVipTag={updateVipTag}
+                          onDeleteLore={deleteLore}
+                        />
                       ))
                     )}
                   </div>
@@ -882,26 +963,31 @@ const AdminPanel = ({ user }) => {
                   <div className={`status-badge status--${selectedLore.status.toLowerCase()}`}>{selectedLore.status}</div>
                 </div>
 
-                <div className="modal-info-grid">
-                  <div className="info-item">
-                    <User size={18} />
-                    <span><strong>Nick:</strong> {selectedLore.nick}</span>
-                  </div>
-                  <div className="info-item">
-                    <ShieldCheck size={18} />
-                    <span><strong>Raça:</strong> {selectedLore.raca}</span>
-                  </div>
-                  <div className="info-item">
-                    <Star size={18} />
-                    <span><strong>Idade:</strong> {selectedLore.idade}</span>
-                  </div>
-                  {selectedLore.discord_id && (
+                  <div className="modal-info-grid">
                     <div className="info-item">
-                      <DollarSign size={18} />
-                      <span><strong>ID da conta:</strong> {selectedLore.discord_id}</span>
+                      <User size={18} />
+                      <span><strong>Nick:</strong> {selectedLore.nick}</span>
                     </div>
-                  )}
-                </div>
+                    <div className="info-item">
+                      <ShieldCheck size={18} />
+                      <span><strong>Raça:</strong> {selectedLore.raca}</span>
+                    </div>
+                    <div className="info-item">
+                      <Star size={18} />
+                      <span><strong>Idade:</strong> {selectedLore.idade}</span>
+                    </div>
+                    {selectedLore.discord_id && (
+                      <div className="info-item">
+                        <DollarSign size={18} />
+                        <span><strong>ID da conta:</strong> {selectedLore.discord_id}</span>
+                      </div>
+                    )}
+                    <div className="info-item info-item--vip">
+                      <Heart size={18} />
+                      <span><strong>VIP atual:</strong> {getVipDisplayValue(selectedLore.vip_tag)}</span>
+                    </div>
+                  </div>
+
 
                 <div className="modal-historia-content">
                   <h3><BookOpen size={20} /> História:</h3>
@@ -915,28 +1001,33 @@ const AdminPanel = ({ user }) => {
                   </div>
                 )}
 
-                <div className="admin-modal-actions">
-                  <div className="admin-vip-tag">
-                    <label>Tag VIP:</label>
-                    <select
-                      value={selectedLore.vip_tag || 'Nenhum'}
-                      onChange={(e) => updateVipTag(selectedLore.id, e.target.value)}
-                    >
-                      {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
-                    </select>
+                  <div className="admin-modal-actions">
+                    <div className="admin-vip-tag">
+                      <label>Tag VIP:</label>
+                      <select
+                        value={getVipDisplayValue(selectedLore.vip_tag)}
+                        onChange={(e) => updateVipTag(selectedLore.id, e.target.value)}
+                      >
+                        {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
+                      </select>
+                      <span className={getVipClassName(selectedLore.vip_tag)}>
+                        {getVipDisplayValue(selectedLore.vip_tag)}
+                      </span>
+                    </div>
+                    <div className="admin-decision-buttons">
+                      {selectedLore.status === 'PENDENTE' && (
+                        <>
+                          <button onClick={() => updateStatus(selectedLore.id, 'APROVADA')} className="btn-approve">Aprovar Lore</button>
+                          <button onClick={() => updateStatus(selectedLore.id, 'RECUSADA')} className="btn-reject">Recusar Lore</button>
+                        </>
+                      )}
+                      {(selectedLore.status === 'APROVADA' || selectedLore.status === 'RECUSADA') && (
+                        <button onClick={() => updateStatus(selectedLore.id, 'PENDENTE')} className="btn-revert">Reverter para Pendente</button>
+                      )}
+                      <button onClick={() => deleteLore(selectedLore.id)} className="btn-delete-lore">Deletar Lore</button>
+                    </div>
                   </div>
-                  <div className="admin-decision-buttons">
-                    {selectedLore.status === 'PENDENTE' && (
-                      <>
-                        <button onClick={() => updateStatus(selectedLore.id, 'APROVADA')} className="btn-approve">Aprovar Lore</button>
-                        <button onClick={() => updateStatus(selectedLore.id, 'RECUSADA')} className="btn-reject">Recusar Lore</button>
-                      </>
-                    )}
-                    {(selectedLore.status === 'APROVADA' || selectedLore.status === 'RECUSADA') && (
-                      <button onClick={() => updateStatus(selectedLore.id, 'PENDENTE')} className="btn-revert">Reverter para Pendente</button>
-                    )}
-                  </div>
-                </div>
+
               </motion.div>
             </div>
           )}
