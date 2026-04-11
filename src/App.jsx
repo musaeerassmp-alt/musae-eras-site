@@ -58,7 +58,7 @@ const STATUS_LABELS = {
   RECUSADA: 'RECUSADA'
 }
 
-const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onUpdateVipTag, onDeleteLore }) => (
+const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onDeleteLore }) => (
   <div className="admin-card">
     <div className="admin-card-header">
       <h3>{lore.nome}</h3>
@@ -66,16 +66,6 @@ const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onUpdateVipTag, onDeleteL
     </div>
     <p><strong>Raça:</strong> {lore.raca}</p>
     {lore.discord_id && <p><strong>ID da conta:</strong> {lore.discord_id}</p>}
-    <div className="admin-inline-vip">
-      <label>Tag VIP:</label>
-      <select
-        value={getVipDisplayValue(lore.vip_tag)}
-        onClick={stopEvent}
-        onChange={(e) => onUpdateVipTag(lore.id, e.target.value)}
-      >
-        {VIP_OPTIONS.map(tag => <option key={tag} value={tag}>{tag}</option>)}
-      </select>
-    </div>
     <div className={getVipClassName(lore.vip_tag)}>{getVipDisplayValue(lore.vip_tag)}</div>
     <div className={`status-badge status--${lore.status.toLowerCase()}`}>{STATUS_LABELS[lore.status] || lore.status}</div>
     <div className="admin-actions">
@@ -651,21 +641,7 @@ const AdminPanel = ({ user }) => {
   }
 
   const updateStatus = async (id, status) => {
-    let motivo = null
-
-    if (status === 'RECUSADA') {
-      motivo = prompt('Por favor, insira o motivo da recusa:')
-      if (!motivo || motivo.trim() === '') {
-        alert('O motivo da recusa é obrigatório.')
-        return
-      }
-    }
-
-    if (status === 'APROVADA' || status === 'PENDENTE') {
-      motivo = null
-    }
-
-    const { error } = await supabase.from('lores').update({ status, motivo }).eq('id', id)
+    const { error } = await supabase.from('lores').update({ status }).eq('id', id)
 
     if (error) {
       alert('Erro ao atualizar status: ' + error.message)
@@ -673,7 +649,7 @@ const AdminPanel = ({ user }) => {
     }
 
     if (selectedLore && selectedLore.id === id) {
-      setSelectedLore(prev => prev ? { ...prev, status, motivo } : prev)
+      setSelectedLore(prev => prev ? { ...prev, status } : prev)
     }
 
     await fetchAllLores()
@@ -698,24 +674,6 @@ const AdminPanel = ({ user }) => {
     await fetchAllLores()
     await fetchAccountOptions()
     alert('Whitelist deletada com sucesso.')
-  }
-
-  const updateVipTag = async (id, newTag) => {
-    const vipValue = newTag === 'Nenhum' ? null : newTag
-
-    const { error } = await supabase.from('lores').update({ vip_tag: vipValue }).eq('id', id)
-
-    if (error) {
-      alert('Erro ao atualizar a tag VIP: ' + error.message)
-      return
-    }
-
-    await fetchAllLores()
-    await fetchAccountOptions()
-
-    if (selectedLore && selectedLore.id === id) {
-      setSelectedLore(prev => prev ? { ...prev, vip_tag: vipValue } : prev)
-    }
   }
 
   const applyVipToAccount = async () => {
@@ -813,7 +771,6 @@ const AdminPanel = ({ user }) => {
                           lore={l}
                           onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
                           onUpdateStatus={updateStatus}
-                          onUpdateVipTag={updateVipTag}
                           onDeleteLore={deleteLore}
                         />
                       ))
@@ -833,7 +790,6 @@ const AdminPanel = ({ user }) => {
                           lore={l}
                           onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
                           onUpdateStatus={updateStatus}
-                          onUpdateVipTag={updateVipTag}
                           onDeleteLore={deleteLore}
                         />
                       ))
@@ -853,7 +809,6 @@ const AdminPanel = ({ user }) => {
                           lore={l}
                           onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
                           onUpdateStatus={updateStatus}
-                          onUpdateVipTag={updateVipTag}
                           onDeleteLore={deleteLore}
                         />
                       ))
@@ -1002,14 +957,8 @@ const AdminPanel = ({ user }) => {
                 )}
 
                   <div className="admin-modal-actions">
-                    <div className="admin-vip-tag">
-                      <label>Tag VIP:</label>
-                      <select
-                        value={getVipDisplayValue(selectedLore.vip_tag)}
-                        onChange={(e) => updateVipTag(selectedLore.id, e.target.value)}
-                      >
-                        {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
-                      </select>
+                    <div className="admin-vip-display-only">
+                      <span className="admin-vip-display-label">Tag VIP da conta:</span>
                       <span className={getVipClassName(selectedLore.vip_tag)}>
                         {getVipDisplayValue(selectedLore.vip_tag)}
                       </span>
