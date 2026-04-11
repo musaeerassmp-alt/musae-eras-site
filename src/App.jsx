@@ -14,9 +14,6 @@ const supabase = createClient(
 const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID
 const REDIRECT_URI = window.location.origin + '/login'
 
-// ============================================================
-// COMPONENTE: SidebarDivider (Divisor com ícone musical)
-// ============================================================
 const SidebarDivider = () => (
   <div className="sidebar-divider">
     <div className="divider-line"></div>
@@ -30,7 +27,7 @@ export const PageTransition = ({ children }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    transition={{ duration: 0.4, ease: "easeOut" }}
+    transition={{ duration: 0.4, ease: 'easeOut' }}
     style={{ width: '100%' }}
   >
     {children}
@@ -38,24 +35,26 @@ export const PageTransition = ({ children }) => (
 )
 
 const FRASES_FILOSOFICAS = [
-  { texto: "A alegria não está nas coisas, está em nós.", autor: "Richard Wagner" },
-  { texto: "O coração tem razões que a própria razão desconhece.", autor: "Blaise Pascal" },
-  { texto: "Onde há amor, há vida.", autor: "Mahatma Gandhi" },
-  { texto: "A música exprime o que não pode ser dito e sobre o qual é impossível calar.", autor: "Victor Hugo" },
-  { texto: "A felicidade é a única coisa que se duplica quando se compartilha.", autor: "Albert Schweitzer" },
-  { texto: "A beleza das coisas existe no espírito de quem as contempla.", autor: "David Hume" },
-  { texto: "O homem é o que ele sente.", autor: "Aristóteles" },
-  { texto: "A melancolia é a felicidade de ser triste.", autor: "Victor Hugo" },
-  { texto: "Sentir é criar. Sentir é pensar sem ideias.", autor: "Fernando Pessoa" },
-  { texto: "A amizade é uma alma que habita em dois corpos.", autor: "Aristóteles" }
+  { texto: 'A alegria não está nas coisas, está em nós.', autor: 'Richard Wagner' },
+  { texto: 'O coração tem razões que a própria razão desconhece.', autor: 'Blaise Pascal' },
+  { texto: 'Onde há amor, há vida.', autor: 'Mahatma Gandhi' },
+  { texto: 'A música exprime o que não pode ser dito e sobre o qual é impossível calar.', autor: 'Victor Hugo' },
+  { texto: 'A felicidade é a única coisa que se duplica quando se compartilha.', autor: 'Albert Schweitzer' },
+  { texto: 'A beleza das coisas existe no espírito de quem as contempla.', autor: 'David Hume' },
+  { texto: 'O homem é o que ele sente.', autor: 'Aristóteles' },
+  { texto: 'A melancolia é a felicidade de ser triste.', autor: 'Victor Hugo' },
+  { texto: 'Sentir é criar. Sentir é pensar sem ideias.', autor: 'Fernando Pessoa' },
+  { texto: 'A amizade é uma alma que habita em dois corpos.', autor: 'Aristóteles' }
 ]
 
 const Home = () => {
-  const [frase, setFrase] = useState({ texto: "", autor: "" })
+  const [frase, setFrase] = useState({ texto: '', autor: '' })
+
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * FRASES_FILOSOFICAS.length)
     setFrase(FRASES_FILOSOFICAS[randomIndex])
   }, [])
+
   return (
     <PageTransition>
       <div className="main-content home-section">
@@ -83,9 +82,9 @@ const Forum = () => {
   const [selectedRace, setSelectedRace] = useState(null)
 
   const races = [
-    { 
-      id: 'humanos', 
-      name: 'Humanos', 
+    {
+      id: 'humanos',
+      name: 'Humanos',
       icon: <Users size={24} />,
       content: {
         expectativa: '83 anos de persistência',
@@ -96,19 +95,19 @@ const Forum = () => {
         magia: 'Dizem que somos páginas em branco. Enquanto um anjo nasce com a luz e um demônio com o fogo, o humano nasce com o vazio — e é nesse vazio que reside nossa maior vantagem. Podemos aprender qualquer segredo arcano, trilhar qualquer caminho místico. Não somos os mestres naturais de nenhum elemento, mas somos os que evoluem com a velocidade de um vendaval, preenchendo nossas páginas com a magia que escolhermos conquistar.',
         lendas: [
           {
-            nome: "Krampus",
-            relato: "Krampus é uma criatura abominável, com patas de bode, chifres de cabra, cauda com ponta como de tridente, garras afiadas como as de um leão e língua de serpente. Muitos pais advertem seus filhos para se comportarem e serem obedientes, caso contrário Krampus as buscará e as castigará. Existem diversos relatos de crianças travessas que somem no primeiro solstício de inverno e aparecem somente a noite, com marcas de chicote nas costas e com os olhos cheios de temor, mas com uma lição aprendida: respeite seus pais."
+            nome: 'Krampus',
+            relato: 'Krampus é uma criatura abominável, com patas de bode, chifres de cabra, cauda com ponta como de tridente, garras afiadas como as de um leão e língua de serpente. Muitos pais advertem seus filhos para se comportarem e serem obedientes, caso contrário Krampus as buscará e as castigará. Existem diversos relatos de crianças travessas que somem no primeiro solstício de inverno e aparecem somente a noite, com marcas de chicote nas costas e com os olhos cheios de temor, mas com uma lição aprendida: respeite seus pais.'
           },
           {
-            nome: "Althira",
-            relato: "Dizem que o espírito de Althira vaga pelos mares cheia de raiva e sede de vingança. Ela atrai qualquer homem que veja com suas canções e aparência exuberante, o espírito então os afoga e naufraga suas embarcações. Relatos dizem que Althira ignora embarcações cujo o capitão seja uma mulher."
+            nome: 'Althira',
+            relato: 'Dizem que o espírito de Althira vaga pelos mares cheia de raiva e sede de vingança. Ela atrai qualquer homem que veja com suas canções e aparência exuberante, o espírito então os afoga e naufraga suas embarcações. Relatos dizem que Althira ignora embarcações cujo o capitão seja uma mulher.'
           },
           {
-            nome: "Kaelthar, a Luz do Céu",
+            nome: 'Kaelthar, a Luz do Céu',
             relato: "Há um século, em meio a conflitos humanos, uma luz intensa teria descido do céu. Dela, um ser alado com voz de trovão surgiu dizendo: 'Não temam, eis que está sobre vós a justiça dos céus'. O ser exterminou o grupo maligno 'Sangue e Aço' de maneira limpa e rápida. Desde esse dia, diversas canções foram feitas em homenagem a este ser misterioso que recebeu o nome de: 'Kaelthar das Himmelslicht'."
           },
           {
-            nome: "Vaelion, a Sorte",
+            nome: 'Vaelion, a Sorte',
             relato: "Séculos atrás, um surto de doença quase dizimou os humanos. Tomados pelo desespero, o povo cantava: 'Alguém por favor atenda ao nosso clamor, mude a nossa sorte e acabe com nossa dor'. Misteriosamente, a doença acabou conforme pediram. Hoje, as pessoas continuam proferindo este canto e dão o nome de 'Vaelion, a sortuda' para a entidade que os atendeu."
           }
         ],
@@ -140,7 +139,10 @@ const Forum = () => {
           <div className="forum-nav">
             <button
               className={`forum-nav-btn ${activeSection === 'historia' ? 'active' : ''}`}
-              onClick={() => { setActiveSection('historia'); setSelectedRace(null); }}
+              onClick={() => {
+                setActiveSection('historia')
+                setSelectedRace(null)
+              }}
             >
               📖 História do Mundo
             </button>
@@ -151,7 +153,7 @@ const Forum = () => {
               👥 Raças Disponíveis
             </button>
           </div>
-          
+
           <div className="forum-content">
             <AnimatePresence mode="wait">
               {activeSection === 'intro' && (
@@ -170,21 +172,17 @@ const Forum = () => {
                     <div className="lore-text-content">
                       <p className="lore-highlight">Na vasta e silenciosa escuridão do universe, algo cantou.</p>
                       <p>Dessa primeira nota, o silêncio foi quebrado e o mundo começou a se moldar. Onde antes havia apenas o vazio, surgiram montanhas que parecem tocar o céu, florestas que sussurram segredos ao vento e oceanos que guardam o peso de eras esquecidas.</p>
-                      
+
                       <div className="lore-divider"><Music size={16} /></div>
-                      
+
                       <p>Muito antes de sua chegada, no ano 999, as terras deste continente já carregavam cicatrizes de histórias antigas — impérios erguidos, alianças seladas e guerras que quase apagaram civilizações inteiras. Foi nesse passado distante que nasceu o primeiro grande reino humano, marcando o início de uma nova era.</p>
-                      
-                      <p>Agora, no ano 1000, um marco histórico se aproxima: o milésimo aniversário do primeiro reino humano, da grandiosa <span className="text-primary">União entre as Raças</span> e da fundação da capital <span className="text-primary">Chrona</span>. Este antigo tratado, forjado em tempos imemoriais, assegura a paz e a coexistência entre todas as raças.</p>
-                      
+                      <p>No presente, o mundo se encontra em um raro momento de equilíbrio. Após gerações de conflitos entre povos, fronteiras foram redesenhadas e alianças diplomáticas mantêm a paz entre os grandes reinos. Esse período de estabilidade permitiu o florescimento das cidades, do comércio e da cultura. Caravanas atravessam rotas antes perigosas, navios cruzam os mares com mais frequência, e histórias de oportunidades atraem aventureiros, nobres caídos, estudiosos e sonhadores de todos os cantos.</p>
                       <p>É neste cenário de celebração e expectativa que você, um desses viajantes, deixa para trás as pequenas ilhas onde cresceu e cruza as águas incertas em busca de algo maior. Seja por ambição, necessidade ou por um chamado que nem mesmo você compreende, seu barco corta as ondas em direção ao grande continente.</p>
-                      
                       <p>No horizonte, ergue-se <span className="text-primary">Chrona</span>, a capital — uma cidade monumental, coração político e simbólico de toda a região, fundada no mesmo ano do Tratado. Sua chegada não poderia acontecer em momento mais decisivo.</p>
-                      
                       <p>As antigas cidades, construídas sobre camadas de tempo e esquecimento, continuam vivas. Humanos dominam grande parte delas, mas não estão sozinhos: entre becos e mercados, seres de outras naturezas coexistem, observam... e conspiram. Neste mosaico de raças e histórias, forças ocultas começam a se mover com mais intensidade. Segredos enterrados no passado ecoam novamente, como notas esquecidas que insistem em retornar à melodia.</p>
-                      
+
                       <div className="lore-divider"><Music size={16} /></div>
-                      
+
                       <p className="lore-footer">Ao desembarcar nestas terras, você não é apenas um espectador, mas uma nova nota nesta sinfonia inacabada. O que você encontrará nas ruínas do passado? De que lado ficará quando a harmonia começar a ruir? E quais objetivos irá perseguir?</p>
                     </div>
                   </div>
@@ -297,11 +295,25 @@ const Profile = ({ user }) => {
   }, [user])
 
   const fetchUserLores = async () => {
-    const { data } = await supabase
-      .from("lores")
-      .select("*, vip_tag") // Seleciona também a vip_tag
-      .or(`discord_tag.eq.${user.username},discord_tag.eq.${user.username}#0`)
-      .order("created_at", { ascending: false })
+    const filtros = []
+
+    if (user?.id) filtros.push(`discord_id.eq.${user.id}`)
+    if (user?.username) {
+      filtros.push(`discord_tag.eq.${user.username}`)
+      filtros.push(`discord_tag.eq.${user.username}#0`)
+    }
+
+    const { data, error } = await supabase
+      .from('lores')
+      .select('*')
+      .or(filtros.join(','))
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Erro ao buscar lores do usuário:', error)
+      return
+    }
+
     setLores(data || [])
   }
 
@@ -313,17 +325,18 @@ const Profile = ({ user }) => {
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-user-info">
-              <img 
-                src={user.avatar_url} 
-                alt="" 
-                className="profile-avatar" 
+              <img
+                src={user.avatar_url}
+                alt=""
+                className="profile-avatar"
                 onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff` }}
               />
               <div>
                 <h1 className="profile-username">{user.username}</h1>
                 <p className="profile-discord-tag">@{user.username}</p>
+                <p className="profile-discord-tag">ID da conta: {user.id}</p>
                 {user.vip_tag && (
-                  <span className={`vip-tag vip-tag--${user.vip_tag.toLowerCase().replace("+", "-plus")}`}>
+                  <span className={`vip-tag vip-tag--${user.vip_tag.toLowerCase().replace('+', '-plus')}`}>
                     {user.vip_tag}
                   </span>
                 )}
@@ -340,10 +353,10 @@ const Profile = ({ user }) => {
             ) : (
               <div className="profile-lores-grid">
                 {lores.map(f => (
-                  <div key={f.id} className="profile-lore-card" onClick={() => { setSelectedLore(f); setModalOpen(true); }}>
-                    <div className="status-badge" style={{ 
-                      backgroundColor: f.status === "APROVADA" ? "rgba(35, 165, 89, 0.2)" : f.status === "RECUSADA" ? "rgba(242, 63, 71, 0.2)" : "rgba(240, 178, 50, 0.2)",
-                      color: f.status === "APROVADA" ? "#23a559" : f.status === "RECUSADA" ? "#f23f47" : "#f0b232"
+                  <div key={f.id} className="profile-lore-card" onClick={() => { setSelectedLore(f); setModalOpen(true) }}>
+                    <div className="status-badge" style={{
+                      backgroundColor: f.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : f.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
+                      color: f.status === 'APROVADA' ? '#23a559' : f.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
                     }}>
                       {f.status}
                     </div>
@@ -352,6 +365,7 @@ const Profile = ({ user }) => {
                     </div>
                     <p><strong>Nome:</strong> {f.nome}</p>
                     <p><strong>Raça:</strong> {f.raca}</p>
+                    {f.discord_id && <p><strong>ID da conta:</strong> {f.discord_id}</p>}
                     <p className="profile-lore-preview">{f.historia.substring(0, 100)}...</p>
                   </div>
                 ))}
@@ -363,8 +377,8 @@ const Profile = ({ user }) => {
         <AnimatePresence>
           {modalOpen && selectedLore && (
             <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-              <motion.div 
-                className="modal-content" 
+              <motion.div
+                className="modal-content"
                 onClick={e => e.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -376,14 +390,15 @@ const Profile = ({ user }) => {
                   <p><strong>Nick:</strong> {selectedLore.nick}</p>
                   <p><strong>Raça:</strong> {selectedLore.raca}</p>
                   <p><strong>Idade:</strong> {selectedLore.idade}</p>
+                  {selectedLore.discord_id && <p><strong>ID da conta:</strong> {selectedLore.discord_id}</p>}
                   {selectedLore.vip_tag && (
-                    <span className={`vip-tag vip-tag--${selectedLore.vip_tag.toLowerCase().replace("+", "-plus")}`}>
+                    <span className={`vip-tag vip-tag--${selectedLore.vip_tag.toLowerCase().replace('+', '-plus')}`}>
                       {selectedLore.vip_tag}
                     </span>
                   )}
-                  <div className="status-badge" style={{ 
-                    backgroundColor: selectedLore.status === "APROVADA" ? "rgba(35, 165, 89, 0.2)" : selectedLore.status === "RECUSADA" ? "rgba(242, 63, 71, 0.2)" : "rgba(240, 178, 50, 0.2)",
-                    color: selectedLore.status === "APROVADA" ? "#23a559" : selectedLore.status === "RECUSADA" ? "#f23f47" : "#f0b232"
+                  <div className="status-badge" style={{
+                    backgroundColor: selectedLore.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : selectedLore.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
+                    color: selectedLore.status === 'APROVADA' ? '#23a559' : selectedLore.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
                   }}>
                     {selectedLore.status}
                   </div>
@@ -392,7 +407,7 @@ const Profile = ({ user }) => {
                   <h3>História:</h3>
                   <p>{selectedLore.historia}</p>
                 </div>
-                {selectedLore.status === "RECUSADA" && selectedLore.motivo && (
+                {selectedLore.status === 'RECUSADA' && selectedLore.motivo && (
                   <div className="profile-motivo-box">
                     <strong>Motivo da Recusa:</strong>
                     <p>{selectedLore.motivo}</p>
@@ -415,15 +430,23 @@ const CriarFicha = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!user) return alert('Faça login primeiro!')
+
     setLoading(true)
+
     const { error } = await supabase.from('lores').insert([{
       ...formData,
       discord_tag: user.username,
+      discord_id: user.id,
       status: 'PENDENTE'
     }])
+
     setLoading(false)
+
     if (error) alert('Erro ao enviar: ' + error.message)
-    else { alert('Ficha enviada com sucesso!'); navigate('/perfil') }
+    else {
+      alert('Ficha enviada com sucesso!')
+      navigate('/perfil')
+    }
   }
 
   return (
@@ -434,25 +457,29 @@ const CriarFicha = ({ user }) => {
           <form onSubmit={handleSubmit} className="ficha-form">
             <div className="form-group">
               <label>Nome do Personagem</label>
-              <input type="text" required value={formData.nome} onChange={e => setFormData({...formData, nome: e.target.value})} />
+              <input type="text" required value={formData.nome} onChange={e => setFormData({ ...formData, nome: e.target.value })} />
             </div>
             <div className="form-group">
               <label>Nick no Minecraft</label>
-              <input type="text" required value={formData.nick} onChange={e => setFormData({...formData, nick: e.target.value})} />
+              <input type="text" required value={formData.nick} onChange={e => setFormData({ ...formData, nick: e.target.value })} />
             </div>
             <div className="form-group">
               <label>Raça</label>
-              <select value={formData.raca} onChange={e => setFormData({...formData, raca: e.target.value})}>
-                <option>Humanos</option><option>Anjos</option><option>Demônios</option><option>Quimeras</option><option>Aquarianos</option>
+              <select value={formData.raca} onChange={e => setFormData({ ...formData, raca: e.target.value })}>
+                <option>Humanos</option>
+                <option>Anjos</option>
+                <option>Demônios</option>
+                <option>Quimeras</option>
+                <option>Aquarianos</option>
               </select>
             </div>
             <div className="form-group">
               <label>Idade</label>
-              <input type="number" required value={formData.idade} onChange={e => setFormData({...formData, idade: e.target.value})} />
+              <input type="number" required value={formData.idade} onChange={e => setFormData({ ...formData, idade: e.target.value })} />
             </div>
             <div className="form-group">
               <label>História (Mínimo 15 linhas)</label>
-              <textarea required rows="10" value={formData.historia} onChange={e => setFormData({...formData, historia: e.target.value})} />
+              <textarea required rows="10" value={formData.historia} onChange={e => setFormData({ ...formData, historia: e.target.value })} />
             </div>
             <button type="submit" disabled={loading} className="submit-btn">{loading ? 'Enviando...' : 'Enviar Sinfonia'}</button>
           </form>
@@ -472,9 +499,10 @@ const LoginPage = () => {
   const fetchDiscordUser = async (token) => {
     const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
     const data = await res.json()
-    const avatarUrl = data.avatar 
+    const avatarUrl = data.avatar
       ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`
       : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`
+
     const user = { id: data.id, username: data.username, avatar_url: avatarUrl }
     localStorage.setItem('discord_user', JSON.stringify(user))
     window.location.href = '/perfil'
@@ -488,107 +516,194 @@ const LoginPage = () => {
 }
 
 const AdminPanel = ({ user }) => {
-  const [activeTab, setActiveTab] = useState("lores");
-  const [lores, setLores] = useState([]);
-  const [admins, setAdmins] = useState([]);
-  const [newAdminName, setNewAdminName] = useState("");
-  const [selectedLore, setSelectedLore] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const vipTags = ["Nenhum", "VIP", "VIP+", "VIP++", "Beta"];
+  const [activeTab, setActiveTab] = useState('lores')
+  const [lores, setLores] = useState([])
+  const [admins, setAdmins] = useState([])
+  const [newAdminName, setNewAdminName] = useState('')
+  const [selectedLore, setSelectedLore] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [accountOptions, setAccountOptions] = useState([])
+  const [selectedAccountId, setSelectedAccountId] = useState('')
+  const [manualAccountId, setManualAccountId] = useState('')
+  const [bulkVipTag, setBulkVipTag] = useState('VIP')
+  const [bulkUpdatingVip, setBulkUpdatingVip] = useState(false)
 
-  const pendingLores = lores.filter(lore => lore.status !== "APROVADA" && lore.status !== "RECUSADA");
-  const approvedLores = lores.filter(lore => lore.status === "APROVADA");
-  const rejectedLores = lores.filter(lore => lore.status === "RECUSADA");
+  const vipTags = ['Nenhum', 'VIP', 'VIP+', 'VIP++', 'Beta']
+
+  const pendingLores = lores.filter(lore => lore.status !== 'APROVADA' && lore.status !== 'RECUSADA')
+  const approvedLores = lores.filter(lore => lore.status === 'APROVADA')
+  const rejectedLores = lores.filter(lore => lore.status === 'RECUSADA')
 
   useEffect(() => {
     if (user) {
-      fetchAllLores();
-      fetchAllAdmins();
+      fetchAllLores()
+      fetchAllAdmins()
+      fetchAccountOptions()
     }
-  }, [user]);
+  }, [user])
 
   const fetchAllLores = async () => {
-    const { data, error } = await supabase.from("lores").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
     if (error) {
-      console.error("Erro ao buscar lores:", error);
-      alert("Erro ao carregar lores: " + error.message);
+      console.error('Erro ao buscar lores:', error)
+      alert('Erro ao carregar lores: ' + error.message)
     } else {
-      setLores(data || []);
+      setLores(data || [])
     }
-  };
+  }
 
   const fetchAllAdmins = async () => {
-    const { data } = await supabase.from("admins").select("*");
-    setAdmins(data || []);
-  };
+    const { data } = await supabase.from('admins').select('*')
+    setAdmins(data || [])
+  }
+
+  const fetchAccountOptions = async () => {
+    const { data, error } = await supabase
+      .from('lores')
+      .select('discord_id, discord_tag, vip_tag, created_at')
+      .not('discord_id', 'is', null)
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Erro ao buscar contas para VIP:', error)
+      return
+    }
+
+    const groupedAccounts = (data || []).reduce((acc, lore) => {
+      if (!lore.discord_id) return acc
+
+      if (!acc[lore.discord_id]) {
+        acc[lore.discord_id] = {
+          discord_id: lore.discord_id,
+          discord_tag: lore.discord_tag || 'Sem username',
+          current_vip_tag: lore.vip_tag || 'Nenhum',
+          total_whitelists: 0
+        }
+      }
+
+      acc[lore.discord_id].total_whitelists += 1
+
+      if (acc[lore.discord_id].current_vip_tag === 'Nenhum' && lore.vip_tag) {
+        acc[lore.discord_id].current_vip_tag = lore.vip_tag
+      }
+
+      return acc
+    }, {})
+
+    setAccountOptions(Object.values(groupedAccounts))
+  }
 
   const updateStatus = async (id, status) => {
-    let motivo = null;
-    if (status === "RECUSADA") {
-      motivo = prompt("Por favor, insira o motivo da recusa:");
-      if (!motivo || motivo.trim() === "") {
-        alert("O motivo da recusa é obrigatório.");
-        return;
+    let motivo = null
+
+    if (status === 'RECUSADA') {
+      motivo = prompt('Por favor, insira o motivo da recusa:')
+      if (!motivo || motivo.trim() === '') {
+        alert('O motivo da recusa é obrigatório.')
+        return
       }
     }
-    await supabase.from("lores").update({ status, motivo }).eq("id", id);
-    fetchAllLores();
-    if (modalOpen) setModalOpen(false);
-  };
+
+    await supabase.from('lores').update({ status, motivo }).eq('id', id)
+    fetchAllLores()
+    if (modalOpen) setModalOpen(false)
+  }
 
   const updateVipTag = async (id, newTag) => {
-    await supabase.from("lores").update({ vip_tag: newTag === "Nenhum" ? null : newTag }).eq("id", id);
-    fetchAllLores();
-    // Atualiza a lore selecionada no modal, se estiver aberta
+    const vipValue = newTag === 'Nenhum' ? null : newTag
+
+    await supabase.from('lores').update({ vip_tag: vipValue }).eq('id', id)
+    await fetchAllLores()
+    await fetchAccountOptions()
+
     if (selectedLore && selectedLore.id === id) {
-      setSelectedLore({ ...selectedLore, vip_tag: newTag === "Nenhum" ? null : newTag });
+      setSelectedLore({ ...selectedLore, vip_tag: vipValue })
     }
-  };
+  }
+
+  const applyVipToAccount = async () => {
+    const targetAccountId = manualAccountId.trim() || selectedAccountId
+
+    if (!targetAccountId) {
+      alert('Selecione uma conta ou digite manualmente o ID da conta.')
+      return
+    }
+
+    setBulkUpdatingVip(true)
+
+    const vipValue = bulkVipTag === 'Nenhum' ? null : bulkVipTag
+
+    const { data, error } = await supabase
+      .from('lores')
+      .update({ vip_tag: vipValue })
+      .eq('discord_id', targetAccountId)
+      .select('id')
+
+    setBulkUpdatingVip(false)
+
+    if (error) {
+      alert('Erro ao aplicar VIP na conta: ' + error.message)
+      return
+    }
+
+    const totalAtualizado = data?.length || 0
+
+    if (totalAtualizado === 0) {
+      alert('Nenhuma whitelist foi encontrada para esse ID de conta.')
+      return
+    }
+
+    alert(`VIP aplicado com sucesso em ${totalAtualizado} whitelist(s).`)
+
+    setSelectedAccountId('')
+    setManualAccountId('')
+    await fetchAllLores()
+    await fetchAccountOptions()
+  }
 
   const addAdmin = async () => {
-    if (!newAdminName.trim()) return alert("Digite um nome de usuário do Discord.");
-    const { data, error } = await supabase.from("admins").insert([{ discord_username: newAdminName.trim() }]);
+    if (!newAdminName.trim()) return alert('Digite um nome de usuário do Discord.')
+    const { error } = await supabase.from('admins').insert([{ discord_username: newAdminName.trim() }])
     if (error) {
-      alert("Erro ao adicionar admin: " + error.message);
+      alert('Erro ao adicionar admin: ' + error.message)
     } else {
-      setNewAdminName("");
-      fetchAllAdmins();
+      setNewAdminName('')
+      fetchAllAdmins()
     }
-  };
+  }
 
   const removeAdmin = async (id) => {
-    if (!confirm("Tem certeza que deseja remover este administrador?")) return;
-    await supabase.from("admins").delete().eq("id", id);
-    fetchAllAdmins();
-  };
+    if (!confirm('Tem certeza que deseja remover este administrador?')) return
+    await supabase.from('admins').delete().eq('id', id)
+    fetchAllAdmins()
+  }
 
-  if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>;
+  if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>
 
   return (
     <PageTransition>
       <div className="main-content">
         <div className="admin-container">
           <h1 className="admin-title">👑 Painel Administrativo</h1>
-          
+
           <div className="admin-nav">
-            <button 
-              className={`admin-nav-btn ${activeTab === "lores" ? "active" : ""}`}
-              onClick={() => setActiveTab("lores")}
+            <button
+              className={`admin-nav-btn ${activeTab === 'lores' ? 'active' : ''}`}
+              onClick={() => setActiveTab('lores')}
             >
               Gerenciar Lores
             </button>
-            <button 
-              className={`admin-nav-btn ${activeTab === "admins" ? "active" : ""}`}
-              onClick={() => setActiveTab("admins")}
+            <button
+              className={`admin-nav-btn ${activeTab === 'admins' ? 'active' : ''}`}
+              onClick={() => setActiveTab('admins')}
             >
               Gerenciar Admins
             </button>
           </div>
 
           <AnimatePresence mode="wait">
-            {activeTab === "lores" && (
+            {activeTab === 'lores' && (
               <motion.div key="lores-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="lores-management-grid">
-                
                 <div className="lore-column">
                   <h2>Em Análise</h2>
                   <div className="admin-grid">
@@ -602,11 +717,12 @@ const AdminPanel = ({ user }) => {
                             <span>@{l.discord_tag}</span>
                           </div>
                           <p><strong>Raça:</strong> {l.raca}</p>
+                          {l.discord_id && <p><strong>ID da conta:</strong> {l.discord_id}</p>}
                           <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
                           <div className="admin-actions">
-                            <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Analisar</button>
-                            <button onClick={() => updateStatus(l.id, "APROVADA")} className="btn-approve">Aprovar</button>
-                            <button onClick={() => updateStatus(l.id, "RECUSADA")} className="btn-reject">Recusar</button>
+                            <button onClick={() => { setSelectedLore(l); setModalOpen(true) }} className="btn-analisar">Analisar</button>
+                            <button onClick={() => updateStatus(l.id, 'APROVADA')} className="btn-approve">Aprovar</button>
+                            <button onClick={() => updateStatus(l.id, 'RECUSADA')} className="btn-reject">Recusar</button>
                           </div>
                         </div>
                       ))
@@ -627,10 +743,11 @@ const AdminPanel = ({ user }) => {
                             <span>@{l.discord_tag}</span>
                           </div>
                           <p><strong>Raça:</strong> {l.raca}</p>
+                          {l.discord_id && <p><strong>ID da conta:</strong> {l.discord_id}</p>}
                           <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
                           <div className="admin-actions">
-                            <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Ver Detalhes</button>
-                            <button onClick={() => updateStatus(l.id, "PENDENTE")} className="btn-revert">Reverter</button>
+                            <button onClick={() => { setSelectedLore(l); setModalOpen(true) }} className="btn-analisar">Ver Detalhes</button>
+                            <button onClick={() => updateStatus(l.id, 'PENDENTE')} className="btn-revert">Reverter</button>
                           </div>
                         </div>
                       ))
@@ -651,32 +768,33 @@ const AdminPanel = ({ user }) => {
                             <span>@{l.discord_tag}</span>
                           </div>
                           <p><strong>Raça:</strong> {l.raca}</p>
+                          {l.discord_id && <p><strong>ID da conta:</strong> {l.discord_id}</p>}
                           <div className={`status-badge status--${l.status.toLowerCase()}`}>{l.status}</div>
                           <div className="admin-actions">
-                            <button onClick={() => { setSelectedLore(l); setModalOpen(true); }} className="btn-analisar">Ver Detalhes</button>
-                            <button onClick={() => updateStatus(l.id, "PENDENTE")} className="btn-revert">Reverter</button>
+                            <button onClick={() => { setSelectedLore(l); setModalOpen(true) }} className="btn-analisar">Ver Detalhes</button>
+                            <button onClick={() => updateStatus(l.id, 'PENDENTE')} className="btn-revert">Reverter</button>
                           </div>
                         </div>
                       ))
                     )}
                   </div>
                 </div>
-
               </motion.div>
             )}
 
-            {activeTab === "admins" && (
+            {activeTab === 'admins' && (
               <motion.div key="admins-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="admin-manage-section">
                 <div className="add-admin-form">
                   <h3>Adicionar Novo Admin</h3>
-                  <input 
-                    type="text" 
-                    placeholder="Username do Discord (sem #)" 
+                  <input
+                    type="text"
+                    placeholder="Username do Discord (sem #)"
                     value={newAdminName}
                     onChange={e => setNewAdminName(e.target.value)}
                   />
                   <button onClick={addAdmin}>Adicionar</button>
                 </div>
+
                 <div className="admin-list">
                   <h3>Administradores Atuais</h3>
                   {admins.map(admin => (
@@ -686,6 +804,63 @@ const AdminPanel = ({ user }) => {
                     </div>
                   ))}
                 </div>
+
+                <div className="admin-bulk-vip">
+                  <div className="admin-bulk-vip-header">
+                    <h3>Gerenciar VIP por Conta</h3>
+                    <p>
+                      Selecione o ID da conta e aplique o cargo VIP pago para todas as whitelists vinculadas a esse usuário.
+                    </p>
+                  </div>
+
+                  <div className="admin-bulk-vip-form">
+                    <div className="admin-bulk-vip-field">
+                      <label>Selecionar conta cadastrada</label>
+                      <select
+                        value={selectedAccountId}
+                        onChange={(e) => {
+                          setSelectedAccountId(e.target.value)
+                          setManualAccountId('')
+                        }}
+                      >
+                        <option value="">Selecione uma conta</option>
+                        {accountOptions.map(account => (
+                          <option key={account.discord_id} value={account.discord_id}>
+                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | VIP atual: {account.current_vip_tag}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="admin-bulk-vip-field">
+                      <label>Ou digite manualmente o ID da conta</label>
+                      <input
+                        type="text"
+                        placeholder="Ex: 123456789012345678"
+                        value={manualAccountId}
+                        onChange={(e) => {
+                          setManualAccountId(e.target.value)
+                          setSelectedAccountId('')
+                        }}
+                      />
+                    </div>
+
+                    <div className="admin-bulk-vip-field">
+                      <label>Tag VIP paga</label>
+                      <select value={bulkVipTag} onChange={(e) => setBulkVipTag(e.target.value)}>
+                        {vipTags.map(tag => (
+                          <option key={tag} value={tag}>{tag}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="admin-bulk-vip-actions">
+                      <button onClick={applyVipToAccount} className="btn-bulk-vip" disabled={bulkUpdatingVip}>
+                        {bulkUpdatingVip ? 'Aplicando VIP...' : 'Aplicar VIP em todas as whitelists'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -694,8 +869,8 @@ const AdminPanel = ({ user }) => {
         <AnimatePresence>
           {modalOpen && selectedLore && (
             <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-              <motion.div 
-                className="modal-content admin-lore-modal" 
+              <motion.div
+                className="modal-content admin-lore-modal"
                 onClick={e => e.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -706,7 +881,7 @@ const AdminPanel = ({ user }) => {
                   <h2>Análise de Lore: {selectedLore.nome}</h2>
                   <div className={`status-badge status--${selectedLore.status.toLowerCase()}`}>{selectedLore.status}</div>
                 </div>
-                
+
                 <div className="modal-info-grid">
                   <div className="info-item">
                     <User size={18} />
@@ -720,6 +895,12 @@ const AdminPanel = ({ user }) => {
                     <Star size={18} />
                     <span><strong>Idade:</strong> {selectedLore.idade}</span>
                   </div>
+                  {selectedLore.discord_id && (
+                    <div className="info-item">
+                      <DollarSign size={18} />
+                      <span><strong>ID da conta:</strong> {selectedLore.discord_id}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="modal-historia-content">
@@ -727,31 +908,32 @@ const AdminPanel = ({ user }) => {
                   <p>{selectedLore.historia}</p>
                 </div>
 
-                {selectedLore.status === "RECUSADA" && selectedLore.motivo && (
+                {selectedLore.status === 'RECUSADA' && selectedLore.motivo && (
                   <div className="modal-motivo-recusa">
                     <h3><X size={20} /> Motivo da Recusa:</h3>
                     <p>{selectedLore.motivo}</p>
                   </div>
                 )}
+
                 <div className="admin-modal-actions">
                   <div className="admin-vip-tag">
                     <label>Tag VIP:</label>
-                    <select 
-                      value={selectedLore.vip_tag || "Nenhum"}
+                    <select
+                      value={selectedLore.vip_tag || 'Nenhum'}
                       onChange={(e) => updateVipTag(selectedLore.id, e.target.value)}
                     >
                       {vipTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
                     </select>
                   </div>
                   <div className="admin-decision-buttons">
-                    {selectedLore.status === "PENDENTE" && (
+                    {selectedLore.status === 'PENDENTE' && (
                       <>
-                        <button onClick={() => updateStatus(selectedLore.id, "APROVADA")} className="btn-approve">Aprovar Lore</button>
-                        <button onClick={() => updateStatus(selectedLore.id, "RECUSADA")} className="btn-reject">Recusar Lore</button>
+                        <button onClick={() => updateStatus(selectedLore.id, 'APROVADA')} className="btn-approve">Aprovar Lore</button>
+                        <button onClick={() => updateStatus(selectedLore.id, 'RECUSADA')} className="btn-reject">Recusar Lore</button>
                       </>
                     )}
-                    {(selectedLore.status === "APROVADA" || selectedLore.status === "RECUSADA") && (
-                      <button onClick={() => updateStatus(selectedLore.id, "PENDENTE")} className="btn-revert">Reverter para Pendente</button>
+                    {(selectedLore.status === 'APROVADA' || selectedLore.status === 'RECUSADA') && (
+                      <button onClick={() => updateStatus(selectedLore.id, 'PENDENTE')} className="btn-revert">Reverter para Pendente</button>
                     )}
                   </div>
                 </div>
@@ -781,19 +963,17 @@ const App = () => {
   }, [])
 
   const checkAdmin = async (username) => {
-    // Verificamos na coluna correta 'discord_username' conforme o seu banco de dados
     const { data, error } = await supabase
       .from('admins')
       .select('*')
       .eq('discord_username', username)
-    
-    // Se encontrar no banco OU se for o seu usuário principal (garantia extra)
+
     const isUserAdmin = (data && data.length > 0) || username === 'circoaleorico' || username === 'xaveiroxd'
-    
+
     setIsAdmin(isUserAdmin)
     setLoadingAdmin(false)
-    
-    if (error) console.error("Erro ao verificar admin:", error)
+
+    if (error) console.error('Erro ao verificar admin:', error)
   }
 
   return (
@@ -813,7 +993,7 @@ const App = () => {
             {!loadingAdmin && isAdmin && <Link to="/admin" className="nav-item" style={{ color: '#f0a500' }}><span>👑 Admin</span></Link>}
             <SidebarDivider />
             {user ? (
-              <button className="sidebar-login-btn" onClick={() => { localStorage.removeItem('discord_user'); window.location.href = '/'; }}>Sair</button>
+              <button className="sidebar-login-btn" onClick={() => { localStorage.removeItem('discord_user'); window.location.href = '/' }}>Sair</button>
             ) : (
               <a href={`https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`} className="sidebar-login-btn" style={{ textDecoration: 'none', textAlign: 'center', background: '#5865F2', display: 'block' }}>Login com Discord</a>
             )}

@@ -7,10 +7,12 @@
   --card-bg: #161b22;
   --primary-color: #d565e5;
   --text-color: #ffffff;
+  --text-primary: #ffffff;
   --text-secondary: #8b949e;
   --success-color: #23a559;
   --warning-color: #f0b232;
   --danger-color: #f23f43;
+  --accent-color: #d565e5;
   --sidebar-width: 80px;
   --sidebar-expanded-width: 240px;
   --custom-purple-semi: rgba(213, 101, 229, 0.2);
@@ -31,13 +33,12 @@ body {
   width: 100%;
   height: 100%;
   background-color: var(--bg-color);
-  /* NOME DO GIF CORRIGIDO: Prancheta-1.gif */
-  background-image: linear-gradient(rgba(11, 14, 20, 0.6), rgba(11, 14, 20, 0.6)), url("/Prancheta-1.gif");
+  background-image: linear-gradient(rgba(11, 14, 20, 0.6), rgba(11, 14, 20, 0.6)), url('/Prancheta-1.gif');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   color: var(--text-color);
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .container {
@@ -121,7 +122,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Esconde as linhas quando a sidebar está fechada para não bugar o visual */
 .sidebar:not(:hover) .divider-line {
   opacity: 0;
 }
@@ -140,7 +140,8 @@ body {
   margin-top: 1rem;
 }
 
-.nav-item, .sidebar-nav a {
+.nav-item,
+.sidebar-nav a {
   padding: 0.8rem;
   border-radius: 8px;
   cursor: pointer;
@@ -151,14 +152,16 @@ body {
   text-decoration: none;
 }
 
-.nav-item span, .sidebar-nav a span {
+.nav-item span,
+.sidebar-nav a span {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
   margin-left: 1rem;
 }
 
-.sidebar:hover .nav-item span, .sidebar:hover .sidebar-nav a span {
+.sidebar:hover .nav-item span,
+.sidebar:hover .sidebar-nav a span {
   opacity: 1;
   visibility: visible;
 }
@@ -238,7 +241,7 @@ body {
   backdrop-filter: blur(10px);
   position: relative;
   width: 100%;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .quote-text {
@@ -284,11 +287,25 @@ body {
   max-width: 1200px;
 }
 
+.forum-header h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.forum-intro-text {
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
 .forum-nav {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 3rem;
+  flex-wrap: wrap;
 }
 
 .forum-nav-btn {
@@ -305,6 +322,61 @@ body {
   background: #f0b232;
   color: #000;
   font-weight: bold;
+}
+
+.forum-section-placeholder,
+.placeholder-card {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.lore-section {
+  width: 100%;
+}
+
+.lore-intro-card {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 24px;
+  padding: 3rem;
+  text-align: left;
+  backdrop-filter: blur(12px);
+}
+
+.lore-title {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.lore-text-content p {
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.lore-highlight {
+  color: white !important;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.lore-divider {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  color: var(--primary-color);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.lore-footer {
+  font-style: italic;
+  color: white !important;
 }
 
 .races-grid {
@@ -338,6 +410,17 @@ body {
 .race-card.active {
   background: var(--primary-color);
   border-color: white;
+}
+
+.race-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.race-placeholder {
+  color: var(--text-secondary);
+  padding: 2rem;
 }
 
 .race-details-card {
@@ -421,6 +504,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .ability-type {
@@ -431,6 +515,18 @@ body {
   font-size: 0.7rem;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.ability-description {
+  color: white;
+  line-height: 1.6;
+}
+
+.ability-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  color: var(--text-secondary);
 }
 
 /* ============================================================
@@ -505,7 +601,14 @@ body {
   object-fit: cover;
 }
 
-.profile-user-details h1 {
+.profile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-user-details h1,
+.profile-username {
   font-size: 2.5rem;
   margin: 0;
   color: white;
@@ -515,6 +618,13 @@ body {
   font-size: 1.2rem;
   color: var(--text-secondary);
   margin-top: 0.5rem;
+}
+
+.profile-lores-section h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
 .profile-lores-grid {
@@ -535,6 +645,29 @@ body {
   text-align: left;
 }
 
+.profile-lore-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(213, 101, 229, 0.5);
+}
+
+.profile-lore-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0 0.5rem;
+}
+
+.profile-lore-nick {
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.profile-lore-preview {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 .status-badge {
   font-size: 0.75rem;
   padding: 0.3rem 0.8rem;
@@ -543,9 +676,23 @@ body {
   font-weight: 800;
 }
 
-.status-badge.aprovada { background: rgba(35, 165, 89, 0.2); color: #23a559; border: 1px solid rgba(35, 165, 89, 0.3); }
-.status-badge.recusada { background: rgba(242, 63, 67, 0.2); color: #f23f43; border: 1px solid rgba(242, 63, 67, 0.3); }
-.status-badge.em-análise { background: rgba(240, 178, 50, 0.2); color: #f0b232; border: 1px solid rgba(240, 178, 50, 0.3); }
+.status-badge.aprovada {
+  background: rgba(35, 165, 89, 0.2);
+  color: #23a559;
+  border: 1px solid rgba(35, 165, 89, 0.3);
+}
+
+.status-badge.recusada {
+  background: rgba(242, 63, 67, 0.2);
+  color: #f23f43;
+  border: 1px solid rgba(242, 63, 67, 0.3);
+}
+
+.status-badge.em-análise {
+  background: rgba(240, 178, 50, 0.2);
+  color: #f0b232;
+  border: 1px solid rgba(240, 178, 50, 0.3);
+}
 
 /* ============================================================
    FORMULÁRIO COMPOR
@@ -562,6 +709,7 @@ body {
   text-align: left;
 }
 
+.ficha-form,
 .lore-form {
   display: flex;
   flex-direction: column;
@@ -580,7 +728,9 @@ body {
   color: var(--primary-color);
 }
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0.8rem;
@@ -601,13 +751,20 @@ body {
   margin-top: 1rem;
 }
 
+.submit-btn:hover {
+  background: #b34fe0;
+}
+
 /* ============================================================
    MODAL
    ============================================================ */
 
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
@@ -630,16 +787,26 @@ body {
   overflow-y: auto;
 }
 
+.modal-details p,
+.modal-historia p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 .modal-close {
   position: absolute;
-  top: 1.25rem; right: 1.25rem;
+  top: 1.25rem;
+  right: 1.25rem;
   background: rgba(255, 255, 255, 0.05);
   border: none;
   color: var(--text-secondary);
   cursor: pointer;
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ============================================================
@@ -652,17 +819,27 @@ body {
     width: 100%;
     padding: 2rem 1rem;
   }
+
   .sidebar {
     display: none;
   }
-  .lore-two-columns {
+
+  .lore-two-columns,
+  .ability-footer {
     grid-template-columns: 1fr;
+  }
+
+  .profile-header,
+  .profile-user-info {
+    flex-direction: column;
+    text-align: center;
   }
 }
 
 /* ============================================================
    PÁGINA DE APOIOS - ESTILOS GERAIS
    ============================================================ */
+
 .apoios-container {
   padding: 3rem 2rem;
   max-width: 1200px;
@@ -685,7 +862,6 @@ body {
   margin: 0 auto 3rem auto;
 }
 
-/* Seção de Artefatos */
 .artefatos-info {
   background: rgba(22, 27, 34, 0.6);
   backdrop-filter: blur(10px);
@@ -698,7 +874,7 @@ body {
 
 .artefatos-info h2 {
   font-size: 2rem;
-  color: #FFD700; /* Cor de ouro para Artefatos */
+  color: #FFD700;
   margin-bottom: 1.5rem;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
@@ -717,7 +893,6 @@ body {
   padding-left: 1rem;
 }
 
-/* Grid de Tiers VIP */
 .tiers-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -776,7 +951,8 @@ body {
   flex-grow: 1;
 }
 
-.tier-benefits h4, .tier-kit h4 {
+.tier-benefits h4,
+.tier-kit h4 {
   color: #fff;
   font-size: 1.1rem;
   margin-bottom: 0.8rem;
@@ -784,13 +960,15 @@ body {
   padding-bottom: 0.5rem;
 }
 
-.tier-benefits ul, .tier-kit ul {
+.tier-benefits ul,
+.tier-kit ul {
   list-style: none;
   padding: 0;
   margin-bottom: 1.5rem;
 }
 
-.tier-benefits li, .tier-kit li {
+.tier-benefits li,
+.tier-kit li {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -818,7 +996,6 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Seção de Boosts do Discord */
 .discord-boost-info {
   background: rgba(88, 101, 242, 0.1);
   backdrop-filter: blur(10px);
@@ -830,7 +1007,7 @@ body {
 
 .discord-boost-info h2 {
   font-size: 2rem;
-  color: #5865F2; /* Cor do Discord */
+  color: #5865F2;
   margin-bottom: 1.5rem;
   text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
 }
@@ -841,31 +1018,33 @@ body {
   line-height: 1.7;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .apoios-header h1 {
     font-size: 2.5rem;
   }
-  .artefatos-info, .discord-boost-info {
+
+  .artefatos-info,
+  .discord-boost-info {
     padding: 1.5rem;
   }
+
   .tiers-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* Ajustes para ícones dentro dos benefícios e kits */
 .tier-benefits li svg,
 .tier-kit li svg {
-  width: 18px; /* Tamanho padrão para os ícones */
+  width: 18px;
   height: 18px;
-  min-width: 18px; /* Garante que o tamanho não seja menor */
+  min-width: 18px;
   flex-shrink: 0;
 }
 
 /* ============================================================
    VIP TAGS
    ============================================================ */
+
 .vip-tag {
   display: inline-block;
   padding: 0.3rem 0.8rem;
@@ -885,30 +1064,29 @@ body {
 }
 
 .vip-tag--vip {
-  background-color: rgba(240, 178, 50, 0.2); /* Amarelo/Bronze */
+  background-color: rgba(240, 178, 50, 0.2);
   color: #f0b232;
   border-color: rgba(240, 178, 50, 0.3);
 }
 
 .vip-tag--vip-plus {
-  background-color: rgba(213, 101, 229, 0.2); /* Roxo/Prata */
+  background-color: rgba(213, 101, 229, 0.2);
   color: var(--primary-color);
   border-color: rgba(213, 101, 229, 0.3);
 }
 
 .vip-tag--vip-plus-plus {
-  background-color: rgba(35, 165, 89, 0.2); /* Verde/Diamante */
+  background-color: rgba(35, 165, 89, 0.2);
   color: #23a559;
   border-color: rgba(35, 165, 89, 0.3);
 }
 
 .vip-tag--beta {
-  background-color: rgba(242, 63, 67, 0.2); /* Vermelho/Beta */
+  background-color: rgba(242, 63, 67, 0.2);
   color: #f23f43;
   border-color: rgba(242, 63, 67, 0.3);
 }
 
-/* Estilos para o seletor de tag VIP no Admin Panel */
 .admin-vip-tag {
   display: flex;
   align-items: center;
@@ -935,6 +1113,7 @@ body {
 /* ============================================================
    ADMIN PANEL
    ============================================================ */
+
 .admin-container {
   width: 100%;
   max-width: 1200px;
@@ -955,6 +1134,7 @@ body {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .admin-nav-btn {
@@ -997,6 +1177,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
+  gap: 1rem;
 }
 
 .admin-card-header h3 {
@@ -1083,7 +1264,6 @@ body {
   background-color: #b82e32;
 }
 
-/* Admin Manage Section */
 .admin-manage-section {
   background: rgba(22, 27, 34, 0.6);
   border: 1px solid rgba(213, 101, 229, 0.2);
@@ -1096,6 +1276,7 @@ body {
   gap: 1rem;
   margin-bottom: 2rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .add-admin-form h3 {
@@ -1106,6 +1287,7 @@ body {
 
 .add-admin-form input {
   flex: 1;
+  min-width: 240px;
   padding: 0.7rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1142,6 +1324,7 @@ body {
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
   margin-bottom: 0.5rem;
+  gap: 1rem;
 }
 
 .admin-list-item span {
@@ -1162,7 +1345,6 @@ body {
   background-color: #b82e32;
 }
 
-/* Admin Lore Modal */
 .admin-lore-modal {
   max-width: 800px;
   width: 90%;
@@ -1198,7 +1380,6 @@ body {
   padding: 1rem;
   border-radius: 8px;
   margin-top: 1.5rem;
-  text-align: left;
 }
 
 .profile-motivo-box strong {
@@ -1210,7 +1391,6 @@ body {
   margin-top: 0.5rem;
 }
 
-/* Lores Management Grid (3 columns) */
 .lores-management-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1257,7 +1437,6 @@ body {
   background-color: #d49c29;
 }
 
-/* Admin Lore Modal Improvements */
 .admin-lore-modal {
   padding: 2rem;
   max-width: 700px;
@@ -1295,6 +1474,7 @@ body {
   align-items: center;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(213, 101, 229, 0.3);
+  gap: 1rem;
 }
 
 .modal-header-lore h2 {
@@ -1333,7 +1513,7 @@ body {
   padding: 1.2rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  max-height: 300px; /* Limita a altura para rolagem */
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -1354,7 +1534,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text-secondary);
-  white-space: pre-wrap; /* Preserva quebras de linha */
+  white-space: pre-wrap;
 }
 
 .modal-motivo-recusa {
@@ -1383,13 +1563,6 @@ body {
   line-height: 1.5;
 }
 
-.admin-modal-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
 .admin-vip-tag {
   display: flex;
   align-items: center;
@@ -1411,7 +1584,7 @@ body {
   color: var(--text-primary);
   font-size: 1rem;
   cursor: pointer;
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23D565E5%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-6.5%200-12.3%203.2-16.1%208.1-3.8%204.9-4.5%2011.5-1.7%2017.4l132%20140c3.8%204.9%2010%207.5%2016.1%207.5s12.3-2.6%2016.1-7.5l132-140c2.8-5.9%202.1-12.5-1.7-17.4z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 0.7em top 50%, 0 0;
@@ -1430,6 +1603,96 @@ body {
   justify-content: flex-end;
 }
 
+/* ============================================================
+   NOVA ÁREA: VIP POR CONTA
+   ============================================================ */
+
+.admin-bulk-vip {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, rgba(28, 34, 44, 0.95), rgba(19, 23, 31, 0.95));
+  border: 1px solid rgba(213, 101, 229, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.admin-bulk-vip-header h3 {
+  margin: 0 0 0.5rem;
+  color: white;
+  font-size: 1.35rem;
+}
+
+.admin-bulk-vip-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.admin-bulk-vip-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.admin-bulk-vip-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-bulk-vip-field label {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.admin-bulk-vip-field input,
+.admin-bulk-vip-field select {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: white;
+  font-family: inherit;
+}
+
+.admin-bulk-vip-field input:focus,
+.admin-bulk-vip-field select:focus {
+  outline: none;
+  border-color: rgba(213, 101, 229, 0.7);
+  box-shadow: 0 0 0 2px rgba(213, 101, 229, 0.16);
+}
+
+.admin-bulk-vip-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.btn-bulk-vip {
+  background: linear-gradient(135deg, #d565e5, #9b38c3);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-bulk-vip:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(155, 56, 195, 0.25);
+}
+
+.btn-bulk-vip:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .admin-lore-modal {
     padding: 1.5rem;
@@ -1443,7 +1706,21 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .admin-decision-buttons {
+  .admin-decision-buttons,
+  .admin-actions,
+  .admin-list-item {
     flex-direction: column;
+  }
+
+  .admin-bulk-vip-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-bulk-vip-actions {
+    justify-content: stretch;
+  }
+
+  .btn-bulk-vip {
+    width: 100%;
   }
 }
