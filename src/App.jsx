@@ -369,25 +369,63 @@ const Profile = ({ user }) => {
 
   if (!user) return <div className="main-content"><h1>Por favor, faça login.</h1></div>
 
+  const profileVipTag = user?.vip_tag || lores.find(lore => lore.vip_tag && lore.vip_tag !== 'Nenhum')?.vip_tag || 'Nenhum'
+  const approvedCount = lores.filter(lore => lore.status === 'APROVADA').length
+  const pendingCount = lores.filter(lore => lore.status === 'PENDENTE').length
+
   return (
     <PageTransition>
       <div className="main-content">
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-user-info">
-              <img
-                src={user.avatar_url}
-                alt=""
-                className="profile-avatar"
-                onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff` }}
-              />
-              <div>
-                <h1 className="profile-username">{user.username}</h1>
-                <p className="profile-discord-tag">@{user.username}</p>
-                <p className="profile-discord-tag">ID da conta: {user.id}</p>
-                <span className={getVipClassName(user.vip_tag)}>
-                  {getVipDisplayValue(user.vip_tag)}
-                </span>
+              <div className="profile-avatar-wrapper">
+                <img
+                  src={user.avatar_url}
+                  alt=""
+                  className="profile-avatar"
+                  onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=d565e5&color=fff` }}
+                />
+                <span className="profile-avatar-glow"></span>
+              </div>
+
+              <div className="profile-user-content">
+                <div className="profile-user-main">
+                  <div className="profile-identity-block">
+                    <span className="profile-section-kicker">Perfil da Conta</span>
+                    <h1 className="profile-username">{user.username}</h1>
+                    <p className="profile-discord-tag">@{user.username}</p>
+                  </div>
+
+                  <div className="profile-vip-panel">
+                    <span className="profile-vip-label">Tier VIP</span>
+                    <span className={getVipClassName(profileVipTag)}>
+                      {getVipDisplayValue(profileVipTag)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="profile-meta-grid">
+                  <div className="profile-meta-card">
+                    <span className="profile-meta-label">ID da conta</span>
+                    <strong className="profile-meta-value profile-meta-value--mono">{user.id}</strong>
+                  </div>
+
+                  <div className="profile-meta-card">
+                    <span className="profile-meta-label">Whitelists enviadas</span>
+                    <strong className="profile-meta-value">{lores.length}</strong>
+                  </div>
+
+                  <div className="profile-meta-card">
+                    <span className="profile-meta-label">Aprovadas</span>
+                    <strong className="profile-meta-value">{approvedCount}</strong>
+                  </div>
+
+                  <div className="profile-meta-card">
+                    <span className="profile-meta-label">Pendentes</span>
+                    <strong className="profile-meta-value">{pendingCount}</strong>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
