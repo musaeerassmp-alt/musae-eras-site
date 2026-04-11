@@ -641,7 +641,24 @@ const AdminPanel = ({ user }) => {
   }
 
   const updateStatus = async (id, status) => {
-    const { error } = await supabase.from('lores').update({ status }).eq('id', id)
+    let motivo = null
+
+    if (status === 'RECUSADA') {
+      motivo = prompt('Digite o motivo da recusa para o jogador saber o que precisa corrigir:')
+
+      if (!motivo || !motivo.trim()) {
+        alert('Você precisa informar o motivo da recusa.')
+        return
+      }
+
+      motivo = motivo.trim()
+    }
+
+    const payload = status === 'RECUSADA'
+      ? { status, motivo }
+      : { status, motivo: null }
+
+    const { error } = await supabase.from('lores').update(payload).eq('id', id)
 
     if (error) {
       alert('Erro ao atualizar status: ' + error.message)
@@ -649,7 +666,7 @@ const AdminPanel = ({ user }) => {
     }
 
     if (selectedLore && selectedLore.id === id) {
-      setSelectedLore(prev => prev ? { ...prev, status } : prev)
+      setSelectedLore(prev => prev ? { ...prev, ...payload } : prev)
     }
 
     await fetchAllLores()
