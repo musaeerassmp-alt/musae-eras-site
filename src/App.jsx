@@ -439,20 +439,57 @@ const Profile = ({ user }) => {
             ) : (
               <div className="profile-lores-grid">
                 {lores.map(f => (
-                  <div key={f.id} className="profile-lore-card" onClick={() => { setSelectedLore(f); setModalOpen(true) }}>
-                    <div className="status-badge" style={{
-                      backgroundColor: f.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : f.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
-                      color: f.status === 'APROVADA' ? '#23a559' : f.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
-                    }}>
-                      {f.status}
+                  <div
+                    key={f.id}
+                    className="profile-lore-card profile-lore-card--enhanced"
+                    onClick={() => { setSelectedLore(f); setModalOpen(true) }}
+                  >
+                    <div className="profile-lore-card-top">
+                      <div
+                        className="status-badge profile-status-inline"
+                        style={{
+                          backgroundColor: f.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.16)' : f.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.16)' : 'rgba(240, 178, 50, 0.16)',
+                          color: f.status === 'APROVADA' ? '#57d98c' : f.status === 'RECUSADA' ? '#ff6b72' : '#f4c55d'
+                        }}
+                      >
+                        {f.status}
+                      </div>
+                      <span className={getVipClassName(f.vip_tag)}>{getVipDisplayValue(f.vip_tag)}</span>
                     </div>
-                    <div className="profile-lore-header">
-                      <span className="profile-lore-nick">{f.nick}</span>
+
+                    <div className="profile-lore-card-headline">
+                      <h3>{f.nome}</h3>
+                      <p>@{f.nick}</p>
                     </div>
-                    <p><strong>Nome:</strong> {f.nome}</p>
-                    <p><strong>Raça:</strong> {f.raca}</p>
-                    {f.discord_id && <p><strong>ID da conta:</strong> {f.discord_id}</p>}
-                    <p className="profile-lore-preview">{f.historia.substring(0, 100)}...</p>
+
+                    <div className="profile-lore-meta-grid profile-lore-meta-grid--compact">
+                      <div className="profile-lore-meta-item">
+                        <span className="profile-lore-meta-label">Raça</span>
+                        <strong className="profile-lore-meta-value">{f.raca}</strong>
+                      </div>
+                      <div className="profile-lore-meta-item">
+                        <span className="profile-lore-meta-label">Idade</span>
+                        <strong className="profile-lore-meta-value">{f.idade}</strong>
+                      </div>
+                    </div>
+
+                    {f.discord_id && (
+                      <div className="profile-lore-account-chip">
+                        <span className="profile-lore-meta-label">ID da conta</span>
+                        <strong className="profile-lore-meta-value profile-lore-meta-value--mono">{f.discord_id}</strong>
+                      </div>
+                    )}
+
+                    <div className="profile-lore-story-box">
+                      <span className="profile-lore-story-label">Prévia da história</span>
+                      <p className="profile-lore-preview">
+                        {f.historia?.length > 150 ? `${f.historia.substring(0, 150)}...` : f.historia}
+                      </p>
+                    </div>
+
+                    <div className="profile-lore-card-footer">
+                      <span>Abrir detalhes da ficha</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -464,37 +501,61 @@ const Profile = ({ user }) => {
           {modalOpen && selectedLore && (
             <div className="modal-overlay" onClick={() => setModalOpen(false)}>
               <motion.div
-                className="modal-content"
+                className="modal-content profile-lore-modal"
                 onClick={e => e.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
               >
                 <button className="modal-close" onClick={() => setModalOpen(false)}><X size={24} /></button>
-                <h2>{selectedLore.nome}</h2>
-                <div className="modal-details">
-                  <p><strong>Nick:</strong> {selectedLore.nick}</p>
-                  <p><strong>Raça:</strong> {selectedLore.raca}</p>
-                  <p><strong>Idade:</strong> {selectedLore.idade}</p>
-                  {selectedLore.discord_id && <p><strong>ID da conta:</strong> {selectedLore.discord_id}</p>}
-                  <span className={getVipClassName(selectedLore.vip_tag)}>
-                    {getVipDisplayValue(selectedLore.vip_tag)}
-                  </span>
 
-                  <div className="status-badge" style={{
-                    backgroundColor: selectedLore.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.2)' : selectedLore.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.2)' : 'rgba(240, 178, 50, 0.2)',
-                    color: selectedLore.status === 'APROVADA' ? '#23a559' : selectedLore.status === 'RECUSADA' ? '#f23f47' : '#f0b232'
-                  }}>
-                    {selectedLore.status}
+                <div className="profile-lore-modal-header">
+                  <div className="profile-lore-modal-top">
+                    <div
+                      className="status-badge profile-status-inline"
+                      style={{
+                        backgroundColor: selectedLore.status === 'APROVADA' ? 'rgba(35, 165, 89, 0.16)' : selectedLore.status === 'RECUSADA' ? 'rgba(242, 63, 71, 0.16)' : 'rgba(240, 178, 50, 0.16)',
+                        color: selectedLore.status === 'APROVADA' ? '#57d98c' : selectedLore.status === 'RECUSADA' ? '#ff6b72' : '#f4c55d'
+                      }}
+                    >
+                      {selectedLore.status}
+                    </div>
+                    <span className={getVipClassName(selectedLore.vip_tag)}>
+                      {getVipDisplayValue(selectedLore.vip_tag)}
+                    </span>
+                  </div>
+
+                  <div className="profile-lore-modal-titleblock">
+                    <span className="profile-lore-modal-kicker">Ficha enviada</span>
+                    <h2>{selectedLore.nome}</h2>
+                    <p>@{selectedLore.nick}</p>
                   </div>
                 </div>
-                <div className="modal-historia">
-                  <h3>História:</h3>
+
+                <div className="profile-lore-modal-grid">
+                  <div className="profile-lore-modal-item">
+                    <span className="profile-lore-modal-label">Raça</span>
+                    <strong>{selectedLore.raca}</strong>
+                  </div>
+                  <div className="profile-lore-modal-item">
+                    <span className="profile-lore-modal-label">Idade</span>
+                    <strong>{selectedLore.idade}</strong>
+                  </div>
+                  <div className="profile-lore-modal-item profile-lore-modal-item--full">
+                    <span className="profile-lore-modal-label">ID da conta</span>
+                    <strong className="profile-lore-meta-value--mono">{selectedLore.discord_id || 'Não informado'}</strong>
+                  </div>
+                </div>
+
+                <div className="profile-lore-story-panel">
+                  <h3>História do personagem</h3>
                   <p>{selectedLore.historia}</p>
                 </div>
+
                 {selectedLore.status === 'RECUSADA' && selectedLore.motivo && (
-                  <div className="profile-motivo-box">
-                    <strong>Motivo da Recusa:</strong>
+                  <div className="profile-motivo-box profile-motivo-box--enhanced">
+                    <span className="profile-motivo-kicker">Análise da administração</span>
+                    <strong>Motivo da recusa</strong>
                     <p>{selectedLore.motivo}</p>
                   </div>
                 )}
