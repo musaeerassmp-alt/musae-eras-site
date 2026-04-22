@@ -583,7 +583,8 @@ const CriarFicha = ({ user }) => {
       ...formData,
       discord_tag: user.username,
       discord_id: user.id,
-      status: 'PENDENTE'
+      status: 'PENDENTE',
+      vip_tag: user.vip_tag || 'Nenhum'
     }])
 
     setLoading(false)
@@ -735,9 +736,20 @@ const LoginPage = () => {
       ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`
       : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`
 
-    const user = { id: data.id, username: data.username, avatar_url: avatarUrl }
-    localStorage.setItem('discord_user', JSON.stringify(user))
-    window.location.href = '/perfil'
+    const { data: userProfile, error: profileError } = await supabase
+      .from("users")
+      .select("vip_tag")
+      .eq("discord_id", data.id)
+      .single()
+
+    let vipTag = "Nenhum"
+    if (userProfile && !profileError) {
+      vipTag = userProfile.vip_tag || "Nenhum"
+    }
+
+    const user = { id: data.id, username: data.username, avatar_url: avatarUrl, vip_tag: vipTag }
+    localStorage.setItem("discord_user", JSON.stringify(user))
+    window.location.href = "/perfil"
   }
 
   return (
