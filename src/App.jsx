@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState, useEffect, useCallback } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { createClient } from '@supabase/supabase-js'
 import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star } from 'lucide-react'
 import Apoios from './Apoios'
+import PageTransition from './PageTransition'
 import './App.css'
 
 const supabase = createClient(
@@ -22,18 +23,6 @@ const SidebarDivider = () => (
   </div>
 )
 
-export const PageTransition = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    transition={{ duration: 0.4, ease: 'easeOut' }}
-    style={{ width: '100%' }}
-  >
-    {children}
-  </motion.div>
-)
-
 const getVipClassName = (vipTag) => {
   const normalizedTag = (vipTag || 'Nenhum')
     .toLowerCase()
@@ -44,11 +33,6 @@ const getVipClassName = (vipTag) => {
 }
 
 const getVipDisplayValue = (vipTag) => vipTag || 'Nenhum'
-
-const stopEvent = (event) => {
-  event.preventDefault()
-  event.stopPropagation()
-}
 
 const VIP_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++', 'Beta']
 
@@ -98,12 +82,10 @@ const FRASES_FILOSOFICAS = [
 ]
 
 const Home = () => {
-  const [frase, setFrase] = useState({ texto: '', autor: '' })
-
-  useEffect(() => {
+  const [frase] = useState(() => {
     const randomIndex = Math.floor(Math.random() * FRASES_FILOSOFICAS.length)
-    setFrase(FRASES_FILOSOFICAS[randomIndex])
-  }, [])
+    return FRASES_FILOSOFICAS[randomIndex]
+  })
 
   return (
     <PageTransition>
@@ -114,7 +96,11 @@ const Home = () => {
           transition={{ duration: 0.8 }}
           className="home-hero"
         >
-          <h1 className="home-title">Musae Eras</h1>
+          <img
+  src="/logonparadaMUSAE.png"
+  alt="Musae Eras"
+  className="home-logo"
+/>
           <div className="quote-container">
             <p className="quote-text">"{frase.texto}"</p>
             <p className="quote-author">— {frase.autor}</p>
@@ -341,31 +327,33 @@ const Profile = ({ user }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
-    if (user) fetchUserLores()
+    const fetchUserLores = async () => {
+      const filtros = []
+
+      if (user?.id) filtros.push(`discord_id.eq.${user.id}`)
+      if (user?.username) {
+        filtros.push(`discord_tag.eq.${user.username}`)
+        filtros.push(`discord_tag.eq.${user.username}#0`)
+      }
+
+      const { data, error } = await supabase
+        .from('lores')
+        .select('*')
+        .or(filtros.join(','))
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.error('Erro ao buscar lores do usuário:', error)
+        return
+      }
+
+      setLores(data || [])
+    }
+
+    if (user) {
+      fetchUserLores()
+    }
   }, [user])
-
-  const fetchUserLores = async () => {
-    const filtros = []
-
-    if (user?.id) filtros.push(`discord_id.eq.${user.id}`)
-    if (user?.username) {
-      filtros.push(`discord_tag.eq.${user.username}`)
-      filtros.push(`discord_tag.eq.${user.username}#0`)
-    }
-
-    const { data, error } = await supabase
-      .from('lores')
-      .select('*')
-      .or(filtros.join(','))
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Erro ao buscar lores do usuário:', error)
-      return
-    }
-
-    setLores(data || [])
-  }
 
   if (!user) return <div className="main-content"><h1>Por favor, faça login.</h1></div>
 
@@ -575,30 +563,38 @@ const CriarFicha = ({ user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!user) return alert('Faça login primeiro!')
-
-    setLoading(true    // Buscar a vip_tag mais recente do usuário diretamente do banco de dados
-    const { data: userProfile, error: profileError } = await supabase
-      .from(\'users\')
-      .select(\'vip_tag\')
-      .eq(\'discord_id\', user.id)
-      .single()
-
-    let currentVipTag = \'Nenhum\'
-    if (userProfile && !profileError) {
-      currentVipTag = userProfile.vip_tag || \'Nenhum\'
+    if (!user) {
+      alert('Faça login primeiro!')
+      return
     }
 
-    const { error } = await supabase.from(\'lores\').insert([{
+    setLoading(true)
+
+    // Buscar a vip_tag mais recente do usuário diretamente do banco de dados
+    const { data: userProfile, error: profileError } = await supabase
+      .from('users')
+      .select('vip_tag')
+      .eq('discord_id', user.id)
+      .single()
+
+    let currentVipTag = 'Nenhum'
+    if (userProfile && !profileError) {
+      currentVipTag = userProfile.vip_tag || 'Nenhum'
+    }
+
+    const { error } = await supabase.from('lores').insert([{
       ...formData,
       discord_tag: user.username,
       discord_id: user.id,
-      status: \'PENDENTE\',
+      status: 'PENDENTE',
       vip_tag: currentVipTag
-    }])   setLoading(false)
+    }])
 
-    if (error) alert('Erro ao enviar: ' + error.message)
-    else {
+    setLoading(false)
+
+    if (error) {
+      alert('Erro ao enviar: ' + error.message)
+    } else {
       alert('Ficha enviada com sucesso!')
       navigate('/perfil')
     }
@@ -732,33 +728,33 @@ const CriarFicha = ({ user }) => {
 
 const LoginPage = () => {
   useEffect(() => {
+    const fetchDiscordUser = async (token) => {
+      const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
+      const data = await res.json()
+      const avatarUrl = data.avatar
+        ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`
+        : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`
+
+      const { data: userProfile, error: profileError } = await supabase
+        .from('users')
+        .select('vip_tag')
+        .eq('discord_id', data.id)
+        .single()
+
+      let vipTag = 'Nenhum'
+      if (userProfile && !profileError) {
+        vipTag = userProfile.vip_tag || 'Nenhum'
+      }
+
+      const user = { id: data.id, username: data.username, avatar_url: avatarUrl, vip_tag: vipTag }
+      localStorage.setItem('discord_user', JSON.stringify(user))
+      window.location.href = '/perfil'
+    }
+
     const params = new URLSearchParams(window.location.hash.substring(1))
     const token = params.get('access_token')
     if (token) fetchDiscordUser(token)
   }, [])
-
-  const fetchDiscordUser = async (token) => {
-    const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } })
-    const data = await res.json()
-    const avatarUrl = data.avatar
-      ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`
-      : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`
-
-    const { data: userProfile, error: profileError } = await supabase
-      .from("users")
-      .select("vip_tag")
-      .eq("discord_id", data.id)
-      .single()
-
-    let vipTag = "Nenhum"
-    if (userProfile && !profileError) {
-      vipTag = userProfile.vip_tag || "Nenhum"
-    }
-
-    const user = { id: data.id, username: data.username, avatar_url: avatarUrl, vip_tag: vipTag }
-    localStorage.setItem("discord_user", JSON.stringify(user))
-    window.location.href = "/perfil"
-  }
 
   return (
     <div className="main-content">
@@ -786,15 +782,7 @@ const AdminPanel = ({ user }) => {
   const approvedLores = lores.filter(lore => lore.status === 'APROVADA')
   const rejectedLores = lores.filter(lore => lore.status === 'RECUSADA')
 
-  useEffect(() => {
-    if (user) {
-      fetchAllLores()
-      fetchAllAdmins()
-      fetchAccountOptions()
-    }
-  }, [user])
-
-  const fetchAllLores = async () => {
+  const fetchAllLores = useCallback(async () => {
     const { data, error } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
     if (error) {
       console.error('Erro ao buscar lores:', error)
@@ -802,14 +790,14 @@ const AdminPanel = ({ user }) => {
     } else {
       setLores(data || [])
     }
-  }
+  }, [])
 
-  const fetchAllAdmins = async () => {
+  const fetchAllAdmins = useCallback(async () => {
     const { data } = await supabase.from('admins').select('*')
     setAdmins(data || [])
-  }
+  }, [])
 
-  const fetchAccountOptions = async () => {
+  const fetchAccountOptions = useCallback(async () => {
     const { data, error } = await supabase
       .from('lores')
       .select('discord_id, discord_tag, vip_tag, created_at')
@@ -843,7 +831,7 @@ const AdminPanel = ({ user }) => {
     }, {})
 
     setAccountOptions(Object.values(groupedAccounts))
-  }
+  }, [])
 
   const updateStatus = async (id, status) => {
     let motivo = null
@@ -1213,18 +1201,7 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [loadingAdmin, setLoadingAdmin] = useState(true)
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem('discord_user')
-    if (savedUser) {
-      const parsedUser = JSON.parse(savedUser)
-      setUser(parsedUser)
-      checkAdmin(parsedUser.username)
-    } else {
-      setLoadingAdmin(false)
-    }
-  }, [])
-
-  const checkAdmin = async (username) => {
+  const checkAdmin = useCallback(async (username) => {
     const { data, error } = await supabase
       .from('admins')
       .select('*')
@@ -1236,7 +1213,22 @@ const App = () => {
     setLoadingAdmin(false)
 
     if (error) console.error('Erro ao verificar admin:', error)
-  }
+  }, [])
+
+  useEffect(() => {
+    const initializeUser = async () => {
+      const savedUser = localStorage.getItem('discord_user')
+      if (savedUser) {
+        const parsedUser = JSON.parse(savedUser)
+        setUser(parsedUser)
+        await checkAdmin(parsedUser.username)
+      } else {
+        setLoadingAdmin(false)
+      }
+    }
+
+    initializeUser()
+  }, [checkAdmin])
 
   return (
     <Router>

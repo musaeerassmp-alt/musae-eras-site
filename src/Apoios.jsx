@@ -1,7 +1,7 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { Music, Disc, Volume2, Mic, DollarSign } from 'lucide-react' // Importando ícones musicais
-import { PageTransition } from './App' // Assumindo que PageTransition está exportado em App.jsx
+import PageTransition from './PageTransition'
 
 const tiers = [
   {
