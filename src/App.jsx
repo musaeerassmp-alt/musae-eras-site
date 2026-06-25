@@ -943,6 +943,15 @@ const AdminPanel = ({ user }) => {
     fetchAllAdmins()
   }
 
+  useEffect(() => {
+    // Carrega os dados do painel quando o componente monta (IIFE assíncrona)
+    void (async () => {
+      await fetchAllLores()
+      await fetchAllAdmins()
+      await fetchAccountOptions()
+    })()
+  }, [fetchAllLores, fetchAllAdmins, fetchAccountOptions])
+
   if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>
 
   return (
