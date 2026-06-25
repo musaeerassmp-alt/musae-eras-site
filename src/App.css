@@ -2401,7 +2401,7 @@ body {
   height: auto;
   object-fit: contain;
   display: block;
-  margin: 0 auto -180px auto;
+  margin: 0 auto -220px auto;
   position: relative;
   z-index: 2;
 }
