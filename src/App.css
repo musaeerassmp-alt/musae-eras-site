@@ -215,6 +215,7 @@ body {
 }
 
 .home-hero {
+  position: relative;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -2397,8 +2398,10 @@ body {
 }
 .home-logo {
   max-width: 760px;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 200px;
+  object-fit: contain;
   display: block;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto 0 auto;
+  padding-bottom: 1rem;
 }
