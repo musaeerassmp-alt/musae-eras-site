@@ -2397,11 +2397,11 @@ body {
   }
 }
 .home-logo {
-  width: min(920px, 100%);
+  width: min(1080px, 100%);
   height: auto;
   object-fit: contain;
   display: block;
-  margin: 0 auto -120px auto;
+  margin: 0 auto -140px auto;
   position: relative;
   z-index: 2;
 }
