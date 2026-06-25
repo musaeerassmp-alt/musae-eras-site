@@ -236,7 +236,7 @@ body {
 
 .quote-container {
   background: rgba(22, 27, 34, 0.4);
-  padding: 2.5rem;
+  padding: 5rem 2.5rem 2.5rem;
   border-radius: 20px;
   border: 1px solid rgba(213, 101, 229, 0.2);
   backdrop-filter: blur(10px);
@@ -2397,11 +2397,11 @@ body {
   }
 }
 .home-logo {
-  max-width: 760px;
-  width: auto;
-  height: 200px;
+  width: min(920px, 100%);
+  height: auto;
   object-fit: contain;
   display: block;
-  margin: 0 auto 0 auto;
-  padding-bottom: 1rem;
+  margin: 0 auto -120px auto;
+  position: relative;
+  z-index: 2;
 }
