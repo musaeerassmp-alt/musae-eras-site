@@ -19,6 +19,16 @@
   --custom-purple-expanded: rgba(213, 101, 229, 0.4);
 }
 
+/* Glass card reusable style for semi-transparent text panels */
+.glass-card {
+  background: rgba(22, 27, 34, 0.45);
+  border: 1px solid rgba(213, 101, 229, 0.18);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -1107,8 +1117,8 @@ body {
 .form-group select,
 .form-group textarea {
   width: 100%;
-  background: rgba(7, 10, 16, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(22, 27, 34, 0.45);
+  border: 1px solid rgba(213, 101, 229, 0.12);
   padding: 0.95rem 1rem;
   border-radius: 14px;
   color: white;
@@ -1227,8 +1237,9 @@ body {
 }
 
 .modal-content {
-  background: #161b22;
-  border: 1px solid rgba(213, 101, 229, 0.3);
+  /* use glass-card style for semi-transparent panels */
+  background: rgba(22, 27, 34, 0.45);
+  border: 1px solid rgba(213, 101, 229, 0.18);
   border-radius: 20px;
   max-width: 700px;
   width: 100%;
@@ -1237,15 +1248,16 @@ body {
   position: relative;
   text-align: left;
   overflow-y: auto;
+  backdrop-filter: blur(8px);
 }
 
 .profile-lore-modal {
   max-width: 760px;
   padding: 2rem;
-  background:
-    radial-gradient(circle at top right, rgba(213, 101, 229, 0.16), transparent 30%),
-    linear-gradient(180deg, rgba(23, 29, 39, 0.98), rgba(14, 19, 27, 0.98));
+  background: rgba(22, 27, 34, 0.45);
+  border: 1px solid rgba(213, 101, 229, 0.18);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
 }
 
 .profile-lore-modal-header {
@@ -1838,8 +1850,8 @@ body {
 
 .admin-inline-vip select {
   min-width: 130px;
-  background: #2a2f36;
-  border: 1px solid rgba(213, 101, 229, 0.35);
+  background: rgba(22, 27, 34, 0.45);
+  border: 1px solid rgba(213, 101, 229, 0.18);
   border-radius: 10px;
   padding: 0.55rem 2rem 0.55rem 0.8rem;
   color: var(--text-primary);
