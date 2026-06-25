@@ -97,10 +97,10 @@ const Home = () => {
           className="home-hero"
         >
           <img
-  src="/logonparadaMUSAE.png"
-  alt="Musae Eras"
-  className="home-logo"
-/>
+            src="/logonparadaMUSAE.png"
+            alt="Logo Musae Eras"
+            className="home-logo"
+          />
           <div className="quote-container">
             <p className="quote-text">"{frase.texto}"</p>
             <p className="quote-author">— {frase.autor}</p>
