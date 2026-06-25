@@ -577,17 +577,25 @@ const CriarFicha = ({ user }) => {
     e.preventDefault()
     if (!user) return alert('Faça login primeiro!')
 
-    setLoading(true)
+    setLoading(true    // Buscar a vip_tag mais recente do usuário diretamente do banco de dados
+    const { data: userProfile, error: profileError } = await supabase
+      .from(\'users\')
+      .select(\'vip_tag\')
+      .eq(\'discord_id\', user.id)
+      .single()
 
-    const { error } = await supabase.from('lores').insert([{
+    let currentVipTag = \'Nenhum\'
+    if (userProfile && !profileError) {
+      currentVipTag = userProfile.vip_tag || \'Nenhum\'
+    }
+
+    const { error } = await supabase.from(\'lores\').insert([{
       ...formData,
       discord_tag: user.username,
       discord_id: user.id,
-      status: 'PENDENTE',
-      vip_tag: user.vip_tag || 'Nenhum'
-    }])
-
-    setLoading(false)
+      status: \'PENDENTE\',
+      vip_tag: currentVipTag
+    }])   setLoading(false)
 
     if (error) alert('Erro ao enviar: ' + error.message)
     else {
