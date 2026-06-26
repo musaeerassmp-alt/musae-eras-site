@@ -102,17 +102,19 @@ body {
 }
 
 .sidebar-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white;
+  width: 140px;
+  height: auto;
+  display: inline-block;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(-10px);
 }
 
 .sidebar:hover .sidebar-title {
   opacity: 1;
   visibility: visible;
+  transform: translateX(0);
 }
 
 .sidebar-divider {
