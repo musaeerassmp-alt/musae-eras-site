@@ -1244,7 +1244,7 @@ const App = () => {
       <div className="container">
         <aside className="sidebar">
           <Link to="/" className="logo-section">
-            <img src="/logo.png" alt="Logo" className="sidebar-logo" />
+            <img src="/logonovaSemfundo.png" alt="Logo" className="sidebar-logo" />
             <span className="sidebar-title">Musae Eras</span>
           </Link>
           <SidebarDivider />
