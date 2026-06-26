@@ -97,7 +97,7 @@ const Home = () => {
           className="home-hero"
         >
           <img
-            src="/logonparadaMUSAE.png"
+            src="/logonovaSemfundo.png"
             alt="Logo Musae Eras"
             className="home-logo"
           />
