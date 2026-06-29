@@ -641,6 +641,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(-10px);
 }
 
 .profile-avatar-glow {
