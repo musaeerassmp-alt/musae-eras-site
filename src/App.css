@@ -641,7 +641,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-24px);
+  transform: translateY(-12px);
   align-self: flex-start;
 }
 
