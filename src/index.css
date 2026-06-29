@@ -381,7 +381,7 @@ h1 {
   border: 1px solid #30363d;
   width: 100%;
   max-width: 800px;
-  margin-bottom: 3rem;
+  margin: 0 auto 3rem;
   text-align: left;
   backdrop-filter: blur(10px);
 }
