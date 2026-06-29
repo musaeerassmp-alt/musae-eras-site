@@ -262,6 +262,23 @@ h1 {
   padding-left: 1.5rem;
 }
 
+.lore-intro-card {
+  text-align: center;
+}
+
+.lore-title {
+  text-align: center;
+}
+
+.lore-text-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.lore-text-content p {
+  text-align: center;
+}
+
 .content-paper {
   background: rgba(22, 27, 34, 0.8);
   border: 1px solid #30363d;
