@@ -746,9 +746,9 @@ body {
 
 .profile-meta-grid {
   display: grid;
-  width: min(100%, 980px);
-  max-width: 980px;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  width: min(100%, 860px);
+  max-width: 860px;
+  grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(140px, 1fr));
   gap: 1rem;
   margin: 1.5rem auto 0;
   justify-items: stretch;
