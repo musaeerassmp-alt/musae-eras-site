@@ -746,23 +746,30 @@ body {
 
 .profile-meta-grid {
   display: grid;
-  width: 100%;
-  grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(130px, 1fr));
+  width: min(100%, 900px);
+  max-width: 900px;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
   gap: 1rem;
-  margin: 1.5rem 0 0;
+  margin: 1.5rem auto 0;
   justify-items: stretch;
   align-items: start;
 }
 
+.profile-meta-grid > .profile-meta-card:first-child {
+  min-height: 120px;
+}
+
 @media (max-width: 1100px) {
   .profile-meta-grid {
-    grid-template-columns: minmax(180px, 1.3fr) repeat(3, minmax(120px, 1fr));
+    width: min(100%, 820px);
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
   }
 }
 
 @media (max-width: 900px) {
   .profile-meta-grid {
-    grid-template-columns: repeat(4, minmax(140px, 1fr));
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
   }
 }
 
