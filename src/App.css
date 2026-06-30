@@ -752,7 +752,7 @@ body {
   max-width: 860px;
   grid-template-columns: repeat(4, minmax(180px, 1fr));
   gap: 1.25rem;
-  margin: 1.5rem auto 0;
+  margin: 1.5rem auto 0 3rem;
   justify-content: center;
   justify-items: stretch;
   align-items: stretch;
