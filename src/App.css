@@ -679,9 +679,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .profile-user-main {
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -744,9 +746,11 @@ body {
 
 .profile-meta-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  width: min(100%, 920px);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0;
+  justify-items: stretch;
 }
 
 .profile-meta-card {
