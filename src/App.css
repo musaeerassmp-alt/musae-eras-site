@@ -748,21 +748,21 @@ body {
 
 .profile-meta-grid {
   display: grid;
-  width: min(700px, 100%);
-  max-width: 700px;
-  grid-template-columns: repeat(4, minmax(160px, 1fr));
-  gap: 1rem;
+  width: min(88%, 860px);
+  max-width: 860px;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 1.25rem;
   margin: 1.5rem auto 0;
   justify-content: center;
   justify-items: stretch;
-  align-items: start;
+  align-items: stretch;
   padding: 0 0.5rem;
   box-sizing: border-box;
 }
 
 .profile-meta-grid > .profile-meta-card {
-  min-height: 140px;
-  padding: 1.25rem 1.2rem;
+  min-height: 160px;
+  padding: 1.4rem 1.3rem;
 }
 
 .profile-meta-grid > .profile-meta-card:first-child {
