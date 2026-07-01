@@ -1180,10 +1180,17 @@ body {
 .form-grid {
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 
 .form-grid--two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .form-grid--two {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group {
