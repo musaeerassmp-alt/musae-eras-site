@@ -832,7 +832,7 @@ body {
 .profile-lores-section h2 {
   color: var(--primary-color);
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.8rem;
   text-align: center;
   text-shadow: 0 0 15px rgba(213, 101, 229, 0.5);
 }
