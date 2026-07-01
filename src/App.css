@@ -1197,6 +1197,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
+  min-width: 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.form-group textarea {
+  min-width: 0;
 }
 
 .form-group label {
