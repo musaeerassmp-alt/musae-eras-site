@@ -830,10 +830,11 @@ body {
 }
 
 .profile-lores-section h2 {
-  color: white;
+  color: var(--primary-color);
   font-size: 2rem;
   margin-bottom: 1rem;
-  text-align: left;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(213, 101, 229, 0.5);
 }
 
 .profile-lores-section {
