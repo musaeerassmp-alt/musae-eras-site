@@ -831,6 +831,7 @@ body {
 }
 
 .profile-lores-section h2 {
+  font-family: 'MonteCarlo', cursive;
   color: var(--primary-color);
   font-size: 2.9rem;
   margin-bottom: 3.4rem;
