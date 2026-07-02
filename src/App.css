@@ -369,6 +369,7 @@ body {
 }
 
 .lore-title {
+  font-family: 'MonteCarlo', cursive;
   font-size: 2.2rem;
   color: white;
   margin-bottom: 1.5rem;
