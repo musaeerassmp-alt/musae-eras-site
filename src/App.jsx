@@ -897,6 +897,9 @@ const AdminPanel = ({ user }) => {
     setBulkUpdatingVip(true)
 
     const vipValue = bulkVipTag === 'Nenhum' ? null : bulkVipTag
+    const selectedAccount = accountOptions.find(account => account.discord_id === selectedAccountId)
+    const targetDiscordUsername = selectedAccount?.discord_tag || targetAccountId
+
     // 1) Try updating the VIP tag on the users table. If no row was updated, insert a new user record.
     let userError = null
     try {
@@ -911,7 +914,7 @@ const AdminPanel = ({ user }) => {
       if (!updateData || updateData.length === 0) {
         const { data: insertData, error: insertErr } = await supabase
           .from('vips')
-          .insert([{ discord_id: targetAccountId, vip_tag: vipValue }])
+          .insert([{ discord_id: targetAccountId, discord_username: targetDiscordUsername, vip_tag: vipValue }])
         if (insertErr) throw insertErr
       }
     } catch (err) {
