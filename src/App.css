@@ -1751,20 +1751,22 @@ body {
 .boost-arts-section h2 {
   font-family: 'MonteCarlo', cursive;
   color: var(--primary-color);
-  font-size: 4.2rem;
-  margin-bottom: 2.8rem;
+  font-size: 4.6rem;
+  margin-bottom: 2.4rem;
   text-align: center;
-  text-shadow: 0 0 16px rgba(213, 101, 229, 0.52);
+  text-shadow: 0 0 18px rgba(213, 101, 229, 0.56);
+  transform: translateY(-8px);
 }
 
 /* VIP headings: use same font as 'Minhas Partituras' and center */
 .vip-arts-section h2 {
   font-family: 'MonteCarlo', cursive;
   color: var(--primary-color);
-  font-size: 4.2rem;
+  font-size: 4.6rem;
   margin-bottom: 1.8rem;
   text-align: center;
-  text-shadow: 0 0 16px rgba(213, 101, 229, 0.52);
+  text-shadow: 0 0 18px rgba(213, 101, 229, 0.56);
+  transform: translateY(-8px);
 }
 
 .beta-arts-grid {
