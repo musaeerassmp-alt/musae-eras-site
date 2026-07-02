@@ -145,7 +145,7 @@ const Apoios = () => {
             <div className="beta-arts-section vip-arts-section">
               <h2>O Crescendo</h2>
               <div className="beta-arts-grid">
-                {['/ARTEVIP+1.jpg', '/ARTEVIP+2.jpg', '/ARTEVIP+4.jpg'].map((src, index) => (
+                {['/ARTEVIP+1.jpg', '/ARTEVIP+2.jpg', '/ARTEVIP+3.jpg', '/ARTEVIP+4.jpg'].map((src, index) => (
                   <motion.img
                     key={src}
                     src={src}
