@@ -897,7 +897,20 @@ const AdminPanel = ({ user }) => {
     setBulkUpdatingVip(true)
 
     const vipValue = bulkVipTag === 'Nenhum' ? null : bulkVipTag
+    // 1) Upsert the VIP tag on the users table so the VIP is tied to the account
+    const { data: userData, error: userError } = await supabase
+      .from('users')
+      .upsert([
+        { discord_id: targetAccountId, vip_tag: vipValue }
+      ], { onConflict: 'discord_id' })
 
+    if (userError) {
+      setBulkUpdatingVip(false)
+      alert('Erro ao atualizar VIP da conta: ' + userError.message)
+      return
+    }
+
+    // 2) Update existing lores for visual consistency (optional but useful)
     const { data, error } = await supabase
       .from('lores')
       .update({ vip_tag: vipValue })
@@ -907,18 +920,13 @@ const AdminPanel = ({ user }) => {
     setBulkUpdatingVip(false)
 
     if (error) {
-      alert('Erro ao aplicar VIP na conta: ' + error.message)
-      return
+      alert('VIP aplicado na conta, mas houve erro ao atualizar as whitelists: ' + error.message)
+      // proceed — user VIP updated, lores update failed
     }
 
     const totalAtualizado = data?.length || 0
 
-    if (totalAtualizado === 0) {
-      alert('Nenhuma whitelist foi encontrada para esse ID de conta.')
-      return
-    }
-
-    alert(`VIP aplicado com sucesso em ${totalAtualizado} whitelist(s).`)
+    alert(`VIP aplicado na conta. Whitelists atualizadas: ${totalAtualizado} entrada(s).`)
 
     setSelectedAccountId('')
     setManualAccountId('')
