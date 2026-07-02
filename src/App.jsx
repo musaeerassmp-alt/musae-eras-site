@@ -48,11 +48,14 @@ const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onDeleteLore }) => (
   <div className="admin-card">
     <div className="admin-card-header">
       <h3>{lore.nome}</h3>
-      <span>@{lore.discord_tag}</span>
+      <span>@{lore.discord_tag}{lore.beta ? ' • Beta' : ''}</span>
     </div>
     <p><strong>Raça:</strong> {lore.raca}</p>
     {lore.discord_id && <p><strong>ID da conta:</strong> {lore.discord_id}</p>}
-    <div className={getVipClassName(lore.vip_tag)}>{getVipDisplayValue(lore.vip_tag)}</div>
+    <div className="admin-vip-tags">
+      <span className={getVipClassName(lore.vip_tag)}>{getVipDisplayValue(lore.vip_tag)}</span>
+      {lore.beta && <span className={getBetaClassName()}>Beta</span>}
+    </div>
     <div className={`status-badge status--${lore.status.toLowerCase()}`}>{STATUS_LABELS[lore.status] || lore.status}</div>
     <div className="admin-actions">
       <button onClick={() => onOpen(lore)} className="btn-analisar">{lore.status === 'PENDENTE' ? 'Analisar' : 'Ver Detalhes'}</button>
@@ -327,9 +330,30 @@ const Profile = ({ user }) => {
   const [lores, setLores] = useState([])
   const [selectedLore, setSelectedLore] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const [currentVipStatus, setCurrentVipStatus] = useState({ vip_tag: user?.vip_tag || 'Nenhum', beta: user?.beta || false })
+
+  const refreshVipStatus = useCallback(async () => {
+    if (user?.id) {
+      const { data: vipData, error: vipError } = await supabase
+        .from('vips')
+        .select('vip_tag, beta')
+        .eq('discord_id', user.id)
+        .single()
+
+      if (!vipError && vipData) {
+        setCurrentVipStatus({
+          vip_tag: vipData.vip_tag || 'Nenhum',
+          beta: vipData.beta === true
+        })
+      }
+    }
+  }, [user?.id])
 
   useEffect(() => {
-    const fetchUserLores = async () => {
+    const fetchUserLoresAndVipStatus = async () => {
+      await refreshVipStatus()
+
+      // Fetch user lores
       const filtros = []
 
       if (user?.id) filtros.push(`discord_id.eq.${user.id}`)
@@ -353,14 +377,25 @@ const Profile = ({ user }) => {
     }
 
     if (user) {
-      fetchUserLores()
+      fetchUserLoresAndVipStatus()
     }
-  }, [user])
+  }, [user, refreshVipStatus])
+
+  // Refresh VIP status every 10 seconds to catch admin updates
+  useEffect(() => {
+    if (!user?.id) return
+
+    const interval = setInterval(() => {
+      refreshVipStatus()
+    }, 10000)
+
+    return () => clearInterval(interval)
+  }, [user?.id, refreshVipStatus])
 
   if (!user) return <div className="main-content"><h1>Por favor, faça login.</h1></div>
 
-  const profileVipTag = user?.vip_tag || lores.find(lore => lore.vip_tag && lore.vip_tag !== 'Nenhum')?.vip_tag || 'Nenhum'
-  const profileBetaActive = user?.beta === true
+  const profileVipTag = currentVipStatus.vip_tag || 'Nenhum'
+  const profileBetaActive = currentVipStatus.beta === true
   const approvedCount = lores.filter(lore => lore.status === 'APROVADA').length
   const pendingCount = lores.filter(lore => lore.status === 'PENDENTE').length
 
@@ -794,9 +829,31 @@ const AdminPanel = ({ user }) => {
     if (error) {
       console.error('Erro ao buscar lores:', error)
       alert('Erro ao carregar lores: ' + error.message)
-    } else {
-      setLores(data || [])
+      setLores([])
+      return
     }
+
+    const { data: vipStatuses, error: vipStatusesError } = await supabase
+      .from('vips')
+      .select('discord_id, vip_tag, beta')
+      .not('discord_id', 'is', null)
+
+    if (vipStatusesError) {
+      console.error('Erro ao buscar status VIP e Beta das contas:', vipStatusesError)
+    }
+
+    const vipByDiscordId = (vipStatuses || []).reduce((acc, vip) => {
+      if (vip && vip.discord_id) acc[vip.discord_id] = vip
+      return acc
+    }, {})
+
+    const mergedLores = (data || []).map(lore => ({
+      ...lore,
+      vip_tag: vipByDiscordId[lore.discord_id]?.vip_tag || lore.vip_tag || 'Nenhum',
+      beta: vipByDiscordId[lore.discord_id]?.beta === true
+    }))
+
+    setLores(mergedLores)
   }, [])
 
   const fetchAllAdmins = useCallback(async () => {
@@ -847,6 +904,7 @@ const AdminPanel = ({ user }) => {
       return acc
     }, {})
 
+    // Merge com dados da tabela vips - esta é a fonte de verdade para VIP e Beta
     ;(vipsData || []).forEach(vipRow => {
       if (!vipRow.discord_id) return
 
@@ -859,8 +917,9 @@ const AdminPanel = ({ user }) => {
           beta: vipRow.beta === true
         }
       } else {
+        // A tabela vips é a fonte de verdade - sempre sobrescreve lores
         groupedAccounts[vipRow.discord_id].discord_tag = groupedAccounts[vipRow.discord_id].discord_tag || vipRow.discord_username || 'Sem username'
-        groupedAccounts[vipRow.discord_id].current_vip_tag = vipRow.vip_tag || groupedAccounts[vipRow.discord_id].current_vip_tag
+        groupedAccounts[vipRow.discord_id].current_vip_tag = vipRow.vip_tag || 'Nenhum'
         groupedAccounts[vipRow.discord_id].beta = vipRow.beta === true
       }
     })
@@ -963,10 +1022,13 @@ const AdminPanel = ({ user }) => {
       return
     }
 
-    // 2) Update existing lores for visual consistency (optional but useful)
+    // 2) Update existing lores for visual consistency (update both vip_tag and beta if table supports it)
+    const updatePayload = { vip_tag: vipValue }
+    
+    // Also update beta in lores if the field exists
     const { data, error } = await supabase
       .from('lores')
-      .update({ vip_tag: vipValue })
+      .update(updatePayload)
       .eq('discord_id', targetAccountId)
       .select('id')
 
@@ -983,6 +1045,12 @@ const AdminPanel = ({ user }) => {
 
     setSelectedAccountId('')
     setManualAccountId('')
+    setBulkVipTag('VIP')
+    setBulkBetaEnabled(false)
+    
+    // Wait a moment to ensure database is updated before refetch
+    await new Promise(resolve => setTimeout(resolve, 300))
+    
     await fetchAllLores()
     await fetchAccountOptions()
   }
@@ -1142,7 +1210,7 @@ const AdminPanel = ({ user }) => {
                         <option value="">Selecione uma conta</option>
                         {accountOptions.map(account => (
                           <option key={account.discord_id} value={account.discord_id}>
-                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | VIP atual: {account.current_vip_tag}{account.beta ? ' + Beta' : ''}
+                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | VIP atual: {account.current_vip_tag || 'Nenhum'}{account.beta ? ' + Beta' : ''}
                           </option>
                         ))}
                       </select>
