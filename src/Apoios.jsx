@@ -98,6 +98,7 @@ const vipArts = {
 
 const Apoios = () => {
   const [selectedImage, setSelectedImage] = useState(null)
+  const [paymentOpen, setPaymentOpen] = useState(false)
 
   return (
     <PageTransition>
@@ -140,6 +141,9 @@ const Apoios = () => {
                   />
                 ))}
               </div>
+              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+                <button className="payment-btn" onClick={() => setPaymentOpen(true)}>Métodos de Pagamento</button>
+              </div>
             </div>
 
             <div className="beta-arts-section vip-arts-section">
@@ -158,6 +162,9 @@ const Apoios = () => {
                   />
                 ))}
               </div>
+              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+                <button className="payment-btn" onClick={() => setPaymentOpen(true)}>Métodos de Pagamento</button>
+              </div>
             </div>
 
             <div className="beta-arts-section vip-arts-section">
@@ -175,6 +182,9 @@ const Apoios = () => {
                     transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
                   />
                 ))}
+              </div>
+              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+                <button className="payment-btn" onClick={() => setPaymentOpen(true)}>Métodos de Pagamento</button>
               </div>
             </div>
           </div>
@@ -210,6 +220,9 @@ const Apoios = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
               />
             </div>
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <button className="payment-btn" onClick={() => setPaymentOpen(true)}>Métodos de Pagamento</button>
+            </div>
           </div>
           
           <div className="boost-arts-section">
@@ -243,6 +256,9 @@ const Apoios = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
               />
             </div>
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <button className="payment-btn" onClick={() => setPaymentOpen(true)}>Métodos de Pagamento</button>
+            </div>
           </div>
         </div>
 
@@ -269,6 +285,43 @@ const Apoios = () => {
                   <X size={28} />
                 </button>
                 <img src={selectedImage} alt="Beta Art Expandida" className="beta-art-expanded" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {paymentOpen && (
+            <motion.div
+              className="beta-art-modal-overlay"
+              onClick={() => setPaymentOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="payment-modal-content"
+                onClick={e => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+              >
+                <button
+                  className="beta-art-modal-close"
+                  onClick={() => setPaymentOpen(false)}
+                >
+                  <X size={28} />
+                </button>
+                <h3 className="payment-modal-title">𝑴𝒆𝒕𝒐𝒅𝒐𝒔 𝒅𝒆 𝑷𝒂𝒈𝒂𝒎𝒆𝒏𝒕𝒐</h3>
+                <img src="/QRCODEMUSAE.png" alt="QR Code Musae" className="payment-qr" />
+                <div className="payment-modal-text">
+                  <p>• Por enquanto, contamos apenas com o "Pix.gg", ou seja, apenas pagamentos Via-Pix estão sendo aceitos, sendo todos os tier de forma mensal!</p>
+                  <p>➥ (ao fazer sua compra, adicione na aba "Mensagem" o Tier do VIP que Comprar, Seu nick no Minecraft e no Discord! Então, abra um Ticket do tipo "Financeiro" e mande o comprovante de sua compra, com caso seja nescessario, a musica que quer no disco, e qualquer outro fator do tier que for pegar!)</p>
+                  <p><strong>(AVISO:</strong> ITENS APENAS PARA MINECRAFT DOS TIER DE VIP, SERÃO DADOS AOS COMPRADORES NA ABERTURA DO SERVIDOR, MESMO QUE NO TAL MES ELES NÃO ESTEJAM MAIS COMO VIP!)</p>
+                  <p className="refund-title">.·:*¨༺ 𝑷𝒐𝒍𝒊́𝒕𝒊𝒄𝒂 𝒅𝒆 𝑹𝒆𝒆𝒎𝒃𝒐𝒍𝒔𝒐 ༻¨*:·.</p>
+                  <p>- De acordo com o <strong>artigo 49</strong> do <strong>Código de Defesa do Consumidor</strong> (<em>CDC</em>), o <strong>consumidor</strong> possui o direito de <strong>arrependimento</strong> no prazo de até <strong>7</strong> (<em>sete</em>) dias corridos, contados <strong>a partir do recebimento do produto</strong> ou da <strong>contratação do serviço</strong>.</p>
+                  <p>➥ Nesse caso, <strong>o cancelamento pode ser solicitado sem necessidade de apresentar justificativa</strong>, garantindo ao consumidor a devolução integral de <strong>todos os valores pagos</strong>, incluindo <strong>taxas adicionais</strong> (<em>se houver</em>). O reembolso deverá ser realizado de forma <strong>transparente</strong> e dentro de um <strong>prazo razoável</strong>, utilizando, preferencialmente, o mesmo meio de pagamento utilizado na compra. Se caso haja alguma dificuldade que limite ou dificulte o exercício desse direito pode ser considerado abusivo, conforme previsto pela legislação consumerista vigente e deverá ser comunicado a um superior maior a quem você conversa.</p>
+                </div>
               </motion.div>
             </motion.div>
           )}

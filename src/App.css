@@ -1836,6 +1836,61 @@ body {
   box-shadow: 0 0 20px rgba(242, 63, 71, 0.5);
 }
 
+/* Payment modal and button */
+.payment-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(213,101,229,0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.payment-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(213,101,229,0.2); }
+
+.payment-modal-content {
+  position: relative;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(22,27,34,0.95), rgba(18,20,26,0.95));
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+  border: 1px solid rgba(213,101,229,0.12);
+}
+
+.payment-modal-title {
+  font-family: 'Aref Ruqaa', serif;
+  color: var(--primary-color);
+  font-size: 1.9rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.payment-qr {
+  display: block;
+  margin: 0.5rem auto 1rem auto;
+  max-width: 320px;
+  width: 90%;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid rgba(213,101,229,0.12);
+}
+
+.payment-modal-text {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: left;
+  max-width: 720px;
+  margin: 0.5rem auto 0 auto;
+}
+
+.payment-modal-text p { margin: 0.6rem 0; }
+.refund-title { font-weight: 700; margin-top: 0.8rem; }
+
 .boost-arts-section,
 .beta-arts-section {
   background: rgba(88, 101, 242, 0.08);
