@@ -32,9 +32,11 @@ const getVipClassName = (vipTag) => {
   return `vip-tag vip-tag--${normalizedTag}`
 }
 
+const getBetaClassName = () => 'vip-tag vip-tag--beta'
+
 const getVipDisplayValue = (vipTag) => vipTag || 'Nenhum'
 
-const VIP_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++', 'Beta']
+const VIP_TIER_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++']
 
 const STATUS_LABELS = {
   PENDENTE: 'PENDENTE',
@@ -774,9 +776,10 @@ const AdminPanel = ({ user }) => {
   const [selectedAccountId, setSelectedAccountId] = useState('')
   const [manualAccountId, setManualAccountId] = useState('')
   const [bulkVipTag, setBulkVipTag] = useState('VIP')
+  const [bulkBetaEnabled, setBulkBetaEnabled] = useState(false)
   const [bulkUpdatingVip, setBulkUpdatingVip] = useState(false)
 
-  const vipTags = VIP_OPTIONS
+  const vipTags = VIP_TIER_OPTIONS
 
   const pendingLores = lores.filter(lore => lore.status !== 'APROVADA' && lore.status !== 'RECUSADA')
   const approvedLores = lores.filter(lore => lore.status === 'APROVADA')
@@ -809,6 +812,15 @@ const AdminPanel = ({ user }) => {
       return
     }
 
+    const { data: vipsData, error: vipsError } = await supabase
+      .from('vips')
+      .select('discord_id, discord_username, vip_tag, beta')
+      .not('discord_id', 'is', null)
+
+    if (vipsError) {
+      console.error('Erro ao buscar dados VIP das contas:', vipsError)
+    }
+
     const groupedAccounts = (data || []).reduce((acc, lore) => {
       if (!lore.discord_id) return acc
 
@@ -817,7 +829,8 @@ const AdminPanel = ({ user }) => {
           discord_id: lore.discord_id,
           discord_tag: lore.discord_tag || 'Sem username',
           current_vip_tag: lore.vip_tag || 'Nenhum',
-          total_whitelists: 0
+          total_whitelists: 0,
+          beta: false
         }
       }
 
@@ -829,6 +842,24 @@ const AdminPanel = ({ user }) => {
 
       return acc
     }, {})
+
+    ;(vipsData || []).forEach(vipRow => {
+      if (!vipRow.discord_id) return
+
+      if (!groupedAccounts[vipRow.discord_id]) {
+        groupedAccounts[vipRow.discord_id] = {
+          discord_id: vipRow.discord_id,
+          discord_tag: vipRow.discord_username || 'Sem username',
+          current_vip_tag: vipRow.vip_tag || 'Nenhum',
+          total_whitelists: 0,
+          beta: vipRow.beta === true
+        }
+      } else {
+        groupedAccounts[vipRow.discord_id].discord_tag = groupedAccounts[vipRow.discord_id].discord_tag || vipRow.discord_username || 'Sem username'
+        groupedAccounts[vipRow.discord_id].current_vip_tag = vipRow.vip_tag || groupedAccounts[vipRow.discord_id].current_vip_tag
+        groupedAccounts[vipRow.discord_id].beta = vipRow.beta === true
+      }
+    })
 
     setAccountOptions(Object.values(groupedAccounts))
   }, [])
@@ -897,15 +928,16 @@ const AdminPanel = ({ user }) => {
     setBulkUpdatingVip(true)
 
     const vipValue = bulkVipTag === 'Nenhum' ? null : bulkVipTag
+    const betaValue = bulkBetaEnabled
     const selectedAccount = accountOptions.find(account => account.discord_id === selectedAccountId)
     const targetDiscordUsername = selectedAccount?.discord_tag || targetAccountId
 
-    // 1) Try updating the VIP tag on the users table. If no row was updated, insert a new user record.
+    // 1) Try updating the VIP tag and beta access on the vips table. If no row was updated, insert a new vips record.
     let userError = null
     try {
       const { data: updateData, error: updateErr } = await supabase
         .from('vips')
-        .update({ vip_tag: vipValue })
+        .update({ vip_tag: vipValue, beta: betaValue })
         .eq('discord_id', targetAccountId)
         .select('discord_id')
 
@@ -914,7 +946,7 @@ const AdminPanel = ({ user }) => {
       if (!updateData || updateData.length === 0) {
         const { data: insertData, error: insertErr } = await supabase
           .from('vips')
-          .insert([{ discord_id: targetAccountId, discord_username: targetDiscordUsername, vip_tag: vipValue }])
+          .insert([{ discord_id: targetAccountId, discord_username: targetDiscordUsername, vip_tag: vipValue, beta: betaValue }])
         if (insertErr) throw insertErr
       }
     } catch (err) {
@@ -1132,6 +1164,15 @@ const AdminPanel = ({ user }) => {
                           <option key={tag} value={tag}>{tag}</option>
                         ))}
                       </select>
+                    </div>
+
+                    <div className="admin-bulk-vip-field">
+                      <label>Ativar versão Beta</label>
+                      <input
+                        type="checkbox"
+                        checked={bulkBetaEnabled}
+                        onChange={(e) => setBulkBetaEnabled(e.target.checked)}
+                      />
                     </div>
 
                     <div className="admin-bulk-vip-actions">
