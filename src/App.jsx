@@ -481,10 +481,6 @@ const Profile = ({ user }) => {
                       >
                         {f.status}
                       </div>
-                      <div className="profile-vip-badges">
-                        <span className={getVipClassName(f.vip_tag)}>{getVipDisplayValue(f.vip_tag)}</span>
-                        {f.beta && <span className={getBetaClassName()}>Beta</span>}
-                      </div>
                     </div>
 
                     <div className="profile-lore-card-headline">
@@ -549,12 +545,6 @@ const Profile = ({ user }) => {
                       }}
                     >
                       {selectedLore.status}
-                    </div>
-                    <div className="profile-vip-badges">
-                      <span className={getVipClassName(selectedLore.vip_tag)}>
-                        {getVipDisplayValue(selectedLore.vip_tag)}
-                      </span>
-                      {selectedLore.beta && <span className={getBetaClassName()}>Beta</span>}
                     </div>
                   </div>
 
