@@ -1,6 +1,6 @@
-import React from 'react'
-import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
-import { Music, Disc, Volume2, Mic, DollarSign } from 'lucide-react' // Importando ícones musicais
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion' // eslint-disable-line no-unused-vars
+import { Music, Disc, Volume2, Mic, DollarSign, X } from 'lucide-react' // Importando ícones musicais
 import PageTransition from './PageTransition'
 
 const tiers = [
@@ -91,6 +91,8 @@ const tiers = [
 ]
 
 const Apoios = () => {
+  const [selectedImage, setSelectedImage] = useState(null)
+
   return (
     <PageTransition>
       <div className="main-content">
@@ -163,6 +165,7 @@ const Apoios = () => {
                 src="/ARTEBETA1.jpg"
                 alt="Beta Art 1"
                 className="beta-art"
+                onClick={() => setSelectedImage('/ARTEBETA1.jpg')}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -171,6 +174,7 @@ const Apoios = () => {
                 src="/ARTEBETA2.jpg"
                 alt="Beta Art 2"
                 className="beta-art"
+                onClick={() => setSelectedImage('/ARTEBETA2.jpg')}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -179,6 +183,7 @@ const Apoios = () => {
                 src="/ARTEBETA3.jpg"
                 alt="Beta Art 3"
                 className="beta-art"
+                onClick={() => setSelectedImage('/ARTEBETA3.jpg')}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
@@ -193,6 +198,34 @@ const Apoios = () => {
             </p>
           </div>
         </div>
+
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              className="beta-art-modal-overlay"
+              onClick={() => setSelectedImage(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="beta-art-modal-content"
+                onClick={e => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+              >
+                <button
+                  className="beta-art-modal-close"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  <X size={28} />
+                </button>
+                <img src={selectedImage} alt="Beta Art Expandida" className="beta-art-expanded" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </PageTransition>
   )

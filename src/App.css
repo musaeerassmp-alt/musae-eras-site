@@ -1774,6 +1774,65 @@ body {
   box-shadow: 0 15px 40px rgba(242, 63, 71, 0.35);
 }
 
+.beta-art-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.beta-art-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beta-art-expanded {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  border: 2px solid rgba(242, 63, 71, 0.5);
+  box-shadow: 0 0 40px rgba(242, 63, 71, 0.4), inset 0 0 40px rgba(242, 63, 71, 0.1);
+}
+
+.beta-art-modal-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: rgba(242, 63, 71, 0.2);
+  border: 1px solid rgba(242, 63, 71, 0.4);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.beta-art-modal-close:hover {
+  background: rgba(242, 63, 71, 0.5);
+  border-color: rgba(242, 63, 71, 0.8);
+  box-shadow: 0 0 20px rgba(242, 63, 71, 0.5);
+}
+
 .discord-boost-info {
   background: rgba(88, 101, 242, 0.1);
   backdrop-filter: blur(10px);
