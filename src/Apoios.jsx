@@ -316,7 +316,7 @@ const Apoios = () => {
                 <img src="/QRCODEMUSAE.png" alt="QR Code Musae" className="payment-qr" />
                 <div className="payment-modal-text">
                   <p>• Por enquanto, contamos apenas com o "Pix.gg", ou seja, apenas pagamentos Via-Pix estão sendo aceitos, sendo todos os tier de forma mensal!</p>
-                  <p>➥ (ao fazer sua compra, adicione na aba "Mensagem" o Tier do VIP que Comprar, Seu nick no Minecraft e no Discord! Então, abra um Ticket do tipo "Financeiro" e mande o comprovante de sua compra, com caso seja nescessario, a musica que quer no disco, e qualquer outro fator do tier que for pegar!)</p>
+                  <p>➥ (ao fazer sua compra, adicione na aba "Mensagem" o Tier do VIP que Comprar, Seu nick no Minecraft e no Discord! Então, abra um Ticket do tipo "Financeiro" no Discord e mande o comprovante de sua compra, com caso seja nescessario, a musica que quer no disco, e qualquer outro fator do tier que for pegar!)</p>
                   <p><strong>(AVISO:</strong> ITENS APENAS PARA MINECRAFT DOS TIER DE VIP, SERÃO DADOS AOS COMPRADORES NA ABERTURA DO SERVIDOR, MESMO QUE NO TAL MES ELES NÃO ESTEJAM MAIS COMO VIP!)</p>
                   <p className="refund-title">.·:*¨༺ 𝑷𝒐𝒍𝒊́𝒕𝒊𝒄𝒂 𝒅𝒆 𝑹𝒆𝒆𝒎𝒃𝒐𝒍𝒔𝒐 ༻¨*:·.</p>
                   <p>- De acordo com o <strong>artigo 49</strong> do <strong>Código de Defesa do Consumidor</strong> (<em>CDC</em>), o <strong>consumidor</strong> possui o direito de <strong>arrependimento</strong> no prazo de até <strong>7</strong> (<em>sete</em>) dias corridos, contados <strong>a partir do recebimento do produto</strong> ou da <strong>contratação do serviço</strong>.</p>
