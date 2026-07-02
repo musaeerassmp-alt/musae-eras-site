@@ -572,7 +572,7 @@ const CriarFicha = ({ user }) => {
 
     // Buscar a vip_tag mais recente do usuário diretamente do banco de dados
     const { data: userProfile, error: profileError } = await supabase
-      .from('users')
+      .from('vips')
       .select('vip_tag')
       .eq('discord_id', user.id)
       .single()
@@ -736,7 +736,7 @@ const LoginPage = () => {
         : `https://cdn.discordapp.com/embed/avatars/${data.discriminator % 5}.png`
 
       const { data: userProfile, error: profileError } = await supabase
-        .from('users')
+        .from('vips')
         .select('vip_tag')
         .eq('discord_id', data.id)
         .single()
@@ -901,7 +901,7 @@ const AdminPanel = ({ user }) => {
     let userError = null
     try {
       const { data: updateData, error: updateErr } = await supabase
-        .from('users')
+        .from('vips')
         .update({ vip_tag: vipValue })
         .eq('discord_id', targetAccountId)
         .select('discord_id')
@@ -910,7 +910,7 @@ const AdminPanel = ({ user }) => {
 
       if (!updateData || updateData.length === 0) {
         const { data: insertData, error: insertErr } = await supabase
-          .from('users')
+          .from('vips')
           .insert([{ discord_id: targetAccountId, vip_tag: vipValue }])
         if (insertErr) throw insertErr
       }
