@@ -360,6 +360,7 @@ const Profile = ({ user }) => {
   if (!user) return <div className="main-content"><h1>Por favor, faça login.</h1></div>
 
   const profileVipTag = user?.vip_tag || lores.find(lore => lore.vip_tag && lore.vip_tag !== 'Nenhum')?.vip_tag || 'Nenhum'
+  const profileBetaActive = user?.beta === true
   const approvedCount = lores.filter(lore => lore.status === 'APROVADA').length
   const pendingCount = lores.filter(lore => lore.status === 'PENDENTE').length
 
@@ -389,9 +390,10 @@ const Profile = ({ user }) => {
 
                   <div className="profile-vip-panel">
                     <span className="profile-vip-label">Tier VIP</span>
-                    <span className={getVipClassName(profileVipTag)}>
-                      {getVipDisplayValue(profileVipTag)}
-                    </span>
+                    <div className="profile-vip-badges">
+                      <span className={getVipClassName(profileVipTag)}>{getVipDisplayValue(profileVipTag)}</span>
+                      {profileBetaActive && <span className={getBetaClassName()}>Beta</span>}
+                    </div>
                   </div>
                 </div>
 
@@ -739,16 +741,18 @@ const LoginPage = () => {
 
       const { data: userProfile, error: profileError } = await supabase
         .from('vips')
-        .select('vip_tag')
+        .select('vip_tag, beta')
         .eq('discord_id', data.id)
         .single()
 
       let vipTag = 'Nenhum'
+      let beta = false
       if (userProfile && !profileError) {
         vipTag = userProfile.vip_tag || 'Nenhum'
+        beta = userProfile.beta === true
       }
 
-      const user = { id: data.id, username: data.username, avatar_url: avatarUrl, vip_tag: vipTag }
+      const user = { id: data.id, username: data.username, avatar_url: avatarUrl, vip_tag: vipTag, beta }
       localStorage.setItem('discord_user', JSON.stringify(user))
       window.location.href = '/perfil'
     }
@@ -1138,7 +1142,7 @@ const AdminPanel = ({ user }) => {
                         <option value="">Selecione uma conta</option>
                         {accountOptions.map(account => (
                           <option key={account.discord_id} value={account.discord_id}>
-                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | VIP atual: {account.current_vip_tag}
+                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | VIP atual: {account.current_vip_tag}{account.beta ? ' + Beta' : ''}
                           </option>
                         ))}
                       </select>
