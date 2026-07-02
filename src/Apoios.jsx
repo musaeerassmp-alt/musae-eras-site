@@ -116,7 +116,7 @@ const Apoios = () => {
           </div>
 
           <div className="tiers-grid">
-            {tiers.map(tier => (
+            {tiers.filter(tier => tier.id !== 'acesso-antecipado').map(tier => (
               <motion.div
                 key={tier.id}
                 className={`tier-card tier-card--${tier.id}`}
@@ -154,6 +154,36 @@ const Apoios = () => {
                 </a>
               </motion.div>
             ))}
+          </div>
+
+          <div className="beta-arts-section">
+            <h2>Acesso Antecipado (Beta)</h2>
+            <div className="beta-arts-grid">
+              <motion.img
+                src="/ARTEBETA1.jpg"
+                alt="Beta Art 1"
+                className="beta-art"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              />
+              <motion.img
+                src="/ARTEBETA2.jpg"
+                alt="Beta Art 2"
+                className="beta-art"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
+              <motion.img
+                src="/ARTEBETA3.jpg"
+                alt="Beta Art 3"
+                className="beta-art"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              />
+            </div>
           </div>
           
           <div className="discord-boost-info">
