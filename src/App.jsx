@@ -1299,7 +1299,25 @@ const App = () => {
       const savedUser = localStorage.getItem('discord_user')
       if (savedUser) {
         const parsedUser = JSON.parse(savedUser)
-        setUser(parsedUser)
+
+        const { data: vipProfile, error: vipError } = await supabase
+          .from('vips')
+          .select('vip_tag, beta')
+          .eq('discord_id', parsedUser.id)
+          .single()
+
+        if (!vipError && vipProfile) {
+          const refreshedUser = {
+            ...parsedUser,
+            vip_tag: vipProfile.vip_tag || 'Nenhum',
+            beta: vipProfile.beta === true
+          }
+          localStorage.setItem('discord_user', JSON.stringify(refreshedUser))
+          setUser(refreshedUser)
+        } else {
+          setUser(parsedUser)
+        }
+
         await checkAdmin(parsedUser.username)
       } else {
         setLoadingAdmin(false)
