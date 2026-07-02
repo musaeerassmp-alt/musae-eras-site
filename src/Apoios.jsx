@@ -90,6 +90,12 @@ const tiers = [
   }
 ]
 
+const vipArts = {
+  acorde: ['/ARTEVIP1.jpg', '/ARTEVIP2.jpg', '/ARTEVIP3.jpg'],
+  crescendo: ['/ARTEVIP+1.jpg', '/ARTEVIP+2.jpg', '/ARTEVIP+4.jpg'],
+  'obra-prima': ['/ARTEVIP++1.jpg', '/ARTEVIP++2.jpg', '/ARTEVIP++3.jpg', '/ARTEVIP++4.jpg']
+}
+
 const Apoios = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
@@ -132,7 +138,25 @@ const Apoios = () => {
                   <p className="tier-price" style={{ color: tier.color }}>{tier.price}</p>
                 </div>
                 <p className="tier-details">{tier.details}</p>
-                
+                {vipArts[tier.id] && (
+                  <div className="beta-arts-section">
+                    <h4>Artes VIP</h4>
+                    <div className="beta-arts-grid">
+                      {vipArts[tier.id].map((src, index) => (
+                        <motion.img
+                          key={src}
+                          src={src}
+                          alt={`VIP Art ${index + 1}`}
+                          className="beta-art"
+                          onClick={() => setSelectedImage(src)}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div className="tier-benefits">
                   <h4>Benefícios Exclusivos:</h4>
                   <ul>
