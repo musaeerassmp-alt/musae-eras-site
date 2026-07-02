@@ -897,12 +897,26 @@ const AdminPanel = ({ user }) => {
     setBulkUpdatingVip(true)
 
     const vipValue = bulkVipTag === 'Nenhum' ? null : bulkVipTag
-    // 1) Upsert the VIP tag on the users table so the VIP is tied to the account
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .upsert([
-        { discord_id: targetAccountId, vip_tag: vipValue }
-      ], { onConflict: 'discord_id' })
+    // 1) Try updating the VIP tag on the users table. If no row was updated, insert a new user record.
+    let userError = null
+    try {
+      const { data: updateData, error: updateErr } = await supabase
+        .from('users')
+        .update({ vip_tag: vipValue })
+        .eq('discord_id', targetAccountId)
+        .select('discord_id')
+
+      if (updateErr) throw updateErr
+
+      if (!updateData || updateData.length === 0) {
+        const { data: insertData, error: insertErr } = await supabase
+          .from('users')
+          .insert([{ discord_id: targetAccountId, vip_tag: vipValue }])
+        if (insertErr) throw insertErr
+      }
+    } catch (err) {
+      userError = err
+    }
 
     if (userError) {
       setBulkUpdatingVip(false)
