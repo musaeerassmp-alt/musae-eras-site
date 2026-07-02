@@ -123,63 +123,60 @@ const Apoios = () => {
             </p>
           </div>
 
-          <div className="tiers-grid">
-            {tiers.filter(tier => tier.id !== 'acesso-antecipado').map(tier => (
-              <motion.div
-                key={tier.id}
-                className={`tier-card tier-card--${tier.id}`}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * tiers.indexOf(tier) }}
-              >
-                <div className="tier-header" style={{ borderBottomColor: tier.color }}>
-                  <div className="tier-icon" style={{ color: tier.color }}>{tier.icon}</div>
-                  <h3 className="tier-title">{tier.title}</h3>
-                  <p className="tier-price" style={{ color: tier.color }}>{tier.price}</p>
-                </div>
-                <p className="tier-details">{tier.details}</p>
-                {vipArts[tier.id] && (
-                  <div className="beta-arts-section">
-                    <h4>Artes VIP</h4>
-                    <div className="beta-arts-grid">
-                      {vipArts[tier.id].map((src, index) => (
-                        <motion.img
-                          key={src}
-                          src={src}
-                          alt={`VIP Art ${index + 1}`}
-                          className="beta-art"
-                          onClick={() => setSelectedImage(src)}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                <div className="tier-benefits">
-                  <h4>Benefícios Exclusivos:</h4>
-                  <ul>
-                    {tier.benefits.map((benefit, index) => (
-                      <li key={index}><Disc size={16} style={{ color: tier.color }} /> {benefit}</li>
-                    ))}
-                  </ul>
-                </div>
+          <div className="vip-arts-wrapper">
+            <div className="beta-arts-section vip-arts-section">
+              <h2>O Primeiro Acorde</h2>
+              <div className="beta-arts-grid">
+                {['/ARTEVIP1.jpg', '/ARTEVIP2.jpg', '/ARTEVIP3.jpg'].map((src, index) => (
+                  <motion.img
+                    key={src}
+                    src={src}
+                    alt={`O Primeiro Acorde ${index + 1}`}
+                    className="beta-art"
+                    onClick={() => setSelectedImage(src)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                  />
+                ))}
+              </div>
+            </div>
 
-                <div className="tier-kit">
-                  <h4>Kit Inicial (Base):</h4>
-                  <ul>
-                    {tier.kit.map((item, index) => (
-                      <li key={index}><Music size={16} style={{ color: tier.color }} /> {item}</li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <a href="LINK_PARA_PAGAMENTO" target="_blank" className="tier-btn" style={{ backgroundColor: tier.color }}>
-                  Quero Apoiar! <DollarSign size={18} />
-                </a>
-              </motion.div>
-            ))}
+            <div className="beta-arts-section vip-arts-section">
+              <h2>O Crescendo</h2>
+              <div className="beta-arts-grid">
+                {['/ARTEVIP+1.jpg', '/ARTEVIP+2.jpg', '/ARTEVIP+4.jpg'].map((src, index) => (
+                  <motion.img
+                    key={src}
+                    src={src}
+                    alt={`O Crescendo ${index + 1}`}
+                    className="beta-art"
+                    onClick={() => setSelectedImage(src)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="beta-arts-section vip-arts-section">
+              <h2>Nossa Obra-Prima</h2>
+              <div className="beta-arts-grid">
+                {['/ARTEVIP++1.jpg', '/ARTEVIP++2.jpg', '/ARTEVIP++3.jpg', '/ARTEVIP++4.jpg'].map((src, index) => (
+                  <motion.img
+                    key={src}
+                    src={src}
+                    alt={`Nossa Obra-Prima ${index + 1}`}
+                    className="beta-art"
+                    onClick={() => setSelectedImage(src)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="beta-arts-section">
