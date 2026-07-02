@@ -191,11 +191,37 @@ const Apoios = () => {
             </div>
           </div>
           
-          <div className="discord-boost-info">
+          <div className="boost-arts-section">
             <h2>Boosts no Discord</h2>
-            <p>
-              Para quem quer apoiar, mas prefere fazer pelo Discord, a gente tem uma forma legal de agradecer. Você ganha um cargo especial chamado "Patrocinador", acesso a chats que só vocês e os VIPs veem (com uns spoilers a mais bem legais sobre o que tá vindo), e ainda ganha um áudio personalizado só seu no servidor, que de preferência seja engraçadinho.
-            </p>
+            <div className="beta-arts-grid">
+              <motion.img
+                src="/ARTEBOOST1.jpg"
+                alt="Boost Art 1"
+                className="beta-art"
+                onClick={() => setSelectedImage('/ARTEBOOST1.jpg')}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              />
+              <motion.img
+                src="/ARTEBOOST2.jpg"
+                alt="Boost Art 2"
+                className="beta-art"
+                onClick={() => setSelectedImage('/ARTEBOOST2.jpg')}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
+              <motion.img
+                src="/ARTEBOOST3.jpg"
+                alt="Boost Art 3"
+                className="beta-art"
+                onClick={() => setSelectedImage('/ARTEBOOST3.jpg')}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              />
+            </div>
           </div>
         </div>
 

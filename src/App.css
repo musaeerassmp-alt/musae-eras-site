@@ -1833,13 +1833,26 @@ body {
   box-shadow: 0 0 20px rgba(242, 63, 71, 0.5);
 }
 
-.discord-boost-info {
-  background: rgba(88, 101, 242, 0.1);
+.boost-arts-section,
+.beta-arts-section {
+  background: rgba(88, 101, 242, 0.08);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(88, 101, 242, 0.3);
+  border: 1px solid rgba(88, 101, 242, 0.25);
   border-radius: 20px;
   padding: 2.5rem;
   text-align: left;
+}
+
+.boost-arts-section h2,
+.beta-arts-section h2 {
+  font-size: 2rem;
+  color: #5865F2;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
+}
+
+.discord-boost-info {
+  display: none;
 }
 
 .discord-boost-info h2 {
