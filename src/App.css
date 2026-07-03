@@ -3,6 +3,7 @@
   ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 
 :root {
   --bg-color: #0b0e14;
@@ -372,8 +373,8 @@ body {
 }
 
 .lore-title {
-  font-family: 'MonteCarlo', cursive;
-  font-size: 3.2rem;
+  font-family: 'Playball', cursive;
+  font-size: 3.6rem;
   color: white;
   margin-bottom: 1.5rem;
   text-align: center;
