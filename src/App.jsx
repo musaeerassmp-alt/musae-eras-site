@@ -505,7 +505,7 @@ const Profile = ({ user }) => {
           </div>
 
           <div className="profile-lores-section">
-            <h2>Minhas Partituras</h2>
+            <h2 className="lore-title lore-title-small">Minhas Partituras</h2>
             {lores.length === 0 ? (
               <div className="placeholder-card">
                 <p>Você ainda não compôs nenhuma obra. Vá até "Componha sua Obra" para começar!</p>

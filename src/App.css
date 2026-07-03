@@ -380,6 +380,12 @@ body {
   text-align: center;
 }
 
+.lore-title-small {
+  font-size: 2.2rem;
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
 .lore-text-content {
   max-width: 800px;
   margin: 0 auto;
