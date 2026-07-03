@@ -477,9 +477,18 @@ body {
   margin-right: auto;
 }
 
+.race-details-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
 .race-details-header h2 {
+  font-family: 'Playball', cursive;
   font-size: 3rem;
-  margin-bottom: 1rem;
+  margin: 0;
   color: white;
   font-weight: 900;
 }

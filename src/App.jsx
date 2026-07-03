@@ -148,7 +148,7 @@ const Forum = () => {
       name: 'Humanos',
       icon: <Users size={24} />,
       content: {
-        expectativa: '83 anos de persistência',
+        expectativa: 'de 80 a 100 anos de persistencia',
         descricao: 'Onde outras raças nascem com o poder de mover montanhas ou dobrar a realidade, o humano nasce apenas com o desejo de fazê-lo. Somos a raça da adaptação, os arquitetos do improvável. Nossa força não vem de linhagens divinas ou ancestrais mágicos, mas do suor, da proatividade e da teimosia em não aceitar o destino imposto.',
         culturaFora: 'Para aqueles que cruzaram as águas em busca do continente, a vida foi uma sinfonia de luta. Sobrevivemos sob o fio da navalha, onde cada dia era uma batalha entre o "lutar" e o "fugir". Fora daqui, aprendemos que a união não é apenas uma escolha, mas uma necessidade vital. Valorizamos a força de quem age, a coragem de quem protege e o amor que nos mantém juntos quando tudo o mais desmorona.',
         percepcaoDentro: 'Os que já habitam o continente, protegidos por muralhas e tratados, parecem ter esquecido o peso do aço. São vistos por nós como intelectuais de mãos limpas, talvez um pouco lentos e arrogantes em sua sabedoria de livros. Dizem que são frágeis, que a paz os tornou preguiçosos... mas talvez tenham apenas encontrado uma harmonia que nós, os de fora, ainda estamos lutando para compreender.',
