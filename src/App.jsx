@@ -158,6 +158,14 @@ const Forum = () => {
           {
             nome: 'Vaelion, a Sorte',
             relato: "Séculos atrás, um surto de doença quase dizimou os humanos. Tomados pelo desespero, o povo cantava: 'Alguém por favor atenda ao nosso clamor, mude a nossa sorte e acabe com nossa dor'. Misteriosamente, a doença acabou conforme pediram. Hoje, as pessoas continuam proferindo este canto e dão o nome de 'Vaelion, a sortuda' para a entidade que os atendeu."
+          },
+          {
+            nome: 'Erynn, a Promessa Perdida',
+            relato: 'Dizem que Erynn era uma jovem que fez promessa ao solo ancestral de proteger os viajantes perdidos. Quando a tempestade tomou o caminho, sua voz ainda ecoa entre as rochas, guiando aqueles que se perdem para fora da névoa. Muitos afirmam ouvir seu canto suave nas noites de lua minguante.'
+          },
+          {
+            nome: 'O Eco do Primeiro Pacto',
+            relato: 'No começo dos tempos, dizem que os humanos fizeram um pacto com o vento: em troca de coragem e esperança, o vento levaria suas histórias aos confins do mundo. Quando o eco daquele juramento ainda corre pelos vales, alguns acreditam que é ele quem sussurra conselhos aos corações mais ousados.'
           }
         ],
         habilidade: {
@@ -301,8 +309,12 @@ const Forum = () => {
                         </div>
 
                         <div className="lore-lendas-section">
-                          <div className="lore-subtitle"><Sparkles size={20} /> Lendas Conhecidas</div>
-                          <div className="lendas-grid">
+                            <button type="button" className="lore-subtitle lore-subtitle-toggle" onClick={toggleAllLendas}>
+                              <Sparkles size={20} />
+                              <span>Lendas Conhecidas</span>
+                              <span className="lore-subtitle-action">{selectedRace.content.lendas.every((_, index) => !!openLendas[index]) ? 'Fechar todas' : 'Abrir todas'}</span>
+                            </button>
+                            <div className="lendas-grid">
                               {selectedRace.content.lendas.map((lenda, index) => {
                                 const isOpen = !!openLendas[index]
                                 return (
