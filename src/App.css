@@ -1918,6 +1918,7 @@ body {
    text-align: center;
    text-shadow: 0 0 26px rgba(213, 101, 229, 0.7);
    transform: translateY(-22px);
+}
 
 .discord-boost-info p {
   font-size: 1rem;
