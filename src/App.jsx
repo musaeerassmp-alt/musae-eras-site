@@ -123,11 +123,23 @@ const Forum = () => {
   const [selectedRace, setSelectedRace] = useState(null)
   const [openLendas, setOpenLendas] = useState({})
 
+  const selectedLendas = selectedRace?.content?.lendas ?? []
+
   const toggleLenda = (index) => {
     setOpenLendas((prev) => ({
       ...prev,
       [index]: !prev[index]
     }))
+  }
+
+  const toggleAllLendas = () => {
+    if (selectedLendas.length === 0) return
+    const areAllOpen = selectedLendas.every((_, index) => !!openLendas[index])
+    const nextState = selectedLendas.reduce((acc, _, index) => {
+      acc[index] = !areAllOpen
+      return acc
+    }, {})
+    setOpenLendas(nextState)
   }
 
   const races = [
@@ -312,10 +324,10 @@ const Forum = () => {
                             <button type="button" className="lore-subtitle lore-subtitle-toggle" onClick={toggleAllLendas}>
                               <Sparkles size={20} />
                               <span>Lendas Conhecidas</span>
-                              <span className="lore-subtitle-action">{selectedRace.content.lendas.every((_, index) => !!openLendas[index]) ? 'Fechar todas' : 'Abrir todas'}</span>
+                              <span className="lore-subtitle-action">{selectedLendas.length > 0 && selectedLendas.every((_, index) => !!openLendas[index]) ? 'Fechar todas' : 'Abrir todas'}</span>
                             </button>
                             <div className="lendas-grid">
-                              {selectedRace.content.lendas.map((lenda, index) => {
+                              {selectedLendas.map((lenda, index) => {
                                 const isOpen = !!openLendas[index]
                                 return (
                                   <div key={index} className={`lenda-card ${isOpen ? 'open' : 'closed'}`}>
@@ -333,7 +345,7 @@ const Forum = () => {
                                   </div>
                                 )
                               })}
-                          </div>
+                            </div>
                         </div>
                         <div className="ability-card">
                           <div className="ability-title">
