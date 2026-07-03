@@ -1753,12 +1753,12 @@ body {
 .vip-arts-section h2 {
   font-family: 'MonteCarlo', cursive !important;
   color: var(--primary-color) !important;
-  font-size: 9.4rem !important;
+  font-size: 6rem !important;
   line-height: 0.95;
   margin-bottom: 1.2rem !important;
   text-align: center !important;
-  text-shadow: 0 0 28px rgba(213, 101, 229, 0.8) !important;
-  transform: translateY(-24px) !important;
+  text-shadow: 0 0 22px rgba(88, 101, 242, 0.85) !important;
+  transform: translateY(-18px) !important;
 }
 
 .beta-arts-grid {
