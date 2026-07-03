@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { createClient } from '@supabase/supabase-js'
-import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star } from 'lucide-react'
+import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star, ChevronDown, ChevronUp } from 'lucide-react'
 import Apoios from './Apoios'
 import PageTransition from './PageTransition'
 import './App.css'
@@ -121,6 +121,14 @@ const Home = () => {
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
+  const [openLendas, setOpenLendas] = useState({})
+
+  const toggleLenda = (index) => {
+    setOpenLendas((prev) => ({
+      ...prev,
+      [index]: !prev[index]
+    }))
+  }
 
   const races = [
     {
@@ -183,6 +191,7 @@ const Forum = () => {
               onClick={() => {
                 setActiveSection('historia')
                 setSelectedRace(null)
+                setOpenLendas({})
               }}
             >
               📖 História do Mundo
@@ -237,7 +246,10 @@ const Forum = () => {
                       <div
                         key={race.id}
                         className={`race-card ${selectedRace?.id === race.id ? 'active' : ''}`}
-                        onClick={() => setSelectedRace(race)}
+                        onClick={() => {
+                          setSelectedRace(race)
+                          setOpenLendas({})
+                        }}
                       >
                         <div className="race-icon">{race.icon}</div>
                         <span>{race.name}</span>
@@ -291,15 +303,26 @@ const Forum = () => {
                         <div className="lore-lendas-section">
                           <div className="lore-subtitle"><Sparkles size={20} /> Lendas Conhecidas</div>
                           <div className="lendas-grid">
-                            {selectedRace.content.lendas.map((lenda, index) => (
-                              <div key={index} className="lenda-card">
-                                <h4>{lenda.nome}</h4>
-                                <p>"{lenda.relato}"</p>
-                              </div>
-                            ))}
+                              {selectedRace.content.lendas.map((lenda, index) => {
+                                const isOpen = !!openLendas[index]
+                                return (
+                                  <div key={index} className={`lenda-card ${isOpen ? 'open' : 'closed'}`}>
+                                    <div className="lenda-card-header">
+                                      <h4>{lenda.nome}</h4>
+                                      <button
+                                        type="button"
+                                        className="lenda-toggle-btn"
+                                        onClick={() => toggleLenda(index)}
+                                      >
+                                        {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                                      </button>
+                                    </div>
+                                    {isOpen && <p>"{lenda.relato}"</p>}
+                                  </div>
+                                )
+                              })}
                           </div>
                         </div>
-
                         <div className="ability-card">
                           <div className="ability-title">
                             <Zap size={24} /> {selectedRace.content.habilidade.nome}
