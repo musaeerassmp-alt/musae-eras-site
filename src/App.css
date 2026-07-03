@@ -1920,22 +1920,13 @@ body {
 
 .boost-arts-section h2,
 .beta-arts-section h2 {
-  font-size: 2rem;
-  color: #5865F2;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
-}
-
-.discord-boost-info {
-  display: none;
-}
-
-.discord-boost-info h2 {
-  font-size: 2rem;
-  color: #5865F2;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
-}
+   font-family: 'MonteCarlo', cursive;
+   color: var(--primary-color);
+   font-size: 8rem;
+   margin-bottom: 1.6rem;
+   text-align: center;
+   text-shadow: 0 0 26px rgba(213, 101, 229, 0.7);
+   transform: translateY(-22px);
 
 .discord-boost-info p {
   font-size: 1rem;
