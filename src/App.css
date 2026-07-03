@@ -1749,25 +1749,16 @@ body {
 }
 
 .beta-arts-section h2,
-.boost-arts-section h2 {
-  font-family: 'MonteCarlo', cursive;
-  color: var(--primary-color);
-  font-size: 8rem;
-  margin-bottom: 1.6rem;
-  text-align: center;
-  text-shadow: 0 0 26px rgba(213, 101, 229, 0.7);
-  transform: translateY(-22px);
-}
-
-/* VIP headings: use same font as 'Minhas Partituras' and center */
+.boost-arts-section h2,
 .vip-arts-section h2 {
-  font-family: 'MonteCarlo', cursive;
-  color: var(--primary-color);
-  font-size: 8rem;
-  margin-bottom: 1.8rem;
-  text-align: center;
-  text-shadow: 0 0 26px rgba(213, 101, 229, 0.7);
-  transform: translateY(-22px);
+  font-family: 'MonteCarlo', cursive !important;
+  color: var(--primary-color) !important;
+  font-size: 9.4rem !important;
+  line-height: 0.95;
+  margin-bottom: 1.2rem !important;
+  text-align: center !important;
+  text-shadow: 0 0 28px rgba(213, 101, 229, 0.8) !important;
+  transform: translateY(-24px) !important;
 }
 
 .beta-arts-grid {
