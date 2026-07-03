@@ -838,10 +838,10 @@ body {
 .profile-lores-section h2 {
   font-family: 'MonteCarlo', cursive;
   color: var(--primary-color);
-  font-size: 7.6rem;
+  font-size: 4.4rem;
   margin-bottom: 2.6rem;
   text-align: center;
-  text-shadow: 0 0 22px rgba(213, 101, 229, 0.65);
+  text-shadow: 0 0 18px rgba(213, 101, 229, 0.6);
 }
 
 .profile-lores-section {
@@ -1752,22 +1752,22 @@ body {
 .boost-arts-section h2 {
   font-family: 'MonteCarlo', cursive;
   color: var(--primary-color);
-  font-size: 6.6rem;
-  margin-bottom: 1.8rem;
+  font-size: 8rem;
+  margin-bottom: 1.6rem;
   text-align: center;
-  text-shadow: 0 0 22px rgba(213, 101, 229, 0.65);
-  transform: translateY(-18px);
+  text-shadow: 0 0 26px rgba(213, 101, 229, 0.7);
+  transform: translateY(-22px);
 }
 
 /* VIP headings: use same font as 'Minhas Partituras' and center */
 .vip-arts-section h2 {
   font-family: 'MonteCarlo', cursive;
   color: var(--primary-color);
-  font-size: 6.6rem;
+  font-size: 8rem;
   margin-bottom: 1.8rem;
   text-align: center;
-  text-shadow: 0 0 22px rgba(213, 101, 229, 0.65);
-  transform: translateY(-18px);
+  text-shadow: 0 0 26px rgba(213, 101, 229, 0.7);
+  transform: translateY(-22px);
 }
 
 .beta-arts-grid {
