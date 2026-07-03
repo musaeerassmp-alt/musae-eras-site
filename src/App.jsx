@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { createClient } from '@supabase/supabase-js'
 import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star, ChevronDown, ChevronUp } from 'lucide-react'
@@ -847,7 +847,7 @@ const LoginPage = () => {
   )
 }
 
-const AdminPanel = ({ user }) => {
+const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
   const [activeTab, setActiveTab] = useState('lores')
   const [lores, setLores] = useState([])
   const [admins, setAdmins] = useState([])
@@ -1125,6 +1125,14 @@ const AdminPanel = ({ user }) => {
   }, [fetchAllLores, fetchAllAdmins, fetchAccountOptions])
 
   if (!user) return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>
+
+  if (loadingAdmin) {
+    return <div className="main-content"><h1>Verificando permissões...</h1></div>
+  }
+
+  if (!isAdmin) {
+    return <div className="main-content"><h1>Acesso negado. Faça login como administrador.</h1></div>
+  }
 
   return (
     <PageTransition>
@@ -1467,7 +1475,16 @@ const App = () => {
           <Route path="/forum" element={<Forum />} />
           <Route path="/compor" element={<CriarFicha user={user} />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin" element={<AdminPanel user={user} />} />
+          <Route
+            path="/admin"
+            element={
+              loadingAdmin
+                ? <div className="main-content"><h1>Verificando permissões...</h1></div>
+                : isAdmin
+                  ? <AdminPanel user={user} isAdmin={isAdmin} loadingAdmin={loadingAdmin} />
+                  : <Navigate to="/" replace />
+            }
+          />
           <Route path="/apoios" element={<Apoios />} />
         </Routes>
       </div>
