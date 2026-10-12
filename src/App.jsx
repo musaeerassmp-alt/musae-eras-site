@@ -149,11 +149,16 @@ const Forum = () => {
       icon: <Users size={24} />,
       content: {
         expectativa: 'de 80 a 100 anos de persistencia',
-        descricao: 'Onde outras raças nascem com o poder de mover montanhas ou dobrar a realidade, o humano nasce apenas com o desejo de fazê-lo. Somos a raça da adaptação, os arquitetos do improvável. Nossa força não vem de linhagens divinas ou ancestrais mágicos, mas do suor, da proatividade e da teimosia em não aceitar o destino imposto.',
-        culturaFora: 'Para aqueles que cruzaram as águas em busca do continente, a vida foi uma sinfonia de luta. Sobrevivemos sob o fio da navalha, onde cada dia era uma batalha entre o "lutar" e o "fugir". Fora daqui, aprendemos que a união não é apenas uma escolha, mas uma necessidade vital. Valorizamos a força de quem age, a coragem de quem protege e o amor que nos mantém juntos quando tudo o mais desmorona.',
-        percepcaoDentro: 'Os que já habitam o continente, protegidos por muralhas e tratados, parecem ter esquecido o peso do aço. São vistos por nós como intelectuais de mãos limpas, talvez um pouco lentos e arrogantes em sua sabedoria de livros. Dizem que são frágeis, que a paz os tornou preguiçosos... mas talvez tenham apenas encontrado uma harmonia que nós, os de fora, ainda estamos lutando para compreender.',
+        descricao: 'Os Humanos são uma das raças mais comuns e versáteis já catalogadas. Não apresentam afinidade natural com qualquer elemento, tampouco possuem características físicas extraordinárias. Ainda assim, são reconhecidos por sua inteligência, capacidade de adaptação e incessante busca por conhecimento.',
+        origem: [
+          'Habitam o mundo desde tempos imemoriais.',
+          'Foram responsáveis pelo desenvolvimento de ferramentas, da escrita e das primeiras grandes sociedades.',
+          'Expandiram-se por praticamente todos os continentes e biomas conhecidos.',
+          'Sua história é marcada pela constante evolução, adaptação e reconstrução diante das adversidades.'
+        ],
+        organizacaoSocial: 'A organização social dos Humanos é baseada na cooperação e na vida em comunidade. São naturalmente inclinados à formação de grupos, vilas e cidades, valorizando relações de confiança, troca de conhecimento e auxílio mútuo. Embora existam inúmeras culturas entre eles, a união é frequentemente apontada como a principal razão para sua permanência e expansão ao longo da história.',
         fisico: 'Nossa aparência é o reflexo da nossa simplicidade: não temos orelhas pontiagudas para ouvir o além, nem escamas para nos proteger do fogo. Somos carne, osso e vontade. Um espelho limpo da natureza, sem adornos, onde a verdadeira beleza reside na diversidade de nossas faces e na força de nossos passos.',
-        magia: 'Dizem que somos páginas em branco. Enquanto um anjo nasce com a luz e um demônio com o fogo, o humano nasce com o vazio — e é nesse vazio que reside nossa maior vantagem. Podemos aprender qualquer segredo arcano, trilhar qualquer caminho místico. Não somos os mestres naturais de nenhum elemento, mas somos os que evoluem com a velocidade de um vendaval, preenchendo nossas páginas com a magia que escolhermos conquistar.',
+        magia: 'Os Humanos não possuem afinidade elemental, tornando sua natureza completamente neutra. São a única raça conhecida capaz de aprender e dominar qualquer vertente da magia. Sua maior arma é a capacidade de aprender com rapidez e adaptar-se a qualquer desafio.',
         lendas: [
           {
             nome: 'Krampus',
@@ -181,11 +186,9 @@ const Forum = () => {
           }
         ],
         habilidade: {
-          nome: 'Indomável Espírito Humano',
-          tipo: 'Despertar Ancestral',
-          descricao: 'Quando o corpo clama pela queda e o fôlego se esvai, algo profundo e indomável desperta em suas veias. É o grito de mil gerações que se recusaram a morrer.',
-          efeito: 'Ao atingir o limiar de 3 corações, sua vontade se torna aço: você recebe Regeneração II, Resistência I e Força I por 30 segundos, negando o abraço da morte.',
-          recarga: '15 minutos de descanso da alma'
+          nome: 'Adrenalina',
+          tipo: 'Estado Instintivo',
+          descricao: 'Quando submetidos a situações extremas, os Humanos podem despertar um estado instintivo conhecido como Adrenalina, elevando temporariamente seus limites físicos.'
         }
       }
     },
@@ -299,14 +302,30 @@ const Forum = () => {
                         </div>
 
                         <div className="lore-two-columns">
-                          <div className="lore-block">
-                            <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
-                            <p>{selectedRace.content.culturaFora}</p>
-                          </div>
-                          <div className="lore-block">
-                            <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
-                            <p>{selectedRace.content.percepcaoDentro}</p>
-                          </div>
+                          {selectedRace.content.origem ? (
+                            <div className="lore-block">
+                              <div className="lore-subtitle"><Map size={20} /> Origem</div>
+                              <ul className="lore-list">
+                                {selectedRace.content.origem.map(item => <li key={item}>{item}</li>)}
+                              </ul>
+                            </div>
+                          ) : (
+                            <div className="lore-block">
+                              <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
+                              <p>{selectedRace.content.culturaFora}</p>
+                            </div>
+                          )}
+                          {selectedRace.content.organizacaoSocial ? (
+                            <div className="lore-block">
+                              <div className="lore-subtitle"><ShieldCheck size={20} /> Organização Social</div>
+                              <p>{selectedRace.content.organizacaoSocial}</p>
+                            </div>
+                          ) : (
+                            <div className="lore-block">
+                              <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
+                              <p>{selectedRace.content.percepcaoDentro}</p>
+                            </div>
+                          )}
                         </div>
 
                         <div className="lore-two-columns">
@@ -353,10 +372,12 @@ const Forum = () => {
                             <span className="ability-type">{selectedRace.content.habilidade.tipo}</span>
                           </div>
                           <p className="ability-description">{selectedRace.content.habilidade.descricao}</p>
-                          <div className="ability-footer">
-                            <div className="ability-effect"><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</div>
-                            <div className="ability-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</div>
-                          </div>
+                          {(selectedRace.content.habilidade.efeito || selectedRace.content.habilidade.recarga) && (
+                            <div className="ability-footer">
+                              {selectedRace.content.habilidade.efeito && <div className="ability-effect"><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</div>}
+                              {selectedRace.content.habilidade.recarga && <div className="ability-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</div>}
+                            </div>
+                          )}
                         </div>
                       </motion.div>
                     ) : (

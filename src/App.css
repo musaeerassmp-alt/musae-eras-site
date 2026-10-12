@@ -553,6 +553,17 @@ body {
   margin: 0;
 }
 
+.lore-list {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.lore-list li + li {
+  margin-top: 0.5rem;
+}
+
 .lore-two-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
