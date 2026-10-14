@@ -168,13 +168,7 @@ const Forum = () => {
           'Muitos dos maiores curandeiros conhecidos pertencem à raça angelical.',
           'Sua energia também lhes permite desafiar parcialmente a gravidade, tornando seus movimentos mais leves.'
         ],
-        detalhesAntesImagem: [
-          {
-            titulo: 'Leis da Criação',
-            descricao: 'A responsabilidade dos Anjos é proteger as Quatorze Leis da Criação, princípios absolutos que sustentam a ordem. Essas leis proíbem diversas ações; segundo os registros angelicais, sua violação ameaça a própria continuidade do universo.'
-          }
-        ],
-        introducao: 'Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente. Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.'
+        introducao: 'A responsabilidade dos Anjos é proteger as Quatorze Leis da Criação, princípios absolutos que sustentam a ordem. Essas leis proíbem diversas ações; segundo os registros angelicais, sua violação ameaça a própria continuidade do universo. Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente. Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.'
       }
     },
     { id: 'demonios', name: 'Demônios', icon: <Zap size={24} /> },
@@ -315,28 +309,15 @@ const Forum = () => {
                             </div>
 
                             {selectedRace.content.magia && (
-                              <div className="lore-two-columns">
-                                <div className="lore-block">
-                                  <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
-                                  {Array.isArray(selectedRace.content.magia) ? (
-                                    <ul className="lore-list">
-                                      {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
-                                    </ul>
-                                  ) : (
-                                    <p>{selectedRace.content.magia}</p>
-                                  )}
-                                </div>
-                              </div>
-                            )}
-
-                            {selectedRace.content.detalhesAntesImagem?.length > 0 && (
-                              <div className="lore-two-columns">
-                                {selectedRace.content.detalhesAntesImagem.map(({ titulo, descricao }) => (
-                                  <div className="lore-block" key={titulo}>
-                                    <div className="lore-subtitle"><BookOpen size={20} /> {titulo}</div>
-                                    <p>{descricao}</p>
-                                  </div>
-                                ))}
+                              <div className="lore-block">
+                                <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
+                                {Array.isArray(selectedRace.content.magia) ? (
+                                  <ul className="lore-list">
+                                    {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
+                                  </ul>
+                                ) : (
+                                  <p>{selectedRace.content.magia}</p>
+                                )}
                               </div>
                             )}
                               </>
