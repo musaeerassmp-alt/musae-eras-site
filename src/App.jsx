@@ -208,7 +208,39 @@ const Forum = () => {
       }
     },
     { id: 'quimeras', name: 'Quimeras', icon: <UserCheck size={24} /> },
-    { id: 'aquarianos', name: 'Aquarianos', icon: <Map size={24} /> }
+    {
+      id: 'aquarianos',
+      name: 'Aquarianos',
+      icon: <Map size={24} />,
+      content: {
+        expectativa: 'de 100 a 120 anos',
+        descricao: 'Os Aquarianos são uma raça própria, distinta das Quimeras apesar das semelhanças. Seus corpos possuem características humanoides combinadas com traços de criaturas aquáticas, como peixes e animais que habitam mares e profundezas.',
+        origemTitulo: 'Natureza',
+        origem: [
+          'Sua natureza está diretamente ligada ao ambiente aquático.',
+          'Apresentam características provenientes de diferentes criaturas aquáticas.'
+        ],
+        caracteristicas: [
+          'Seus corpos são perfeitamente adaptados à vida subaquática.',
+          'Conseguem enxergar em ambientes aquáticos.',
+          'Respiram normalmente debaixo d’água, sem depender de equipamentos ou outras formas de adaptação.'
+        ],
+        imagem: '/AquarianoVITRUVIANO.png',
+        introducao: [
+          'Embora sejam adaptados à água, os Aquarianos possuem dificuldades significativas longe de seu ambiente natural. O fogo é especialmente perigoso para seus corpos, podendo causar ferimentos mais graves do que causaria em outras raças. Ambientes extremamente secos podem ser debilitantes e fazê-los perder força quando permanecem por longos períodos longe de fontes de água.',
+          'A água não representa apenas uma necessidade para os Aquarianos: também moldou sua civilização. Suas cidades foram construídas ao redor dela, sobre ela e, em muitos casos, dentro dela, dando origem a uma sociedade cuja arquitetura e cotidiano foram profundamente influenciados pelo ambiente.',
+          'As cidades Aquarianas possuem construções elegantes, grandes praças, palácios ornamentados, jardins e estruturas adaptadas às necessidades de uma civilização que vive sobre e dentro da água.',
+          'A religião ocupa uma posição central na cultura Aquariana. A maioria do povo acredita em Leviata, entidade central em sua história. Segundo suas tradições, foi Leviata quem tornou os Aquarianos verdadeiramente livres, conduzindo-os a uma existência de felicidade e união e permitindo que encontrassem seu lugar entre as águas.',
+          'O monarca atual é Pierre, um homem já velho que ocupa o trono não apenas como governante, mas também como profeta de Leviata. Sua autoridade está fortemente ligada à sua relação com a entidade e à interpretação de seus ensinamentos, tornando-o uma das figuras centrais da sociedade Aquariana em Chrona e conhecido além do continente.',
+          'Apesar da forte presença de Leviata, a sociedade Aquariana não exige que todos sigam essa crença. Outras divindades podem ser cultuadas em suas cidades, desde que respeitem as leis gerais.'
+        ],
+        habilidade: {
+          nome: 'Adaptação Subaquática',
+          tipo: 'Habilidade Racial',
+          descricao: 'Debaixo d’água, os Aquarianos se movimentam com liberdade igual ou superior à de outras raças em terra firme, mantendo força e precisão. São capazes de lutar e realizar movimentos precisos sem as limitações enfrentadas por criaturas terrestres submersas.'
+        }
+      }
+    }
   ]
 
   return (
@@ -316,34 +348,36 @@ const Forum = () => {
                               <p>{selectedRace.content.descricao}</p>
                             </div>
 
-                            <div className="lore-two-columns">
-                              {selectedRace.content.origem && (
+                            {(selectedRace.content.origem || selectedRace.content.culturaFora || selectedRace.content.organizacaoSocial || selectedRace.content.percepcaoDentro) && (
+                              <div className="lore-two-columns">
+                                {selectedRace.content.origem && (
                                 <div className="lore-block">
-                                  <div className="lore-subtitle"><Map size={20} /> Origem</div>
+                                  <div className="lore-subtitle"><Map size={20} /> {selectedRace.content.origemTitulo || 'Origem'}</div>
                                   <ul className="lore-list">
                                     {selectedRace.content.origem.map(item => <li key={item}>{item}</li>)}
                                   </ul>
                                 </div>
-                              )}
-                              {!selectedRace.content.origem && selectedRace.content.culturaFora && (
-                                <div className="lore-block">
-                                  <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
-                                  <p>{selectedRace.content.culturaFora}</p>
-                                </div>
-                              )}
-                              {selectedRace.content.organizacaoSocial && (
-                                <div className="lore-block">
-                                  <div className="lore-subtitle"><ShieldCheck size={20} /> Organização Social</div>
-                                  <p>{selectedRace.content.organizacaoSocial}</p>
-                                </div>
-                              )}
-                              {!selectedRace.content.organizacaoSocial && selectedRace.content.percepcaoDentro && (
-                                <div className="lore-block">
-                                  <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
-                                  <p>{selectedRace.content.percepcaoDentro}</p>
-                                </div>
-                              )}
-                            </div>
+                                )}
+                                {!selectedRace.content.origem && selectedRace.content.culturaFora && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
+                                    <p>{selectedRace.content.culturaFora}</p>
+                                  </div>
+                                )}
+                                {selectedRace.content.organizacaoSocial && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><ShieldCheck size={20} /> Organização Social</div>
+                                    <p>{selectedRace.content.organizacaoSocial}</p>
+                                  </div>
+                                )}
+                                {!selectedRace.content.organizacaoSocial && selectedRace.content.percepcaoDentro && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
+                                    <p>{selectedRace.content.percepcaoDentro}</p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
 
                             {(selectedRace.content.caracteristicas || selectedRace.content.magia) && (
                               <div className="lore-two-columns">
