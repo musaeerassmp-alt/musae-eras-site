@@ -122,6 +122,33 @@ const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
 
+  const chimeraTypes = [
+    {
+      id: 'passeriformes',
+      parentId: 'quimeras',
+      name: 'Passeriformes',
+      content: {
+        imagem: '/QuimeraPASSERIFORME.png'
+      }
+    },
+    {
+      id: 'insecta',
+      parentId: 'quimeras',
+      name: 'Insecta',
+      content: {
+        imagem: '/QuimeraINSETO.png'
+      }
+    },
+    {
+      id: 'ferais',
+      parentId: 'quimeras',
+      name: 'Ferais',
+      content: {
+        imagem: '/QuimeraFERAL.png'
+      }
+    }
+  ]
+
   const races = [
     {
       id: 'humanos',
@@ -317,7 +344,7 @@ const Forum = () => {
                     {races.map(race => (
                       <div
                         key={race.id}
-                        className={`race-card ${selectedRace?.id === race.id ? 'active' : ''}`}
+                        className={`race-card ${selectedRace?.id === race.id || selectedRace?.parentId === race.id ? 'active' : ''}`}
                         onClick={() => {
                           setSelectedRace(race)
                         }}
@@ -328,8 +355,27 @@ const Forum = () => {
                     ))}
                   </div>
 
+                  {selectedRace?.id === 'quimeras' || selectedRace?.parentId === 'quimeras' ? (
+                    <div className="chimera-types">
+                      <h3>Escolha uma categoria de Quimera</h3>
+                      <div className="chimera-types-grid">
+                        {chimeraTypes.map(type => (
+                          <button
+                            type="button"
+                            key={type.id}
+                            className={`chimera-type-card ${selectedRace.id === type.id ? 'active' : ''}`}
+                            onClick={() => setSelectedRace(type)}
+                          >
+                            <img src={type.content.imagem} alt="" />
+                            <span>{type.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
                   <AnimatePresence mode="wait">
-                    {selectedRace ? (
+                    {selectedRace && selectedRace.id !== 'quimeras' ? (
                       <motion.div
                         key={selectedRace.id}
                         initial={{ opacity: 0, y: 20 }}
@@ -348,10 +394,12 @@ const Forum = () => {
 
                         {selectedRace.content && (
                           <>
-                            <div className="lore-block">
-                              <div className="lore-subtitle"><BookOpen size={20} /> A Essência</div>
-                              <p>{selectedRace.content.descricao}</p>
-                            </div>
+                            {selectedRace.content.descricao && (
+                              <div className="lore-block">
+                                <div className="lore-subtitle"><BookOpen size={20} /> A Essência</div>
+                                <p>{selectedRace.content.descricao}</p>
+                              </div>
+                            )}
 
                             {(selectedRace.content.origem || selectedRace.content.culturaFora || selectedRace.content.organizacaoSocial || selectedRace.content.percepcaoDentro) && (
                               <div className="lore-two-columns">
@@ -448,7 +496,11 @@ const Forum = () => {
                         )}
                       </motion.div>
                     ) : (
-                      <div className="race-placeholder">Selecione uma raça para ver seus detalhes</div>
+                      <div className="race-placeholder">
+                        {selectedRace?.id === 'quimeras'
+                          ? 'Escolha uma categoria de Quimera para ver sua imagem'
+                          : 'Selecione uma raça para ver seus detalhes'}
+                      </div>
                     )}
                   </AnimatePresence>
                 </motion.div>
