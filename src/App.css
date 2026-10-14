@@ -571,6 +571,14 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.lore-two-columns > .lore-block:only-child {
+  grid-column: 1 / -1;
+}
+
+.race-introduction p + p {
+  margin-top: 1rem;
+}
+
 .ability-card {
   background: linear-gradient(135deg, rgba(213, 101, 229, 0.15), rgba(213, 101, 229, 0.05));
   border: 1px solid rgba(213, 101, 229, 0.3);

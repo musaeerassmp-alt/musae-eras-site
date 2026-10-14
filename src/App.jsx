@@ -176,7 +176,38 @@ const Forum = () => {
         }
       }
     },
-    { id: 'demonios', name: 'Demônios', icon: <Zap size={24} /> },
+    {
+      id: 'demonios',
+      name: 'Daemons',
+      icon: <Zap size={24} />,
+      content: {
+        descricao: 'Os Daemons são os habitantes nativos do Inferno, uma raça moldada pelas chamas eternas e pela constante disputa por poder. Entre eles, força, honra e autoridade caminham lado a lado, tornando sua sociedade uma das mais rígidas e implacáveis já registradas.',
+        origem: [
+          'Habitam o reino infernal desde sua criação.',
+          'Desenvolveram-se em um ambiente de calor extremo, fortalezas colossais e guerras constantes.',
+          'Sua cultura foi construída sobre a conquista, a sobrevivência e o respeito à hierarquia.',
+          'A força é considerada o maior símbolo de legitimidade entre sua espécie.'
+        ],
+        caracteristicas: [
+          'Apresentam chifres de inúmeros formatos e tamanhos, raramente existindo dois indivíduos idênticos.',
+          'Sua coloração varia entre diferentes tonalidades de vermelho, escarlate e carmesim.',
+          'São completamente imunes ao fogo e ao calor extremo.',
+          'A lava possui propriedades regenerativas para seus corpos, restaurando ferimentos e prolongando sua capacidade de combate.'
+        ],
+        imagem: '/DemonioVitruviano.png',
+        magia: [
+          'Sua afinidade natural com o fogo elimina qualquer fraqueza relacionada a esse elemento.',
+          'Emoções intensas podem despertar a Ira Demoníaca, ampliando drasticamente sua força e velocidade.',
+          'Quanto maior a intensidade desse estado, mais difícil se torna preservar a razão.',
+          'A maioria dos guerreiros considera dominar a própria ira um dos maiores desafios de sua existência.'
+        ],
+        introducao: [
+          'A sociedade dos Daemons é regida pela força. Títulos, territórios e riquezas pertencem àqueles capazes de conquistá-los ou herdá-los. A maior parte da população sustenta as cidades infernais através do trabalho, enquanto famílias nobres e Soberanos disputam influência sobre o reino. Acima de toda a hierarquia existe apenas uma autoridade absoluta: a Rainha do Inferno, cuja soberania jamais foi contestada desde a criação do reino.',
+          'O Inferno também abriga o domínio do julgamento das almas das demais raças. Após a morte, os mortais são conduzidos ao Julgamento Final, podendo receber três destinos: um inferno pessoal, um paraíso ou o completo desaparecimento no Vazio. Os Daemons, entretanto, não são julgados. Quando morrem, suas almas são consumidas imediatamente pelo Vazio, encerrando sua existência de forma definitiva. Por essa razão, a morte é considerada o único destino verdadeiramente temido por sua espécie.',
+          'Embora frequentemente vistos como caóticos pelos povos da superfície, os Daemons seguem um rigoroso código de honra, dever e hierarquia. Cada guerreiro sabe sua posição, cada nobre comanda por seu território e cada desafio de autoridade deve ser resolvido pela força. Para os habitantes do Inferno, governar é conquista reservada apenas àqueles capazes de suportar as chamas mais intensas.'
+        ]
+      }
+    },
     { id: 'quimeras', name: 'Quimeras', icon: <UserCheck size={24} /> },
     { id: 'aquarianos', name: 'Aquarianos', icon: <Map size={24} /> }
   ]
@@ -287,25 +318,27 @@ const Forum = () => {
                             </div>
 
                             <div className="lore-two-columns">
-                              {selectedRace.content.origem ? (
+                              {selectedRace.content.origem && (
                                 <div className="lore-block">
                                   <div className="lore-subtitle"><Map size={20} /> Origem</div>
                                   <ul className="lore-list">
                                     {selectedRace.content.origem.map(item => <li key={item}>{item}</li>)}
                                   </ul>
                                 </div>
-                              ) : (
+                              )}
+                              {!selectedRace.content.origem && selectedRace.content.culturaFora && (
                                 <div className="lore-block">
                                   <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
                                   <p>{selectedRace.content.culturaFora}</p>
                                 </div>
                               )}
-                              {selectedRace.content.organizacaoSocial ? (
+                              {selectedRace.content.organizacaoSocial && (
                                 <div className="lore-block">
                                   <div className="lore-subtitle"><ShieldCheck size={20} /> Organização Social</div>
                                   <p>{selectedRace.content.organizacaoSocial}</p>
                                 </div>
-                              ) : (
+                              )}
+                              {!selectedRace.content.organizacaoSocial && selectedRace.content.percepcaoDentro && (
                                 <div className="lore-block">
                                   <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
                                   <p>{selectedRace.content.percepcaoDentro}</p>
@@ -313,15 +346,27 @@ const Forum = () => {
                               )}
                             </div>
 
-                            {selectedRace.content.magia && (
-                              <div className="lore-block">
-                                <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
-                                {Array.isArray(selectedRace.content.magia) ? (
-                                  <ul className="lore-list">
-                                    {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
-                                  </ul>
-                                ) : (
-                                  <p>{selectedRace.content.magia}</p>
+                            {(selectedRace.content.caracteristicas || selectedRace.content.magia) && (
+                              <div className="lore-two-columns">
+                                {selectedRace.content.caracteristicas && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><User size={20} /> Características</div>
+                                    <ul className="lore-list">
+                                      {selectedRace.content.caracteristicas.map(item => <li key={item}>{item}</li>)}
+                                    </ul>
+                                  </div>
+                                )}
+                                {selectedRace.content.magia && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
+                                    {Array.isArray(selectedRace.content.magia) ? (
+                                      <ul className="lore-list">
+                                        {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
+                                      </ul>
+                                    ) : (
+                                      <p>{selectedRace.content.magia}</p>
+                                    )}
+                                  </div>
                                 )}
                               </div>
                             )}
@@ -340,7 +385,11 @@ const Forum = () => {
                             {selectedRace.content?.introducao && (
                               <div className="lore-block race-introduction">
                                 <div className="lore-subtitle"><BookOpen size={20} /> Introdução</div>
-                                <p>{selectedRace.content.introducao}</p>
+                                {Array.isArray(selectedRace.content.introducao) ? (
+                                  selectedRace.content.introducao.map(paragrafo => <p key={paragrafo}>{paragrafo}</p>)
+                                ) : (
+                                  <p>{selectedRace.content.introducao}</p>
+                                )}
                               </div>
                             )}
 
