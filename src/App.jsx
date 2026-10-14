@@ -128,7 +128,7 @@ const Forum = () => {
       name: 'Humanos',
       icon: <Users size={24} />,
       content: {
-        expectativa: 'de 80 a 100 anos de persistencia',
+        expectativa: 'de 80 a 100 anos',
         descricao: 'Os Humanos são uma das raças mais comuns e versáteis já catalogadas. Não apresentam afinidade natural com qualquer elemento, tampouco possuem características físicas extraordinárias. Ainda assim, são reconhecidos por sua inteligência, capacidade de adaptação e incessante busca por conhecimento.',
         origem: [
           'Habitam o mundo desde tempos imemoriais.',
@@ -136,9 +136,13 @@ const Forum = () => {
           'Expandiram-se por praticamente todos os continentes e biomas conhecidos.',
           'Sua história é marcada pela constante evolução, adaptação e reconstrução diante das adversidades.'
         ],
-        organizacaoSocial: 'A organização social dos Humanos é baseada na cooperação e na vida em comunidade. São naturalmente inclinados à formação de grupos, vilas e cidades, valorizando relações de confiança, troca de conhecimento e auxílio mútuo. Embora existam inúmeras culturas entre eles, a união é frequentemente apontada como a principal razão para sua permanência e expansão ao longo da história.',
         imagem: '/humanoVITRUVIANO.png',
-        magia: 'Os Humanos não possuem afinidade elemental, tornando sua natureza completamente neutra. São a única raça conhecida capaz de aprender e dominar qualquer vertente da magia. Sua maior arma é a capacidade de aprender com rapidez e adaptar-se a qualquer desafio.',
+        magia: [
+          'Não possuem afinidade elemental, tornando sua natureza completamente neutra.',
+          'São a única raça conhecida capaz de aprender e dominar qualquer vertente da magia.',
+          'Sua maior arma é a capacidade de aprender com rapidez e adaptar-se a qualquer desafio.'
+        ],
+        introducao: 'A organização social dos Humanos é baseada na cooperação e na vida em comunidade. São naturalmente inclinados à formação de grupos, vilas e cidades, valorizando relações de confiança, troca de conhecimento e auxílio mútuo. Embora existam inúmeras culturas entre eles, a união é frequentemente apontada como a principal razão para sua permanência e expansão ao longo da história.',
         habilidade: {
           nome: 'Adrenalina',
           tipo: 'Estado Instintivo',
