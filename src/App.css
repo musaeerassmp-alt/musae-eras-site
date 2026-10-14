@@ -612,75 +612,18 @@ body {
   color: var(--text-secondary);
 }
 
-/* ============================================================
-   LENDAS
-   ============================================================ */
-
-.lore-lendas-section {
-  margin-top: 3rem;
-}
-
-.lendas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.lenda-card {
-  background: rgba(213, 101, 229, 0.05);
-  border-left: 3px solid var(--primary-color);
-  padding: 1.25rem;
-  border-radius: 0 12px 12px 0;
-  transition: all 0.25s ease;
-  overflow: hidden;
-}
-
-.lenda-card-header {
+.race-details-illustration {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
-.lenda-card h4 {
-  color: var(--primary-color);
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.lenda-toggle-btn {
-  background: transparent;
-  border: none;
-  color: var(--primary-color);
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  padding: 0.35rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  margin: 3rem auto 0;
 }
 
-.lenda-toggle-btn:hover {
-  background: rgba(213, 101, 229, 0.12);
-  transform: scale(1.05);
-}
-
-.lenda-card p {
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-top: 1rem;
-}
-
-.lenda-card.closed {
-  min-height: 60px;
-}
-
-.lenda-card.open {
-  background: rgba(213, 101, 229, 0.1);
+.race-details-illustration img {
+  display: block;
+  width: min(100%, 700px);
+  height: auto;
+  border: 1px solid rgba(213, 101, 229, 0.3);
+  border-radius: 16px;
 }
 
 /* ============================================================

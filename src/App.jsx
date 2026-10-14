@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { createClient } from '@supabase/supabase-js'
-import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star, ChevronDown, ChevronUp } from 'lucide-react'
+import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star } from 'lucide-react'
 import Apoios from './Apoios'
 import PageTransition from './PageTransition'
 import './App.css'
@@ -121,26 +121,6 @@ const Home = () => {
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
-  const [openLendas, setOpenLendas] = useState({})
-
-  const selectedLendas = selectedRace?.content?.lendas ?? []
-
-  const toggleLenda = (index) => {
-    setOpenLendas((prev) => ({
-      ...prev,
-      [index]: !prev[index]
-    }))
-  }
-
-  const toggleAllLendas = () => {
-    if (selectedLendas.length === 0) return
-    const areAllOpen = selectedLendas.every((_, index) => !!openLendas[index])
-    const nextState = selectedLendas.reduce((acc, _, index) => {
-      acc[index] = !areAllOpen
-      return acc
-    }, {})
-    setOpenLendas(nextState)
-  }
 
   const races = [
     {
@@ -159,32 +139,6 @@ const Forum = () => {
         organizacaoSocial: 'A organização social dos Humanos é baseada na cooperação e na vida em comunidade. São naturalmente inclinados à formação de grupos, vilas e cidades, valorizando relações de confiança, troca de conhecimento e auxílio mútuo. Embora existam inúmeras culturas entre eles, a união é frequentemente apontada como a principal razão para sua permanência e expansão ao longo da história.',
         fisico: 'Nossa aparência é o reflexo da nossa simplicidade: não temos orelhas pontiagudas para ouvir o além, nem escamas para nos proteger do fogo. Somos carne, osso e vontade. Um espelho limpo da natureza, sem adornos, onde a verdadeira beleza reside na diversidade de nossas faces e na força de nossos passos.',
         magia: 'Os Humanos não possuem afinidade elemental, tornando sua natureza completamente neutra. São a única raça conhecida capaz de aprender e dominar qualquer vertente da magia. Sua maior arma é a capacidade de aprender com rapidez e adaptar-se a qualquer desafio.',
-        lendas: [
-          {
-            nome: 'Krampus',
-            relato: 'Krampus é uma criatura abominável, com patas de bode, chifres de cabra, cauda com ponta como de tridente, garras afiadas como as de um leão e língua de serpente. Muitos pais advertem seus filhos para se comportarem e serem obedientes, caso contrário Krampus as buscará e as castigará. Existem diversos relatos de crianças travessas que somem no primeiro solstício de inverno e aparecem somente a noite, com marcas de chicote nas costas e com os olhos cheios de temor, mas com uma lição aprendida: respeite seus pais.'
-          },
-          {
-            nome: 'Althira',
-            relato: 'Dizem que o espírito de Althira vaga pelos mares cheia de raiva e sede de vingança. Ela atrai qualquer homem que veja com suas canções e aparência exuberante, o espírito então os afoga e naufraga suas embarcações. Relatos dizem que Althira ignora embarcações cujo o capitão seja uma mulher.'
-          },
-          {
-            nome: 'Kaelthar, a Luz do Céu',
-            relato: "Há um século, em meio a conflitos humanos, uma luz intensa teria descido do céu. Dela, um ser alado com voz de trovão surgiu dizendo: 'Não temam, eis que está sobre vós a justiça dos céus'. O ser exterminou o grupo maligno 'Sangue e Aço' de maneira limpa e rápida. Desde esse dia, diversas canções foram feitas em homenagem a este ser misterioso que recebeu o nome de: 'Kaelthar das Himmelslicht'."
-          },
-          {
-            nome: 'Vaelion, a Sorte',
-            relato: "Séculos atrás, um surto de doença quase dizimou os humanos. Tomados pelo desespero, o povo cantava: 'Alguém por favor atenda ao nosso clamor, mude a nossa sorte e acabe com nossa dor'. Misteriosamente, a doença acabou conforme pediram. Hoje, as pessoas continuam proferindo este canto e dão o nome de 'Vaelion, a sortuda' para a entidade que os atendeu."
-          },
-          {
-            nome: 'Erynn, a Promessa Perdida',
-            relato: 'Dizem que Erynn era uma jovem que fez promessa ao solo ancestral de proteger os viajantes perdidos. Quando a tempestade tomou o caminho, sua voz ainda ecoa entre as rochas, guiando aqueles que se perdem para fora da névoa. Muitos afirmam ouvir seu canto suave nas noites de lua minguante.'
-          },
-          {
-            nome: 'O Eco do Primeiro Pacto',
-            relato: 'No começo dos tempos, dizem que os humanos fizeram um pacto com o vento: em troca de coragem e esperança, o vento levaria suas histórias aos confins do mundo. Quando o eco daquele juramento ainda corre pelos vales, alguns acreditam que é ele quem sussurra conselhos aos corações mais ousados.'
-          }
-        ],
         habilidade: {
           nome: 'Adrenalina',
           tipo: 'Estado Instintivo',
@@ -214,7 +168,6 @@ const Forum = () => {
               onClick={() => {
                 setActiveSection('historia')
                 setSelectedRace(null)
-                setOpenLendas({})
               }}
             >
               📖 História do Mundo
@@ -271,7 +224,6 @@ const Forum = () => {
                         className={`race-card ${selectedRace?.id === race.id ? 'active' : ''}`}
                         onClick={() => {
                           setSelectedRace(race)
-                          setOpenLendas({})
                         }}
                       >
                         <div className="race-icon">{race.icon}</div>
@@ -291,94 +243,82 @@ const Forum = () => {
                       >
                         <div className="race-details-header">
                           <h2>{selectedRace.name}</h2>
-                          <div className="race-stat-badge">
-                            <Heart size={16} /> {selectedRace.content.expectativa}
-                          </div>
-                        </div>
-
-                        <div className="lore-block">
-                          <div className="lore-subtitle"><BookOpen size={20} /> A Essência</div>
-                          <p>{selectedRace.content.descricao}</p>
-                        </div>
-
-                        <div className="lore-two-columns">
-                          {selectedRace.content.origem ? (
-                            <div className="lore-block">
-                              <div className="lore-subtitle"><Map size={20} /> Origem</div>
-                              <ul className="lore-list">
-                                {selectedRace.content.origem.map(item => <li key={item}>{item}</li>)}
-                              </ul>
-                            </div>
-                          ) : (
-                            <div className="lore-block">
-                              <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
-                              <p>{selectedRace.content.culturaFora}</p>
-                            </div>
-                          )}
-                          {selectedRace.content.organizacaoSocial ? (
-                            <div className="lore-block">
-                              <div className="lore-subtitle"><ShieldCheck size={20} /> Organização Social</div>
-                              <p>{selectedRace.content.organizacaoSocial}</p>
-                            </div>
-                          ) : (
-                            <div className="lore-block">
-                              <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
-                              <p>{selectedRace.content.percepcaoDentro}</p>
+                          {selectedRace.content?.expectativa && (
+                            <div className="race-stat-badge">
+                              <Heart size={16} /> {selectedRace.content.expectativa}
                             </div>
                           )}
                         </div>
 
-                        <div className="lore-two-columns">
-                          <div className="lore-block">
-                            <div className="lore-subtitle"><User size={20} /> Físico</div>
-                            <p>{selectedRace.content.fisico}</p>
-                          </div>
-                          <div className="lore-block">
-                            <div className="lore-subtitle"><Zap size={20} /> Magia</div>
-                            <p>{selectedRace.content.magia}</p>
-                          </div>
+                        {selectedRace.content && (
+                          <>
+                            <div className="lore-block">
+                              <div className="lore-subtitle"><BookOpen size={20} /> A Essência</div>
+                              <p>{selectedRace.content.descricao}</p>
+                            </div>
+
+                            <div className="lore-two-columns">
+                              {selectedRace.content.origem ? (
+                                <div className="lore-block">
+                                  <div className="lore-subtitle"><Map size={20} /> Origem</div>
+                                  <ul className="lore-list">
+                                    {selectedRace.content.origem.map(item => <li key={item}>{item}</li>)}
+                                  </ul>
+                                </div>
+                              ) : (
+                                <div className="lore-block">
+                                  <div className="lore-subtitle"><Map size={20} /> Cultura (Fora)</div>
+                                  <p>{selectedRace.content.culturaFora}</p>
+                                </div>
+                              )}
+                              {selectedRace.content.organizacaoSocial ? (
+                                <div className="lore-block">
+                                  <div className="lore-subtitle"><ShieldCheck size={20} /> Organização Social</div>
+                                  <p>{selectedRace.content.organizacaoSocial}</p>
+                                </div>
+                              ) : (
+                                <div className="lore-block">
+                                  <div className="lore-subtitle"><ShieldCheck size={20} /> Percepção (Dentro)</div>
+                                  <p>{selectedRace.content.percepcaoDentro}</p>
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="lore-two-columns">
+                              <div className="lore-block">
+                                <div className="lore-subtitle"><User size={20} /> Físico</div>
+                                <p>{selectedRace.content.fisico}</p>
+                              </div>
+                              <div className="lore-block">
+                                <div className="lore-subtitle"><Zap size={20} /> Magia</div>
+                                <p>{selectedRace.content.magia}</p>
+                              </div>
+                            </div>
+                          </>
+                        )}
+
+                        <div className="race-details-illustration">
+                          <img
+                            src="/humanoVITRUVIANO.png"
+                            alt="Ilustração das características físicas dos Humanos"
+                          />
                         </div>
 
-                        <div className="lore-lendas-section">
-                            <button type="button" className="lore-subtitle lore-subtitle-toggle" onClick={toggleAllLendas}>
-                              <Sparkles size={20} />
-                              <span>Lendas Conhecidas</span>
-                              <span className="lore-subtitle-action">{selectedLendas.length > 0 && selectedLendas.every((_, index) => !!openLendas[index]) ? 'Fechar todas' : 'Abrir todas'}</span>
-                            </button>
-                            <div className="lendas-grid">
-                              {selectedLendas.map((lenda, index) => {
-                                const isOpen = !!openLendas[index]
-                                return (
-                                  <div key={index} className={`lenda-card ${isOpen ? 'open' : 'closed'}`}>
-                                    <div className="lenda-card-header">
-                                      <h4>{lenda.nome}</h4>
-                                      <button
-                                        type="button"
-                                        className="lenda-toggle-btn"
-                                        onClick={() => toggleLenda(index)}
-                                      >
-                                        {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                                      </button>
-                                    </div>
-                                    {isOpen && <p>"{lenda.relato}"</p>}
-                                  </div>
-                                )
-                              })}
+                        {selectedRace.content?.habilidade && (
+                          <div className="ability-card">
+                            <div className="ability-title">
+                              <Zap size={24} /> {selectedRace.content.habilidade.nome}
+                              <span className="ability-type">{selectedRace.content.habilidade.tipo}</span>
                             </div>
-                        </div>
-                        <div className="ability-card">
-                          <div className="ability-title">
-                            <Zap size={24} /> {selectedRace.content.habilidade.nome}
-                            <span className="ability-type">{selectedRace.content.habilidade.tipo}</span>
+                            <p className="ability-description">{selectedRace.content.habilidade.descricao}</p>
+                            {(selectedRace.content.habilidade.efeito || selectedRace.content.habilidade.recarga) && (
+                              <div className="ability-footer">
+                                {selectedRace.content.habilidade.efeito && <div className="ability-effect"><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</div>}
+                                {selectedRace.content.habilidade.recarga && <div className="ability-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</div>}
+                              </div>
+                            )}
                           </div>
-                          <p className="ability-description">{selectedRace.content.habilidade.descricao}</p>
-                          {(selectedRace.content.habilidade.efeito || selectedRace.content.habilidade.recarga) && (
-                            <div className="ability-footer">
-                              {selectedRace.content.habilidade.efeito && <div className="ability-effect"><strong>Efeito:</strong> {selectedRace.content.habilidade.efeito}</div>}
-                              {selectedRace.content.habilidade.recarga && <div className="ability-cooldown"><strong>Recarga:</strong> {selectedRace.content.habilidade.recarga}</div>}
-                            </div>
-                          )}
-                        </div>
+                        )}
                       </motion.div>
                     ) : (
                       <div className="race-placeholder">Selecione uma raça para ver seus detalhes</div>
