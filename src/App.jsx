@@ -128,6 +128,7 @@ const Forum = () => {
       parentId: 'quimeras',
       name: 'Passeriformes',
       content: {
+        rosto: '/PasseriformeRosto.png',
         imagem: '/QuimeraPASSERIFORME.png'
       }
     },
@@ -136,6 +137,7 @@ const Forum = () => {
       parentId: 'quimeras',
       name: 'Insecta',
       content: {
+        rosto: '/InsectaRosto.png',
         imagem: '/QuimeraINSETO.png'
       }
     },
@@ -144,6 +146,7 @@ const Forum = () => {
       parentId: 'quimeras',
       name: 'Ferais',
       content: {
+        rosto: '/FeralRosto.png',
         imagem: '/QuimeraFERAL.png'
       }
     }
@@ -366,7 +369,7 @@ const Forum = () => {
                             className={`chimera-type-card ${selectedRace.id === type.id ? 'active' : ''}`}
                             onClick={() => setSelectedRace(type)}
                           >
-                            <img src={type.content.imagem} alt="" />
+                            <img src={type.content.rosto} alt={`Rosto de ${type.name}`} />
                             <span>{type.name}</span>
                           </button>
                         ))}
