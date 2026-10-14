@@ -204,7 +204,12 @@ const Forum = () => {
           'A sociedade dos Daemons é regida pela força. Títulos, territórios e riquezas pertencem àqueles capazes de conquistá-los ou herdá-los. A maior parte da população sustenta as cidades infernais através do trabalho, enquanto famílias nobres e Soberanos disputam influência sobre o reino. Acima de toda a hierarquia existe apenas uma autoridade absoluta: a Rainha do Inferno, cuja soberania jamais foi contestada desde a criação do reino.',
           'O Inferno também abriga o domínio do julgamento das almas das demais raças. Após a morte, os mortais são conduzidos ao Julgamento Final, podendo receber três destinos: um inferno pessoal, um paraíso ou o completo desaparecimento no Vazio. Os Daemons, entretanto, não são julgados. Quando morrem, suas almas são consumidas imediatamente pelo Vazio, encerrando sua existência de forma definitiva. Por essa razão, a morte é considerada o único destino verdadeiramente temido por sua espécie.',
           'Embora frequentemente vistos como caóticos pelos povos da superfície, os Daemons seguem um rigoroso código de honra, dever e hierarquia. Cada guerreiro sabe sua posição, cada nobre comanda por seu território e cada desafio de autoridade deve ser resolvido pela força. Para os habitantes do Inferno, governar é conquista reservada apenas àqueles capazes de suportar as chamas mais intensas.'
-        ]
+        ],
+        habilidade: {
+          nome: 'Ira Demoníaca',
+          tipo: 'Habilidade Racial',
+          descricao: 'Os Daemons podem despertar sua Ira, tornando-se mais fortes e rápidos e ficando prontos para a batalha. São imunes ao fogo e o calor extremo da lava pode regenerar seus ferimentos. Água e chuva reduzem sua temperatura corporal, deixando-os fracos e incapazes de ativar a Ira.'
+        }
       }
     },
     { id: 'quimeras', name: 'Quimeras', icon: <UserCheck size={24} /> },
