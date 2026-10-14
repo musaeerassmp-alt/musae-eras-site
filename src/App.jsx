@@ -137,7 +137,7 @@ const Forum = () => {
           'Sua história é marcada pela constante evolução, adaptação e reconstrução diante das adversidades.'
         ],
         organizacaoSocial: 'A organização social dos Humanos é baseada na cooperação e na vida em comunidade. São naturalmente inclinados à formação de grupos, vilas e cidades, valorizando relações de confiança, troca de conhecimento e auxílio mútuo. Embora existam inúmeras culturas entre eles, a união é frequentemente apontada como a principal razão para sua permanência e expansão ao longo da história.',
-        fisico: 'Nossa aparência é o reflexo da nossa simplicidade: não temos orelhas pontiagudas para ouvir o além, nem escamas para nos proteger do fogo. Somos carne, osso e vontade. Um espelho limpo da natureza, sem adornos, onde a verdadeira beleza reside na diversidade de nossas faces e na força de nossos passos.',
+        imagem: '/humanoVITRUVIANO.png',
         magia: 'Os Humanos não possuem afinidade elemental, tornando sua natureza completamente neutra. São a única raça conhecida capaz de aprender e dominar qualquer vertente da magia. Sua maior arma é a capacidade de aprender com rapidez e adaptar-se a qualquer desafio.',
         habilidade: {
           nome: 'Adrenalina',
@@ -146,7 +146,48 @@ const Forum = () => {
         }
       }
     },
-    { id: 'anjos', name: 'Anjos', icon: <Sparkles size={24} /> },
+    {
+      id: 'anjos',
+      name: 'Anjos',
+      icon: <Sparkles size={24} />,
+      content: {
+        descricao: 'Os Anjos são os nativos do Céu e os principais guardiões das Leis da Criação. Ao contrário do imaginário popular, não são definidos por grandes asas, mas pela Energia Angelical que percorre naturalmente seus corpos desde o nascimento.',
+        origem: [
+          'Habitam o Céu desde tempos anteriores ao surgimento das civilizações.',
+          'São responsáveis por preservar o equilíbrio entre as diferentes sociedades.',
+          'Sua sociedade foi fundada sobre os princípios da justiça.',
+          'Não governam o mundo, mas garantem que as Leis da Criação sejam respeitadas.'
+        ],
+        caracteristicas: [
+          'Olhos que brilham intensamente em dourado.',
+          'Todos manifestam uma auréola, expressão visível de sua Energia Angelical.',
+          'Alguns indivíduos desenvolvem pequenas asas pelo corpo.'
+        ],
+        organizacaoSocial: 'A sociedade dos Anjos é altamente organizada e estruturada. O Imperador Celestial representa a maior autoridade do Céu, governando ao lado de conselhos com juízes, estrategistas e oficiais responsáveis por interpretar e aplicar as Leis. Ordens especializadas observam as demais civilizações, investigam violações e intervêm apenas quando o equilíbrio se encontra ameaçado.',
+        imagem: '/AnjoVITRUVIANO.png',
+        magiaTitulo: 'Energia Angelical',
+        magia: [
+          'Possuem grande afinidade com magias sagradas.',
+          'São capazes de acelerar a recuperação de ferimentos e aliviar graves danos físicos.',
+          'Muitos dos maiores curandeiros conhecidos pertencem à raça angelical.',
+          'Sua energia também lhes permite desafiar parcialmente a gravidade, tornando seus movimentos mais leves.'
+        ],
+        detalhes: [
+          {
+            titulo: 'Leis da Criação',
+            descricao: 'A responsabilidade dos Anjos é proteger as Quatorze Leis da Criação, princípios absolutos que sustentam a ordem. Essas leis proíbem diversas ações; segundo os registros angelicais, sua violação ameaça a própria continuidade do universo.'
+          },
+          {
+            titulo: 'Educação e propósito',
+            descricao: 'Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente.'
+          },
+          {
+            titulo: 'Justiça',
+            descricao: 'Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.'
+          }
+        ]
+      }
+    },
     { id: 'demonios', name: 'Demônios', icon: <Zap size={24} /> },
     { id: 'quimeras', name: 'Quimeras', icon: <UserCheck size={24} /> },
     { id: 'aquarianos', name: 'Aquarianos', icon: <Map size={24} /> }
@@ -284,25 +325,52 @@ const Forum = () => {
                               )}
                             </div>
 
-                            <div className="lore-two-columns">
-                              <div className="lore-block">
-                                <div className="lore-subtitle"><User size={20} /> Físico</div>
-                                <p>{selectedRace.content.fisico}</p>
+                            {(selectedRace.content.caracteristicas || selectedRace.content.magia) && (
+                              <div className="lore-two-columns">
+                                {selectedRace.content.caracteristicas && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><User size={20} /> Características</div>
+                                    <ul className="lore-list">
+                                      {selectedRace.content.caracteristicas.map(item => <li key={item}>{item}</li>)}
+                                    </ul>
+                                  </div>
+                                )}
+                                {selectedRace.content.magia && (
+                                  <div className="lore-block">
+                                    <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
+                                    {Array.isArray(selectedRace.content.magia) ? (
+                                      <ul className="lore-list">
+                                        {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
+                                      </ul>
+                                    ) : (
+                                      <p>{selectedRace.content.magia}</p>
+                                    )}
+                                  </div>
+                                )}
                               </div>
-                              <div className="lore-block">
-                                <div className="lore-subtitle"><Zap size={20} /> Magia</div>
-                                <p>{selectedRace.content.magia}</p>
-                              </div>
-                            </div>
-                          </>
-                        )}
+                            )}
 
-                        <div className="race-details-illustration">
-                          <img
-                            src="/humanoVITRUVIANO.png"
-                            alt="Ilustração das características físicas dos Humanos"
-                          />
-                        </div>
+                            {selectedRace.content.detalhes?.length > 0 && (
+                              <div className="lore-two-columns">
+                                {selectedRace.content.detalhes.map(({ titulo, descricao }) => (
+                                  <div className="lore-block" key={titulo}>
+                                    <div className="lore-subtitle"><BookOpen size={20} /> {titulo}</div>
+                                    <p>{descricao}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                              </>
+                            )}
+
+                            {selectedRace.content?.imagem && (
+                              <div className="race-details-illustration">
+                              <img
+                                src={selectedRace.content.imagem}
+                                alt={`Ilustração das características físicas dos ${selectedRace.name}`}
+                              />
+                              </div>
+                            )}
 
                         {selectedRace.content?.habilidade && (
                           <div className="ability-card">
