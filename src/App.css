@@ -618,6 +618,10 @@ body {
   margin: 3rem auto 0;
 }
 
+.race-details-illustration + .race-introduction {
+  margin-top: 1.5rem;
+}
+
 .race-details-illustration img {
   display: block;
   width: min(100%, 700px);

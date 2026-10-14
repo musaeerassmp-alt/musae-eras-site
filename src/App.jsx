@@ -168,7 +168,12 @@ const Forum = () => {
           'Muitos dos maiores curandeiros conhecidos pertencem à raça angelical.',
           'Sua energia também lhes permite desafiar parcialmente a gravidade, tornando seus movimentos mais leves.'
         ],
-        introducao: 'A responsabilidade dos Anjos é proteger as Quatorze Leis da Criação, princípios absolutos que sustentam a ordem. Essas leis proíbem diversas ações; segundo os registros angelicais, sua violação ameaça a própria continuidade do universo. Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente. Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.'
+        introducao: 'A responsabilidade dos Anjos é proteger as Quatorze Leis da Criação, princípios absolutos que sustentam a ordem. Essas leis proíbem diversas ações; segundo os registros angelicais, sua violação ameaça a própria continuidade do universo. Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente. Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.',
+        habilidade: {
+          nome: 'Cura Angelical',
+          tipo: 'Manipulação de Energia Angelical',
+          descricao: 'Os Anjos manipulam a Energia Angelical dentro do próprio corpo para curar uma ou várias pessoas ao mesmo tempo. Quanto mais energia utilizam, maior o desgaste: o uso excessivo pode deixá-los fracos.'
+        }
       }
     },
     { id: 'demonios', name: 'Demônios', icon: <Zap size={24} /> },
