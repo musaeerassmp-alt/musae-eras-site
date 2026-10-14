@@ -151,6 +151,7 @@ const Forum = () => {
       name: 'Anjos',
       icon: <Sparkles size={24} />,
       content: {
+        expectativa: 'de 120 a 150 anos',
         descricao: 'Os Anjos são os nativos do Céu e os principais guardiões das Leis da Criação. Ao contrário do imaginário popular, não são definidos por grandes asas, mas pela Energia Angelical que percorre naturalmente seus corpos desde o nascimento.',
         origem: [
           'Habitam o Céu desde tempos anteriores ao surgimento das civilizações.',
@@ -158,34 +159,22 @@ const Forum = () => {
           'Sua sociedade foi fundada sobre os princípios da justiça.',
           'Não governam o mundo, mas garantem que as Leis da Criação sejam respeitadas.'
         ],
-        caracteristicas: [
-          'Olhos que brilham intensamente em dourado.',
-          'Todos manifestam uma auréola, expressão visível de sua Energia Angelical.',
-          'Alguns indivíduos desenvolvem pequenas asas pelo corpo.'
-        ],
         organizacaoSocial: 'A sociedade dos Anjos é altamente organizada e estruturada. O Imperador Celestial representa a maior autoridade do Céu, governando ao lado de conselhos com juízes, estrategistas e oficiais responsáveis por interpretar e aplicar as Leis. Ordens especializadas observam as demais civilizações, investigam violações e intervêm apenas quando o equilíbrio se encontra ameaçado.',
         imagem: '/AnjoVITRUVIANO.png',
-        magiaTitulo: 'Energia Angelical',
+        magiaTitulo: 'Magia',
         magia: [
           'Possuem grande afinidade com magias sagradas.',
           'São capazes de acelerar a recuperação de ferimentos e aliviar graves danos físicos.',
           'Muitos dos maiores curandeiros conhecidos pertencem à raça angelical.',
           'Sua energia também lhes permite desafiar parcialmente a gravidade, tornando seus movimentos mais leves.'
         ],
-        detalhes: [
+        detalhesAntesImagem: [
           {
             titulo: 'Leis da Criação',
             descricao: 'A responsabilidade dos Anjos é proteger as Quatorze Leis da Criação, princípios absolutos que sustentam a ordem. Essas leis proíbem diversas ações; segundo os registros angelicais, sua violação ameaça a própria continuidade do universo.'
-          },
-          {
-            titulo: 'Educação e propósito',
-            descricao: 'Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente.'
-          },
-          {
-            titulo: 'Justiça',
-            descricao: 'Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.'
           }
-        ]
+        ],
+        introducao: 'Desde a juventude, cada Anjo recebe educação em filosofia, ética, história e legislação universal. Espera-se que todo indivíduo encontre uma função útil para a sociedade, tornando-se curandeiro, escriba, pesquisador, construtor, juiz ou mensageiro. Aqueles que ainda não descobriram seu propósito ingressam nas Ordens Guerreiras, onde recebem treinamento militar para proteger as Leis da Criação quando a diplomacia deixa de ser suficiente. Embora frequentemente descritos como seres de pura bondade, os Anjos não se consideram juízes da moral. Sua função não é recompensar os virtuosos nem punir os perversos, mas assegurar que as leis que sustentam a existência permaneçam válidas para todos. Entre eles, a justiça somente existe quando nenhuma criatura está acima das regras.'
       }
     },
     { id: 'demonios', name: 'Demônios', icon: <Zap size={24} /> },
@@ -325,34 +314,24 @@ const Forum = () => {
                               )}
                             </div>
 
-                            {(selectedRace.content.caracteristicas || selectedRace.content.magia) && (
+                            {selectedRace.content.magia && (
                               <div className="lore-two-columns">
-                                {selectedRace.content.caracteristicas && (
-                                  <div className="lore-block">
-                                    <div className="lore-subtitle"><User size={20} /> Características</div>
+                                <div className="lore-block">
+                                  <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
+                                  {Array.isArray(selectedRace.content.magia) ? (
                                     <ul className="lore-list">
-                                      {selectedRace.content.caracteristicas.map(item => <li key={item}>{item}</li>)}
+                                      {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
                                     </ul>
-                                  </div>
-                                )}
-                                {selectedRace.content.magia && (
-                                  <div className="lore-block">
-                                    <div className="lore-subtitle"><Zap size={20} /> {selectedRace.content.magiaTitulo || 'Magia'}</div>
-                                    {Array.isArray(selectedRace.content.magia) ? (
-                                      <ul className="lore-list">
-                                        {selectedRace.content.magia.map(item => <li key={item}>{item}</li>)}
-                                      </ul>
-                                    ) : (
-                                      <p>{selectedRace.content.magia}</p>
-                                    )}
-                                  </div>
-                                )}
+                                  ) : (
+                                    <p>{selectedRace.content.magia}</p>
+                                  )}
+                                </div>
                               </div>
                             )}
 
-                            {selectedRace.content.detalhes?.length > 0 && (
+                            {selectedRace.content.detalhesAntesImagem?.length > 0 && (
                               <div className="lore-two-columns">
-                                {selectedRace.content.detalhes.map(({ titulo, descricao }) => (
+                                {selectedRace.content.detalhesAntesImagem.map(({ titulo, descricao }) => (
                                   <div className="lore-block" key={titulo}>
                                     <div className="lore-subtitle"><BookOpen size={20} /> {titulo}</div>
                                     <p>{descricao}</p>
@@ -369,6 +348,13 @@ const Forum = () => {
                                 src={selectedRace.content.imagem}
                                 alt={`Ilustração das características físicas dos ${selectedRace.name}`}
                               />
+                              </div>
+                            )}
+
+                            {selectedRace.content?.introducao && (
+                              <div className="lore-block race-introduction">
+                                <div className="lore-subtitle"><BookOpen size={20} /> Introdução</div>
+                                <p>{selectedRace.content.introducao}</p>
                               </div>
                             )}
 
