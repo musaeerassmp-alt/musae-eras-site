@@ -173,7 +173,35 @@ const Forum = () => {
       content: {
         ...chimeraCommonContent,
         rosto: '/InsectaRosto.png',
-        imagem: '/QuimeraINSETO.png'
+        imagem: '/QuimeraINSETO.png',
+        descricao: 'As Quimeras Insecta são uma das castas que compõem a sociedade Quimera, reunindo indivíduos com características provenientes de diversos insetos. Apesar da variedade de aparências, todas compartilham corpos extremamente pequenos.',
+        origemTitulo: 'Classificação',
+        origem: [
+          'Apresentam características dos mais diversos insetos.',
+          'Nunca ultrapassam um metro de altura, sendo a menor classificação entre as raças.',
+          'Indivíduos derivados de insetos que desenvolvem asas funcionais podem ser classificados como Passeriformes; até indivíduos da mesma espécie podem nascer em castas diferentes.'
+        ],
+        caracteristicas: [
+          'Seus corpos podem apresentar adaptações herdadas dos animais que representam, como pernas adicionais.',
+          'Seu tamanho permite que se desloquem e trabalhem em espaços pequenos.'
+        ],
+        magiaTitulo: 'Adaptações naturais',
+        magia: [
+          'Podem produzir veneno, utilizado para lentamente derrubar suas presas.',
+          'Sua capacidade de ocupar espaços pequenos torna essa casta útil em diversas funções da sociedade Quimera.'
+        ],
+        introducao: [
+          'A sociedade Quimera é organizada por um rígido sistema de castas. Nascer Insecta significa ocupar a posição mais baixa dessa estrutura; a classificação representa não apenas uma característica física, mas também uma posição social. As castas superiores frequentemente os enxergam como pequenos e menos importantes, e grande parte de sua população ocupa trabalhos menos valorizados.',
+          'Os trabalhos desempenhados pelos Insecta são fundamentais para as comunidades Quimera. Agricultores, trabalhadores, carregadores, artesãos e serventes mantêm plantações, construções e serviços essenciais em funcionamento. Apesar disso, seus salários normalmente são baixos e muitas famílias vivem em condições simples. Para a maioria, por mais que trabalhe, sua casta jamais poderá ser alterada.',
+          'Embora frequentemente tratados como a casta menos importante, os Insecta são essenciais para a sociedade Quimera. Sua capacidade de ocupar pequenos espaços permite que desempenhem funções que outras Quimeras teriam dificuldade em realizar.',
+          'Os Insecta possuem representantes próprios diante dos líderes da sociedade Quimera. Eles levam reclamações, necessidades e propostas das comunidades aos governantes, mas suas vozes precisam atravessar uma hierarquia construída ao longo de gerações.',
+          ...chimeraCommonContent.introducao
+        ],
+        habilidade: {
+          nome: 'Veneno Insecta',
+          tipo: 'Habilidade Racial',
+          descricao: 'Os Insecta podem produzir veneno para enfraquecer lentamente suas presas.'
+        }
       }
     },
     {
@@ -183,7 +211,36 @@ const Forum = () => {
       content: {
         ...chimeraCommonContent,
         rosto: '/FeralRosto.png',
-        imagem: '/QuimeraFERAL.png'
+        imagem: '/QuimeraFERAL.png',
+        descricao: 'As Quimeras Ferais são o grupo mais diverso entre as Quimeras, reunindo características de múltiplos animais terrestres que não pertencem às categorias Insecta ou Passeriformes. Canídeos, roedores e outros animais podem dar origem a uma Quimera Feral.',
+        origem: [
+          'Reúnem animais terrestres que não pertencem às categorias Insecta ou Passeriformes.',
+          'A variedade é tão grande que é difícil encontrar dois indivíduos completamente iguais.',
+          'Mesmo indivíduos semelhantes podem apresentar diferenças significativas na aparência e nas características.'
+        ],
+        caracteristicas: [
+          'Possuem alturas próximas às das demais raças humanoides.',
+          'A aparência varia de traços discretos, como orelhas, caudas e presas, a transformações mais marcantes.',
+          'Algumas apresentam pelagens, escamas, focinhos e outras características dos animais de origem.',
+          'Sua enorme diversidade torna sua aparência uma das mais variadas entre as Quimeras.'
+        ],
+        magiaTitulo: 'Sentidos e instintos',
+        magia: [
+          'Possuem olfato extraordinariamente desenvolvido e podem identificar criaturas pelos rastros de cheiro que deixam.',
+          'Conseguem distinguir inimigos e localizar suas posições.',
+          'Seus instintos e sentidos desenvolvidos tornam-nos extremamente adaptáveis em batalha.'
+        ],
+        introducao: [
+          'As Quimeras Ferais ocupam uma posição intermediária na estrutura de castas. Não pertencem à camada mais baixa da sociedade, como os Insecta, nem fazem parte da elite dos Passeriformes. Representam grande parte da população comum e incluem trabalhadores, comerciantes e pequenos proprietários.',
+          'Os Ferais normalmente vivem em condições de renda baixa a média. Não possuem os privilégios das famílias Passeriformes, mas também não carregam o mesmo estigma social dos Insecta. Para muitos, nascer Feral significa nascer como parte do povo, responsável por grande parte da vida cotidiana das cidades Quimera.',
+          'Os Ferais possuem representantes na sociedade Quimera, responsáveis por levar as necessidades de sua casta aos governantes e representar uma população diversa em costumes, características e origens.',
+          'Como todas as Quimeras, os Ferais conseguem aproveitar uma grande variedade de materiais como fonte de energia, incluindo carne, vegetais, folhas, ossos e couro. Para eles, alimento pode ser muito mais do que aquilo que outras raças considerariam comida.'
+        ],
+        habilidade: {
+          nome: 'Rastreamento Feral',
+          tipo: 'Habilidade Racial',
+          descricao: 'Com seu olfato extraordinariamente desenvolvido, os Ferais conseguem rastrear criaturas pelos cheiros deixados e distinguir inimigos, identificando suas posições.'
+        }
       }
     }
   ]
