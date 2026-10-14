@@ -122,14 +122,48 @@ const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
 
+  const chimeraCommonContent = {
+    expectativa: 'de 100 a 120 anos',
+    descricao: 'As Quimeras são uma única raça dividida em três classificações: Passeriformes, Insecta e Ferais.',
+    introducao: [
+      'Todas as Quimeras compartilham uma fome singular: seus corpos conseguem aproveitar uma grande variedade de materiais, incluindo carne, vegetais, folhas, ossos e couro. Para uma Quimera, alimento pode ser muito mais do que aquilo que outras raças considerariam comida.'
+    ]
+  }
+
   const chimeraTypes = [
     {
       id: 'passeriformes',
       parentId: 'quimeras',
       name: 'Passeriformes',
       content: {
+        ...chimeraCommonContent,
         rosto: '/PasseriformeRosto.png',
-        imagem: '/QuimeraPASSERIFORME.png'
+        imagem: '/QuimeraPASSERIFORME.png',
+        descricao: 'Os Passeriformes são uma das três grandes classificações existentes entre as Quimeras, reconhecidas principalmente pela capacidade de desenvolver asas funcionais. Apesar do nome, não precisam necessariamente possuir características semelhantes às de aves.',
+        origemTitulo: 'Adaptação ao voo',
+        origem: [
+          'Possuem asas funcionais capazes de sustentar seus corpos humanoides.',
+          'Suas asas podem apresentar penas, estruturas semelhantes às de insetos ou combinações entre ambas.',
+          'Quimeras provenientes da mesma espécie animal podem nascer em classificações diferentes.',
+          'Uma Quimera cuja origem costuma ser associada aos insetos pode pertencer aos Passeriformes caso desenvolva asas.'
+        ],
+        caracteristicas: [
+          'Possuem corpos mais delicados e frágeis que os das demais classificações de Quimeras.',
+          'Sua estrutura corporal é mais leve, favorecendo a mobilidade e o deslocamento pelos céus.',
+          'Têm menor resistência física e não são conhecidas pela força ou pela capacidade de suportar grandes impactos.',
+          'Sua principal vantagem está na capacidade de voar e atravessar grandes distâncias.'
+        ],
+        introducao: [
+          'A sociedade Quimera é dividida em castas, e a classificação recebida ao nascer acompanha o indivíduo durante toda a vida. Os Passeriformes ocupam o topo dessa estrutura social. Durante gerações, a capacidade de alcançar os céus foi associada à liberdade, à superioridade e à proximidade com o divino, transformando-se em uma ideologia de superioridade sobre aqueles que permanecem no chão.',
+          'A sociedade dos Passeriformes é marcada pelo privilégio. Famílias antigas acumularam riquezas, terras e poder ao longo das gerações, formando uma elite. É comum encontrar Passeriformes em posições de autoridade, controlando propriedades, exércitos e instituições. Nem todos são ricos ou desejam fazer parte dessa elite, mas sua classificação permanece determinada pelo nascimento.',
+          'Os Passeriformes possuem grande influência sobre as regras que organizam a sociedade Quimera. Embora não a governem completamente, ocupam posições de destaque e recebem representantes das demais castas para discutir leis.',
+          ...chimeraCommonContent.introducao
+        ],
+        habilidade: {
+          nome: 'Impulso Aéreo',
+          tipo: 'Habilidade Racial',
+          descricao: 'Os Passeriformes conseguem realizar um dash em direção ao ar para ganhar impulso e começar a voar.'
+        }
       }
     },
     {
@@ -137,6 +171,7 @@ const Forum = () => {
       parentId: 'quimeras',
       name: 'Insecta',
       content: {
+        ...chimeraCommonContent,
         rosto: '/InsectaRosto.png',
         imagem: '/QuimeraINSETO.png'
       }
@@ -146,6 +181,7 @@ const Forum = () => {
       parentId: 'quimeras',
       name: 'Ferais',
       content: {
+        ...chimeraCommonContent,
         rosto: '/FeralRosto.png',
         imagem: '/QuimeraFERAL.png'
       }
