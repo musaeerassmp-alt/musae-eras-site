@@ -181,18 +181,13 @@ const Forum = () => {
       name: 'Daemons',
       icon: <Zap size={24} />,
       content: {
+        expectativa: 'de 150 a 180 anos',
         descricao: 'Os Daemons são os habitantes nativos do Inferno, uma raça moldada pelas chamas eternas e pela constante disputa por poder. Entre eles, força, honra e autoridade caminham lado a lado, tornando sua sociedade uma das mais rígidas e implacáveis já registradas.',
         origem: [
           'Habitam o reino infernal desde sua criação.',
           'Desenvolveram-se em um ambiente de calor extremo, fortalezas colossais e guerras constantes.',
           'Sua cultura foi construída sobre a conquista, a sobrevivência e o respeito à hierarquia.',
           'A força é considerada o maior símbolo de legitimidade entre sua espécie.'
-        ],
-        caracteristicas: [
-          'Apresentam chifres de inúmeros formatos e tamanhos, raramente existindo dois indivíduos idênticos.',
-          'Sua coloração varia entre diferentes tonalidades de vermelho, escarlate e carmesim.',
-          'São completamente imunes ao fogo e ao calor extremo.',
-          'A lava possui propriedades regenerativas para seus corpos, restaurando ferimentos e prolongando sua capacidade de combate.'
         ],
         imagem: '/DemonioVitruviano.png',
         magia: [
