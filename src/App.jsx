@@ -349,6 +349,108 @@ const daemonOntology = {
   ]
 }
 
+const aquarianOntology = {
+  title: 'Cinco faces da existência aquariana',
+  introduction: 'Os 𝓐𝓺𝓾𝓪𝓻𝓲𝓪𝓷𝓸𝓼 possuem uma cultura profundamente ligada ao oceano, às suas profundezas e aos mistérios que habitam suas águas. Para eles, o mar representa tanto a grandiosidade quanto a transformação, guardando belezas capazes de fascinar e forças capazes de consumir tudo aquilo que ousa desafiá-las. Suas cinco entidades são 𝓞 𝓛𝓮𝓿𝓲𝓪𝓽𝗮̃, 𝓐 𝓘𝓪𝓻𝓪, 𝓐 𝓜𝓪𝓻𝓮́, 𝓞 𝓕𝓪𝓻𝓸𝓵𝓮𝓲𝓻𝓸 e 𝓐 𝓟𝓮́𝓻𝓸𝓵𝓪. Cada uma representa uma face da existência aquariana, desde a soberania imensurável das profundezas até a fascinação dos reflexos, a inevitabilidade das mudanças, a orientação em meio à escuridão e a beleza que nasce com o tempo.',
+  entities: [
+    {
+      name: '𝓞 𝓛𝓮𝓿𝓲𝓪𝓽𝗮̃',
+      description: [
+        'É a imensidão, a soberania e o poder ancestral que repousa nas profundezas. O Leviatã representa o oceano em sua forma mais grandiosa: belo o suficiente para despertar admiração e terrível o suficiente para lembrar aos Aquarianos que nem tudo aquilo que existe pode ser compreendido ou dominado.',
+        'Ele simboliza a autoridade das águas, a força que precede os reinos e a grandeza daqueles que carregam o mar em sua própria existência. Para os Aquarianos, o Leviatã é a lembrança de que até os maiores soberanos permanecem pequenos diante da vastidão do oceano.'
+      ],
+      poem: [
+        'Sob mil coroas de espuma,',
+        'Onde a luz não ousa entrar,',
+        'Dorme aquele que não tem reino,',
+        'Pois seu reino é todo o mar.',
+        'Não há muralha que o detenha,',
+        'Nem corrente que o faça ceder;',
+        'Pois antes de os reis terem nomes,',
+        'Já havia o que temer.'
+      ],
+      poet: 'Careca!',
+      belief: 'O Leviatã é honrado através de demonstrações de respeito ao oceano e de reconhecimento de sua grandiosidade. Seus devotos constroem monumentos próximos à costa, erguem estátuas colossais e depositam oferendas nas águas profundas, como pérolas, metais preciosos e objetos de grande valor simbólico. Em algumas tradições, navegadores realizam cerimônias antes de atravessar regiões desconhecidas, pedindo permissão para adentrar aquilo que não lhes pertence. Para o Leviatã, a devoção verdadeira não está em tentar controlar o mar, mas em compreender sua pequenez diante dele.'
+    },
+    {
+      name: '𝓐 𝓘𝓪𝓻𝓪',
+      description: [
+        'É o reflexo, a fascinação e a obsessão que nasce quando alguém passa a desejar aquilo que vê. A Iara existe para representar a fronteira entre a admiração e o aprisionamento, entre reconhecer a própria imagem e tornar-se incapaz de enxergar qualquer coisa além dela.',
+        'Seus domínios envolvem a beleza percebida, os desejos que se alimentam da contemplação e as ilusões que alguém escolhe acreditar. Para os Aquarianos, a Iara é a lembrança de que nem todo reflexo revela a verdade e de que, às vezes, aquilo que mais encanta é justamente aquilo que mais profundamente nos prende.'
+      ],
+      poem: [
+        'Na superfície imóvel,',
+        'Há um rosto a me chamar;',
+        'Quanto mais busco alcançá-lo,',
+        'Mais me afundo em seu olhar.',
+        'E se a imagem me pertence,',
+        'Por que não posso tocá-la?',
+        'Talvez eu tema o que sou,',
+        'Ou talvez tema encontrá-la.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Iara é honrada através de espelhos, superfícies polidas e oferendas que representem aquilo que seus devotos mais desejam. Seus santuários costumam ser construídos junto a lagos cristalinos, grutas inundadas e piscinas naturais, onde a água permanece imóvel o suficiente para refletir o céu. Alguns devotos deixam joias, perfumes, adornos ou retratos diante de seus altares, enquanto outros realizam rituais de contemplação, buscando compreender os próprios desejos. Entretanto, seus seguidores mais tradicionais acreditam que a Iara não deve ser venerada por aquilo que promete mostrar, mas pelo que obriga cada um a reconhecer em si mesmo.'
+    },
+    {
+      name: '𝓐 𝓜𝓪𝓻𝓮́',
+      description: [
+        'É a mudança, os ciclos e a força inevitável que transforma tudo aquilo que toca. A Maré representa o movimento constante das águas, lembrando aos Aquarianos que nenhuma condição permanece para sempre e que até os períodos de calmaria escondem a possibilidade de uma transformação.',
+        'Ela simboliza as partidas e os retornos, as perdas que abrem espaço para novos caminhos e a capacidade de acompanhar o curso da existência sem permanecer preso ao passado. Para os Aquarianos, a Maré ensina que resistir a toda mudança é como tentar ordenar ao oceano que permaneça imóvel.'
+      ],
+      poem: [
+        'A onda parte, a onda retorna,',
+        'Nenhuma encontra o mesmo lugar;',
+        'O que hoje repousa na areia,',
+        'Amanhã voltará a navegar.',
+        'Não amaldiçoes a corrente,',
+        'Nem implores ao tempo que pare;',
+        'Há caminhos que só se revelam',
+        'Quando sobe ou recua a maré.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Maré é honrada através de rituais ligados às mudanças de ciclo, às partidas e aos recomeços. Seus devotos costumam realizar cerimônias durante as mudanças das águas, depositando pequenas conchas, flores e objetos simbólicos que representam aquilo que desejam deixar para trás. Alguns santuários são construídos em regiões que alternam entre terra firme e áreas submersas, permitindo que a própria maré determine quando seus altares ficam acessíveis. Também é comum que viajantes e famílias procurem sua bênção antes de iniciar uma nova etapa de suas vidas. Para a Maré, aceitar a mudança é uma forma de fé, e saber partir pode ser tão importante quanto saber retornar.'
+    },
+    {
+      name: '𝓞 𝓕𝓪𝓻𝓸𝓵𝓮𝓲𝓻𝓸',
+      description: [
+        'É a orientação, a esperança e a responsabilidade de iluminar caminhos sem poder percorrê-los por aqueles que se perderam. O Faroleiro existe para representar aqueles que permanecem atentos quando outros se encontram à deriva, oferecendo direção sem prometer que toda jornada será segura.',
+        'Ele simboliza a perseverança diante da escuridão, a sabedoria de reconhecer os próprios limites e a importância de preservar uma luz mesmo quando ninguém parece estar procurando por ela. Para os Aquarianos, o Faroleiro é a lembrança de que guiar alguém não significa decidir seu destino, mas permitir que encontre o próprio caminho.'
+      ],
+      poem: [
+        'Se a noite cobrir os caminhos,',
+        'Se a corrente esconder o chão,',
+        'Que permaneça acesa a luz',
+        'Na janela da solidão.',
+        'Não escolherei teu destino,',
+        'Nem poderei teu mar acalmar;',
+        'Mas enquanto houver uma chama,',
+        'Saberás onde procurar.'
+      ],
+      poet: 'Careca!',
+      belief: 'O Faroleiro é honrado através da proteção aos viajantes, do auxílio aos perdidos e da preservação de lugares que orientam aqueles que atravessam as águas. Seus devotos mantêm lanternas acesas em portos, constroem faróis e oferecem abrigo aos navegadores que retornam de jornadas difíceis. Em comunidades submersas, suas homenagens podem assumir a forma de cristais luminosos instalados em passagens perigosas, guiando viajantes através das profundezas. Também é comum que seus seguidores dediquem parte de seu tempo a ensinar rotas seguras e ajudar aqueles que não conhecem o caminho. Para o Faroleiro, a maior oferenda é uma vida que encontra o caminho de volta graças à luz que alguém decidiu manter acesa.'
+    },
+    {
+      name: '𝓐 𝓟𝓮́𝓻𝓸𝓵𝓪',
+      description: [
+        'É a paciência, a transformação e o valor que nasce de processos que poucos conseguem testemunhar. A Pérola representa aquilo que se desenvolve lentamente, escondido dos olhos alheios, até adquirir uma beleza própria.',
+        'Ela existe para lembrar aos Aquarianos que nem toda dificuldade precisa ser encarada como uma maldição e que certas experiências, mesmo quando dolorosas, podem transformar a maneira como alguém compreende a si mesmo e ao mundo. Para os Aquarianos, a Pérola é a lembrança de que o verdadeiro valor nem sempre está naquilo que nasce perfeito, mas naquilo que se transforma com o tempo.'
+      ],
+      poem: [
+        'No silêncio do fundo,',
+        'Longe do brilho e do olhar,',
+        'Cresce uma pequena estrela',
+        'Que ninguém veio procurar.',
+        'Não foi o mar que a fez perfeita,',
+        'Nem o tempo que a fez igual;',
+        'Foi o que enfrentou escondida',
+        'Que a tornou tão singular.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Pérola é honrada através da paciência, da preservação de memórias e da valorização daquilo que amadurece com o tempo. Seus devotos oferecem pérolas encontradas em suas jornadas, mas também criam joias com materiais que possuem histórias familiares, transmitindo-as entre gerações. Seus santuários costumam ser discretos, adornados com conchas, madrepérola e pequenas relíquias preservadas cuidadosamente. Em algumas tradições, uma pérola só pode ser oferecida após anos de dedicação a um ofício, uma promessa ou uma jornada pessoal. Para a Pérola, o valor de uma oferenda não depende de seu brilho, mas da história e da transformação que ela carrega consigo.'
+    }
+  ]
+}
+
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
@@ -609,7 +711,9 @@ const Forum = () => {
       ? angelOntology
       : selectedOntologyRace?.id === 'demonios'
         ? daemonOntology
-        : null
+        : selectedOntologyRace?.id === 'aquarianos'
+          ? aquarianOntology
+          : null
 
   return (
     <PageTransition>
