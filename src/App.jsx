@@ -118,6 +118,53 @@ const Home = () => {
   )
 }
 
+const humanOntology = {
+  introduction: 'Os 𝓗𝓾𝓶𝓪𝓷𝓸𝓼 não possuem uma única entidade que os represente. Sua natureza é marcada pela diversidade de caminhos, e por isso cinco entidades se relacionam diretamente com eles: 𝓐 𝓕𝓸𝓻𝓽𝓾𝓷𝓪, 𝓞 𝓔𝓼𝓬𝓻𝓲𝓫𝓪, 𝓐 𝓟𝓮𝓻𝓮𝓰𝓻𝓲𝓷𝓪, 𝓞 𝓕𝓮𝓻𝓻𝓮𝓲𝓻𝓸 e 𝓐 𝓜𝓪́𝓼𝓬𝓪𝓻𝓪. Cada uma representa uma possibilidade da existência humana, aquilo que pode ser encontrado, criado, percorrido, construído ou escondido ao longo de uma vida.',
+  entities: [
+    {
+      name: '𝓐 𝓕𝓸𝓻𝓽𝓾𝓷𝓪',
+      description: [
+        'Representa o acaso e as possibilidades. Ela não determina o destino dos Humanos, mas rege os pequenos desvios que podem transformar completamente uma vida.',
+        'Para alguns, sua presença se manifesta como sorte; para outros, como uma sucessão de acontecimentos inesperados. A Fortuna não escolhe quem merece prosperar. Ela apenas abre portas, cabe ao indivíduo decidir se irá atravessá-las.'
+      ],
+      belief: 'A Fortuna não exige templos ou cerimônias elaboradas, pois sua natureza está no acaso e nas oportunidades. Seus devotos costumam oferecer pequenas moedas, objetos encontrados durante suas jornadas ou presentes adquiridos em momentos de sorte. Muitos acreditam que compartilhar parte daquilo que receberam é uma maneira de demonstrar gratidão, enquanto outros simplesmente depositam uma moeda em encruzilhadas e seguem seus caminhos, sem esperar uma resposta.'
+    },
+    {
+      name: '𝓞 𝓔𝓼𝓬𝓻𝓲𝓫𝓪',
+      description: [
+        'Representa o conhecimento, a memória e aquilo que permanece. É ligada às histórias registradas, aos nomes preservados e às verdades que sobrevivem àqueles que as descobriram.',
+        'Para os Humanos, sua existência lembra que uma vida pode terminar, mas aquilo que foi escrito pode continuar. O Escriba observa, registra e guarda, não para julgar o passado, mas para impedir que ele seja completamente esquecido.'
+      ],
+      belief: 'O Escriba é louvado através da preservação do conhecimento e da memória. Seus devotos mantêm bibliotecas, registram histórias, restauram documentos antigos e escrevem os nomes daqueles que não devem ser esquecidos. Para ele, o maior ato de devoção não é construir um templo, mas impedir que o conhecimento desapareça. Destruir deliberadamente registros importantes é considerado uma das maiores ofensas que se pode cometer contra sua entidade.'
+    },
+    {
+      name: '𝓐 𝓟𝓮𝓻𝓮𝓰𝓻𝓲𝓷𝓪',
+      description: [
+        'Representa a jornada, a descoberta e a mudança. Ela está presente em todo Humano que abandona aquilo que conhece para buscar algo além de seus próprios limites.',
+        'Sua influência está nos viajantes, exploradores e naqueles que simplesmente desejam descobrir quem são. Para ela, nenhum caminho é verdadeiramente perdido enquanto ainda houver algo a aprender.'
+      ],
+      belief: 'A Peregrina é honrada através das jornadas. Seus devotos costumam partir em viagens para conhecer terras desconhecidas, visitar lugares históricos ou simplesmente abandonar a segurança do familiar em busca de novas experiências. Não existem destinos obrigatórios nem caminhos sagrados universais: o importante é partir com disposição para aprender. Alguns viajantes deixam pequenas lembranças nos lugares por onde passam, enquanto outros consideram que retornar transformados já é a maior oferenda possível.'
+    },
+    {
+      name: '𝓞 𝓕𝓮𝓻𝓻𝓮𝓲𝓻𝓸',
+      description: [
+        'Representa a criação, o trabalho e a transformação. É aquele que molda aquilo que existe para criar aquilo que ainda não existe.',
+        'Sua essência está presente nas mãos dos artesãos, construtores e inventores, mas também em qualquer Humano que transforme sua própria realidade através do esforço. O Ferreiro ensina que nada precisa permanecer exatamente como foi encontrado.'
+      ],
+      belief: 'O Ferreiro recebe devoção através do trabalho, da criação e do aperfeiçoamento. Artesãos dedicam suas melhores obras à entidade, enquanto construtores gravam seu símbolo em fundações e oficinas. Em algumas comunidades, é costume oferecer a primeira peça produzida por um aprendiz ou preservar ferramentas utilizadas por gerações. Não é necessário construir igrejas em seu nome: criar algo duradouro, útil ou extraordinário já representa uma forma de louvor.'
+    },
+    {
+      name: '𝓐 𝓜𝓪́𝓼𝓬𝓪𝓻𝓪',
+      description: [
+        'Representa a identidade, os segredos que os Humanos escolhem apresentar ao mundo.',
+        'Todo Humano carrega diferentes versões de si mesmo. Algumas são mostradas, outras são escondidas. A Máscara não representa necessariamente a mentira, mas a capacidade de escolher quem se é diante de cada olhar.',
+        'Ela existe entre o verdadeiro e o aparente, entre aquilo que alguém é e aquilo que deseja que os outros enxerguem.'
+      ],
+      belief: 'A Máscara é louvada através do mistério, da expressão e da preservação dos segredos. Seus devotos utilizam máscaras em cerimônias, deixam presentes em locais discretos e mantêm pequenos santuários escondidos dos olhos alheios. Alguns acreditam que revelar voluntariamente um segredo importante durante um ritual é uma demonstração de confiança; outros preferem permanecer anônimos, considerando que a devoção perde parte de seu significado quando realizada para receber reconhecimento.'
+    }
+  ]
+}
+
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
@@ -634,10 +681,29 @@ const Forum = () => {
                   </div>
                   <div className="ontology-entities">
                     {selectedOntologyRace ? (
-                      <>
-                        <h3>{selectedOntologyRace.name}</h3>
-                        <p>As entidades desta raça serão adicionadas aqui.</p>
-                      </>
+                      selectedOntologyRace.id === 'humanos' ? (
+                        <div className="ontology-human-content">
+                          <h3>{selectedOntologyRace.name}</h3>
+                          <p className="ontology-human-intro">{humanOntology.introduction}</p>
+                          <div className="ontology-entity-list">
+                            {humanOntology.entities.map(entity => (
+                              <article className="ontology-entity-card" key={entity.name}>
+                                <h4>{entity.name}</h4>
+                                {entity.description.map(paragraph => (
+                                  <p key={paragraph}>{paragraph}</p>
+                                ))}
+                                <h5>A Maneira da Crença</h5>
+                                <p>{entity.belief}</p>
+                              </article>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <h3>{selectedOntologyRace.name}</h3>
+                          <p>As entidades desta raça serão adicionadas aqui.</p>
+                        </>
+                      )
                     ) : (
                       <p>Selecione uma raça para ver suas entidades.</p>
                     )}

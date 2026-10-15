@@ -433,6 +433,49 @@ body {
   color: white;
 }
 
+.ontology-human-intro,
+.ontology-entity-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.ontology-human-intro {
+  margin-bottom: 2rem;
+}
+
+.ontology-entity-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1rem;
+}
+
+.ontology-entity-card {
+  padding: 1.5rem;
+  background: rgba(11, 14, 20, 0.45);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 12px;
+}
+
+.ontology-entity-card h4 {
+  margin: 0 0 1rem;
+  color: var(--primary-color);
+  font-size: 1.4rem;
+}
+
+.ontology-entity-card h5 {
+  margin: 1.5rem 0 0.5rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.ontology-entity-card p {
+  margin: 0 0 0.75rem;
+}
+
+.ontology-entity-card p:last-child {
+  margin-bottom: 0;
+}
+
 .forum-section-placeholder,
 .placeholder-card {
   background: rgba(22, 27, 34, 0.6);
