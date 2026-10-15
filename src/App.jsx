@@ -268,6 +268,87 @@ const angelOntology = {
   ]
 }
 
+const daemonOntology = {
+  title: 'Cinco faces da existência demoníaca',
+  introduction: 'Os 𝓓𝓮𝓶𝓸̂𝓷𝓲𝓸𝓼 possuem uma sociedade construída sobre a força, a guerra e a conquista. Para eles, o poder não é apenas um privilégio, mas uma condição que precisa ser demonstrada, defendida e constantemente reafirmada. Aquele que deseja respeito deve provar seu valor, e aquele que deseja governar precisa demonstrar que é capaz de sustentar sua autoridade. Suas cinco entidades são 𝓐 𝓘𝓻𝓪, 𝓞 𝓒𝓸𝓷𝓺𝓾𝓲𝓼𝓽𝓪𝓭𝓸𝓻, 𝓐 𝓛𝓪̂𝓶𝓲𝓷𝓪, 𝓞 𝓢𝓸𝓫𝓮𝓻𝓪𝓷𝓸 e 𝓐 𝓒𝓲𝓷𝔃𝓪. Cada uma representa uma face da existência demoníaca, desde a fúria que desperta o poder até a resistência daqueles que sobrevivem à própria ruína.',
+  entities: [
+    {
+      name: '𝓐 𝓘𝓻𝓪',
+      description: [
+        'É a fúria, a força e o instinto que despertam diante da adversidade. A Ira existe para lembrar aos Demônios que a fraqueza não precisa ser o fim de ninguém, mas também que a força sem controle pode consumir até mesmo aquele que a carrega.',
+        'Ela não representa a violência sem propósito, mas a chama que impulsiona um ser a continuar lutando quando tudo parece perdido. Para os Demônios, a Ira é a prova de que dominar a própria fúria é tão importante quanto vencer um inimigo.'
+      ],
+      poem: [
+        'A cólera é um cavalo fogoso;',
+        'quem não o governa,',
+        'será por ele arrastado.'
+      ],
+      poet: 'William Shakespeare',
+      belief: 'A Ira é honrada através da força, da resistência e do domínio sobre os próprios impulsos. Seus devotos realizam treinamentos exaustivos, enfrentam desafios físicos e fazem juramentos de nunca abandonar uma luta por medo. Armas utilizadas em batalhas memoráveis podem ser depositadas em seus altares como oferendas. Para a entidade, enfurecer-se é natural; permitir que a própria fúria governe todas as decisões é uma demonstração de fraqueza.'
+    },
+    {
+      name: '𝓞 𝓒𝓸𝓷𝓺𝓾𝓲𝓼𝓽𝓪𝓭𝓸𝓻',
+      description: [
+        'É a ambição, a conquista e a vontade de superar os próprios limites. O Conquistador existe para lembrar aos Demônios que o poder precisa ser demonstrado por meio de ações, e que nenhum feito grandioso nasce da acomodação.',
+        'Ele representa a busca por territórios, vitórias e reconhecimento, mas também o peso de sustentar aquilo que foi conquistado. Para os Demônios, o Conquistador é a lembrança de que vencer é apenas o início da verdadeira provação.'
+      ],
+      poem: [
+        'Quem passa pela vida em branca nuvem,',
+        'E em plácido repouso adormece,',
+        'Quem não sente o calor da chama viva,',
+        'Nem a dor que o coração enobrece.'
+      ],
+      poet: 'Castro Alves',
+      belief: 'O Conquistador é honrado através de feitos grandiosos, desafios superados e vitórias conquistadas por mérito. Seus devotos dedicam campanhas, troféus e territórios conquistados à entidade, além de erguer monumentos para preservar os nomes daqueles que realizaram grandes feitos. Em algumas culturas, guerreiros gravam suas maiores conquistas em placas de metal ou nas paredes de salões de batalha. Promessas vazias não possuem valor para o Conquistador: somente aquilo que foi realizado merece ser oferecido.'
+    },
+    {
+      name: '𝓐 𝓛𝓪̂𝓶𝓲𝓷𝓪',
+      description: [
+        'É a disciplina, a precisão e o domínio da própria habilidade. A Lâmina existe para lembrar aos Demônios que a força bruta, sozinha, não determina o vencedor, pois até o golpe mais poderoso pode falhar quando executado sem técnica.',
+        'Ela representa o aperfeiçoamento constante, a paciência necessária para dominar uma arte e a responsabilidade de saber quando utilizar aquilo que se aprendeu. Para os Demônios, a Lâmina ensina que a verdadeira maestria não está em atacar sem parar, mas em nunca desperdiçar um movimento.'
+      ],
+      poem: [
+        'A mão que executa deve conhecer',
+        'O peso daquilo que escolheu fazer;',
+        'Pois não há arte no golpe sem propósito,',
+        'Nem vitória no gesto sem saber.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Lâmina é honrada através do treinamento, da disciplina e do aperfeiçoamento das próprias habilidades. Seus devotos cuidam de suas armas com grande respeito, dedicam horas à prática de suas técnicas e evitam desperdiçar movimentos em demonstrações vazias. É comum que aprendizes ofereçam à entidade sua primeira arma forjada ou a primeira ferramenta que dominaram por completo. Seus santuários costumam exibir armas históricas, cada uma acompanhada de relatos sobre a habilidade de quem a utilizou. Para a Lâmina, a excelência é uma oferenda maior do que a brutalidade.'
+    },
+    {
+      name: '𝓞 𝓢𝓸𝓫𝓮𝓻𝓪𝓷𝓸',
+      description: [
+        'É a autoridade, o domínio e o dever de sustentar o próprio poder. O Soberano existe para lembrar aos Demônios que governar não significa apenas ordenar, mas assumir a responsabilidade por tudo aquilo que se encontra sob seu comando.',
+        'Ele representa a hierarquia, a ambição de ocupar posições elevadas e a necessidade de provar continuamente que se é digno de permanecer nelas. Para os Demônios, o Soberano é a lembrança de que nenhum trono se mantém apenas pelo nome de quem o ocupa.'
+      ],
+      poem: [
+        'O poder não se mede pela coroa,',
+        'Mas pelo peso que repousa sobre ela;',
+        'Pois aquele que governa sem propósito',
+        'É apenas um servo sentado em seu trono.'
+      ],
+      poet: 'Careca!',
+      belief: 'O Soberano é honrado através de juramentos, demonstrações de liderança e da construção de monumentos que simbolizem autoridade. Reis, generais e governantes costumam erguer estátuas em sua homenagem, enquanto seus salões são decorados com estandartes e registros de conquistas políticas ou militares. Em algumas tradições, líderes renovam seus juramentos diante de seus subordinados, reafirmando publicamente os deveres que aceitaram. Para o Soberano, exigir obediência sem demonstrar competência é uma afronta: toda autoridade precisa ser sustentada por ações.'
+    },
+    {
+      name: '𝓐 𝓒𝓲𝓷𝔃𝓪',
+      description: [
+        'É a resistência, a memória e a capacidade de recomeçar depois da destruição. A Cinza existe para lembrar aos Demônios que nem toda derrota representa o fim e que, mesmo quando tudo aquilo que se conhecia desaparece, ainda pode restar algo capaz de dar origem a um novo começo.',
+        'Ela representa os vestígios das batalhas, os nomes daqueles que partiram e a força necessária para reconstruir aquilo que foi perdido. Para os Demônios, a Cinza ensina que sobreviver não é apenas permanecer de pé, mas encontrar um motivo para continuar.'
+      ],
+      poem: [
+        'Daquilo que o fogo consumiu,',
+        'Resta a memória sobre o chão;',
+        'E onde antes repousavam ruínas,',
+        'Outra vez se erguerá a construção.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Cinza é honrada através da preservação da memória e da reconstrução após períodos de destruição. Seus devotos mantêm ruínas como memoriais, guardam objetos pertencentes aos que morreram e registram os nomes daqueles que não devem ser esquecidos. Em algumas regiões, pequenas urnas com cinzas simbólicas são colocadas em altares ou monumentos dedicados aos sobreviventes. Também é comum dedicar à entidade uma construção recém-erguida após uma guerra ou calamidade. Para a Cinza, não é necessário destruir para demonstrar devoção: reconstruir aquilo que parecia perdido já é, por si só, uma oferenda.'
+    }
+  ]
+}
+
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
@@ -526,7 +607,9 @@ const Forum = () => {
     ? humanOntology
     : selectedOntologyRace?.id === 'anjos'
       ? angelOntology
-      : null
+      : selectedOntologyRace?.id === 'demonios'
+        ? daemonOntology
+        : null
 
   return (
     <PageTransition>
