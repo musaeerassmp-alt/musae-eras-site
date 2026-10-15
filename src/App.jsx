@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { createClient } from '@supabase/supabase-js'
-import { Music, Users, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Sparkles, Map, UserCheck, DollarSign, Star } from 'lucide-react'
+import { Music, Search, LogOut, User, BookOpen, PenTool, ShieldCheck, ClipboardList, X, Heart, Zap, Map, DollarSign, Star } from 'lucide-react'
 import Apoios from './Apoios'
 import PageTransition from './PageTransition'
 import './App.css'
@@ -249,7 +249,7 @@ const Forum = () => {
     {
       id: 'humanos',
       name: 'Humanos',
-      icon: <Users size={24} />,
+      icon: <img src="/HumanoRosto.png" alt="" />,
       content: {
         expectativa: 'de 80 a 100 anos',
         descricao: 'Os Humanos são uma das raças mais comuns e versáteis já catalogadas. Não apresentam afinidade natural com qualquer elemento, tampouco possuem características físicas extraordinárias. Ainda assim, são reconhecidos por sua inteligência, capacidade de adaptação e incessante busca por conhecimento.',
@@ -276,7 +276,7 @@ const Forum = () => {
     {
       id: 'anjos',
       name: 'Anjos',
-      icon: <Sparkles size={24} />,
+      icon: <img src="/AnjoRosto.png" alt="" />,
       content: {
         expectativa: 'de 120 a 150 anos',
         descricao: 'Os Anjos são os nativos do Céu e os principais guardiões das Leis da Criação. Ao contrário do imaginário popular, não são definidos por grandes asas, mas pela Energia Angelical que percorre naturalmente seus corpos desde o nascimento.',
@@ -306,7 +306,7 @@ const Forum = () => {
     {
       id: 'demonios',
       name: 'Daemons',
-      icon: <Zap size={24} />,
+      icon: <img src="/DaemonRosto.png" alt="" />,
       content: {
         expectativa: 'de 150 a 180 anos',
         descricao: 'Os Daemons são os habitantes nativos do Inferno, uma raça moldada pelas chamas eternas e pela constante disputa por poder. Entre eles, força, honra e autoridade caminham lado a lado, tornando sua sociedade uma das mais rígidas e implacáveis já registradas.',
@@ -335,11 +335,11 @@ const Forum = () => {
         }
       }
     },
-    { id: 'quimeras', name: 'Quimeras', icon: <UserCheck size={24} /> },
+    { id: 'quimeras', name: 'Quimeras', icon: <img src="/FeralRosto.png" alt="" /> },
     {
       id: 'aquarianos',
       name: 'Aquarianos',
-      icon: <Map size={24} />,
+      icon: <img src="/AquarianoRosto.png" alt="" />,
       content: {
         expectativa: 'de 100 a 120 anos',
         descricao: 'Os Aquarianos são uma raça própria, distinta das Quimeras apesar das semelhanças. Seus corpos possuem características humanoides combinadas com traços de criaturas aquáticas, como peixes e animais que habitam mares e profundezas.',

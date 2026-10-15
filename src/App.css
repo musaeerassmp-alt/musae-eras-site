@@ -510,6 +510,13 @@ body {
   justify-content: center;
 }
 
+.race-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .race-placeholder {
   color: var(--text-secondary);
   padding: 2rem;
