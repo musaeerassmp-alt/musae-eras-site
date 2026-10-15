@@ -679,21 +679,29 @@ const Forum = () => {
                       </button>
                     ))}
                   </div>
-                  <div className="ontology-entities">
+                  <div className={`ontology-entities ${selectedOntologyRace?.id === 'humanos' ? 'ontology-entities--human' : ''}`}>
                     {selectedOntologyRace ? (
                       selectedOntologyRace.id === 'humanos' ? (
-                        <div className="ontology-human-content">
-                          <h3>{selectedOntologyRace.name}</h3>
+                        <div className="ontology-human-content ontology-human-content--selected">
+                          <header className="ontology-human-heading">
+                            <span className="ontology-human-kicker">Entidades humanas</span>
+                            <h3>Cinco caminhos, uma existência</h3>
+                          </header>
                           <p className="ontology-human-intro">{humanOntology.introduction}</p>
                           <div className="ontology-entity-list">
-                            {humanOntology.entities.map(entity => (
+                            {humanOntology.entities.map((entity, index) => (
                               <article className="ontology-entity-card" key={entity.name}>
-                                <h4>{entity.name}</h4>
+                                <div className="ontology-entity-heading">
+                                  <span className="ontology-entity-number">{String(index + 1).padStart(2, '0')}</span>
+                                  <h4>{entity.name}</h4>
+                                </div>
                                 {entity.description.map(paragraph => (
                                   <p key={paragraph}>{paragraph}</p>
                                 ))}
-                                <h5>A Maneira da Crença</h5>
-                                <p>{entity.belief}</p>
+                                <div className="ontology-entity-belief">
+                                  <h5>A Maneira da Crença</h5>
+                                  <p>{entity.belief}</p>
+                                </div>
                               </article>
                             ))}
                           </div>
