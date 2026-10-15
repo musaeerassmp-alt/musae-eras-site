@@ -350,6 +350,80 @@ body {
   font-weight: bold;
 }
 
+.ontology-section {
+  width: 100%;
+}
+
+.ontology-section h2 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.ontology-intro {
+  color: var(--text-secondary);
+}
+
+.ontology-races {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.ontology-race-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 100px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font: inherit;
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ontology-race-btn:hover {
+  background: rgba(213, 101, 229, 0.1);
+  transform: translateY(-3px);
+}
+
+.ontology-race-btn.active {
+  background: var(--primary-color);
+  border-color: white;
+}
+
+.ontology-race-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ontology-race-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ontology-entities {
+  min-height: 100px;
+  padding: 1.5rem;
+  color: var(--text-secondary);
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 16px;
+}
+
+.ontology-entities h3 {
+  margin-top: 0;
+  color: white;
+}
+
 .forum-section-placeholder,
 .placeholder-card {
   background: rgba(22, 27, 34, 0.6);

@@ -121,6 +121,7 @@ const Home = () => {
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
+  const [selectedOntologyRace, setSelectedOntologyRace] = useState(null)
 
   const chimeraCommonContent = {
     expectativa: 'de 100 a 120 anos',
@@ -397,6 +398,12 @@ const Forum = () => {
             >
               👥 Raças Disponíveis
             </button>
+            <button
+              className={`forum-nav-btn ${activeSection === 'ontologia' ? 'active' : ''}`}
+              onClick={() => setActiveSection('ontologia')}
+            >
+              ✨ Ontologia
+            </button>
           </div>
 
           <div className="forum-content">
@@ -599,6 +606,42 @@ const Forum = () => {
                       </div>
                     )}
                   </AnimatePresence>
+                </motion.div>
+              )}
+
+              {activeSection === 'ontologia' && (
+                <motion.div
+                  key="ontologia"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="ontology-section"
+                >
+                  <h2>Ontologia</h2>
+                  <p className="ontology-intro">Escolha uma raça para consultar suas entidades.</p>
+                  <div className="ontology-races">
+                    {races.map(race => (
+                      <button
+                        type="button"
+                        key={race.id}
+                        className={`ontology-race-btn ${selectedOntologyRace?.id === race.id ? 'active' : ''}`}
+                        onClick={() => setSelectedOntologyRace(race)}
+                      >
+                        <span className="ontology-race-icon">{race.icon}</span>
+                        <span>{race.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="ontology-entities">
+                    {selectedOntologyRace ? (
+                      <>
+                        <h3>{selectedOntologyRace.name}</h3>
+                        <p>As entidades desta raça serão adicionadas aqui.</p>
+                      </>
+                    ) : (
+                      <p>Selecione uma raça para ver suas entidades.</p>
+                    )}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
