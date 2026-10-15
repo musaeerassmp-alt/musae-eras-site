@@ -128,6 +128,17 @@ const humanOntology = {
         'Representa o acaso e as possibilidades. Ela não determina o destino dos Humanos, mas rege os pequenos desvios que podem transformar completamente uma vida.',
         'Para alguns, sua presença se manifesta como sorte; para outros, como uma sucessão de acontecimentos inesperados. A Fortuna não escolhe quem merece prosperar. Ela apenas abre portas, cabe ao indivíduo decidir se irá atravessá-las.'
       ],
+      poem: [
+        'As coisas que errei na vida',
+        'São as que acharei na morte,',
+        'Porque a vida é dividida',
+        'Entre quem sou e a sorte.',
+        'As coisas que a Sorte deu',
+        'Levou-as ela consigo,',
+        'Mas as coisas que sou eu',
+        'Guardei-as todas comigo.'
+      ],
+      poet: 'Fernando Pessoa',
       belief: 'A Fortuna não exige templos ou cerimônias elaboradas, pois sua natureza está no acaso e nas oportunidades. Seus devotos costumam oferecer pequenas moedas, objetos encontrados durante suas jornadas ou presentes adquiridos em momentos de sorte. Muitos acreditam que compartilhar parte daquilo que receberam é uma maneira de demonstrar gratidão, enquanto outros simplesmente depositam uma moeda em encruzilhadas e seguem seus caminhos, sem esperar uma resposta.'
     },
     {
@@ -136,6 +147,13 @@ const humanOntology = {
         'Representa o conhecimento, a memória e aquilo que permanece. É ligada às histórias registradas, aos nomes preservados e às verdades que sobrevivem àqueles que as descobriram.',
         'Para os Humanos, sua existência lembra que uma vida pode terminar, mas aquilo que foi escrito pode continuar. O Escriba observa, registra e guarda, não para julgar o passado, mas para impedir que ele seja completamente esquecido.'
       ],
+      poem: [
+        'Amar o perdido, deixa confundido este coração.',
+        'Nada pode o olvido contra o sem sentido apelo do Não.',
+        'As coisas tangíveis tornam-se insensíveis à palma da mão.',
+        'Mas as coisas findas, muito mais que lindas, essas ficarão.'
+      ],
+      poet: 'Carlos Drummond de Andrade',
       belief: 'O Escriba é louvado através da preservação do conhecimento e da memória. Seus devotos mantêm bibliotecas, registram histórias, restauram documentos antigos e escrevem os nomes daqueles que não devem ser esquecidos. Para ele, o maior ato de devoção não é construir um templo, mas impedir que o conhecimento desapareça. Destruir deliberadamente registros importantes é considerado uma das maiores ofensas que se pode cometer contra sua entidade.'
     },
     {
@@ -144,6 +162,16 @@ const humanOntology = {
         'Representa a jornada, a descoberta e a mudança. Ela está presente em todo Humano que abandona aquilo que conhece para buscar algo além de seus próprios limites.',
         'Sua influência está nos viajantes, exploradores e naqueles que simplesmente desejam descobrir quem são. Para ela, nenhum caminho é verdadeiramente perdido enquanto ainda houver algo a aprender.'
       ],
+      poem: [
+        'Quero andar pela superfície,',
+        'caminhar o meu caminho,',
+        'ter o chão firme por onde passar,',
+        'ver as águas limpas dos riachos,',
+        'sejam ouvidas batendo',
+        'de encontro às pedras,',
+        'abundantes, claras e permanentes!...'
+      ],
+      poet: 'Luiz Romeu Oliboni',
       belief: 'A Peregrina é honrada através das jornadas. Seus devotos costumam partir em viagens para conhecer terras desconhecidas, visitar lugares históricos ou simplesmente abandonar a segurança do familiar em busca de novas experiências. Não existem destinos obrigatórios nem caminhos sagrados universais: o importante é partir com disposição para aprender. Alguns viajantes deixam pequenas lembranças nos lugares por onde passam, enquanto outros consideram que retornar transformados já é a maior oferenda possível.'
     },
     {
@@ -152,6 +180,26 @@ const humanOntology = {
         'Representa a criação, o trabalho e a transformação. É aquele que molda aquilo que existe para criar aquilo que ainda não existe.',
         'Sua essência está presente nas mãos dos artesãos, construtores e inventores, mas também em qualquer Humano que transforme sua própria realidade através do esforço. O Ferreiro ensina que nada precisa permanecer exatamente como foi encontrado.'
       ],
+      poem: [
+        'Mudam-se os tempos, mudam-se as vontades,',
+        'Muda-se o ser, muda-se a confiança;',
+        'Todo o mundo é composto de mudança,',
+        'Tomando sempre novas qualidades.',
+        '',
+        'Continuamente vemos novidades,',
+        'Diferentes em tudo da esperança;',
+        'Do mal ficam as mágoas na lembrança,',
+        'E do bem, se algum houve, as saudades.',
+        '',
+        'O tempo cobre o chão de verde manto,',
+        'Que já coberto foi de neve fria,',
+        'E enfim converte em choro o doce canto.',
+        '',
+        'E, afora este mudar-se cada dia,',
+        'Outra mudança faz de mor espanto:',
+        'Que não se muda já como soía.'
+      ],
+      poet: 'Luís de Camões',
       belief: 'O Ferreiro recebe devoção através do trabalho, da criação e do aperfeiçoamento. Artesãos dedicam suas melhores obras à entidade, enquanto construtores gravam seu símbolo em fundações e oficinas. Em algumas comunidades, é costume oferecer a primeira peça produzida por um aprendiz ou preservar ferramentas utilizadas por gerações. Não é necessário construir igrejas em seu nome: criar algo duradouro, útil ou extraordinário já representa uma forma de louvor.'
     },
     {
@@ -161,6 +209,20 @@ const humanOntology = {
         'Todo Humano carrega diferentes versões de si mesmo. Algumas são mostradas, outras são escondidas. A Máscara não representa necessariamente a mentira, mas a capacidade de escolher quem se é diante de cada olhar.',
         'Ela existe entre o verdadeiro e o aparente, entre aquilo que alguém é e aquilo que deseja que os outros enxerguem.'
       ],
+      poem: [
+        'Às vezes nem eu mesmo sei quem sou.',
+        "às vezes sou 'o meu queridinho',",
+        "às vezes sou 'moleque malcriado'.",
+        'Para mim tem vezes que eu sou rei, herói voador,',
+        'caubói lutador, jogador campeão.',
+        'às vezes sou pulga, sou mosca também,',
+        'que voa e se esconde de medo e vergonha.',
+        'Às vezes eu sou Hércules, Sansão vencedor,',
+        'peito de aço goleador!',
+        'Mas o que importa o que pensam de mim?',
+        'Eu sou quem sou, eu sou eu, sou assim, sou menino.'
+      ],
+      poet: 'Pedro Bandeira',
       belief: 'A Máscara é louvada através do mistério, da expressão e da preservação dos segredos. Seus devotos utilizam máscaras em cerimônias, deixam presentes em locais discretos e mantêm pequenos santuários escondidos dos olhos alheios. Alguns acreditam que revelar voluntariamente um segredo importante durante um ritual é uma demonstração de confiança; outros preferem permanecer anônimos, considerando que a devoção perde parte de seu significado quando realizada para receber reconhecimento.'
     }
   ]
