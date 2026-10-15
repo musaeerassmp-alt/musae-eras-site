@@ -451,6 +451,104 @@ const aquarianOntology = {
   ]
 }
 
+const chimeraOntology = {
+  title: 'Cinco faces da existência quimérica',
+  introduction: 'Os 𝓠𝓾𝓲𝓶𝓮𝓻𝓪𝓼 possuem uma existência marcada pela diversidade, pela adaptação e pelas diferentes formas de compreender o mundo. Entre os Passeriformes, os Insecta e os Feral, suas culturas expressam maneiras distintas de enxergar a liberdade, a comunidade, os instintos e o valor da própria existência. Suas cinco entidades são 𝓐 𝓢𝓸𝓫𝓮𝓻𝓪𝓷𝓪, 𝓞 𝓔𝓷𝔁𝓪𝓶𝓮, 𝓐 𝓕𝓮𝓻𝓪, 𝓞 𝓔𝓰𝓸 e 𝓐 𝓜𝓾𝓽𝓪𝓬̧𝓪̃𝓸. Cada uma representa uma face da existência quimérica, desde a liberdade de alcançar os céus e a força da coletividade até os instintos selvagens, a devoção absoluta a si mesmo e a capacidade de transformar-se diante de um mundo em constante mudança.',
+  entities: [
+    {
+      name: '𝓐 𝓢𝓸𝓫𝓮𝓻𝓪𝓷𝓪',
+      description: [
+        'É a liberdade, a elevação e a busca por horizontes que poucos conseguem alcançar. A Soberana representa os Passeriformes, suas asas e o desejo de ultrapassar os limites impostos pelo mundo.',
+        'Ela simboliza a ambição de alcançar o céu, a independência daqueles que não aceitam permanecer presos e a visão daqueles que observam o mundo de uma perspectiva distante. Para os Quimeras, a Soberana é a lembrança de que nascer com asas não significa estar livre, pois até mesmo aqueles capazes de alcançar os céus podem viver acorrentados.'
+      ],
+      poem: [
+        'Não há fronteira no horizonte,',
+        'Nem corrente capaz de deter;',
+        'Aquele que contempla o infinito',
+        'Nunca se contenta em permanecer.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Soberana é honrada através da liberdade, da exploração e da busca por novos horizontes. Seus devotos constroem santuários em penhascos, montanhas e lugares elevados, onde estandartes são deixados ao vento como oferendas. Entre os Passeriformes, é comum realizar cerimônias nas quais os jovens partem em jornadas para conhecer terras distantes, retornando apenas quando acreditam ter encontrado algo digno de compartilhar. Para a Soberana, a maior demonstração de devoção é viver sem permitir que o medo ou a submissão determinem o próprio destino.'
+    },
+    {
+      name: '𝓞 𝓔𝓷𝔁𝓪𝓶𝓮',
+      description: [
+        'É a união, a persistência e a força daqueles que jamais enfrentam o mundo sozinhos. O Enxame representa os Insecta, sua organização coletiva e a capacidade de transformar indivíduos frágeis em uma força capaz de desafiar adversários muito maiores.',
+        'Ele simboliza o trabalho compartilhado, a lealdade ao grupo e a continuidade de uma comunidade mesmo diante de perdas. Para os Quimeras, o Enxame ensina que a força de um povo não está apenas na capacidade de seus indivíduos, mas naquilo que são capazes de construir juntos.'
+      ],
+      poem: [
+        'Uma asa pode se cansar,',
+        'Um corpo pode sucumbir;',
+        'Mas mil passos sobre a terra',
+        'Não se esquecem de seguir.',
+        'Pois aquilo que um começa,',
+        'Muitos podem terminar;',
+        'E a força que nasce em conjunto',
+        'É difícil de quebrar.'
+      ],
+      poet: 'Careca!',
+      belief: 'O Enxame é honrado através do trabalho coletivo, da proteção comunitária e da preservação das tradições. Seus devotos constroem colmeias cerimoniais, monumentos compostos por milhares de pequenas peças e espaços onde cada membro da comunidade contribui com algo próprio. Oferendas individuais são consideradas incompletas quando não acompanhadas de alguma contribuição ao grupo. Entre os Insecta, é comum que grandes obras sejam dedicadas ao Enxame, com cada participante deixando nelas uma marca de sua participação. Para essa entidade, nenhuma contribuição é insignificante quando fortalece o todo.'
+    },
+    {
+      name: '𝓐 𝓕𝓮𝓻𝓪',
+      description: [
+        'É o instinto, a sobrevivência e a liberdade daqueles que se recusam a ser domados. A Fera representa os Feral, sua ligação com a natureza e a força que nasce da necessidade de sobreviver.',
+        'Ela simboliza os sentidos aguçados, a territorialidade e a capacidade de reconhecer ameaças antes que elas se aproximem. Não representa apenas a brutalidade, mas também a sabedoria instintiva de saber quando avançar, recuar ou proteger aquilo que se ama. Para os Quimeras, a Fera é a lembrança de que a civilização pode ensinar muitas coisas, mas não apaga aquilo que vive dentro de cada criatura.'
+      ],
+      poem: [
+        'Na mata, não há coroa,',
+        'Nem promessa, nem senhor;',
+        'Há o silêncio entre as folhas',
+        'E o chamado do interior.',
+        'Não me ensines a ser livre,',
+        'Nem me ordenes a temer;',
+        'Pois antes de conhecer teu mundo,',
+        'Eu já sabia sobreviver.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Fera é honrada através da preservação dos territórios naturais, do respeito aos instintos e da proteção daqueles considerados parte de sua matilha. Seus devotos deixam alimentos, peles e objetos encontrados durante suas jornadas em altares naturais, geralmente escondidos em cavernas, florestas ou regiões selvagens. Entre os Feral, é comum realizar ritos de passagem nos quais os jovens aprendem a reconhecer os sinais da natureza e a sobreviver por conta própria. A caça por prazer e a destruição desnecessária de territórios são vistas como ofensas. Para a Fera, sobreviver não significa apenas permanecer vivo, mas respeitar o mundo que permite a existência.'
+    },
+    {
+      name: '𝓞 𝓔𝓰𝓸',
+      description: [
+        'É a devoção a si mesmo, a supremacia da própria existência e a convicção de que nada deve estar acima de quem se considera digno de adoração. O Ego ensina que a própria vida é o bem mais precioso de um indivíduo e que qualquer coisa pode ser sacrificada para preservar ou engrandecer aquele que se coloca no centro de sua própria fé.',
+        'Seus seguidores não reconhecem a humildade como virtude, mas como uma forma de submissão. Para os Quimeras, o Ego representa o extremo da autossuficiência: a crença de que o mundo inteiro deve servir à própria existência, mesmo quando essa convicção exige que outros paguem o preço.'
+      ],
+      poem: [
+        'Diante do espelho, sou altar,',
+        'Diante do mundo, sou lei;',
+        'Se tudo nasceu para servir,',
+        'Por que serviria a alguém?',
+        'Que se curve o que me contempla,',
+        'Que se cale o que me desafia;',
+        'Pois não existe fé mais alta',
+        'Que aquela que em mim principia.'
+      ],
+      poet: 'Careca!',
+      belief: 'O Ego é honrado através da exaltação individual, da busca por poder e de rituais que colocam seus devotos em posição de absoluta submissão à entidade. Seus santuários são adornados com espelhos, estátuas e representações idealizadas de seus seguidores, sempre organizados de modo que a imagem do próprio devoto seja parte central da cerimônia. Em suas tradições mais extremas, seus rituais envolvem sacrifícios de fiéis, considerados a maior prova de que a vontade da entidade está acima da vida de seus próprios adoradores. Alguns seguidores oferecem voluntariamente a própria existência, enquanto outros são escolhidos por sacerdotes que afirmam interpretar os desejos do Ego. Para essa entidade, a devoção máxima consiste em reconhecer que até mesmo a própria vida pode ser considerada inferior àquilo que se adora.'
+    },
+    {
+      name: '𝓐 𝓜𝓾𝓽𝓪𝓬̧𝓪̃𝓸',
+      description: [
+        'É a adaptação, a transformação e a capacidade de se tornar algo novo diante de um mundo em constante mudança. A Mutação representa aquilo que une todos os Quimeras: a diversidade de formas, características e possibilidades que surgem da própria natureza.',
+        'Ela simboliza a mudança como parte da existência e a força daqueles que encontram maneiras de continuar vivendo mesmo quando o ambiente exige que abandonem antigos hábitos. Para os Quimeras, a Mutação é a lembrança de que não existe uma única forma correta de existir e de que aquilo que torna alguém diferente também pode ser aquilo que o mantém vivo.'
+      ],
+      poem: [
+        'Não sou a forma de ontem,',
+        'Nem serei a de amanhã;',
+        'Sou a mudança que caminha,',
+        'A resposta que o mundo não dá.',
+        'Se a terra mudar seus caminhos,',
+        'Se o céu deixar de brilhar,',
+        'Ainda encontrarei outro modo',
+        'De permanecer e continuar.'
+      ],
+      poet: 'Careca!',
+      belief: 'A Mutação é honrada através da aceitação das diferenças, da preservação da diversidade e da celebração dos ciclos de transformação. Seus devotos mantêm jardins com espécies variadas, colecionam registros de diferentes linhagens quiméricas e constroem santuários cujas formas são alteradas ao longo dos anos. Em algumas comunidades, mudanças importantes na vida de um indivíduo são marcadas por cerimônias nas quais ele abandona um objeto antigo e recebe outro que represente aquilo que deseja se tornar. Para a Mutação, permanecer igual não é uma obrigação, e transformar-se não significa rejeitar quem se foi, mas permitir que a própria existência continue evoluindo.'
+    }
+  ]
+}
+
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
@@ -713,7 +811,9 @@ const Forum = () => {
         ? daemonOntology
         : selectedOntologyRace?.id === 'aquarianos'
           ? aquarianOntology
-          : null
+          : selectedOntologyRace?.id === 'quimeras'
+            ? chimeraOntology
+            : null
 
   return (
     <PageTransition>
