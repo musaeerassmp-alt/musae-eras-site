@@ -528,6 +528,33 @@ body {
   margin: 0 0 0.85rem;
 }
 
+.ontology-entity-poem {
+  margin: 1.25rem 0;
+  padding: 1rem 1.15rem;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(11, 14, 20, 0.38);
+  border-left: 2px solid rgba(213, 101, 229, 0.58);
+  border-radius: 0 10px 10px 0;
+}
+
+.ontology-entity-poem p {
+  margin: 0;
+  color: inherit;
+  font-family: 'Playball', cursive;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.ontology-entity-poem cite {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-style: normal;
+  text-align: right;
+}
+
 .ontology-entity-belief {
   margin-top: 1.4rem;
   padding: 1rem 1.1rem;

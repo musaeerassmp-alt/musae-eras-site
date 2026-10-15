@@ -119,6 +119,7 @@ const Home = () => {
 }
 
 const humanOntology = {
+  title: 'Cinco caminhos, uma existência',
   introduction: 'Os 𝓗𝓾𝓶𝓪𝓷𝓸𝓼 não possuem uma única entidade que os represente. Sua natureza é marcada pela diversidade de caminhos, e por isso cinco entidades se relacionam diretamente com eles: 𝓐 𝓕𝓸𝓻𝓽𝓾𝓷𝓪, 𝓞 𝓔𝓼𝓬𝓻𝓲𝓫𝓪, 𝓐 𝓟𝓮𝓻𝓮𝓰𝓻𝓲𝓷𝓪, 𝓞 𝓕𝓮𝓻𝓻𝓮𝓲𝓻𝓸 e 𝓐 𝓜𝓪́𝓼𝓬𝓪𝓻𝓪. Cada uma representa uma possibilidade da existência humana, aquilo que pode ser encontrado, criado, percorrido, construído ou escondido ao longo de uma vida.',
   entities: [
     {
@@ -161,6 +162,108 @@ const humanOntology = {
         'Ela existe entre o verdadeiro e o aparente, entre aquilo que alguém é e aquilo que deseja que os outros enxerguem.'
       ],
       belief: 'A Máscara é louvada através do mistério, da expressão e da preservação dos segredos. Seus devotos utilizam máscaras em cerimônias, deixam presentes em locais discretos e mantêm pequenos santuários escondidos dos olhos alheios. Alguns acreditam que revelar voluntariamente um segredo importante durante um ritual é uma demonstração de confiança; outros preferem permanecer anônimos, considerando que a devoção perde parte de seu significado quando realizada para receber reconhecimento.'
+    }
+  ]
+}
+
+const angelOntology = {
+  title: 'Cinco princípios da força angelical',
+  introduction: 'Os 𝓐𝓷𝓳𝓸𝓼 possuem cinco entidades que representam os princípios fundamentais de sua existência: 𝓐 𝓑𝓪𝓵𝓪𝓷𝓬̧𝓪, 𝓞 𝓒𝓸𝓻𝓸, 𝓐 𝓥𝓲𝓰𝓲́𝓵𝓲𝓪, 𝓞 𝓥𝓮𝓻𝓮𝓭𝓲𝓽𝓸 e 𝓐 𝓐𝓾𝓻𝓸𝓻𝓪. Cada uma representa uma vertente da força angelical, desde o equilíbrio e a ordem até a proteção, o julgamento e a esperança de um novo começo.',
+  entities: [
+    {
+      name: '𝓐 𝓑𝓪𝓵𝓪𝓷𝓬̧𝓪',
+      description: [
+        'É o equilíbrio, a justiça e a igualdade diante das leis da Criação. A Balança existe para lembrar aos Anjos que nenhuma ação acontece sem consequência e que nenhum ser deve estar acima daquilo que mantém o mundo em equilíbrio.',
+        'Ela não representa bondade ou crueldade, mas a necessidade de pesar cada ato antes de determinar seu valor. Para os Anjos, a Balança é a lembrança de que até aqueles que julgam também estão sujeitos às leis que protegem.'
+      ],
+      poem: [
+        'Justiça! E vós, povos,',
+        'Que a justiça adorais,',
+        'Não deixeis que o crime',
+        'Se erga contra a lei!'
+      ],
+      poet: 'Castro Alves',
+      belief: 'A Balança é honrada através da justiça e da imparcialidade. Seus devotos procuram resolver conflitos sem favorecer amigos ou prejudicar adversários, além de construir tribunais e santuários onde decisões importantes possam ser tomadas. Em seus templos, é comum encontrar balanças esculpidas em pedra ou metal. Para a entidade, uma decisão justa tomada em silêncio pode ter mais valor do que um sacrifício realizado em seu nome.'
+    },
+    {
+      name: '𝓞 𝓒𝓸𝓻𝓸',
+      description: [
+        'É a união, a harmonia e a força encontrada na coletividade. Cada Anjo possui sua própria existência, mas nenhum deles deveria existir completamente separado dos demais.',
+        'O Coro simboliza a reunião dessas diferentes vozes em um mesmo propósito, transformando aquilo que seria apenas uma voz em uma presença capaz de alcançar toda a Criação. Para os Anjos, cantar juntos é também lembrar que nenhuma existência precisa carregar sozinha o peso de sua missão.'
+      ],
+      poem: [
+        'Minha terra tem palmeiras,',
+        'Onde canta o Sabiá;',
+        'As aves, que aqui gorjeiam,',
+        'Não gorjeiam como lá.',
+        '',
+        'Nosso céu tem mais estrelas,',
+        'Nossas várzeas têm mais flores,',
+        'Nossos bosques têm mais vida,',
+        'Nossa vida mais amores.'
+      ],
+      poet: 'Gonçalves Dias',
+      belief: 'O Coro recebe louvor através da música, da união e das orações coletivas. Seus devotos organizam cânticos, corais e cerimônias em que diferentes vozes se unem em uma única composição. Suas igrejas costumam possuir acústica cuidadosamente planejada para que nenhuma voz se perca completamente entre as demais. Cantar sozinho também é aceito, desde que a intenção seja sincera, mas acredita-se que a devoção alcança sua expressão mais elevada quando muitos participam em harmonia.'
+    },
+    {
+      name: '𝓐 𝓥𝓲𝓰𝓲́𝓵𝓲𝓪',
+      description: [
+        'É a proteção, a atenção e o dever de permanecer desperto. A Vigília é aquela que observa quando todos os outros descansam, mantendo seus olhos voltados para aquilo que pode ameaçar a ordem.',
+        'Ela não está presente apenas no combate, mas também na espera silenciosa, no cuidado e na percepção dos menores sinais. Para os Anjos, vigiar é aceitar que proteger alguém significa estar presente mesmo quando nenhuma ameaça parece existir.'
+      ],
+      poem: [
+        'Debruçados do céu... a noite e os astros',
+        'Seguiam da peleja o incerto fado...',
+        'Era a tocha, o fuzil avermelhado!',
+        'Era o circo de Roma — o vasto chão!',
+        '',
+        'Por palmas, o troar da artilharia!',
+        'Por feras, os canhões negros rugiam!',
+        'Por atletas, dois povos se batiam!',
+        'Enorme anfiteatro, era a amplidão!'
+      ],
+      poet: 'Castro Alves',
+      belief: 'A Vigília é honrada através da proteção e do dever. Seus devotos mantêm postos de observação, protegem viajantes e permanecem atentos às comunidades sob seus cuidados. Alguns templos mantêm lanternas acesas durante toda a noite como símbolo de sua presença constante. Para a Vigília, não existem presentes obrigatórios: vigiar quando ninguém mais está disposto a fazê-lo e proteger aqueles que não podem se proteger são as formas mais respeitadas de devoção.'
+    },
+    {
+      name: '𝓞 𝓥𝓮𝓻𝓮𝓭𝓲𝓽𝓸',
+      description: [
+        'É a decisão, a sentença e o peso das consequências. O Veredito existe depois do julgamento, quando aquilo que foi observado precisa finalmente receber uma resposta.',
+        'Ele não age pela raiva ou pelo desejo de vingança, mas pela responsabilidade de determinar aquilo que deverá acontecer diante de uma transgressão. Para os Anjos, representa o momento em que a dúvida termina e a justiça precisa transformar-se em ação.'
+      ],
+      poem: [
+        'Não! Não eram dois povos, que abalavam',
+        'Naquele instante o solo ensanguentado...',
+        'Era o porvir, em frente do passado,',
+        'A liberdade, em frente à escravidão.',
+        '',
+        'Era a luta das águias, e do abutre,',
+        'A revolta do pulso, contra os ferros,',
+        'O pugilato da razão, com os erros,',
+        'O duelo da treva, e do clarão!'
+      ],
+      poet: 'Castro Alves',
+      belief: 'O Veredito é louvado através do cumprimento das decisões e da responsabilidade pelos próprios atos. Seus devotos preservam registros de julgamentos, erguem monumentos em locais onde decisões históricas foram tomadas e realizam cerimônias solenes antes de sentenças importantes. Não costumam oferecer riquezas, pois acreditam que presentes podem comprometer a imparcialidade. Para eles, o maior tributo é aceitar as consequências de uma decisão justa, mesmo quando ela contraria seus próprios interesses.'
+    },
+    {
+      name: '𝓐 𝓐𝓾𝓻𝓸𝓻𝓪',
+      description: [
+        'É o renascimento, a esperança e o início de um novo ciclo. A Aurora surge quando a escuridão começa a desaparecer, trazendo consigo a possibilidade de que aquilo que terminou não seja necessariamente o fim de todas as coisas.',
+        'Ela não apaga a noite nem desfaz aquilo que aconteceu, mas anuncia que existe novamente luz para aqueles que desejam continuar. Para os Anjos, é o símbolo da esperança que permanece mesmo depois dos momentos mais sombrios.'
+      ],
+      poem: [
+        'Quando as estrelas surgem na tarde, surge a esperança...',
+        'Toda alma triste no seu desgosto sonha um Messias:',
+        'Quem sabe? o acaso, na sorte esquiva, traz: a mudança',
+        'E enche de mundos as existências que eram vazias!',
+        '',
+        'Quando as estrelas brilham mais vivas, brilha a esperança...',
+        'Os olhos fulgem; loucas, ensaiam as asas frias:',
+        'Tantos amores há pela terra, que a mão alcança!',
+        'E há tantos astros, com outras vidas, para outros dias!'
+      ],
+      poet: 'Olavo Bilac',
+      belief: 'A Aurora recebe devoção através da esperança e dos recomeços. Seus seguidores costumam realizar orações ao nascer do sol, acender velas em momentos difíceis e oferecer flores aos que iniciam uma nova etapa da vida. Seus templos possuem janelas voltadas para o horizonte, permitindo que a primeira luz do dia alcance os altares. Não exige sacrifícios nem grandes oferendas: continuar acreditando na possibilidade de um amanhã melhor é considerado um dos gestos mais sinceros de fé.'
     }
   ]
 }
@@ -418,6 +521,12 @@ const Forum = () => {
       }
     }
   ]
+
+  const selectedOntologyContent = selectedOntologyRace?.id === 'humanos'
+    ? humanOntology
+    : selectedOntologyRace?.id === 'anjos'
+      ? angelOntology
+      : null
 
   return (
     <PageTransition>
@@ -679,17 +788,17 @@ const Forum = () => {
                       </button>
                     ))}
                   </div>
-                  <div className={`ontology-entities ${selectedOntologyRace?.id === 'humanos' ? 'ontology-entities--human' : ''}`}>
+                  <div className={`ontology-entities ${selectedOntologyContent ? 'ontology-entities--human' : ''}`}>
                     {selectedOntologyRace ? (
-                      selectedOntologyRace.id === 'humanos' ? (
+                      selectedOntologyContent ? (
                         <div className="ontology-human-content ontology-human-content--selected">
                           <header className="ontology-human-heading">
-                            <span className="ontology-human-kicker">Entidades humanas</span>
-                            <h3>Cinco caminhos, uma existência</h3>
+                            <span className="ontology-human-kicker">Entidades de {selectedOntologyRace.name}</span>
+                            <h3>{selectedOntologyContent.title}</h3>
                           </header>
-                          <p className="ontology-human-intro">{humanOntology.introduction}</p>
+                          <p className="ontology-human-intro">{selectedOntologyContent.introduction}</p>
                           <div className="ontology-entity-list">
-                            {humanOntology.entities.map((entity, index) => (
+                            {selectedOntologyContent.entities.map((entity, index) => (
                               <article className="ontology-entity-card" key={entity.name}>
                                 <div className="ontology-entity-heading">
                                   <span className="ontology-entity-number">{String(index + 1).padStart(2, '0')}</span>
@@ -698,6 +807,12 @@ const Forum = () => {
                                 {entity.description.map(paragraph => (
                                   <p key={paragraph}>{paragraph}</p>
                                 ))}
+                                {entity.poem && (
+                                  <blockquote className="ontology-entity-poem">
+                                    <p>{entity.poem.join('\n')}</p>
+                                    <cite>— {entity.poet}</cite>
+                                  </blockquote>
+                                )}
                                 <div className="ontology-entity-belief">
                                   <h5>A Maneira da Crença</h5>
                                   <p>{entity.belief}</p>
