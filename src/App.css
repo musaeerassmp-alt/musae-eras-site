@@ -433,6 +433,100 @@ body {
   color: white;
 }
 
+.ontology-entities--intro {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.ontology-world-intro {
+  text-align: left;
+}
+
+.ontology-world-lead {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  text-align: center;
+}
+
+.ontology-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ontology-intro-card {
+  min-width: 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  background: linear-gradient(145deg, rgba(35, 25, 48, 0.78), rgba(11, 14, 20, 0.62));
+  border: 1px solid rgba(213, 101, 229, 0.22);
+  border-top: 2px solid rgba(213, 101, 229, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.ontology-intro-card--wide {
+  grid-column: 1 / -1;
+}
+
+.ontology-intro-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(213, 101, 229, 0.16);
+}
+
+.ontology-intro-card-heading h4 {
+  margin: 0;
+  color: var(--primary-color);
+  font-family: 'Aref Ruqaa', serif;
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
+  line-height: 1.35;
+}
+
+.ontology-intro-card p,
+.ontology-intro-card li {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.ontology-intro-card p {
+  margin: 0 0 0.85rem;
+}
+
+.ontology-intro-card p:last-child {
+  margin-bottom: 0;
+}
+
+.ontology-intro-card ul {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.ontology-intro-card li::marker {
+  color: var(--primary-color);
+}
+
+.ontology-world-closing {
+  max-width: 850px;
+  margin: 2rem auto 0;
+  padding: 1.25rem 1.5rem;
+  color: white;
+  font-family: 'Aref Ruqaa', serif;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  line-height: 1.6;
+  text-align: center;
+  background: rgba(213, 101, 229, 0.08);
+  border: 1px solid rgba(213, 101, 229, 0.2);
+  border-radius: 12px;
+}
+
 .ontology-human-content--selected {
   text-align: left;
 }
@@ -583,6 +677,14 @@ body {
 @media (max-width: 700px) {
   .ontology-entities--human {
     padding: 1.1rem;
+  }
+
+  .ontology-intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ontology-intro-card--wide {
+    grid-column: auto;
   }
 
   .ontology-entity-list {

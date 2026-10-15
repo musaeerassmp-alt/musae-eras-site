@@ -611,6 +611,93 @@ const chimeraOntology = {
   ]
 }
 
+const ontologyIntroduction = {
+  introduction: 'As Entidades são seres de existência extremamente poderosa, conhecidos por diferentes nomes e interpretações entre as culturas do mundo. Apesar de muitas religiões tratarem essas criaturas como divindades, não existe uma confirmação absoluta sobre sua verdadeira natureza, origem ou mesmo sobre a veracidade de todas as histórias relacionadas a elas.',
+  sections: [
+    {
+      title: 'Partituras, crença e música',
+      paragraphs: [
+        'A principal característica das Entidades é sua relação com a crença e com a música. Toda criatura possui uma alma, conhecida neste mundo como Partitura. As Partituras carregam a existência, as experiências e as emoções daqueles que as possuem.',
+        'Quando inúmeras criaturas passam a acreditar na mesma ideia, entidade ou conceito, suas crenças podem produzir um Eco. Esse Eco, quando suficientemente forte, pode dar origem a uma nova consciência.'
+      ]
+    },
+    {
+      title: 'Ecos e permanência',
+      paragraphs: [
+        'Os Ecos são associados às músicas e às orações realizadas em nome dessas figuras. Quanto mais uma crença é compartilhada, mais forte pode se tornar sua existência.',
+        'Uma entidade depende do Eco produzido pelas Partituras daqueles que acreditam nela. Cultos, canções, orações e histórias podem contribuir para sua permanência.',
+        'Caso sua crença desapareça completamente, o Eco também pode desaparecer, fazendo com que a entidade enfraqueça ou até mesmo deixe de existir. Por esse motivo, uma entidade não é necessariamente eterna.'
+      ]
+    },
+    {
+      title: 'Origens desconhecidas',
+      paragraphs: [
+        'Existem atualmente inúmeras histórias sobre as Entidades, mas nenhuma delas é capaz de determinar com certeza como uma entidade realmente nasce.'
+      ],
+      points: [
+        'Algumas religiões afirmam que suas entidades existem desde o início do mundo.',
+        'Outras acreditam que elas surgiram apenas depois que seus primeiros seguidores começaram a cantar seus nomes.',
+        'Também existem histórias sobre novas entidades surgindo a partir de crenças completamente novas.',
+        'Se essas histórias são verdadeiras ou apenas outra forma de explicar o funcionamento da fé permanece desconhecido.'
+      ]
+    },
+    {
+      title: 'Tradições de cada raça',
+      wide: true,
+      paragraphs: [
+        'Cada uma das grandes raças possui suas próprias tradições religiosas e um conjunto de cinco entidades amplamente conhecidas. Entretanto, acreditar em uma entidade não significa necessariamente que ela seja real. Algumas são tratadas como figuras históricas, outras como divindades e algumas são consideradas apenas lendas antigas.'
+      ],
+      points: [
+        'Humanos: 𝓐 𝓕𝓸𝓻𝓽𝓾𝓷𝓪, 𝓞 𝓔𝓼𝓬𝓻𝓲𝓫𝓪, 𝓐 𝓟𝓮𝓻𝓮𝓰𝓻𝓲𝓷𝓪, 𝓞 𝓕𝓮𝓻𝓻𝓮𝓲𝓻𝓸 e 𝓐 𝓜𝓪́𝓼𝓬𝓪𝓻𝓪.',
+        'Anjos: 𝓐 𝓑𝓪𝓵𝓪𝓷𝓬̧𝓪, 𝓞 𝓒𝓸𝓻𝓸, 𝓐 𝓥𝓲𝓰𝓲́𝓵𝓲𝓪, 𝓞 𝓥𝓮𝓻𝓮𝓭𝓲𝓽𝓸 e 𝓐 𝓐𝓾𝓻𝓸𝓻𝓪.',
+        'Daemons: 𝓐 𝓘𝓻𝓪, 𝓞 𝓒𝓸𝓷𝓺𝓾𝓲𝓼𝓽𝓪𝓭𝓸𝓻, 𝓐 𝓛𝓪̂𝓶𝓲𝓷𝓪, 𝓞 𝓢𝓸𝓫𝓮𝓻𝓪𝓷𝓸 e 𝓐 𝓒𝓲𝓷𝔃𝓪.',
+        'Aquarianos: 𝓞 𝓛𝓮𝓿𝓲𝓪𝓽𝗮̃, 𝓐 𝓘𝓪𝓻𝓪, 𝓐 𝓜𝓪𝓻𝓮́, 𝓞 𝓕𝓪𝓻𝓸𝓵𝓮𝓲𝓻𝓸 e 𝓐 𝓟𝓮́𝓻𝓸𝓵𝓪.',
+        'Quimeras: 𝓐 𝓢𝓸𝓫𝓮𝓻𝓪𝓷𝓪, 𝓞 𝓔𝓷𝔁𝓪𝓶𝓮, 𝓐 𝓕𝓮𝓻𝓪, 𝓞 𝓔𝓰𝓸 e 𝓐 𝓜𝓾𝓽𝓪𝓬̧𝓪̃𝓸.'
+      ]
+    },
+    {
+      title: 'Formas e aparências',
+      paragraphs: [
+        'As entidades não possuem uma forma única ou permanente. Uma mesma entidade pode ser representada de maneiras completamente diferentes por diferentes povos, e sua aparência pode depender da cultura, da época ou da própria interpretação de seus seguidores.',
+        'Algumas são descritas como criaturas humanoides, enquanto outras assumem formas animais, monstruosas, abstratas ou até mesmo impossíveis de compreender. Não existe uma aparência considerada universalmente verdadeira.'
+      ]
+    },
+    {
+      title: 'Poderes e limites',
+      paragraphs: [
+        'Embora sejam extremamente poderosas, as Entidades não são onipotentes. Elas possuem limites, podem cometer erros e estão sujeitas às mesmas regras fundamentais que governam a existência. Uma entidade também pode ser destruída ou morrer caso sua existência deixe de ser sustentada.',
+        'Seu poder não é necessariamente absoluto dentro de seu próprio domínio. Algumas são capazes de realizar feitos extraordinários, enquanto outras possuem formas muito mais específicas de atuação.',
+        'As entidades não possuem autoridade sobre dimensões que não fazem parte da existência conhecida. O mundo, o Céu e o Inferno são os limites conhecidos onde sua influência pode existir.',
+        'Uma entidade pode possuir grande influência sobre determinados acontecimentos, pessoas ou conceitos, mas não pode simplesmente ignorar as regras que governam a existência. Mesmo aquelas consideradas extremamente poderosas precisam obedecer às Leis Universais.'
+      ]
+    },
+    {
+      title: 'As bênçãos',
+      paragraphs: [
+        'Alguns indivíduos afirmam ter recebido bênçãos diretamente de uma entidade. Essas bênçãos podem assumir diferentes formas, como manifestações mágicas, proteção, conhecimento ou acontecimentos considerados impossíveis.',
+        'Entretanto, nenhuma bênção é capaz de provar sozinha que uma entidade realmente existe. Um indivíduo pode acreditar ter recebido uma bênção enquanto aquilo que aconteceu possui uma explicação completamente diferente. Da mesma forma, uma entidade pode realmente ter interferido sem que ninguém seja capaz de provar que foi ela.'
+      ]
+    },
+    {
+      title: 'Orações e vontade própria',
+      paragraphs: [
+        'As entidades também não possuem a obrigação de responder às orações de seus seguidores. Algumas podem responder imediatamente; outras podem exigir algo em troca; algumas podem simplesmente ignorar aqueles que acreditam nelas. Existem ainda aquelas que aparentemente demonstram interesse apenas em determinados indivíduos ou acontecimentos.',
+        'Uma das maiores incertezas relacionadas às Entidades é justamente a existência de sua vontade própria. Não se sabe se elas realmente desejam aquilo que suas religiões afirmam. As histórias podem ter sido modificadas ao longo de milhares de anos.',
+        'Um mesmo acontecimento pode ser interpretado como uma bênção por uma cultura e como uma punição por outra. Assim, aquilo que os povos acreditam sobre uma entidade pode ser muito diferente daquilo que ela realmente pensa.'
+      ]
+    },
+    {
+      title: 'Uma possibilidade ainda mais estranha',
+      wide: true,
+      paragraphs: [
+        'Uma crença pode criar aquilo em que acredita. Se uma nova ideia for compartilhada por pessoas suficientes, seu Eco pode eventualmente adquirir consciência e transformar-se em uma nova entidade.',
+        'Não existe uma forma conhecida de confirmar se isso realmente acontece. Talvez as entidades tenham existido desde o princípio. Talvez tenham nascido das primeiras músicas. Talvez algumas tenham sido criadas pelos próprios povos. E talvez algumas das entidades adoradas atualmente tenham sido apenas histórias antes de começarem a existir.'
+      ]
+    }
+  ],
+  closing: 'Entidades não são deus por natureza. São seres que existem entre a fé, a música e a própria existência.'
+}
+
 const Forum = () => {
   const [activeSection, setActiveSection] = useState('intro')
   const [selectedRace, setSelectedRace] = useState(null)
@@ -1123,8 +1210,16 @@ const Forum = () => {
                   className="ontology-section"
                 >
                   <h2>Ontologia</h2>
-                  <p className="ontology-intro">Escolha uma raça para consultar suas entidades.</p>
+                  <p className="ontology-intro">Conheça como as entidades se relacionam com a fé, a música e as diferentes culturas.</p>
                   <div className="ontology-races">
+                    <button
+                      type="button"
+                      className={`ontology-race-btn ontology-intro-tab ${selectedOntologyRace === null ? 'active' : ''}`}
+                      onClick={() => setSelectedOntologyRace(null)}
+                    >
+                      <span className="ontology-race-icon"><BookOpen size={32} /></span>
+                      <span>Introdução</span>
+                    </button>
                     {races.map(race => (
                       <button
                         type="button"
@@ -1137,10 +1232,9 @@ const Forum = () => {
                       </button>
                     ))}
                   </div>
-                  <div className={`ontology-entities ${selectedOntologyContent ? 'ontology-entities--human' : ''}`}>
-                    {selectedOntologyRace ? (
-                      selectedOntologyContent ? (
-                        <div className="ontology-human-content ontology-human-content--selected">
+                  <div className={`ontology-entities ${selectedOntologyContent ? 'ontology-entities--human' : selectedOntologyRace ? '' : 'ontology-entities--intro'}`}>
+                    {selectedOntologyContent ? (
+                      <div className="ontology-human-content ontology-human-content--selected">
                           <header className="ontology-human-heading">
                             <span className="ontology-human-kicker">Entidades de {selectedOntologyRace.name}</span>
                             <h3>{selectedOntologyContent.title}</h3>
@@ -1169,15 +1263,40 @@ const Forum = () => {
                               </article>
                             ))}
                           </div>
-                        </div>
-                      ) : (
-                        <>
-                          <h3>{selectedOntologyRace.name}</h3>
-                          <p>As entidades desta raça serão adicionadas aqui.</p>
-                        </>
-                      )
+                      </div>
+                    ) : selectedOntologyRace ? (
+                      <div className="ontology-world-intro">
+                        <h3>{selectedOntologyRace.name}</h3>
+                        <p>As entidades desta raça serão adicionadas aqui.</p>
+                      </div>
                     ) : (
-                      <p>Selecione uma raça para ver suas entidades.</p>
+                      <div className="ontology-world-intro">
+                        <header className="ontology-human-heading">
+                          <span className="ontology-human-kicker">Fé • Música • Existência</span>
+                          <h3>Como funcionam as Entidades?</h3>
+                        </header>
+                        <p className="ontology-world-lead">{ontologyIntroduction.introduction}</p>
+                        <div className="ontology-intro-grid">
+                          {ontologyIntroduction.sections.map((section, index) => (
+                            <article
+                              className={`ontology-intro-card ${section.wide ? 'ontology-intro-card--wide' : ''}`}
+                              key={section.title}
+                            >
+                              <div className="ontology-intro-card-heading">
+                                <span className="ontology-entity-number">{String(index + 1).padStart(2, '0')}</span>
+                                <h4>{section.title}</h4>
+                              </div>
+                              {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                              {section.points && (
+                                <ul>
+                                  {section.points.map(point => <li key={point}>{point}</li>)}
+                                </ul>
+                              )}
+                            </article>
+                          ))}
+                        </div>
+                        <p className="ontology-world-closing">{ontologyIntroduction.closing}</p>
+                      </div>
                     )}
                   </div>
                 </motion.div>
