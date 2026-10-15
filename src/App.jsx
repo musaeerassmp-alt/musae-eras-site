@@ -1131,6 +1131,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
   const [lores, setLores] = useState([])
   const [admins, setAdmins] = useState([])
   const [newAdminName, setNewAdminName] = useState('')
+  const [newAdminDiscordId, setNewAdminDiscordId] = useState('')
   const [selectedLore, setSelectedLore] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [accountOptions, setAccountOptions] = useState([])
@@ -1378,13 +1379,22 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
   }
 
   const addAdmin = async () => {
-    if (!newAdminName.trim()) return alert('Digite um nome de usuário do Discord.')
-    const { error } = await supabase.from('admins').insert([{ discord_username: newAdminName.trim() }])
+    const discordUsername = newAdminName.trim()
+    const discordId = newAdminDiscordId.trim()
+
+    if (!discordUsername) return alert('Digite um nome de usuário do Discord.')
+    if (!/^\d+$/.test(discordId)) return alert('Digite um ID de usuário Discord válido (somente números).')
+
+    const { error } = await supabase.from('admins').insert([{
+      discord_id: discordId,
+      discord_username: discordUsername
+    }])
     if (error) {
       alert('Erro ao adicionar admin: ' + error.message)
     } else {
       setNewAdminName('')
-      fetchAllAdmins()
+      setNewAdminDiscordId('')
+      await fetchAllAdmins()
     }
   }
 
@@ -1502,9 +1512,16 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                   <h3>Adicionar Novo Admin</h3>
                   <input
                     type="text"
-                    placeholder="Username do Discord (sem #)"
+                    placeholder="Username do Discord"
                     value={newAdminName}
                     onChange={e => setNewAdminName(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="ID do usuário Discord"
+                    value={newAdminDiscordId}
+                    onChange={e => setNewAdminDiscordId(e.target.value)}
                   />
                   <button onClick={addAdmin}>Adicionar</button>
                 </div>
@@ -1513,7 +1530,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                   <h3>Administradores Atuais</h3>
                   {admins.map(admin => (
                     <div key={admin.id} className="admin-list-item">
-                      <span>{admin.discord_username}</span>
+                      <span>{admin.discord_username || admin.discord_id} ({admin.discord_id})</span>
                       <button onClick={() => removeAdmin(admin.id)} className="btn-remove-admin">Remover</button>
                     </div>
                   ))}
@@ -1678,11 +1695,11 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [loadingAdmin, setLoadingAdmin] = useState(true)
 
-  const checkAdmin = useCallback(async (username) => {
+  const checkAdmin = useCallback(async (discordId, username) => {
     const { data, error } = await supabase
       .from('admins')
       .select('*')
-      .eq('discord_username', username)
+      .eq('discord_id', discordId)
 
     const isUserAdmin = (data && data.length > 0) || username === 'circoaleorico' || username === 'xaveiroxd'
 
@@ -1716,7 +1733,7 @@ const App = () => {
           setUser(parsedUser)
         }
 
-        await checkAdmin(parsedUser.username)
+        await checkAdmin(parsedUser.id, parsedUser.username)
       } else {
         setLoadingAdmin(false)
       }
