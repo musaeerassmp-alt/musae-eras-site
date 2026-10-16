@@ -72,6 +72,13 @@ const STATUS_LABELS = {
   RECUSADA: 'RECUSADA'
 }
 
+const ADMIN_LORE_LISTS = [
+  { status: 'PENDENTE', label: 'Em Análise', emptyMessage: 'Nenhuma lore pendente.' },
+  { status: 'EM_ENTREVISTA', label: 'Em entrevista', emptyMessage: 'Nenhuma lore aguardando entrevista.' },
+  { status: 'APROVADA', label: 'Aprovadas', emptyMessage: 'Nenhuma lore aprovada.' },
+  { status: 'RECUSADA', label: 'Recusadas', emptyMessage: 'Nenhuma lore recusada.' }
+]
+
 const INTERVIEW_NOTICE = 'Você foi aprovado para a segunda fase da entrevista. Verifique nossos avisos no Discord ou abra um ticket caso os dias de entrevista já tenham passado.'
 
 const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onDeleteLore }) => (
@@ -1841,6 +1848,7 @@ const LoginPage = () => {
 
 const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
   const [activeTab, setActiveTab] = useState('lores')
+  const [selectedLoreStatus, setSelectedLoreStatus] = useState('PENDENTE')
   const [lores, setLores] = useState([])
   const [admins, setAdmins] = useState([])
   const [newAdminName, setNewAdminName] = useState('')
@@ -1860,6 +1868,14 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
   const interviewLores = lores.filter(lore => lore.status === 'EM_ENTREVISTA')
   const approvedLores = lores.filter(lore => lore.status === 'APROVADA')
   const rejectedLores = lores.filter(lore => lore.status === 'RECUSADA')
+  const loresByStatus = {
+    PENDENTE: pendingLores,
+    EM_ENTREVISTA: interviewLores,
+    APROVADA: approvedLores,
+    RECUSADA: rejectedLores
+  }
+  const selectedLoreList = ADMIN_LORE_LISTS.find(list => list.status === selectedLoreStatus) || ADMIN_LORE_LISTS[0]
+  const visibleLores = loresByStatus[selectedLoreList.status]
 
   const fetchAllLores = useCallback(async () => {
     const { data, error } = await supabase.from('lores').select('*').order('created_at', { ascending: false })
@@ -2160,71 +2176,29 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
 
           <AnimatePresence mode="wait">
             {activeTab === 'lores' && (
-              <motion.div key="lores-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="lores-management-grid">
-                <div className="lore-column">
-                  <h2>Em Análise</h2>
-                  <div className="admin-grid">
-                    {pendingLores.length === 0 ? (
-                      <p className="no-lores-message">Nenhuma lore pendente.</p>
-                    ) : (
-                      pendingLores.map(l => (
-                        <AdminLoreCard
-                          key={l.id}
-                          lore={l}
-                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
-                          onUpdateStatus={updateStatus}
-                          onDeleteLore={deleteLore}
-                        />
-                      ))
-                    )}
-                  </div>
+              <motion.div key="lores-tab" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+                <div className="lore-status-nav" role="group" aria-label="Selecionar lista de fichas">
+                  {ADMIN_LORE_LISTS.map(list => (
+                    <button
+                      key={list.status}
+                      type="button"
+                      className={`lore-status-btn ${selectedLoreStatus === list.status ? 'active' : ''}`}
+                      aria-pressed={selectedLoreStatus === list.status}
+                      onClick={() => setSelectedLoreStatus(list.status)}
+                    >
+                      {list.label}
+                      <span>{loresByStatus[list.status].length}</span>
+                    </button>
+                  ))}
                 </div>
 
-                <div className="lore-column">
-                  <h2>Em entrevista</h2>
+                <div className="lore-column lore-column--selected">
+                  <h2>{selectedLoreList.label}</h2>
                   <div className="admin-grid">
-                    {interviewLores.length === 0 ? (
-                      <p className="no-lores-message">Nenhuma lore aguardando entrevista.</p>
+                    {visibleLores.length === 0 ? (
+                      <p className="no-lores-message">{selectedLoreList.emptyMessage}</p>
                     ) : (
-                      interviewLores.map(l => (
-                        <AdminLoreCard
-                          key={l.id}
-                          lore={l}
-                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
-                          onUpdateStatus={updateStatus}
-                          onDeleteLore={deleteLore}
-                        />
-                      ))
-                    )}
-                  </div>
-                </div>
-
-                <div className="lore-column">
-                  <h2>Aprovadas</h2>
-                  <div className="admin-grid">
-                    {approvedLores.length === 0 ? (
-                      <p className="no-lores-message">Nenhuma lore aprovada.</p>
-                    ) : (
-                      approvedLores.map(l => (
-                        <AdminLoreCard
-                          key={l.id}
-                          lore={l}
-                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
-                          onUpdateStatus={updateStatus}
-                          onDeleteLore={deleteLore}
-                        />
-                      ))
-                    )}
-                  </div>
-                </div>
-
-                <div className="lore-column">
-                  <h2>Recusadas</h2>
-                  <div className="admin-grid">
-                    {rejectedLores.length === 0 ? (
-                      <p className="no-lores-message">Nenhuma lore recusada.</p>
-                    ) : (
-                      rejectedLores.map(l => (
+                      visibleLores.map(l => (
                         <AdminLoreCard
                           key={l.id}
                           lore={l}

@@ -3034,11 +3034,44 @@ body {
   margin-top: 0.5rem;
 }
 
-.lores-management-grid {
+.lore-status-nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.lore-status-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(213, 101, 229, 0.22);
+  border-radius: 10px;
+  background: rgba(22, 27, 34, 0.6);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.lore-status-btn:hover,
+.lore-status-btn.active {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: #000;
+}
+
+.lore-status-btn span {
+  min-width: 1.5rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .lore-column {
@@ -3059,9 +3092,13 @@ body {
 }
 
 .lore-column .admin-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 1rem;
+}
+
+.lore-column--selected {
+  min-height: 460px;
 }
 
 .no-lores-message {
@@ -3345,6 +3382,10 @@ body {
 
   .admin-bulk-vip-form {
     grid-template-columns: 1fr;
+  }
+
+  .lore-status-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .admin-bulk-vip-actions {
