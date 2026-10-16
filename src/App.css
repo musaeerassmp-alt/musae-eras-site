@@ -1266,7 +1266,7 @@ body {
   font-size: 2.8rem;
   line-height: 1.1;
   margin: 0;
-  text-align: left;
+  text-align: center;
   text-shadow: 0 0 18px rgba(213, 101, 229, 0.6);
 }
 
@@ -1281,11 +1281,16 @@ body {
 }
 
 .profile-lores-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
   gap: 1rem;
   margin-bottom: 1.4rem;
+}
+
+.profile-lores-heading > div {
+  grid-column: 2;
+  text-align: center;
 }
 
 .profile-lores-kicker {
@@ -1299,6 +1304,8 @@ body {
 }
 
 .profile-lores-count {
+  grid-column: 3;
+  justify-self: end;
   flex-shrink: 0;
   padding: 0.45rem 0.75rem;
   border: 1px solid rgba(213, 101, 229, 0.25);
@@ -2066,7 +2073,7 @@ body {
   }
 
   .profile-lores-heading {
-    align-items: flex-start;
+    align-items: center;
   }
 
   .profile-avatar-wrapper {
