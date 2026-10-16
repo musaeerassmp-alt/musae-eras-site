@@ -23,6 +23,33 @@ const SidebarDivider = () => (
   </div>
 )
 
+const SocialLinks = () => (
+  <nav className="social-links" aria-label="Redes sociais do Musae Eras">
+    <a
+      href="https://x.com/MusaeErasSMP"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Musae Eras no X (Twitter)"
+      title="X (Twitter)"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zM17.61 20.64h2.04L6.49 3.24H4.3z" />
+      </svg>
+    </a>
+    <a
+      href="https://www.tiktok.com/@musaeerassmp?is_from_webapp=1"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Musae Eras no TikTok"
+      title="TikTok"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.33V2h-3.4v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.3 0 .6.05.9.14v-3.47a6.4 6.4 0 0 0-.9-.07 6.3 6.3 0 1 0 6.3 6.3V9.02a8.2 8.2 0 0 0 4.8 1.54V7.16c-.37 0-.73-.04-1.03-.12Z" />
+      </svg>
+    </a>
+  </nav>
+)
+
 const getVipClassName = (vipTag) => {
   const normalizedTag = (vipTag || 'Nenhum')
     .toLowerCase()
@@ -2402,6 +2429,7 @@ const App = () => {
   return (
     <Router>
       <div className="container">
+        <SocialLinks />
         <aside className="sidebar">
           <Link to="/" className="logo-section">
             <img src="/logo.png" alt="Logo" className="sidebar-logo" />
