@@ -111,6 +111,46 @@ const Apoios = () => {
             </p>
           </div>
 
+          <section className="magistrado-support">
+            <div className="magistrado-support-header">
+              <div className="magistrado-support-icon"><DollarSign size={25} /></div>
+              <span className="magistrado-support-price">R$ 100,00 ou mais</span>
+              <h2>Apoiador 𝑴𝒂𝒈𝒊𝒔𝒕𝒓𝒂𝒅𝒐</h2>
+              <p>
+                Apoiar o desenvolvimento de Musae Eras é mais do que contribuir para o crescimento do servidor: é fazer parte da construção de um mundo que estamos criando juntos! O cargo de <strong>𝓐𝓹𝓸𝓲𝓪𝓭𝓸𝓻 𝓜𝓪𝓰𝓲𝓼𝓽𝓻𝓪𝓭𝓸</strong> reconhece quem contribui com <strong>R$ 100,00 ou mais</strong> para o projeto, com benefícios exclusivos para a comunidade.
+              </p>
+            </div>
+
+            <h3>Recompensas do Apoiador</h3>
+            <div className="magistrado-rewards">
+              <article className="magistrado-reward">
+                <h4>Todos os benefícios do VIP mais alto</h4>
+                <p>Receba todos os benefícios do maior nível VIP disponível no servidor, com o conjunto mais completo de vantagens VIP.</p>
+              </article>
+              <article className="magistrado-reward">
+                <h4>Recompensas em dobro do Obra Prima</h4>
+                <p>Receba em dobro todas as recompensas oferecidas pelo sistema Obra Prima, exceto o cargo customizável.</p>
+              </article>
+              <article className="magistrado-reward">
+                <h4>Cargo exclusivo de Apoiador Oficial</h4>
+                <p>Receba um cargo exclusivo no Discord que identifica sua contribuição e apoio ao desenvolvimento de Musae Eras.</p>
+              </article>
+              <article className="magistrado-reward">
+                <h4>Contrate a Chronastruction!</h4>
+                <p>Tenha o direito de contratar a Chronastruction, nossa empresa de construções, para adicionar ao mundo uma construção personalizada por meio de uma schematic de até 4 chunks.</p>
+              </article>
+            </div>
+
+            <div className="magistrado-how-to">
+              <h3>Como conseguir o cargo?</h3>
+              <p>
+                Basta contribuir com <strong>R$ 100,00 ou mais</strong> para Musae Eras e cumprir o procedimento de confirmação da contribuição definido pela equipe. Após a confirmação, os benefícios correspondentes poderão ser concedidos.
+              </p>
+              <p className="magistrado-signoff">Apoie Musae Eras, fortaleça o projeto e deixe sua marca no mundo que estamos construindo!</p>
+              <button className="payment-btn" onClick={() => setPaymentOpen(true)}>Informações de pagamento</button>
+            </div>
+          </section>
+
           <div className="artefatos-info">
             <h2>Os Artefatos: O Mistério</h2>
             <p>

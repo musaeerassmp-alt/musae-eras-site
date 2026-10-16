@@ -2012,6 +2012,103 @@ body {
   margin: 0 auto 3rem auto;
 }
 
+.magistrado-support {
+  margin: 0 auto 3rem;
+  padding: 2.5rem;
+  border: 1px solid rgba(232, 199, 106, 0.45);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(35, 30, 19, 0.92), rgba(15, 18, 25, 0.96));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), inset 0 0 35px rgba(232, 199, 106, 0.04);
+  text-align: left;
+}
+
+.magistrado-support-header {
+  position: relative;
+  padding: 0 8rem 1.5rem 0;
+  border-bottom: 1px solid rgba(232, 199, 106, 0.25);
+}
+
+.magistrado-support-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.8rem;
+  border: 1px solid rgba(232, 199, 106, 0.45);
+  border-radius: 50%;
+  color: #f0d98c;
+  background: rgba(232, 199, 106, 0.1);
+}
+
+.magistrado-support-price {
+  position: absolute;
+  top: 0.25rem;
+  right: 0;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(232, 199, 106, 0.4);
+  border-radius: 999px;
+  color: #f0d98c;
+  background: rgba(232, 199, 106, 0.08);
+  font-weight: 700;
+}
+
+.magistrado-support-header h2 {
+  margin: 0 0 0.8rem;
+  color: #f0d98c;
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 2.4rem;
+  text-shadow: 0 0 16px rgba(232, 199, 106, 0.25);
+}
+
+.magistrado-support-header p,
+.magistrado-reward p,
+.magistrado-how-to p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.magistrado-support h3 {
+  margin: 1.8rem 0 1rem;
+  color: #f0d98c;
+  font-size: 1.35rem;
+}
+
+.magistrado-rewards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.magistrado-reward {
+  padding: 1.2rem;
+  border: 1px solid rgba(232, 199, 106, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.magistrado-reward h4 {
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.magistrado-reward p,
+.magistrado-how-to p {
+  margin: 0;
+}
+
+.magistrado-how-to {
+  margin-top: 1.5rem;
+  padding-top: 0.2rem;
+}
+
+.magistrado-how-to .magistrado-signoff {
+  margin: 1rem 0;
+  color: #f0d98c;
+  font-weight: 700;
+}
+
 .artefatos-info {
   background: rgba(22, 27, 34, 0.6);
   backdrop-filter: blur(10px);
@@ -2332,6 +2429,28 @@ body {
 @media (max-width: 768px) {
   .apoios-header h1 {
     font-size: 2.5rem;
+  }
+
+  .magistrado-support {
+    padding: 1.5rem;
+  }
+
+  .magistrado-support-header {
+    padding-right: 0;
+  }
+
+  .magistrado-support-price {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+
+  .magistrado-support-header h2 {
+    font-size: 2rem;
+  }
+
+  .magistrado-rewards {
+    grid-template-columns: 1fr;
   }
 
   .artefatos-info,
