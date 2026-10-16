@@ -1423,6 +1423,15 @@ body {
   border: 1px solid currentColor;
 }
 
+.interview-notice {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(240, 178, 50, 0.3);
+  border-radius: 12px;
+  background: rgba(240, 178, 50, 0.1);
+  color: #f4c55d;
+  line-height: 1.55;
+}
+
 .profile-lore-card-headline h3 {
   margin: 0;
   font-size: 1.45rem;
@@ -2830,6 +2839,11 @@ body {
 }
 
 .status--pendente {
+  background-color: rgba(240, 178, 50, 0.2);
+  color: #f0b232;
+}
+
+.status--em_entrevista {
   background-color: rgba(240, 178, 50, 0.2);
   color: #f0b232;
 }

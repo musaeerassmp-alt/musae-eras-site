@@ -67,9 +67,12 @@ const VIP_TIER_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++']
 
 const STATUS_LABELS = {
   PENDENTE: 'PENDENTE',
+  EM_ENTREVISTA: 'EM ENTREVISTA',
   APROVADA: 'APROVADA',
   RECUSADA: 'RECUSADA'
 }
+
+const INTERVIEW_NOTICE = 'Você foi aprovado para a segunda fase da entrevista. Verifique nossos avisos no Discord ou abra um ticket caso os dias de entrevista já tenham passado.'
 
 const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onDeleteLore }) => (
   <div className="admin-card">
@@ -88,11 +91,14 @@ const AdminLoreCard = ({ lore, onOpen, onUpdateStatus, onDeleteLore }) => (
       <button onClick={() => onOpen(lore)} className="btn-analisar">{lore.status === 'PENDENTE' ? 'Analisar' : 'Ver Detalhes'}</button>
       {lore.status === 'PENDENTE' && (
         <>
-          <button onClick={() => onUpdateStatus(lore.id, 'APROVADA')} className="btn-approve">Aprovar</button>
+          <button onClick={() => onUpdateStatus(lore.id, 'EM_ENTREVISTA')} className="btn-approve">Aprovar história</button>
           <button onClick={() => onUpdateStatus(lore.id, 'RECUSADA')} className="btn-reject">Recusar</button>
         </>
       )}
-      {(lore.status === 'APROVADA' || lore.status === 'RECUSADA') && (
+      {lore.status === 'EM_ENTREVISTA' && (
+        <button onClick={() => onUpdateStatus(lore.id, 'APROVADA')} className="btn-approve">Aprovar entrevista</button>
+      )}
+      {(lore.status === 'APROVADA' || lore.status === 'RECUSADA' || lore.status === 'EM_ENTREVISTA') && (
         <button onClick={() => onUpdateStatus(lore.id, 'PENDENTE')} className="btn-revert">Reverter</button>
       )}
       <button onClick={() => onDeleteLore(lore.id)} className="btn-delete-lore">Deletar</button>
@@ -1407,6 +1413,7 @@ const Profile = ({ user }) => {
   const profileVipTag = currentVipStatus.vip_tag || 'Nenhum'
   const profileBetaActive = currentVipStatus.beta === true
   const approvedCount = lores.filter(lore => lore.status === 'APROVADA').length
+  const interviewCount = lores.filter(lore => lore.status === 'EM_ENTREVISTA').length
   const pendingCount = lores.filter(lore => lore.status === 'PENDENTE').length
 
   return (
@@ -1462,6 +1469,11 @@ const Profile = ({ user }) => {
                     <span className="profile-meta-label">Pendentes</span>
                     <strong className="profile-meta-value">{pendingCount}</strong>
                   </div>
+
+                  <div className="profile-meta-card">
+                    <span className="profile-meta-label">Em entrevista</span>
+                    <strong className="profile-meta-value">{interviewCount}</strong>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1498,9 +1510,13 @@ const Profile = ({ user }) => {
                           color: f.status === 'APROVADA' ? '#57d98c' : f.status === 'RECUSADA' ? '#ff6b72' : '#f4c55d'
                         }}
                       >
-                        {f.status}
+                        {STATUS_LABELS[f.status] || f.status}
                       </div>
                     </div>
+
+                    {f.status === 'EM_ENTREVISTA' && (
+                      <div className="interview-notice">{INTERVIEW_NOTICE}</div>
+                    )}
 
                     <div className="profile-lore-card-headline">
                       <h3>{f.nome}</h3>
@@ -1563,7 +1579,7 @@ const Profile = ({ user }) => {
                         color: selectedLore.status === 'APROVADA' ? '#57d98c' : selectedLore.status === 'RECUSADA' ? '#ff6b72' : '#f4c55d'
                       }}
                     >
-                      {selectedLore.status}
+                      {STATUS_LABELS[selectedLore.status] || selectedLore.status}
                     </div>
                   </div>
 
@@ -1573,6 +1589,10 @@ const Profile = ({ user }) => {
                     <p>@{selectedLore.nick}</p>
                   </div>
                 </div>
+
+                {selectedLore.status === 'EM_ENTREVISTA' && (
+                  <div className="interview-notice">{INTERVIEW_NOTICE}</div>
+                )}
 
                 <div className="profile-lore-modal-grid">
                   <div className="profile-lore-modal-item">
@@ -1836,7 +1856,8 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
 
   const vipTags = VIP_TIER_OPTIONS
 
-  const pendingLores = lores.filter(lore => lore.status !== 'APROVADA' && lore.status !== 'RECUSADA')
+  const pendingLores = lores.filter(lore => lore.status === 'PENDENTE')
+  const interviewLores = lores.filter(lore => lore.status === 'EM_ENTREVISTA')
   const approvedLores = lores.filter(lore => lore.status === 'APROVADA')
   const rejectedLores = lores.filter(lore => lore.status === 'RECUSADA')
 
@@ -2160,6 +2181,25 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                 </div>
 
                 <div className="lore-column">
+                  <h2>Em entrevista</h2>
+                  <div className="admin-grid">
+                    {interviewLores.length === 0 ? (
+                      <p className="no-lores-message">Nenhuma lore aguardando entrevista.</p>
+                    ) : (
+                      interviewLores.map(l => (
+                        <AdminLoreCard
+                          key={l.id}
+                          lore={l}
+                          onOpen={(lore) => { setSelectedLore(lore); setModalOpen(true) }}
+                          onUpdateStatus={updateStatus}
+                          onDeleteLore={deleteLore}
+                        />
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                <div className="lore-column">
                   <h2>Aprovadas</h2>
                   <div className="admin-grid">
                     {approvedLores.length === 0 ? (
@@ -2312,7 +2352,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                 <button className="modal-close" onClick={() => setModalOpen(false)}><X size={24} /></button>
                 <div className="modal-header-lore">
                   <h2>Análise de Lore: {selectedLore.nome}</h2>
-                  <div className={`status-badge status--${selectedLore.status.toLowerCase()}`}>{selectedLore.status}</div>
+                  <div className={`status-badge status--${selectedLore.status.toLowerCase()}`}>{STATUS_LABELS[selectedLore.status] || selectedLore.status}</div>
                 </div>
 
                   <div className="modal-info-grid">
@@ -2363,11 +2403,14 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                     <div className="admin-decision-buttons">
                       {selectedLore.status === 'PENDENTE' && (
                         <>
-                          <button onClick={() => updateStatus(selectedLore.id, 'APROVADA')} className="btn-approve">Aprovar Lore</button>
+                          <button onClick={() => updateStatus(selectedLore.id, 'EM_ENTREVISTA')} className="btn-approve">Aprovar história</button>
                           <button onClick={() => updateStatus(selectedLore.id, 'RECUSADA')} className="btn-reject">Recusar Lore</button>
                         </>
                       )}
-                      {(selectedLore.status === 'APROVADA' || selectedLore.status === 'RECUSADA') && (
+                      {selectedLore.status === 'EM_ENTREVISTA' && (
+                        <button onClick={() => updateStatus(selectedLore.id, 'APROVADA')} className="btn-approve">Aprovar entrevista</button>
+                      )}
+                      {(selectedLore.status === 'APROVADA' || selectedLore.status === 'RECUSADA' || selectedLore.status === 'EM_ENTREVISTA') && (
                         <button onClick={() => updateStatus(selectedLore.id, 'PENDENTE')} className="btn-revert">Reverter para Pendente</button>
                       )}
                       <button onClick={() => deleteLore(selectedLore.id)} className="btn-delete-lore">Deletar Lore</button>
