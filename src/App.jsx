@@ -1468,10 +1468,19 @@ const Profile = ({ user }) => {
           </div>
 
           <div className="profile-lores-section">
-            <h2 className="lore-title lore-title-small">Minhas Partituras</h2>
+            <div className="profile-lores-heading">
+              <div>
+                <span className="profile-lores-kicker">Sua jornada em Musae Eras</span>
+                <h2 className="lore-title lore-title-small">Minhas Partituras</h2>
+              </div>
+              <span className="profile-lores-count">{lores.length} {lores.length === 1 ? 'ficha' : 'fichas'}</span>
+            </div>
             {lores.length === 0 ? (
-              <div className="placeholder-card">
-                <p>Você ainda não compôs nenhuma obra. Vá até "Componha sua Obra" para começar!</p>
+              <div className="profile-empty-state">
+                <div className="profile-empty-icon"><BookOpen size={26} /></div>
+                <h3>Sua história começa com uma partitura</h3>
+                <p>Você ainda não enviou nenhuma ficha. Crie seu personagem para começar sua jornada em Musae Eras.</p>
+                <Link to="/compor" className="profile-create-link">Criar minha ficha <PenTool size={16} /></Link>
               </div>
             ) : (
               <div className="profile-lores-grid">
