@@ -353,7 +353,9 @@ const Apoios = () => {
                   <X size={28} />
                 </button>
                 <h3 className="payment-modal-title">𝑴𝒆𝒕𝒐𝒅𝒐𝒔 𝒅𝒆 𝑷𝒂𝒈𝒂𝒎𝒆𝒏𝒕𝒐</h3>
-                <img src="/QRCODEMUSAE.png" alt="QR Code Musae" className="payment-qr" />
+                <p className="payment-code" aria-label="Código de pagamento">
+                  <code>0a4c3f0d-9d85-409a-8274-5d5fe8f79148</code>
+                </p>
                 <div className="payment-modal-text">
                   <p>• Por enquanto, contamos apenas com o "Pix.gg", ou seja, apenas pagamentos Via-Pix estão sendo aceitos, sendo todos os tier de forma mensal!</p>
                   <p>➥ (ao fazer sua compra, adicione na aba "Mensagem" o Tier do VIP que Comprar, Seu nick no Minecraft e no Discord! Então, abra um Ticket do tipo "Financeiro" no Discord e mande o comprovante de sua compra, com caso seja nescessario, a musica que quer no disco, e qualquer outro fator do tier que for pegar!)</p>

@@ -2521,14 +2521,27 @@ body {
   transform: translateY(-6px);
 }
 
-.payment-qr {
-  display: block;
-  margin: 0.5rem auto 1rem auto;
+.payment-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0.5rem auto 1rem;
   max-width: 320px;
+  min-height: 120px;
   width: 90%;
-  height: auto;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+  overflow-wrap: anywhere;
+  background: #191b4b;
   border-radius: 12px;
   border: 2px solid rgba(213,101,229,0.12);
+}
+
+.payment-code code {
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .payment-modal-text {
