@@ -1210,13 +1210,22 @@ body {
 }
 
 .profile-vip-panel--magistrado {
-  background: linear-gradient(145deg, rgba(55, 44, 20, 0.94), rgba(24, 22, 17, 0.96));
-  border-color: rgba(232, 199, 106, 0.5);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24), inset 0 0 24px rgba(232, 199, 106, 0.08);
+  background: linear-gradient(145deg, rgba(67, 52, 20, 0.97), rgba(25, 23, 18, 0.98));
+  border-color: rgba(232, 199, 106, 0.68);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3), 0 0 22px rgba(232, 199, 106, 0.12), inset 0 0 24px rgba(232, 199, 106, 0.1);
 }
 
 .profile-vip-panel--magistrado .profile-vip-label {
   color: #f0d98c;
+}
+
+.profile-vip-panel--magistrado .vip-tag--magistrado {
+  background: linear-gradient(135deg, #f0d98c, #c59a38);
+  border-color: #ffe9a8;
+  color: #2a2110;
+  box-shadow: 0 0 18px rgba(240, 217, 140, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  font-weight: 900;
+  text-shadow: none;
 }
 
 .profile-meta-grid {
@@ -2682,11 +2691,13 @@ body {
 }
 
 .vip-tag--magistrado {
-  background: linear-gradient(135deg, rgba(232, 199, 106, 0.24), rgba(83, 63, 24, 0.48));
-  color: #f0d98c;
-  border-color: rgba(232, 199, 106, 0.62);
-  box-shadow: 0 0 14px rgba(232, 199, 106, 0.18), inset 0 0 10px rgba(232, 199, 106, 0.08);
-  text-shadow: 0 0 10px rgba(240, 217, 140, 0.28);
+  background: linear-gradient(135deg, rgba(240, 217, 140, 0.24), rgba(126, 91, 29, 0.52));
+  color: #ffe8a3;
+  border-color: rgba(240, 217, 140, 0.78);
+  box-shadow: 0 0 16px rgba(232, 199, 106, 0.24), inset 0 0 10px rgba(232, 199, 106, 0.12);
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  text-shadow: 0 0 10px rgba(240, 217, 140, 0.38);
 }
 
 .vip-tag--beta {

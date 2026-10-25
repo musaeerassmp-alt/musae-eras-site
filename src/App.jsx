@@ -52,12 +52,15 @@ const SocialLinks = () => (
 
 const getVipClassName = (vipTag) => {
   const normalizedTag = (vipTag || 'Nenhum')
+    .trim()
     .toLowerCase()
     .replace(/\+\+/g, '-plus-plus')
     .replace(/\+/g, '-plus')
 
   return `vip-tag vip-tag--${normalizedTag}`
 }
+
+const isMagistrado = (vipTag) => (vipTag || '').trim().toUpperCase() === 'MAGISTRADO'
 
 const getBetaClassName = () => 'vip-tag vip-tag--beta'
 
@@ -1447,8 +1450,8 @@ const Profile = ({ user }) => {
                     <p className="profile-discord-tag">@{user.username}</p>
                   </div>
 
-                  <div className={`profile-vip-panel${profileVipTag === 'MAGISTRADO' ? ' profile-vip-panel--magistrado' : ''}`}>
-                    <span className="profile-vip-label">{profileVipTag === 'MAGISTRADO' ? 'Cargo especial' : 'Tier VIP'}</span>
+                  <div className={`profile-vip-panel${isMagistrado(profileVipTag) ? ' profile-vip-panel--magistrado' : ''}`}>
+                    <span className="profile-vip-label">{isMagistrado(profileVipTag) ? 'Cargo especial' : 'Tier VIP'}</span>
                     <div className="profile-vip-badges">
                       <span className={getVipClassName(profileVipTag)}>{getVipDisplayValue(profileVipTag)}</span>
                       {profileBetaActive && <span className={getBetaClassName()}>Beta</span>}
