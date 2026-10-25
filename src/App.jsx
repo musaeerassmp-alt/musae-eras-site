@@ -63,7 +63,7 @@ const getBetaClassName = () => 'vip-tag vip-tag--beta'
 
 const getVipDisplayValue = (vipTag) => vipTag || 'Nenhum'
 
-const VIP_TIER_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++']
+const VIP_TIER_OPTIONS = ['Nenhum', 'VIP', 'VIP+', 'VIP++', 'MAGISTRADO']
 
 const STATUS_LABELS = {
   PENDENTE: 'PENDENTE',
@@ -1447,8 +1447,8 @@ const Profile = ({ user }) => {
                     <p className="profile-discord-tag">@{user.username}</p>
                   </div>
 
-                  <div className="profile-vip-panel">
-                    <span className="profile-vip-label">Tier VIP</span>
+                  <div className={`profile-vip-panel${profileVipTag === 'MAGISTRADO' ? ' profile-vip-panel--magistrado' : ''}`}>
+                    <span className="profile-vip-label">{profileVipTag === 'MAGISTRADO' ? 'Cargo especial' : 'Tier VIP'}</span>
                     <div className="profile-vip-badges">
                       <span className={getVipClassName(profileVipTag)}>{getVipDisplayValue(profileVipTag)}</span>
                       {profileBetaActive && <span className={getBetaClassName()}>Beta</span>}
@@ -2071,7 +2071,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
 
     if (userError) {
       setBulkUpdatingVip(false)
-      alert('Erro ao atualizar VIP da conta: ' + userError.message)
+      alert('Erro ao atualizar o cargo da conta: ' + userError.message)
       return
     }
 
@@ -2088,13 +2088,13 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
     setBulkUpdatingVip(false)
 
     if (error) {
-      alert('VIP aplicado na conta, mas houve erro ao atualizar as whitelists: ' + error.message)
+      alert('Cargo aplicado na conta, mas houve erro ao atualizar as whitelists: ' + error.message)
       // proceed — user VIP updated, lores update failed
     }
 
     const totalAtualizado = data?.length || 0
 
-    alert(`VIP aplicado na conta. Whitelists atualizadas: ${totalAtualizado} entrada(s).`)
+    alert(`Cargo aplicado na conta. Whitelists atualizadas: ${totalAtualizado} entrada(s).`)
 
     setSelectedAccountId('')
     setManualAccountId('')
@@ -2245,9 +2245,9 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
 
                 <div className="admin-bulk-vip">
                   <div className="admin-bulk-vip-header">
-                    <h3>Gerenciar VIP por Conta</h3>
+                    <h3>Gerenciar cargos por conta</h3>
                     <p>
-                      Selecione o ID da conta e aplique o cargo VIP pago para todas as whitelists vinculadas a esse usuário.
+                      Selecione o ID da conta e aplique o cargo correspondente em todas as whitelists vinculadas a esse usuário.
                     </p>
                   </div>
 
@@ -2264,7 +2264,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                         <option value="">Selecione uma conta</option>
                         {accountOptions.map(account => (
                           <option key={account.discord_id} value={account.discord_id}>
-                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | VIP atual: {account.current_vip_tag || 'Nenhum'}{account.beta ? ' + Beta' : ''}
+                            {account.discord_tag} | ID: {account.discord_id} | {account.total_whitelists} whitelist(s) | Cargo atual: {account.current_vip_tag || 'Nenhum'}{account.beta ? ' + Beta' : ''}
                           </option>
                         ))}
                       </select>
@@ -2284,7 +2284,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                     </div>
 
                     <div className="admin-bulk-vip-field">
-                      <label>Tag VIP paga</label>
+                      <label>Cargo da conta</label>
                       <select value={bulkVipTag} onChange={(e) => setBulkVipTag(e.target.value)}>
                         {vipTags.map(tag => (
                           <option key={tag} value={tag}>{tag}</option>
@@ -2303,7 +2303,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
 
                     <div className="admin-bulk-vip-actions">
                       <button onClick={applyVipToAccount} className="btn-bulk-vip" disabled={bulkUpdatingVip}>
-                        {bulkUpdatingVip ? 'Aplicando VIP...' : 'Aplicar VIP em todas as whitelists'}
+                        {bulkUpdatingVip ? 'Aplicando cargo...' : 'Aplicar cargo em todas as whitelists'}
                       </button>
                     </div>
                   </div>
@@ -2350,7 +2350,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
                     )}
                     <div className="info-item info-item--vip">
                       <Heart size={18} />
-                      <span><strong>VIP atual:</strong> {getVipDisplayValue(selectedLore.vip_tag)}</span>
+                      <span><strong>Cargo atual:</strong> {getVipDisplayValue(selectedLore.vip_tag)}</span>
                     </div>
                   </div>
 
@@ -2369,7 +2369,7 @@ const AdminPanel = ({ user, isAdmin, loadingAdmin }) => {
 
                   <div className="admin-modal-actions">
                     <div className="admin-vip-display-only">
-                      <span className="admin-vip-display-label">Tag VIP da conta:</span>
+                      <span className="admin-vip-display-label">Cargo da conta:</span>
                       <span className={getVipClassName(selectedLore.vip_tag)}>
                         {getVipDisplayValue(selectedLore.vip_tag)}
                       </span>
